@@ -3,152 +3,152 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
+    <loc>/diegousai.io/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/page/</loc>
+    <loc>/diegousai.io/page/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/page/links/</loc>
+    <loc>/diegousai.io/page/links/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/page/about/</loc>
+    <loc>/diegousai.io/page/about/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/articles/</loc>
+    <loc>/diegousai.io/categories/articles/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/bootstrap/</loc>
+    <loc>/diegousai.io/tags/bootstrap/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/diegousai.io/categories/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/clustering/</loc>
+    <loc>/diegousai.io/tags/clustering/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/customer-analytics/</loc>
+    <loc>/diegousai.io/categories/customer-analytics/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/customer-segmentation/</loc>
+    <loc>/diegousai.io/tags/customer-segmentation/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/data-wrangling/</loc>
+    <loc>/diegousai.io/tags/data-wrangling/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/loading-merging-and-joining-datasets/</loc>
+    <loc>/diegousai.io/2019/09/loading-merging-and-joining-datasets/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>/diegousai.io/post/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/principal-component/</loc>
+    <loc>/diegousai.io/tags/principal-component/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/projects/</loc>
+    <loc>/diegousai.io/categories/projects/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/steps-and-considerations-to-run-a-successful-segmentation/</loc>
+    <loc>/diegousai.io/2019/09/steps-and-considerations-to-run-a-successful-segmentation/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>/diegousai.io/tags/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/classification/</loc>
+    <loc>/diegousai.io/tags/classification/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/machine-learning/</loc>
+    <loc>/diegousai.io/tags/machine-learning/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/09/modelling-with-tidymodels-and-parsnip/</loc>
+    <loc>/diegousai.io/2019/09/modelling-with-tidymodels-and-parsnip/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/r-programming/</loc>
+    <loc>/diegousai.io/categories/r-programming/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/tidyverse/</loc>
+    <loc>/diegousai.io/tags/tidyverse/</loc>
     <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/05/a-gentle-introduction-to-customer-segmentation/</loc>
+    <loc>/diegousai.io/2019/05/a-gentle-introduction-to-customer-segmentation/</loc>
     <lastmod>2019-05-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/ml-methods/</loc>
+    <loc>/diegousai.io/categories/ml-methods/</loc>
     <lastmod>2019-05-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/data-product/</loc>
+    <loc>/diegousai.io/tags/data-product/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/market-basket-analysis/</loc>
+    <loc>/diegousai.io/categories/market-basket-analysis/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/market-basket-analysis/</loc>
+    <loc>/diegousai.io/tags/market-basket-analysis/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/04/market-basket-analysis-part-3-of-3/</loc>
+    <loc>/diegousai.io/2019/04/market-basket-analysis-part-3-of-3/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/03/market-basket-analysis-part-2-of-3/</loc>
+    <loc>/diegousai.io/2019/03/market-basket-analysis-part-2-of-3/</loc>
     <lastmod>2019-03-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/03/market-basket-analysis-part-1-of-3/</loc>
+    <loc>/diegousai.io/2019/03/market-basket-analysis-part-1-of-3/</loc>
     <lastmod>2019-03-13T00:00:00+00:00</lastmod>
   </url>
   
