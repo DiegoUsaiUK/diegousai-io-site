@@ -6,10 +6,19 @@
     <description>Recent content in Articles on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Mon, 23 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/articles/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</title>
+      <link>/2019/10/build-your-website-with-hugo-and-blogdown/</link>
+      <pubDate>Mon, 28 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/build-your-website-with-hugo-and-blogdown/</guid>
+      <description>This year has been rather rewarding for me! After completing some of the excellent Business Science University courses, I have worked on a number of Customer Analytics &amp;amp; Business Intelligence projects and summarised them into technical articles that I published on Medium&amp;rsquo;s Towards Data Science. This opened up an entirely new world to me and generated many new connections within the analytics and data science community the world over!</description>
+    </item>
     
     <item>
       <title>Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</title>

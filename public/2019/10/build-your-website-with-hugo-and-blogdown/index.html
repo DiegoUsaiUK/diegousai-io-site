@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en-UK" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="canonical" href="/2019/10/build-your-website-with-hugo-and-blogdown/" />
+
+     <meta name="description" content="This year has been rather rewarding for me! After completing some of the excellent Business Science University courses, I have worked on a number of Customer An" /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="/img/li-yang-a8iCZvtrHpQ-unsplash.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage"/>
+    <meta name="twitter:description" content="This year has been rather rewarding for me! After completing some of the excellent Business Science University courses, I have worked on a number of Customer An"/>
+    <meta name="twitter:url" content="/2019/10/build-your-website-with-hugo-and-blogdown/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2019/10/build-your-website-with-hugo-and-blogdown/" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="This year has been rather rewarding for me! After completing some of the excellent Business Science University courses, I have worked on a number of Customer An" />
+
+    <meta property="article:published_time" content="2019-10-28T00:00:00Z" />
+    <meta property="article:tag" content="blogdown" /><meta property="article:tag" content="rstudio" />
+
+    <meta property="og:image" content="/img/li-yang-a8iCZvtrHpQ-unsplash.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.58.3" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+     <link rel="stylesheet" href="/css/override.css" /> 
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/articles/">Articles</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/market-basket-analysis">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/tags/">Tags</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/links/">Readings</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/about/">About</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    
+
+                    
+
+                    <a class="social-link" href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    <a class="social-link" href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 512 512"><path d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683 C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615 c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915 s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z" /></svg></a>
+
+                    <a class="social-link" href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 195"><path d="M46.5340803,65.2157554 C46.6968378,63.6076572 46.0836,62.018231 44.8828198,60.93592 L32.6512605,46.2010582 L32.6512605,44 L70.6302521,44 L99.9859944,108.380952 L125.794585,44 L162,44 L162,46.2010582 L151.542017,56.2281011 C150.640424,56.9153477 150.193188,58.0448862 150.380019,59.1628454 L150.380019,132.837155 C150.193188,133.955114 150.640424,135.084652 151.542017,135.771899 L161.755369,145.798942 L161.755369,148 L110.38282,148 L110.38282,145.798942 L120.963119,135.527337 C122.002801,134.487948 122.002801,134.182246 122.002801,132.592593 L122.002801,73.0417402 L92.585901,147.755438 L88.6106443,147.755438 L54.3622782,73.0417402 L54.3622782,123.115814 C54.0767278,125.221069 54.7759199,127.3406 56.2581699,128.863022 L70.0186741,145.55438 L70.0186741,147.755438 L31,147.755438 L31,145.55438 L44.7605042,128.863022 C46.2319621,127.338076 46.8903838,125.204485 46.5340803,123.115814 L46.5340803,65.2157554 Z"/></svg></a>
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2019-10-28">28 October 2019</time>
+                <span class="date-divider">/</span> <a href="/tags/blogdown/">#blogdown</a>&nbsp;<a href="/tags/rstudio/">#rstudio</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</h1>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(/img/li-yang-a8iCZvtrHpQ-unsplash.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        
+
+<p>This year has been rather rewarding for me! After completing some of the excellent <a href="https://university.business-science.io/"><strong>Business Science University</strong></a> courses, I have worked on a number of <strong>Customer Analytics</strong> &amp; <strong>Business Intelligence</strong> projects and summarised them into technical articles that I published on <strong>Medium</strong>&rsquo;s <a href="https://towardsdatascience.com/@diegousaiuk"><strong>Towards Data Science</strong></a>. This opened up an entirely new world to me and generated many new connections within the <strong>analytics and data science community</strong> the world over!</p>
+
+<p>The idea to <strong>create my own website</strong> has been at the back of my mind for a few months. So far I&rsquo;ve used <code>rpubs.com</code> (the <em>free web publishing</em> service from <strong>RStudio</strong>) as <a href="https://rpubs.com/diegousai"><strong>a portfolio of sorts</strong></a> but I knew I needed a personal web-space. That would give me the freedom to <strong>showcase my work in a more professional way</strong>, accommodate articles that I didn&rsquo;t necessarily want to publish, and personalise with links to favourite blogs/books/sites as well as my social media platform (<a href="https://www.linkedin.com/in/diegousaiuk"> <em>LinkedIn</em></a>, <a href="https://github.com/DiegoUsaiUK"> <em>GitHub</em></a>, <a href="https://medium.com/@diegousaiuk"> <em>Medium</em></a>, etc.).</p>
+
+<p>When <a href="https://www.linkedin.com/in/mattdancho"><strong>Matt Dancho</strong></a> got in touch in early October 2019 to say that he liked a number of my articles and wanted to feature some of them on <a href="https://www.business-science.io/blog/index.html"><strong>his blog</strong></a>, I knew I could no longer wait. So I put on hold the project I was working on and I gave myself <em>a week</em> to come up with a <em>minimum viable product</em> to put online.</p>
+
+<p>8 days later, I was super excited to deploy <a href="diegousai.io"><strong>diegousai.io</strong></a>!</p>
+
+<p>And <em>Matt Dancho</em> has even been kind enough to <strong>feature my newly created webpage</strong> on his <em>23-Oct-2019</em> webinar <a href="https://github.com/business-science/presentations/tree/master/2019_10_23_lab_21_SQL_for_Data_Science"><strong>SQL for Data Science</strong></a>!</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/0_learninglab.jpg" alt="" width="75%"/></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>In this post I&rsquo;m going to share what I&rsquo;ve learned from my website building adventure. As I&rsquo;m not a web developer nor a programmer, there have been moments where I though to myself <strong>&ldquo;What heck of a rabbit hole have I fell into?&rdquo;</strong>.</p>
+
+<p>Thankfully, there are plenty of <strong>blog articles</strong>, <strong>online books</strong> and <strong>developer forums</strong>, all with varying degree of technical detail. Here I&rsquo;m going to show what worked for me and will reference all the material I&rsquo;ve sifted through and the approaches I&rsquo;ve applied it my many trial-and-error runs.</p>
+
+<p>As it is always the case with these things, I&rsquo;m sure there are more straightforward ways get to the same result so I genuinely welcome tips and suggestions on how the process could be streamlined and improved.</p>
+
+<h2 id="some-preliminary-readings">Some preliminary readings</h2>
+
+<p>This is some of the material I have referred to more or less consistently throughout the process:</p>
+
+<ul>
+<li>The <a href="https://bookdown.org/yihui/blogdown/"><strong>blogdown: Creating Websites with R Markdown</strong></a> book, which has plenty of accessible information and useful tips.</li>
+<li>The <a href="https://sourcethemes.com/academic/docs/"><strong>Academic</strong></a> framework documentation also has lots of information, albeit more technical.</li>
+<li><em>Alison Hill</em> blogpost <a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/"><strong>Up &amp; Running with blogdown</strong></a> has provided plenty of inspiration</li>
+<li>Another post I would recommend is <em>Martin Frigaard</em>&rsquo;s article, <a href="https://www.storybench.org/how-to-build-a-website-with-blogdown-in-r/"><strong>How to build a website with Blogdown in R</strong></a>, which has much more detail on <strong>Git</strong> and <strong>version control</strong>.</li>
+</ul>
+
+<h2 id="assumptions-disclaimers-etc">Assumptions, disclaimers,etc.</h2>
+
+<p><strong>Assumption #1</strong>: I&rsquo;m assuming that you&rsquo;re familiar with the <strong>RStudio IDE</strong> and have already installed the <strong>blogdown package</strong> and <strong>Hugo</strong> on your machine. If not you can refer to the <a href="https://bookdown.org/yihui/blogdown/get-started.html"><strong>Get Started</strong></a> chapter of the blogdown book.</p>
+
+<p><strong>Assumption #2</strong>:  I&rsquo;m also assuming that you already have a <strong>Github repository</strong>, which I will use to host my website. If not, you can create one for free <a href="https://github.com/"><strong>here</strong></a>.</p>
+
+<p><strong>Disclaimer</strong>: This is not intended to be a technical guide as I&rsquo;m not a web designer/developer nor a programmer. This is my report as an ordinary RStudio user on how I set up my blog using <code>blogdown</code>. I welcome comments and suggestions as I&rsquo;m sure my process has a more streamlined flow to it.</p>
+
+<h2 id="create-the-website">Create the website</h2>
+
+<p>Generating a webpage could not be any easier!</p>
+
+<h3 id="pick-a-hugo-theme">Pick a Hugo theme</h3>
+
+<p>First, you need to pick a theme. Currently, there are <a href="https://themes.gohugo.io"><em>hundreds of themes</em></a> you can choose from on the Hugo website and it&rsquo;s worth spending a few minutes perusing the list and try a few of the demo versions to get a feel for the final product.</p>
+
+<p>Some of the themes that stood out for me are:</p>
+
+<ul>
+<li><p><a href="https://themes.gohugo.io/academic/"><strong>Academic</strong></a>: This is probably the most popular theme and, as the name suggests, it draws inspiration from the academic world. It is <em>highly customisable</em> with plenty of <em>widgets and extensions</em>, is <em>well documented</em> and has a <em>large community</em> supporting it. However, the number of features and customisations may prove be a bit daunting to get your head around, especially if you&rsquo;re a novice like myself, so you may want to pick a simpler theme to start off with.</p></li>
+
+<li><p><a href="https://themes.gohugo.io/hugo-future-imperfect-slim/"><strong>Future Imperfect Slim</strong></a>: I really did like this Theme! It&rsquo;s streamlined and very responsive and comes with <em>multilingual integration</em> and an extensive sets of <em>Social Media icons</em> to link all your accounts. Unfortunately, in August 2019 a <a href="https://github.com/pacollins/hugo-future-imperfect-slim/issues/68"><strong>bug</strong></a> which prevents some of the posts to show on the main page has emerged. As of October 2019 the issue is still unresolved but hopefully this will get sorted out soon.</p></li>
+
+<li><p><a href="https://github.com/eueung/hugo-casper-two"><strong>Casper Two</strong></a>: I chose this theme because is has a relatively simple structure, which makes it easy to navigate and personalise, and has just the right amount of <em>Social Media</em> links for me. <strong>And it&rsquo;s beautiful!</strong></p>
+
+<ul>
+<li>However, <strong>be aware that</strong> that this theme appears to be currently <strong>NOT SUPPORTED</strong> by its developer and as such has been removed from the <a href="https://themes.gohugo.io"><em>Hugo Themes Page</em></a>. This may result in &ldquo;code breakages&rdquo; when a new <em>Hugo</em> update is released (in fact I&rsquo;ve already encountered and fixed one!) but given the simplicity of the theme structure and code supporting it, I&rsquo;m hoping that will push me to learn more about HTML and CSS to maintain my site going ahead.</li>
+</ul></li>
+</ul>
+
+<p>Once you&rsquo;ve decided which theme suits you best, click on the <code>Homepage</code> button on its Theme page. This will take you to the github repository housing the theme. Here&rsquo;s the Casper-Two repository.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/1_github_theme_repo.jpg" alt="" width="75%"/></p>
+
+<p>Take a look at the top left-hand side of the page: this tells you that the theme is owned by <code>eueung</code> and it&rsquo;s housed in the <code>hugo-casper-two</code> folder. Make a note of the location address (or copy it to clipboard).</p>
+
+<h3 id="create-a-new-project-directory">Create a new project directory</h3>
+
+<p>You can now create a new project for your website:</p>
+
+<p>in RStudio, go to  <strong>File → New Project → New Directory → Website using Blogdown</strong></p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/2_website_using_blogdown.jpg" alt="" width="75%"/></p>
+
+<p>In the following page, pick a <em>directory name</em> for your website and write/paste the github <em>theme location</em> from the previous step</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/3_create_new_website.jpg" alt="" width="75%"/></p>
+
+<p>You can now hit <code>Create Project</code> and RStudio will import all files from the Github repository and populate the new directory with a series of folders.</p>
+
+<h4 id="the-directory-structure">The directory structure</h4>
+
+<p>Let&rsquo;s take a look at the folder structure that has just been created</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/6_folder_str.jpg" alt="" width="65%" /></p>
+
+<p>Most parameters are self explanatory but more details can be found on the <a href="https://bookdown.org/yihui/blogdown/configuration.html"><strong>Configuration</strong></a> chapter of the <em>blogdown book</em></p>
+
+<ul>
+<li><p><code>config.toml</code>: is the main interface to your website and contains all the global option to <em>personalise your site&rsquo;s content</em></p></li>
+
+<li><p><code>content</code>: all your material ( <em>articles, projects, posts, &ldquo;About me&rdquo; page, CV, etc</em>) is added and stored here</p></li>
+
+<li><p><code>static</code>: is the folder where <em>images and videos</em> are kept</p>
+
+<ul>
+<li>If one of your posts outputs a chart or graph, it will be stored here
+<br /></li>
+</ul></li>
+
+<li><p><code>blogdown</code>: <em>cache files</em> created by your posts are saved here</p></li>
+
+<li><p><code>public</code>: the final html files and site structure gets stored here when Hugo creates your website. This is the <em>static version of the blog</em> we will use to deploy to our domain.</p></li>
+
+<li><p><code>themes</code>: contains all the formatting for the theme and <strong>should be left untouched</strong>. I&rsquo;ll look into how to override some of the theme formatting <strong>later in the post</strong>.</p></li>
+</ul>
+
+<h2 id="build-the-website">Build the website</h2>
+
+<p>You are now ready to create your website and you have a few options to do just that.</p>
+
+<h4 id="1-build-site">1 - build_site()</h4>
+
+<p>Run <code>build_site()</code> in the command line to build a ready-for-publishing site</p>
+
+<h4 id="2-serve-site">2 - serve_site()</h4>
+
+<p>Use <code>serve_site()</code> instead to create a <strong>local live preview</strong> of your website for testing.</p>
+
+<p>This means that your PC is <strong>working as a server</strong> for your website, in much a <em>similar way</em> to when you&rsquo;re building a <strong>Shiny app</strong> and visualise it on your machine before deploying it.</p>
+
+<p>This also has a <code>Serve Site</code> Addin version</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/4_serve_site.jpg" alt="" width="75%"/></p>
+
+<h3 id="project-options">Project options</h3>
+
+<p>You are probably going to spend some time making changes to the <code>config.toml</code>file to personalise your website and run <code>Serve Site</code> several times to see the results.</p>
+
+<p>One thing to be aware of is that whenever you run <code>Serve Site</code> your site remains active, and every change you make to the <code>config.toml</code> file (or any other file that feeds into your site) will trigger a re-render of your website, which can prove a bit annoying!</p>
+
+<p>To prevent that, there is something you can change in the <code>Project Options</code> settings. Go to <strong>Tools → Project Options → Build Tools</strong> and un-tick the <code>Re-knit current preview</code> box.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/5_project_options.jpg" alt="" width="75%"/></p>
+
+<p>Now you can make and save several changes in a row but remember that to visualise them you&rsquo;ll need to re-run <code>Serve Site</code> every single time.</p>
+
+<h2 id="customise-the-theme">Customise the theme</h2>
+
+<p>Typically, there are two way to customise your theme:</p>
+
+<h4 id="1-change-config-toml-parameters">1 - Change <code>config.toml</code> parameters</h4>
+
+<p>Keep in mind that this is restricted to the options that the theme developer made available. For instance, to change the entries in your <strong>Main Menu</strong>, you can use the <em>Categories</em> that you assign to each article.</p>
+
+<p>Say for argument&rsquo;s sake that you have 4 articles you&rsquo;ve assigned to the <code>Data</code> category. By changing the URL to <code>/categories/data</code> you generate a new entry in the main menu called <code>Data</code> which will show all 4 articles.</p>
+
+<pre><code class="language-r">[[menu.main]] 
+name = “Data” 
+url = “/categories/data” 
+weight = 120
+</code></pre>
+
+<p>The <code>weight</code> parameter controls the relative position on the menu: the higher the weight, the further left the category will appear.</p>
+
+<h4 id="2-override-individual-html-css-code">2 - Override individual <code>HTML</code>/<code>CSS</code> code</h4>
+
+<p>This is a bit more convoluted: if you want to override a certain aspect of the site&rsquo;s look or functionality, you <strong>need to know which piece of code governs that particular aspect</strong>. In my case, that  involved an awful lot of reading of online Hugo and HTML/CSS forums.</p>
+
+<p>All key files are in <code>Themes</code> under the <code>layouts</code> and <code>static</code> folders:</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/7_theme_folder_str.jpg" alt="" width="65%"/></p>
+
+<p>If you want to change something that is controlled by, say, the <strong>singles</strong> code in <code>themes/layouts/page</code>, you need to create a new folder called <code>layouts/page</code> under the project root and save an &ldquo;override&rdquo; version of the <strong>singles</strong> code in that folder.</p>
+
+<p>The basic principle is that, when Hugo builds your site, it will look in the main folder first, find the override item and use that instead of the original one in the Themes folder.</p>
+
+<p>Let&rsquo;s go through one of the changes I&rsquo;ve made and this will become much clearer.</p>
+
+<h3 id="custom-css">Custom CSS</h3>
+
+<p>I&rsquo;ve found a way to change the website main title font and weight. These aspects are controlled by the <strong>casper-two</strong> file stored in <code>themes/static/css</code>. Essentially, I created a new folder called <code>css</code> under the <code>static</code> main folder and put an &ldquo;override&rdquo; css file in it.</p>
+
+<p>You can use the original css file in the <code>Themes</code> folder as template and edit it directly in RStudio. Use the <code>CTRL+O</code> short-cut and go to <strong>my_website_casper_two → themes → hugo-casper-two → static → css</strong> and load <strong>casper-two</strong>.</p>
+
+<p>Then paste the code below in the body of the file and save it as <code>overrides.css</code> under <code>static/css</code>.</p>
+
+<pre><code class="language-r">.site-title {
+    font-weight: 200;
+    font-size: 7rem;
+}
+.site-header:before {
+    background: rgba(0, 0, 0, 0.5);
+}
+</code></pre>
+
+<p><strong>DO NOT FORGET</strong> to edit <strong>customCSS = [&ldquo;&rdquo;]</strong> in your <code>config.toml</code> to <strong>customCSS = [&ldquo;css/overrides.css&rdquo;]</strong> or Hugo will still use the original css file in the Theme folder.</p>
+
+<h2 id="add-a-post">Add a post</h2>
+
+<p>Unless you&rsquo;re transferring your blog from another platform, like <em>Wordpress</em> or <em>Jekyll</em> (in which case you can refer to <a href="https://bookdown.org/yihui/blogdown/migration.html"><strong>this</strong></a>), you can simply add an existing .Rmd file to the <code>content</code> folder.</p>
+
+<p>Before hitting <code>Serve Site</code>, there are some changes to make to the .Rmd header:</p>
+
+<ul>
+<li><p>make sure you amend <code>categories</code> and <code>tags</code></p></li>
+
+<li><p>update the path to the image that sits right under the title (do not forget to add the image in the <code>static/img</code> folder)</p></li>
+
+<li><p>you can also add a <code>slug</code></p>
+
+<pre><code class="language-r">---
+title: &quot;Using K-Means Clustering to Understand Marketing Response&quot;
+slug: a-gentle-introduction-to-customer-segmentation
+author: &quot;Diego Usai&quot;
+date: 2019-05-25
+categories: [&quot;ML Methods&quot;, &quot;Articles&quot;]
+tags: [&quot;Clustering&quot;, &quot;Customer Segmentation&quot;]
+image: /img/nick-karvounis-SWIoVDRZWUY-unsplash.jpg
+---
+</code></pre></li>
+</ul>
+
+<p>Now, the <strong>slug</strong> works in conjunction with the <code>permalink</code> parameter you find in the <code>config.toml</code> file. I&rsquo;ve set up my <code>permalink</code> as follows&hellip;</p>
+
+<pre><code class="language-r">[permalinks]
+  post = &quot;/:year/:month/:slug/&quot;
+</code></pre>
+
+<p>&hellip;which means that the above article will have this permalink:</p>
+
+<p><a href="http://diegousai.io/2019/05/a-gentle-introduction-to-customer-segmentation/">http://diegousai.io/2019/05/a-gentle-introduction-to-customer-segmentation/</a></p>
+
+<p>This is to guarantee that, should you want or need to <strong>transfer your blog to another platform</strong>, you <em>won&rsquo;t lose the back-links</em> to your old blog and your article <em>will not suddenly &ldquo;drop off&rdquo; natural search results</em>.</p>
+
+<p>To add a <strong>brand new post</strong> you can use <code>New Post</code> Addin. I&rsquo;m yet to test this facility so I will not comment on it in this post, but you can read about it <a href="https://bookdown.org/yihui/blogdown/rstudio-ide.html"><strong>here</strong></a></p>
+
+<h2 id="fixing-the-bugs">Fixing the Bugs</h2>
+
+<h3 id="main-page-not-showing-posts">Main page not showing posts</h3>
+
+<p>When you <code>Serve Site</code> for the first time, you will notice that the home page is pointing to the posts folder and this requires an additional click to show your posts.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/8_main_page.jpg" alt="" width="75%"/></p>
+
+<p>This is due to the fact that the <code>Casper-Two</code> Theme hasn’t been updated to work with Hugo 0.58 and later versions. Thankfully, I&rsquo;ve come across this
+<a href="https://discourse.gohugo.io/t/hugo-casper-two-theme-home-page-redirect-issue/20817/2"><strong>posts</strong></a> that shows a quick solution.</p>
+
+<p>Basically, as explained in the <em>Custom CSS</em> paragraph, I&rsquo;ve created a new  <code>layout/partials</code> folder under the project root with a copy of the <code>post-list</code> code in it.</p>
+
+<p>I then swapped the first line of the <code>post-list</code> code&hellip;</p>
+
+<pre><code class="language-r">{{ $paginator := .Paginate (where .Data.Pages.ByDate.Reverse &quot;Type&quot; &quot;post&quot;) }}
+</code></pre>
+
+<p>&hellip; with this.</p>
+
+<pre><code class="language-r">{{ $paginator := .Paginate (where .Site.RegularPages.ByDate.Reverse &quot;Type&quot; &quot;post&quot;) }}
+</code></pre>
+
+<p>And hey presto, the problem was sorted!</p>
+
+<h3 id="multiple-formatting-issues">Multiple formatting issues</h3>
+
+<p>This was a more complex issue I only became aware of when I had already invested several days of work in the project. Basically, paragraphs do not render properly in mobile format, cutting off at the edges.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/9_rmd_issue.jpg" alt="" width="75%"/></p>
+
+<p>To make matter worst, external pictures would not show either, even when added through the <code>Insert image</code> Addin.</p>
+
+<p>When I was seriously considering to re-start from scratch and switch to another theme, I decided to give myself another half day to search for solutions and thankfully bumped into this <a href="https://sourcethemes.com/academic/docs/front-matter/#rstudio"><em>comment</em></a> suggesting that if using RStudio, <strong>&ldquo;RMarkdown [files] should be saved with the .Rmarkdown extension rather than the .Rmd extension&rdquo;</strong>.</p>
+
+<p>Luckily, this sorted both issues, killing the proverbial 2 birds with one stone!</p>
+
+<h2 id="publish-your-site">Publish your site</h2>
+
+<p>Now you can deploy your website for the whole world to see. Due to the static nature of the site you&rsquo;ve generated, this can be done in a large variety of ways. Here I&rsquo;m going to show you how I got myself a <strong>custom domain</strong>, how I&rsquo;m using my <strong>github</strong> account to host my site, and how I&rsquo;ve linked all to <strong>Netlify</strong> for publishing.</p>
+
+<p>Admittedly, it took a little while to get all the plumbing and wiring properly aligned and sorted out but I&rsquo;m really happy with the final result, which I&rsquo;m sure can still be improved on so suggestions are more than welcome.
+And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong> in the process!</p>
+
+<h3 id="housekeeping-tasks">Housekeeping tasks</h3>
+
+<ul>
+<li><p>Make sure you change the <code>baseurl</code> in <code>config.toml</code> to your final one (“<a href="http://diegousai.io”">http://diegousai.io”</a> in my case)</p></li>
+
+<li><p>Make your site and its entries searchable on SEO by enabling these:</p>
+
+<ul>
+<li><code>enableRobotsTXT</code>  = true</li>
+<li><code>canonifyURLs</code>     = true</li>
+</ul></li>
+
+<li><p>You can add GoggleAnalytics and Disqus if you want:</p>
+
+<ul>
+<li><code>googleAnalytics</code>  = &ldquo;XX-123456789-1&rdquo;</li>
+<li><code>disqusShortname</code>  = &ldquo;your-disqus-id&rdquo;</li>
+</ul></li>
+</ul>
+
+<h3 id="github">Github</h3>
+
+<p>First, I created a <strong>Github</strong> repository to house all my files. At this stage I could can either:</p>
+
+<ul>
+<li><p><strong>Link my R project to the GitHub repository</strong> (see <a href="https://happygitwithr.com/rstudio-git-GitHub.html"><em>here</em></a> for how to do that) and &ldquo;push&rdquo; the <code>public/</code> folder to GitHub from RStudio.</p></li>
+
+<li><p><strong>Commit my R project via upload</strong> by manually drop the <code>public/</code> folder to the github repository.</p></li>
+</ul>
+
+<p>Given the tight time frame on this project I&rsquo;ve opted for the manual upload. I will further explore the first option in the near future</p>
+
+<h3 id="netlify">Netlify</h3>
+
+<p><a href="https://www.netlify.com/"><strong>Netlify</strong></a> offers hosting and server-less backend services for static websites, and is widely recommended by the large majority of sources I&rsquo;ve come across - you can check <a href="https://sourcethemes.com/academic/docs/deployment/"><em>here</em></a>,  <a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/#deploy-in-netlify"><em>here</em></a>, and <a href="https://bookdown.org/yihui/blogdown/netlify.html"><em>here</em></a>.</p>
+
+<p>Once I created a <strong>basic account for free</strong>, I could <strong>publish a website in minutes</strong> by drag-n-drop the <code>public/</code> folder through their web interface. But what I set out to do was to deploy my website directly from Github.</p>
+
+<p>To do that, I first need to link Netlify to the relevant Github repository: from the <code>Sites</code> tab in Netlify, click on <code>New site from Git</code> and select <code>GitHub</code> to grant it access to your repositories.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/10_netlify_github_1.jpg" alt="" width="75%"/></p>
+
+<p>Once you&rsquo;ve authorised Netlify, you can search and locate the website repository for your site (in my case <code>diegousai-io-site</code>)</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/11_netlify_github_2.jpg" alt="" width="75%"/></p>
+
+<p>The next step is to set the build options. Make sure to leave the <code>build</code> window blank (it plays up otherwise) and point the <em>Publish Directory</em> to <code>public/</code>.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/12_netlify_github_3.jpg" alt="" width="75%"/></p>
+
+<p>Click on <code>Deploy site</code> and Netlify bots will concoct all files into your website for you.</p>
+
+<h3 id="custom-domain">Custom Domain</h3>
+
+<p>With Netlify, your site gets assigned a rather impersonal subdomain along the lines of <code>random.word-random.word-blahblahblah.netlify.com</code>, which I really did want to personalise! So I got on <a href="https://www.namecheap.com"><strong>Namecheap</strong></a> and bought myself a handful of <strong>custom domain</strong> names for a bargain price, including the one I&rsquo;m using for my website: <strong>diegousai.io</strong>.</p>
+
+<p>Last thing you need to do is to tell Netlify to use your personal domain instead of its random-generated one. On your <strong>Netlify</strong> homepage Navigation bar, click on <code>Domains</code> and select <code>Add or register domain</code>.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/13_custom_domain_1.jpg" alt="" width="75%"/></p>
+
+<p>Follow the instructions and you will be provided with some <code>nameservers</code> codes (usually 4 of them), which are used to link you website and you domain. Now, go back to <a href="https://www.namecheap.com"><strong>Namecheap</strong></a>, enter <code>Domain List</code> and select the relevant one with <code>manage</code> and on the <code>domain</code> tab scroll to <code>nameservers</code>,  type the 4 codes you got from Netlify and save.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/14_custom_domain_2.jpg" alt="" width="75%"/></p>
+
+<p>To verify that this worked, check if the <strong>Netlify</strong> site changed its <em>random domain</em> name to your <strong>custom domain</strong>.</p>
+
+<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/15_custom_domain_3.jpg" alt="" width="75%"/></p>
+
+<h2 id="enable-seo">Enable SEO</h2>
+
+<p>Although this theme supports SEO elements, enabling <code>enableRobotsTXT</code> and <code>canonifyURLs</code> in your <code>config.toml</code> is not enough to have your site and its content appear on SEO results. In my many readings, I&rsquo;ve found some instructions on how to do just that on the <em>Future Imperfect Original Theme</em> <a href="https://github.com/jpescador/hugo-future-imperfect"><strong>github README.md</strong></a>.</p>
+
+<p>Bear with me here because I&rsquo;m very much <strong>outside my comfort zone</strong> so <strong>tips and suggestions are more then welcome</strong>!</p>
+
+<p><strong>First</strong>, you need to create an account on <a href="https://search.google.com/search-console/about"><strong>Google Search Console</strong></a> and <strong>Add your website as your own property</strong>. Once you&rsquo;ve done so, google will ask you to <strong>verify domain ownership via DNS record</strong> and will give you these instructions:</p>
+
+<ol>
+<li><p>Sign in to domain name provider</p>
+
+<ul>
+<li><strong>Netlify</strong> in my case as I&rsquo;ve delegated domain name handling from <strong>Namecheap</strong></li>
+</ul></li>
+
+<li><p>Copy TXT record into DNS configuration for <strong>diegousai.io</strong></p></li>
+</ol>
+
+<p><strong>Next</strong>, go to your <strong>Netlify</strong> homepage Navigation bar, click on <code>Domains</code> and under <code>DNS records</code> select <code>Add new record</code> and paste the TXT record you got from google.</p>
+
+<p><strong>Then</strong>, you should <strong>Submit the sitemap</strong> (/sitemap.xml) for indexing but for some obscure reason, this only worked once for me: after many attempts Google Console loaded the sitemap only to tell me it was incomplete. I&rsquo;ve then deleted it and have been unable to load the new one.</p>
+
+<p><strong>However</strong>, I&rsquo;ve managed to submit both <em>diegousai.io</em> and <em>www.diegousai.io</em> for inspection with the <code>URL inspection</code> option and my site and some of its pages started to appear on SEO results.</p>
+
+<p>This is still a <strong>work in progress</strong> so do take my instructions with a huge pinch of salt!</p>
+
+<h3 id="some-tips">Some tips</h3>
+
+<p>I would like to close this post with a couple of tips that I hope others embarking on the journey would find useful.</p>
+
+<p><strong>TIP #1</strong>: one thing that worked really well for me was to add one of my articles to the <code>content</code> folder and <strong>create a few &ldquo;prototypes&rdquo;</strong> using different themes. This gave me not only the chance to <strong>see how my article would look like in the &ldquo;finished product&rdquo;</strong> but also allowed me to check if charts, code chunks and imported pictures were <strong>all rendered all right</strong>.</p>
+
+<p>This is how I found out about the <em>Future Imperfect Slim</em> bug I mentioned earlier, and that .Rmd files struggle to show imported pictures.</p>
+
+<p><strong>TIP #2</strong>: do not forget to check if everything works fine in <strong>MOBILE VIEW!!!</strong>. Although the RStudio <em>Viewer pane</em> provides a mobile-like rendering, it is worth visualising your website in a browser and &ldquo;shrink&rdquo; the page to mimic a mobile view.</p>
+
+<p>This revealed the issue that in mobile format, paragraphs cut off at the edges in <em>Casper Two</em>, which I&rsquo;ve luckily managed to find a fix.</p>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>As a statistical analyst, learning the basics of website construction could be a daunting prospect. Sure, I could&rsquo;ve opted for managed online site builders such as <a href="https://www.squarespace.com/"><strong>SquareSpace</strong></a> or <a href="https://wordpress.com/"><strong>WordPress</strong></a> but I would not have learned half as much as I did! And it wouldn&rsquo;t have been half as rewarding!</p>
+
+<p>Although I did find myself wondering a couple of times <strong>what devil possessed me to get into this</strong> (especially when it comes to SEO), all in all I&rsquo;m rather happy with what I&rsquo;ve achieved!</p>
+
+<p>I learned lots of new concepts and ideas and I now have a really functional and nice looking webspace that should serve me well for some time to come.</p>
+
+<h3 id="code-repository">Code repository</h3>
+
+<p>The full R code can be found on <a href="https://github.com/DiegoUsaiUK/build-your-website-with-hugo-and-blogdown/">my GitHub profile</a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li>The <a href="https://bookdown.org/yihui/blogdown/"><strong>blogdown: Creating Websites with R Markdown</strong></a> book, which has plenty of accessible information and useful tips.</li>
+<li>The <a href="https://sourcethemes.com/academic/docs/"><strong>Academic</strong></a> framework documentation also has lots of information, albeit more technical.</li>
+<li><em>Alison Hill</em> blogpost <a href="https://alison.rbind.io/post/2017-06-12-up-and-running-with-blogdown/"><strong>Up &amp; Running with blogdown</strong></a> has provided plenty of inspiration</li>
+<li>Another post I would recommend is <em>Martin Frigaard</em>&rsquo;s article, <a href="https://www.storybench.org/how-to-build-a-website-with-blogdown-in-r/"><strong>How to build a website with Blogdown in R</strong></a>, which has much more detail on <strong>Git</strong> and <strong>version control</strong>.</li>
+<li><a href="https://www.emilyzabor.com/tutorials/rmarkdown_websites_tutorial.html#types_of_websites"><strong>Creating websites in R</strong></a> by <em>Emily C. Zabor</em> is a detailed introduction to creating websites using R, R Markdown and GitHub pages.</li>
+<li><em>Bingkai Wang</em>&rsquo;s<a href="https://infallible-jennings-0fe40d.netlify.com/blog/how-to-build-such-a-website/"><em>How to build a personal webpage in R</em></a> for the nameservers suggestion</li>
+</ul>
+    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+                <p></p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+<article class="read-next-card" 
+            style="background-image: url(/img/simon-zhu-TfRHSL2GKDc-unsplash.jpg);" >
+    <header class="read-next-card-header">
+        <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
+        
+        <h3 class="read-next-card-header-title"><a href="/tags/blogdown/">#blogdown</a></h3>
+    </header>
+    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+    </div>
+
+    <div class="read-next-card-content">
+      
+        <ul>
+          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3: A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
+        
+          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
+        
+          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
+        
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
+        </ul>
+    </div>
+    <footer class="read-next-card-footer">
+      
+        <a href="/tags/blogdown/">See all related posts →</a>
+    </footer>
+</article>
+
+
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2019/09/loading-merging-and-joining-datasets/">
+      <div class="post-card-image" style="background-image: url(/img/stefan-kunze-v8SjXTTI0GA-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2019/09/loading-merging-and-joining-datasets/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Data Wrangling  </span>
+              
+              <h2 class="post-card-title">Loading, Merging and Joining Datasets</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like sorting variables names, creating essential features and sorting out variables order
+I will continue to add to this code should the need arise for other features to be created.
+The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&rsquo;m using here accompanies a Redbooks publication called Building 360-Degree Information Applications which is available as a free PDF download. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="/">
+      
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Build%20Your%20Website%20with%20Hugo%20and%20blogdown%20-%20How%20I%20used%20RStudio%2c%20GitHub%20and%20Netlify%20to%20create%20and%20deploy%20my%20own%20webpage&amp;url=%2f2019%2f10%2fbuild-your-website-with-hugo-and-blogdown%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2019%2f10%2fbuild-your-website-with-hugo-and-blogdown%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">Diego Usai</a> © 2019 <br>
+      <span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        
+        
+        <a href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener">Github</a>
+        <a href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener">Medium</a>
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-151122416-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>
