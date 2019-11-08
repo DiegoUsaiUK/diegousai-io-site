@@ -324,24 +324,20 @@ weight = 120
 
 <p>Before hitting <code>Serve Site</code>, there are some changes to make to the .Rmd header:</p>
 
-<ul>
-<li><p>make sure you amend <code>categories</code> and <code>tags</code></p></li>
+<p>1- make sure you amend <code>categories</code> and <code>tags</code></p>
 
-<li><p>update the path to the image that sits right under the title (do not forget to add the image in the <code>static/img</code> folder)</p></li>
+<p>2- update the path to the image that sits right under the title (do not forget to add the image in the <code>static/img</code> folder)</p>
 
-<li><p>you can also add a <code>slug</code></p>
+<p>3- you can also add a <code>slug</code></p>
 
-<pre><code class="language-r">---
-title: &quot;Using K-Means Clustering to Understand Marketing Response&quot;
+<pre><code class="language-r">title: &quot;Using K-Means Clustering to Understand Marketing Response&quot;
 slug: a-gentle-introduction-to-customer-segmentation
 author: &quot;Diego Usai&quot;
 date: 2019-05-25
 categories: [&quot;ML Methods&quot;, &quot;Articles&quot;]
 tags: [&quot;Clustering&quot;, &quot;Customer Segmentation&quot;]
 image: /img/nick-karvounis-SWIoVDRZWUY-unsplash.jpg
----
-</code></pre></li>
-</ul>
+</code></pre>
 
 <p>Now, the <strong>slug</strong> works in conjunction with the <code>permalink</code> parameter you find in the <code>config.toml</code> file. I&rsquo;ve set up my <code>permalink</code> as follows&hellip;</p>
 
@@ -568,13 +564,13 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
-        
-          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
-        
           <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3: A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
         
+          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+        
                       
+        
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
         
           <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
         </ul>
