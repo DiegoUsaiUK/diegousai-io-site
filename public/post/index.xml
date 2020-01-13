@@ -6,10 +6,20 @@
     <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Mon, 28 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</title>
+      <link>/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/</guid>
+      <description>Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, have been well-established for decades and find applications in fields as varied as business and finance (e.g. predict stock prices and analyse trends in financial markets), the energy sector (e.g. forecast electricity consumption) and academia (e.g. measure socio-political phenomena).
+In more recent times, the popularisation and wider availability of open source frameworks like Keras, TensorFlow and scikit-learn helped machine learning approaches like Random Forest, Extreme Gradient Boosting, Time Delay Neural Network and Recurrent Neural Network to gain momentum in time series applications.</description>
+    </item>
     
     <item>
       <title>Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</title>
@@ -43,10 +53,20 @@ Earlier this year I&amp;rsquo;ve used the popular K-Means clustering algorithm t
     
     <item>
       <title>Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</title>
-      <link>/2019/09/modelling-with-tidymodels-and-parsnip/</link>
-      <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
+      <link>/2019/06/modelling-with-tidymodels-and-parsnip/</link>
+      <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/modelling-with-tidymodels-and-parsnip/</guid>
+      <guid>/2019/06/modelling-with-tidymodels-and-parsnip/</guid>
+      <description>Recently I have completed the online course Business Analysis With R focused on applied data and business science with R, which introduced me to a couple of new modelling concepts and approaches. One that especially captured my attention is parsnip and its attempt to implement a unified modelling and analysis interface (similar to python&amp;rsquo;s scikit-learn) to seamlessly access several modelling platforms in R.
+parsnip is the brainchild of RStudio&amp;rsquo;s Max Khun (of caret fame) and Davis Vaughan and forms part of tidymodels, a growing ensemble of tools to explore and iterate modelling tasks that shares a common philosophy (and a few libraries) with the tidyverse.</description>
+    </item>
+    
+    <item>
+      <title>Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</title>
+      <link>/2019/06/modelling-with-tidymodels-and-parsnip/</link>
+      <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/06/modelling-with-tidymodels-and-parsnip/</guid>
       <description>Recently I have completed the online course Business Analysis With R focused on applied data and business science with R, which introduced me to a couple of new modelling concepts and approaches. One that especially captured my attention is parsnip and its attempt to implement a unified modelling and analysis interface (similar to python&amp;rsquo;s scikit-learn) to seamlessly access several modelling platforms in R.
 parsnip is the brainchild of RStudio&amp;rsquo;s Max Khun (of caret fame) and Davis Vaughan and forms part of tidymodels, a growing ensemble of tools to explore and iterate modelling tasks that shares a common philosophy (and a few libraries) with the tidyverse.</description>
     </item>
