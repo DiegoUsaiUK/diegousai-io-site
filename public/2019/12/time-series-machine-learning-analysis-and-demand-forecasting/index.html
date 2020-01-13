@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en-UK" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="canonical" href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/" />
+
+     <meta name="description" content="Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, ha" /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="/img/ben-elwood-rsCB-A69lUc-unsplash.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio"/>
+    <meta name="twitter:description" content="Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, ha"/>
+    <meta name="twitter:url" content="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, ha" />
+
+    <meta property="article:published_time" content="2019-12-11T00:00:00Z" />
+    <meta property="article:tag" content="Machine Learning" /><meta property="article:tag" content="Time Series" /><meta property="article:tag" content="Forecasting" />
+
+    <meta property="og:image" content="/img/ben-elwood-rsCB-A69lUc-unsplash.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.58.3" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+     <link rel="stylesheet" href="/css/override.css" /> 
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/articles/">Articles</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/market-basket-analysis">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/tags/">Tags</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/links/">Readings</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/about/">About</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    
+
+                    
+
+                    <a class="social-link" href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    <a class="social-link" href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 512 512"><path d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683 C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615 c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915 s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z" /></svg></a>
+
+                    <a class="social-link" href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 195"><path d="M46.5340803,65.2157554 C46.6968378,63.6076572 46.0836,62.018231 44.8828198,60.93592 L32.6512605,46.2010582 L32.6512605,44 L70.6302521,44 L99.9859944,108.380952 L125.794585,44 L162,44 L162,46.2010582 L151.542017,56.2281011 C150.640424,56.9153477 150.193188,58.0448862 150.380019,59.1628454 L150.380019,132.837155 C150.193188,133.955114 150.640424,135.084652 151.542017,135.771899 L161.755369,145.798942 L161.755369,148 L110.38282,148 L110.38282,145.798942 L120.963119,135.527337 C122.002801,134.487948 122.002801,134.182246 122.002801,132.592593 L122.002801,73.0417402 L92.585901,147.755438 L88.6106443,147.755438 L54.3622782,73.0417402 L54.3622782,123.115814 C54.0767278,125.221069 54.7759199,127.3406 56.2581699,128.863022 L70.0186741,145.55438 L70.0186741,147.755438 L31,147.755438 L31,145.55438 L44.7605042,128.863022 C46.2319621,127.338076 46.8903838,125.204485 46.5340803,123.115814 L46.5340803,65.2157554 Z"/></svg></a>
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2019-12-11">11 December 2019</time>
+                <span class="date-divider">/</span> <a href="/tags/machine-learning/">#Machine Learning</a>&nbsp;<a href="/tags/time-series/">#Time Series</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</h1>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(/img/ben-elwood-rsCB-A69lUc-unsplash.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        
+
+<p>Traditional approaches to time series analysis and forecasting, like <a href="https://en.wikipedia.org/wiki/Linear_regression"><strong>Linear Regression</strong></a>, <a href="https://en.wikipedia.org/wiki/Exponential_smoothing"><strong>Holt-Winters Exponential Smoothing</strong></a>, <a href="https://en.wikipedia.org/wiki/Autoregressive%E2%80%93moving-average_model"><strong>ARMA/ARIMA/SARIMA</strong></a> and <a href="https://en.wikipedia.org/wiki/Autoregressive_conditional_heteroskedasticity"><strong>ARCH/GARCH</strong></a>, have been well-established for decades and find applications in fields as varied as <strong>business and finance</strong> (e.g. predict stock prices and analyse trends in financial markets), the <strong>energy sector</strong> (e.g. forecast electricity consumption) and <strong>academia</strong> (e.g. measure socio-political phenomena).</p>
+
+<p>In more recent times, the popularisation and wider availability of open source frameworks like <a href="https://keras.io/"><strong>Keras</strong></a>, <a href="https://www.tensorflow.org/"><strong>TensorFlow</strong></a> and <a href="https://scikit-learn.org/"><strong>scikit-learn</strong></a> helped machine learning approaches like <a href="https://en.wikipedia.org/wiki/Random_forest"><strong>Random Forest</strong></a>, <a href="https://en.wikipedia.org/wiki/XGBoost"><strong>Extreme Gradient Boosting</strong></a>, <a href="https://en.wikipedia.org/wiki/Time_delay_neural_network"><strong>Time Delay Neural Network</strong></a> and <a href="https://en.wikipedia.org/wiki/Recurrent_neural_network"><strong>Recurrent Neural Network</strong></a> to gain momentum in time series applications. These techniques allow for historical information to be introduced as input to the model through a set of time delays.</p>
+
+<p>The advantage of using machine learning models over more traditional methods is that they can have <code>higher predictive power</code>, especially when predictors have a clear causal link to the response. Moreover, they can handle complex calculations over larger numbers of inputs much <code>faster</code>.</p>
+
+<p>However, they tend to have a <code>wider array of tuning parameters</code>, are generally <code>more complex</code> than &ldquo;classic&rdquo; models, and can be <code>expensive</code> to fit, both in terms of computing power and time. To top it off, their <code>black box</code> nature makes their output harder to interpret and has given birth to the ever growing field of <a href="https://www.h2o.ai/wp-content/uploads/2019/08/An-Introduction-to-Machine-Learning-Interpretability-Second-Edition.pdf"><strong>Machine Learning interpretability</strong></a> (I am not going to touch on this as it&rsquo;s outside the scope of the project)</p>
+
+<h2 id="project-structure">Project structure</h2>
+
+<p>In this project I am going to explain in detail the various steps needed to model time series data with machine learning models.</p>
+
+<p>These include:</p>
+
+<ul>
+<li><p><strong>exploratory time series analysis</strong></p></li>
+
+<li><p><strong>feature engineering</strong></p></li>
+
+<li><p><strong>models training and validation</strong></p></li>
+
+<li><p><strong>comparison of models performance and forecasting</strong></p></li>
+</ul>
+
+<p>In particular, I use <code>TSstudio</code> to carry out a &ldquo;traditional&rdquo; time series <strong>exploratory analysis</strong> to describe the time series and its components and show how to use the insight I gather to <strong>create features</strong> for a machine learning pipeline to ultimately generate a weekly revenue forecast.</p>
+
+<p>For <strong>modelling and forecasting</strong> I&rsquo;ve chosen the high performance, open source machine learning library <code>H2O</code>. I am fitting an assorted selection of machine learning models such as <strong>Generalised Linear Model</strong>, <strong>Gradient Boosting Machine</strong> and <strong>Random Forest</strong> and also using <strong>AutoML</strong> for <em>automatic machine learning</em>, one of the most exciting features of the <code>H2O</code> library.</p>
+
+<h2 id="the-data">The data</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(lubridate)
+library(readr)
+library(TSstudio)
+library(scales)
+library(plotly)
+library(h2o)
+library(vip)
+library(gridExtra)
+library(knitr)
+</code></pre>
+
+<p>The dataset I&rsquo;m using here accompanies a <a href="https://www.redbooks.ibm.com/abstracts/sg248133.html?Open">Redbooks publication</a> and is available as a free download in the <a href="ftp://www.redbooks.ibm.com/redbooks/SG248133">Additional Material</a> section. The data covers <strong>3 &amp; <sup>1</sup>&frasl;<sub>2</sub> years</strong> worth of sales <code>orders</code> for the <strong>Sample Outdoors Company</strong>, a fictitious B2B outdoor equipment retailer enterprise and comes with details about the <code>products</code> they sell as well as their customers (which in their case are <code>retailers</code>). Due to its <strong>artificial nature</strong>, the series presents a few oddities and quirks, which I am going to point out throughout this project.</p>
+
+<p>Here I&rsquo;m simply loading up the compiled dataset but if you want to follow along I&rsquo;ve also written a post called <a href="https://diegousai.io/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a> where I show how I&rsquo;ve assembled the various data feeds and sorted out the likes of variable naming, new features creation and some general housekeeping tasks.</p>
+
+<pre><code class="language-r"># Import orders
+orders_tmp &lt;- 
+   read_rds(&quot;orders_tbl.rds&quot;)
+</code></pre>
+
+<p>You can find the full code on <a href="https://github.com/DiegoUsaiUK/Loading_Merging_and_Joining_Datasets">my Github repository</a>.</p>
+
+<h3 id="initial-exploration">Initial exploration</h3>
+
+<p>Time series data have a set of unique features, like <em>timestamp</em>, <em>frequency</em> and <em>cycle/period</em>, that have applications for both descriptive and predictive analysis. R provides several classes to represent time series objects (<code>xts</code> and <code>zoo</code> to name but the main ones), but to cover the <strong>descriptive analysis</strong> for this project I&rsquo;ve chosen to use the <code>ts</code> class, which is supported by the <code>TSstudio</code> library.</p>
+
+<p><code>TSstudio</code> comes with some very useful functions for interactive visualization of time series objects. And I really like the fact that this library uses <em>plotly</em> as its visualisation engine!</p>
+
+<p>First of all, I select the data I need for my analysis (<code>order_date</code> and <code>revenue</code> in this case) and aggregate it to a <strong>weekly frequency</strong>. I mark this dataset with a <code>_tmp</code> suffix to denote that is a <em>temporary</em> version and a few steps are still needed before it can be used.</p>
+
+<pre><code class="language-r">revenue_tmp &lt;- 
+  orders_tmp %&gt;% 
+  # filter out final month of the series, which is incomplete
+  filter(order_date &lt;= &quot;2007-06-25&quot;) %&gt;% 
+  select(order_date, revenue) %&gt;%
+  mutate(order_date = 
+           floor_date(order_date, 
+                     unit = 'week', 
+                     # setting up week commencing Monday
+                     week_start = getOption(&quot;lubridate.week.start&quot;, 1))) %&gt;%
+  group_by(order_date) %&gt;%
+  summarise(revenue   = sum(revenue)) %&gt;%
+  ungroup()
+</code></pre>
+
+<pre><code class="language-r">revenue_tmp %&gt;% str()
+
+## Classes 'tbl_df', 'tbl' and 'data.frame':    89 obs. of  2 variables:
+##  $ order_date: Date, format: &quot;2004-01-12&quot; &quot;2004-01-19&quot; ...
+##  $ revenue   : num  58814754 13926869 55440318 17802526 52553592 ...
+</code></pre>
+
+<p>The series spans across <strong>3 &amp; <sup>1</sup>&frasl;<sub>2</sub> years</strong> worth of sales <code>orders</code> so I should expect to have <strong>at least 182 data point</strong> but there are <strong>only 89 observations</strong>!</p>
+
+<p>Let&rsquo;s take a closer look to see what&rsquo;s happening:</p>
+
+<pre><code class="language-r">revenue_tmp %&gt;% head(10)
+
+## # A tibble: 10 x 2
+##    order_date   revenue
+##    &lt;date&gt;         &lt;dbl&gt;
+##  1 2004-01-12 58814754.
+##  2 2004-01-19 13926869.
+##  3 2004-02-09 55440318.
+##  4 2004-02-16 17802526.
+##  5 2004-03-08 52553592.
+##  6 2004-03-15 23166647.
+##  7 2004-04-12 39550528.
+##  8 2004-04-19 25727831.
+##  9 2004-05-10 41272154.
+## 10 2004-05-17 33423065.
+</code></pre>
+
+<p><strong>A couple of things to notice here:</strong> this series presents an unusual weekly pattern, with sales logged twice a month on average. Also, the first week of 2004 has no sales logged against it.</p>
+
+<p>To carry out time series analysis with <code>ts</code> objects I need to make sure that I have a full 52 weeks in each year, which should also include weeks with no sales.</p>
+
+<p>So before converting my data to a <code>ts</code> object I need to:</p>
+
+<ul>
+<li><p><strong>Add 1 observation at the beginning of the series</strong> to insure that the first year includes 52 weekly observations</p></li>
+
+<li><p><strong>All is arranged in chronological order.</strong> This is especially important because the output may not be correctly mapped to the actual index of the series, leading to inaccurate results.</p></li>
+
+<li><p><strong>Fill the gaps in incomplete datetime variables.</strong> The <code>pad</code> function from the <code>padr</code> library inserts a record for each of the missing time points (the default fill value is NA)</p></li>
+
+<li><p><strong>Replace missing values with a zero</strong> as there are no sales recorded against the empty weeks. The <code>fill_by_value</code> function from the <code>padr</code> library helps with that.</p></li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r">revenue_tbl &lt;- 
+  revenue_tmp %&gt;% 
+    rbind(list('2004-01-05', NA, NA)) %&gt;%
+    arrange(order_date) %&gt;% 
+    padr::pad() %&gt;% 
+    padr::fill_by_value(value = 0) 
+</code></pre>
+
+<pre><code class="language-r">revenue_tbl %&gt;% summary()
+
+##    order_date            revenue        
+##  Min.   :2004-01-05   Min.   :       0  
+##  1st Qu.:2004-11-15   1st Qu.:       0  
+##  Median :2005-09-26   Median :       0  
+##  Mean   :2005-09-26   Mean   :24974220  
+##  3rd Qu.:2006-08-07   3rd Qu.:52521082  
+##  Max.   :2007-06-18   Max.   :93727081
+</code></pre>
+
+<p>Now I can take a look at <strong>weekly revenue</strong>, my response variable</p>
+
+<pre><code class="language-r">revenue_tbl %&gt;% 
+  ggplot(aes(x = order_date, y = revenue)) + 
+  geom_line(colour = 'darkblue') +
+  theme_light() +
+  scale_y_continuous(labels = scales::dollar_format(scale = 1e-6, 
+                                                    suffix = &quot;m&quot;)) +
+  labs(title = 'Weekly Revenue - 2004 to June 2007',
+           x = &quot;&quot;,
+           y = 'Revenue ($m)')
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/01_weekly_revenue.png" alt="" /></p>
+
+<p>As already mentioned, the series is artificially generated and does not necessarily reflect what would happen in a real-life situation. If this was an actual analytics consulting project, I would most definitely question the odd weekly sales frequency with my client.</p>
+
+<p>But assuming that this is the real deal, <strong>the challenge</strong> here is to construct a thought-through selection of <strong>meaningful features</strong> and test them on <strong>a few machine learning models</strong> to find one that can to <strong>produce a good forecast</strong>.</p>
+
+<p><strong>CHALLENGE EXCEPTED!</strong></p>
+
+<h2 id="exploratory-analysis">Exploratory analysis</h2>
+
+<p>In this segment I am exploring the time series, examining its components and seasonality structure, and carry out a correlation analysis to identify the main characteristics of the series.</p>
+
+<p>Before I can change my series into a <code>ts</code> object, I need to define the <code>start</code> (or <code>end</code>) argument of the series. I want the count of weeks to start with the first week of the year, which ensures that all aligns with the <code>ts</code> framework.</p>
+
+<pre><code class="language-r">start_point_wk &lt;-  c(1,1)
+
+start_point_wk
+## [1] 1 1
+</code></pre>
+
+<p>I create the <code>ts</code> object by selecting the response variable (<code>revenue</code>) as the data argument and specifying a frequency of 52 weeks.</p>
+
+<pre><code class="language-r">ts_weekly &lt;- 
+  revenue_tbl %&gt;%  
+  select(revenue) %&gt;%
+  ts(start = start_point_wk,
+     frequency = 52)
+</code></pre>
+
+<pre><code class="language-r">ts_info(ts_weekly)
+
+##  The ts_weekly series is a ts object with 1 variable and 181 observations
+##  Frequency: 52 
+##  Start time: 1 1 
+##  End time: 4 25
+</code></pre>
+
+<p>Checking the series attributes with the <code>ts_info()</code> function shows that the series is a weekly <code>ts</code> object with 1 variable and 181 observations.</p>
+
+<h3 id="time-series-components">Time series components</h3>
+
+<p>Let&rsquo;s now plot our time series with the help of <code>TSstudio</code>&rsquo;s graphic functions.</p>
+
+<p><code>ts_decompose</code> breaks down the series into its elements: <strong>Trend</strong>, <strong>Seasonality</strong>, and <strong>Random</strong> components.</p>
+
+<pre><code class="language-r">ts_decompose(ts_weekly, type = 'additive')
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/02_ts_decompose.png" alt="" /></p>
+
+<ul>
+<li><p><strong>Trend</strong>: The series does not appear to have a <em>cyclical component</em> but shows a distinct <em>upward trend</em>. The trend is potentially <em>not linear</em>, which I will try to capture by including a squared trend element in the features.</p></li>
+
+<li><p><strong>Seasonal</strong>: the plot shows a distinct <em>seasonal pattern</em>, which I will explore next.</p></li>
+
+<li><p><strong>Random</strong>: The <em>random component</em> appears to be randomly distributed.</p></li>
+</ul>
+
+<h3 id="seasonal-component">Seasonal component</h3>
+
+<p>Let&rsquo;s now zoom in on the <strong>seasonal component</strong> of the series</p>
+
+<pre><code class="language-r">ts_seasonal(ts_weekly, type = 'normal')
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/03_ts_seasonal.png" alt="" /></p>
+
+<p>Although there are 12 distinct &ldquo;spikes&rdquo; (one for each month of the year), the plot does not suggest the presence of a <strong>canonical seasonality</strong>. However, with very few exceptions, sales are logged on the same weeks each year and I will try to capture that regularity with a feature variable.</p>
+
+<h3 id="correlation-analysis">Correlation analysis</h3>
+
+<p>The <strong>autocorrelation function (ACF)</strong> describes the level of correlation between the series and its lags.</p>
+
+<p>Due to the odd nature of the series at hand, the AC plot is not very straightforward to read and interpret: it shows that there is a lag structure but due to the noise in the series it&rsquo;s difficult to pick up a meaningful pattern.</p>
+
+<pre><code class="language-r">ts_acf(ts_weekly, lag.max = 52)
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/04_ts_acf.png" alt="" /></p>
+
+<p>However, I can make use of <strong>Lag Visualizations</strong> and play with the lag number to identify potential correlation between the series and it lags.</p>
+
+<p>In this case, aligning the number of weeks to a <strong>quarterly frequency</strong> shows a distinct <strong>linear relationship</strong> with quarterly lags. For simplicity, I will only include <strong>lag 13</strong> in the models to control for the effect of level of sales during the last quarter.</p>
+
+<pre><code class="language-r">ts_lags(ts_weekly, lags = c(13, 26, 39, 52))
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/05_ts_lags_qtr.png" alt="" /></p>
+
+<p>Using the same trick reveals a <strong>strong linear relationship</strong> with the <strong>first yearly lag</strong>. Again, I will include only a <strong>lag 52</strong> in the models.</p>
+
+<pre><code class="language-r">ts_lags(ts_weekly, lags = c(52, 104, 156))
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/06_ts_lags_yr.png" alt="" /></p>
+
+<h3 id="summary-of-exploratory-analysis">Summary of exploratory analysis</h3>
+
+<ul>
+<li><p>The series has a 2-week-on, 2-week-off purchase frequency with <strong>no canonical seasonality</strong>. However, sales are logged roughly on the same weeks each year, with very few exceptions.</p></li>
+
+<li><p>The series does not appear to have a <strong>cyclical component</strong> but shows a clear <strong>upward trend</strong> as well as potentially a <strong>not linear trend</strong>.</p></li>
+
+<li><p>ACF was difficult to interpret due to the noisy data but the lag plots hint at a <strong>yearly</strong> and <strong>quarterly lag structure</strong>.</p></li>
+</ul>
+
+<p>.</p>
+
+<h2 id="modelling">Modelling</h2>
+
+<p>The <strong>modelling and forecasting</strong> strategy is to:</p>
+
+<ul>
+<li><p>train and cross-validate all models up to and including <strong>Q1 2007</strong> and compare their in-sample <strong>predictive performance</strong> using <strong>Q1 2007</strong>.</p></li>
+
+<li><p>pretend I do not have data for <strong>Q2 2007</strong>, generate a forecast for that period using all fitted models, and compare their <strong>forecasts performance</strong> against <strong>Q2 2007 actuals</strong></p></li>
+</ul>
+
+<p>Below you find a visual representation of the strategy. I find from experience that supporting explanations with a good visualisation is a great way to bring your points to life, especially when working with time series analysis.</p>
+
+<p>All <strong>models accuracy</strong> will be compared with <strong>performance metrics</strong> and <strong>actual vs predicted</strong> plots.</p>
+
+<p>The <strong>performance metrics</strong> I am going to be using are:</p>
+
+<ul>
+<li><p>the <strong>R^2</strong> is a <em>goodness-of-fit metric</em> that explains in percentage terms the amount of variation in the response variable that is due to variation in the feature variables.</p></li>
+
+<li><p>the <strong>RMSE</strong> (or <em>Root Mean Square Error</em>) is the standard deviation of the residuals and measures the average magnitude of the prediction error. Basically, it tells you how spread out residuals are.</p></li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r">revenue_tbl %&gt;%
+  filter(order_date &gt;= &quot;2005-01-03&quot;) %&gt;% 
+  ggplot(aes(order_date, revenue)) +
+  geom_line(colour = 'black', size = 0.7) +
+  geom_point(colour = 'black', size = 0.7) +
+  geom_smooth(se = FALSE, colour = 'red', size = 1, linetype = &quot;dashed&quot;) +
+  theme_light() +
+  scale_y_continuous(limits = c(0, 11.5e7),
+                     labels = scales::dollar_format(scale = 1e-6, suffix = &quot;m&quot;)) +
+  labs(title    = 'Weekly Revenue - 2005 to June 2007',
+       subtitle = 'Train, Test and Forecast Data Portions',
+       x = &quot;&quot;,
+       y = 'Revenue ($m)') +
+  
+  # Train Portion
+  annotate(x = ymd('2005-12-01'), y = (10.5e7), fill = 'black',
+           'text',  label = 'Train\nPortion', size = 2.8) +
+  
+  # Test Portion
+  annotate(x = ymd('2007-02-05'), y = (10.5e7),
+           'text',  label = 'Test\nPortion', size = 2.8) +
+  geom_rect(xmin = as.numeric(ymd('2006-12-18')),
+            xmax = as.numeric(ymd('2007-03-25')),
+            ymin = -Inf, ymax = Inf, alpha = 0.005,
+            fill = 'darkturquoise') +
+  
+  # Forecast Portion
+  annotate(x = ymd('2007-05-13'), y = (10.5e7),
+           'text',  label = 'Forecast\nPortion', size = 2.8) +
+  geom_rect(xmin = as.numeric(ymd('2007-03-26')),
+            xmax = as.numeric(ymd('2007-07-01')),
+            ymin = -Inf, ymax = Inf, alpha = 0.01,
+            fill = 'cornflowerblue')
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/07_strategy.png" alt="" /></p>
+
+<p><strong>A very important remark:</strong> as you can see, I&rsquo;m not showing 2004 data in the plot. This is because, whenever you include a lag variable in your model, the first period used to calculate the lag <strong>&ldquo;drop off&rdquo;</strong> the dataset and won&rsquo;t be available for modelling. In the case of <strong>a yearly lag</strong>, all observations <strong>&ldquo;shift&rdquo; one year ahead</strong>, and as there are no sales recorder for 2003, this  results in the first 52 weeks being dropped from the analysis.</p>
+
+<h3 id="feature-creation">Feature creation</h3>
+
+<p>Now I can start to incorporate the findings from the Time Series exploration in my feature variables. I do that by creating:</p>
+
+<p><strong>Trend</strong> features: (a <em>trend</em> and <em>trend squared</em> ). this is done with a simple numeric index to control for the upward trend and the potential non-linear trend.</p>
+
+<p><strong>Lag</strong> features: (a _lag<em>13</em> and _lag<em>52</em>) to capture the observed correlation of revenue with its quarterly and yearly seasonal lags.</p>
+
+<p><strong>Seasonal</strong> feature to deal with the <em>2-week-on, 2-week-off</em> purchase frequency</p>
+
+<pre><code class="language-r">model_data_tbl &lt;- 
+  revenue_tbl %&gt;% 
+  mutate(trend       = 1:nrow(revenue_tbl),
+         trend_sqr   = trend^2,
+         rev_lag_13  = lag(revenue, n = 13),
+         rev_lag_52  = lag(revenue, n = 52),
+         season      = case_when(revenue == 0 ~ 0,
+                                 TRUE ~ 1)
+        ) %&gt;% 
+ filter(!is.na(rev_lag_52))
+</code></pre>
+
+<p>The next step is to create the <strong>train</strong>, <strong>test</strong> and <strong>forecast</strong> data frames.</p>
+
+<p>As a matter of fact, the <strong>test data</strong> set is <strong>not strictly required</strong>  because <code>H2O</code> allows for <strong>multi-fold cross validation</strong> to be automatically implemented.</p>
+
+<p>However, as hinted at in the previous paragraph, I&rsquo;m &ldquo;carving off&rdquo; a <strong>test set</strong> from the train data for the sake of evaluating and comparing the <strong>in-sample performance</strong> of the fitted models.</p>
+
+<pre><code class="language-r">train_tbl &lt;- 
+  model_data_tbl %&gt;% 
+  filter(order_date &lt;= &quot;2007-03-19&quot;) 
+
+test_tbl &lt;- 
+  model_data_tbl %&gt;%
+  filter(order_date &gt;= &quot;2006-10-02&quot; &amp;
+           order_date &lt;= &quot;2007-03-19&quot;) 
+</code></pre>
+
+<pre><code class="language-r">train_tbl %&gt;% head()
+
+## # A tibble: 6 x 7
+##   order_date   revenue trend trend_sqr rev_lag_13 rev_lag_52 season
+##   &lt;date&gt;         &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+## 1 2005-01-03        0     53      2809         0          0       0
+## 2 2005-01-10 54013487.    54      2916  45011429.  58814754.      1
+## 3 2005-01-17 40984715.    55      3025  30075259.  13926869.      1
+## 4 2005-01-24        0     56      3136         0          0       0
+## 5 2005-01-31        0     57      3249         0          0       0
+## 6 2005-02-07 51927116.    58      3364  51049952.  55440318.      1
+</code></pre>
+
+<p>The main consideration when creating a <strong>forecast data set</strong> revolves around making calculated <strong>assumptions</strong> on the likely values and level for the predictor variables</p>
+
+<ul>
+<li><p>When it comes to the <code>trend</code> features, I simply select them from the _model_data<em>tbl</em> dataset. They are based on the numeric index and are fine as they are</p></li>
+
+<li><p>Given that weeks with orders are almost all aligned year in, year out (remember the exploratory analysis?) I am setting <code>season</code> and <code>rev_lag_52</code> equal to their values a year earlier (52 weeks earlier)</p></li>
+
+<li><p>The value of <code>rev_lag_13</code> is set equal to its value during the previous quarter (i.e. Q1 2007)</p></li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r">forecast_tbl &lt;- 
+  model_data_tbl %&gt;% 
+  filter(order_date &gt; &quot;2007-03-19&quot;) %&gt;%
+  select(order_date:trend_sqr) %&gt;%
+  cbind(season     = model_data_tbl %&gt;%
+               filter(between(order_date,
+                              as.Date(&quot;2006-03-27&quot;),
+                              as.Date(&quot;2006-06-19&quot;))) %&gt;% 
+                        select(season),
+        rev_lag_52 = model_data_tbl %&gt;%
+               filter(between(order_date,
+                              as.Date(&quot;2006-03-27&quot;),
+                              as.Date(&quot;2006-06-19&quot;))) %&gt;% 
+                        select(rev_lag_52),
+        rev_lag_13 = model_data_tbl %&gt;%
+               filter(between(order_date,
+                              as.Date(&quot;2006-12-25&quot;),
+                              as.Date(&quot;2007-03-19&quot;))) %&gt;% 
+                        select(rev_lag_13)
+         )
+</code></pre>
+
+<pre><code class="language-r">forecast_tbl %&gt;% head()
+
+##   order_date  revenue trend trend_sqr season rev_lag_52 rev_lag_13
+## 1 2007-03-26   449709   169     28561      0        0.0          0
+## 2 2007-04-02        0   170     28900      0        0.0          0
+## 3 2007-04-09 89020602   171     29241      1 45948859.7   63603122
+## 4 2007-04-16 70869888   172     29584      1 41664162.8   63305793
+## 5 2007-04-23        0   173     29929      0   480138.8          0
+## 6 2007-04-30        0   174     30276      0        0.0          0
+</code></pre>
+
+<h3 id="modelling-with-h2o">Modelling with H2O</h3>
+
+<p>Finally, I am ready to start modelling!</p>
+
+<p><code>H2O</code> is a high performance, open source library for machine learning applications and works on distributed processing, which makes it suitable for smaller in-memory project and can quikly scale up with external processing power for larger undertaking.</p>
+
+<p>It&rsquo;s Java-based, has dedicated interfaces with both <em>R</em> and <em>Python</em> and incorporates many supervised and unsupervised machine learning models. In this project I am focusing in particular on 4 algorithms:</p>
+
+<ul>
+<li><p><strong>Generalised Linear Model (GLM)</strong></p></li>
+
+<li><p><strong>Random Forest (RF)</strong></p></li>
+
+<li><p><strong>Gradient Boosting Machine (GBM)</strong></p></li>
+
+<li><p>I&rsquo;m also using the <strong>AutoML</strong> facility and use the leader model to compare performance</p></li>
+</ul>
+
+<p>First things first: start a <code>H2O</code> instance!</p>
+
+<p>When R starts H2O through the <code>h2o.init</code> command, I can specify the size of the memory allocation pool cluster. To speed things up a bit, I set it to &ldquo;16G&rdquo;.</p>
+
+<pre><code class="language-r">h2o.init(max_mem_size = &quot;16G&quot;)
+
+## H2O is not running yet, starting it now...
+## 
+## Note:  In case of errors look at the following log files:
+##     C:\Users\LENOVO\AppData\Local\Temp\RtmpSWW88g/h2o_LENOVO_started_from_r.out
+##     C:\Users\LENOVO\AppData\Local\Temp\RtmpSWW88g/h2o_LENOVO_started_from_r.err
+## 
+## 
+## Starting H2O JVM and connecting: . Connection successful!
+## 
+## R is connected to the H2O cluster: 
+##     H2O cluster uptime:         4 seconds 712 milliseconds 
+##     H2O cluster timezone:       Europe/Berlin 
+##     H2O data parsing timezone:  UTC 
+##     H2O cluster version:        3.26.0.10 
+##     H2O cluster version age:    2 months and 4 days  
+##     H2O cluster name:           H2O_started_from_R_LENOVO_xwx278 
+##     H2O cluster total nodes:    1 
+##     H2O cluster total memory:   14.22 GB 
+##     H2O cluster total cores:    4 
+##     H2O cluster allowed cores:  4 
+##     H2O cluster healthy:        TRUE 
+##     H2O Connection ip:          localhost 
+##     H2O Connection port:        54321 
+##     H2O Connection proxy:       NA 
+##     H2O Internal Security:      FALSE 
+##     H2O API Extensions:         Amazon S3, Algos, AutoML, Core V3, TargetEncoder, Core V4 
+##     R Version:                  R version 3.6.1 (2019-07-05)
+</code></pre>
+
+<p>I also prefer to switch off the progress bar as in some cases the output message can be quite verbose and lengthy.</p>
+
+<pre><code class="language-r">h2o.no_progress()
+</code></pre>
+
+<p>The next step is to arrange <strong>response</strong> and <strong>predictor</strong> variables sets. For regression to be performed, you need to ensure that the response variable is NOT a factor (otherwise <code>H2O</code> will carry out a classification).</p>
+
+<pre><code class="language-r"># response variable
+y &lt;- &quot;revenue&quot;
+
+# predictors set: remove response variable and order_date from the set
+x &lt;- setdiff(names(train_tbl %&gt;% as.h2o()), c(y, &quot;order_date&quot;))
+</code></pre>
+
+<h3 id="a-random-forest">A random forest</h3>
+
+<p>I am going to start by fitting a <code>random forest</code>.</p>
+
+<p>Note that I&rsquo;m including the <code>nfolds</code> parameter. Whenever specified, this parameter enables cross-validation to be carried out without the need for a <code>validation_frame</code> - if set to 5 for instance, it will perform a 5-fold cross-validation.</p>
+
+<p>If you want to use a specific validation frame, simply set <code>nfolds == 0</code>, in which case a <code>validation_frame</code> argument can be specified (in my case it would be the <code>test_tbl</code>) and used for early stopping of individual models and of the grid searches.</p>
+
+<p>I&rsquo;m also using some of the control parameters to handle the model&rsquo;s running time:</p>
+
+<ul>
+<li><p>I&rsquo;m setting <code>stopping_metric</code> to <code>RMSE</code> as the error metric for early stopping (the model will stop building new trees when the metric ceases to improve)</p></li>
+
+<li><p>With <code>stopping_rounds</code> I&rsquo;m specifying the number of training rounds before early stopping is considered</p></li>
+
+<li><p>I&rsquo;m using <code>stopping_tolerance</code> to set minimal improvement needed for the training process to continue</p></li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r"># random forest model
+rft_model &lt;- 
+  h2o.randomForest(
+    x = x, 
+    y = y, 
+    training_frame = train_tbl %&gt;% as.h2o(),
+    nfolds = 10,
+    ntrees = 500,
+    stopping_metric = &quot;RMSE&quot;,
+    stopping_rounds = 10,
+    stopping_tolerance = 0.005,
+    seed = 1975
+  )
+</code></pre>
+
+<p>I now visualise the variable importance with <code>h2o.varimp_plot</code>, which returns a plot with the ranked contribution of each variable, normalised to a scale between 0 and 1.</p>
+
+<pre><code class="language-r">rft_model %&gt;% h2o.varimp_plot()
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/08_var_imp_rf.png" alt="" /></p>
+
+<p>The <code>lag_52</code> variable is the most important in the model, followed by <code>season</code> and the other lag variable, <code>lag_13</code>. On the other hand, neither of the trend variables seem to contribute strongly to our random forest model.</p>
+
+<p>The <code>model_summary</code> function grants access to information about the models parameters.</p>
+
+<pre><code class="language-r">rft_model@model$model_summary
+
+## Model Summary: 
+##   number_of_trees number_of_internal_trees model_size_in_bytes min_depth
+## 1              27                       27               12560         7
+##   max_depth mean_depth min_leaves max_leaves mean_leaves
+## 1        14   10.29630         12         45    32.37037
+</code></pre>
+
+<p>Here we can see that the random forest only uses 26 out of a maximum of 500 trees that it was allowed to estimate (I set this with the <code>ntrees</code> parameter). We can also gauge that the tree depth ranges from 7 to 14 (not a particularly deep forest) and that the number of leaves per tree ranges from 12 to 45.</p>
+
+<p>Last but not least, I can review the model&rsquo;s performance with <code>h2o.performance</code></p>
+
+<pre><code class="language-r">h2o.performance(rft_model, newdata = test_tbl %&gt;% as.h2o())
+
+## H2ORegressionMetrics: drf
+## 
+## MSE:  3.434687e+13
+## RMSE:  5860620
+## MAE:  3635468
+## RMSLE:  9.903415
+## Mean Residual Deviance :  3.434687e+13
+## R^2 :  0.9737282
+</code></pre>
+
+<p>The model achieves a high <code>R^2</code> of <em>97.4%</em>, which means that the variation in the feature variables explains almost all the variability of the response variable.</p>
+
+<p>On the other hand, <code>RMSE</code> appears to be quite large! High values of RMSE can be due to the presence of small number of high error predictions (like in the case of outliers), and this should not surprise given the choppy nature of the response variable.</p>
+
+<p>When it comes to error based metric like RMSE, MAE, MSE, etc., there is no absolute value of good or bad as they are <em>expressed in the unit of Response Variable</em>. Usually, you want to achieve a smaller <code>RMSE</code> as this translates into a higher predictive power but for this project I will simply use this metric to compare the relative performance of the different model.</p>
+
+<h3 id="extend-to-many-models">Extend to many models</h3>
+
+<p>Let&rsquo;s generalise the performance assessment in a programmatic way to compute, assess and compare multiple models in one go.</p>
+
+<p>First, I fit a few more models and make sure I&rsquo;m enabling <code>cross-validation</code> for all of them. Note that for the <em>GBM</em> I&rsquo;m specify the same parameters I used for the <em>random forest</em> but there is an extensive array of parameters that you can use to control several aspects of the model&rsquo;s estimation (I will not touch on these as it&rsquo;s outside the scope of this project)</p>
+
+<pre><code class="language-r"># gradient boosting machine model
+gbm_model &lt;-  
+  h2o.gbm(
+    x = x, 
+    y = y, 
+    training_frame = as.h2o(train_tbl),
+    nfolds = 10,
+    ntrees = 500,
+    stopping_metric = &quot;RMSE&quot;,
+    stopping_rounds = 10,         
+    stopping_tolerance = 0.005,
+    seed = 1975
+  )
+
+# generalised linear model (a.k.a. elastic net model)
+glm_model &lt;- 
+  h2o.glm(
+    x = x, 
+    y = y, 
+    training_frame = as.h2o(train_tbl),
+    nfolds = 10,
+    family = &quot;gaussian&quot;,
+    seed = 1975
+  )
+</code></pre>
+
+<p>I&rsquo;m also running the very handy <code>automl</code> function that enables for multiple models to be fitted and grid-search optimised. Like I did for the other models, I can specify a series of parameters to guide the function, like several <code>stopping</code> metrics, and <code>max_runtime_secs</code> to save on computing time.</p>
+
+<pre><code class="language-r">automl_model &lt;-
+  h2o.automl(
+    x = x,
+    y = y,
+    training_frame     = as.h2o(train_tbl),
+    nfolds             = 5,
+    stopping_metric    = &quot;RMSE&quot;,
+    stopping_rounds    = 10,
+    stopping_tolerance = 0.005,
+    max_runtime_secs   = 60,
+    seed               = 1975
+ )
+</code></pre>
+
+<p>Checking the leader board will show the fitted models</p>
+
+<pre><code class="language-r">automl_model@leaderboard
+
+##                                              model_id mean_residual_deviance
+## 1                        GBM_2_AutoML_20200112_111324           1.047135e+14
+## 2                        GBM_4_AutoML_20200112_111324           1.070608e+14
+## 3 StackedEnsemble_BestOfFamily_AutoML_20200112_111324           1.080933e+14
+## 4                        GBM_1_AutoML_20200112_111324           1.102083e+14
+## 5  DeepLearning_grid_1_AutoML_20200112_111324_model_1           1.104058e+14
+## 6  DeepLearning_grid_1_AutoML_20200112_111324_model_5           1.146914e+14
+##       rmse          mse     mae rmsle
+## 1 10232963 1.047135e+14 5895463   NaN
+## 2 10347021 1.070608e+14 5965855   NaN
+## 3 10396794 1.080933e+14 5827000   NaN
+## 4 10498016 1.102083e+14 5113982   NaN
+## 5 10507419 1.104058e+14 6201525   NaN
+## 6 10709407 1.146914e+14 6580217   NaN
+## 
+## [22 rows x 6 columns]
+</code></pre>
+
+<p>As you can see the top model is a <strong>Gradient Boosting Machine</strong> model. There are also a couple of <strong>Deep Learning</strong> models and a <strong>stacked ensemble</strong>, <code>H2O</code> take on the <strong>Super Learner</strong>.</p>
+
+<h2 id="performance-assessment">Performance assessment</h2>
+
+<p>First, I save all models in one folder so that I can access them and process performance metrics programmatically through a series of functions</p>
+
+<pre><code class="language-r"># set path to get around model path being different from project path
+path = &quot;/02_models/final/&quot;
+
+# Save GLM model
+h2o.saveModel(glm_model, path)
+
+# Save RF model
+h2o.saveModel(rft_model, path)
+
+# Save GBM model
+h2o.saveModel(gbm_model, path)
+
+# Extracs and save the leader autoML model
+aml_model &lt;- automl_model@leader
+
+h2o.saveModel(aml_model, path)
+</code></pre>
+
+<h3 id="variable-importance-plots">Variable importance plots</h3>
+
+<p>Let&rsquo;s start with the variable importance plots. Earlier on I used  plotting functionality with the <code>random forest</code> model but now I want to plot them all in one go so that I can compare and contrast the results.</p>
+
+<p>There are many libraries (like <em>IML</em>, <em>PDP</em>, <em>VIP</em>, and <em>DALEX</em> to name the more popular ones) that help with <strong>Machine Learning model interpretability</strong>, <strong>feature explanation</strong> and <strong>general performance assessment</strong>. In this project I am using the <code>vip</code> package.</p>
+
+<p>One of the main advantages of these libraries is their compatibility with other R packages such as <code>gridExtra</code>.</p>
+
+<pre><code class="language-r">p_glm &lt;- vip(glm_model) + ggtitle(&quot;GLM&quot;)
+p_rft &lt;- vip(rft_model) + ggtitle(&quot;RF&quot;)
+p_gbm &lt;- vip(gbm_model) + ggtitle(&quot;GBM&quot;)
+p_aml &lt;- vip(aml_model) + ggtitle(&quot;AML&quot;)
+
+grid.arrange(p_glm, p_rft, p_gbm, p_aml, nrow = 2)
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/09_var_imp_all.png" alt="" /></p>
+
+<p><code>Seasonality</code> and previous revenue levels (<code>lags</code>) come through at the top 3 stronger drives in almost all models (the only exception being <em>GBM</em>). Conversely, none of the models find <code>trend</code> and its <code>squared</code> counterpart to be a strong explainer of variation in the response variable.</p>
+
+<h3 id="performance-metrics">Performance metrics</h3>
+
+<p>As I&rsquo;ve shown earlier with the <code>random forest</code> model, the <code>h2o.performance</code> function shows a single model&rsquo;s performance at a glance (here for example I check the performance of the <code>GBM</code> model)</p>
+
+<pre><code class="language-r">perf_gbm_model &lt;- 
+  h2o.performance(gbm_model, newdata = as.h2o(test_tbl))
+
+perf_gbm_model
+
+## H2ORegressionMetrics: gbm
+## 
+## MSE:  1.629507e+13
+## RMSE:  4036716
+## MAE:  2150460
+## RMSLE:  9.469847
+## Mean Residual Deviance :  1.629507e+13
+## R^2 :  0.9875359
+</code></pre>
+
+<p>However, to assess and compare the models performance I am going to focus on  <code>RMSE</code> and <code>R^2^</code>.</p>
+
+<p>All performance metrics can be pulled at once using the <code>h20.metric</code> function, which for some reason does not seem to work with <code>H2ORegressionMetrics</code> objects.</p>
+
+<pre><code class="language-r">perf_gbm_model %&gt;% 
+  h2o.metric()
+
+## Error in paste0(&quot;No &quot;, metric, &quot; for &quot;,
+## class(object)) : argument &quot;metric&quot; is missing, with
+##  no default
+</code></pre>
+
+<p>Also the error message is not particularly helpful in this case as the &ldquo;metric&rdquo; argument is optional and should return all metrics by default. The issue seems to have to do with performing a regression as it actually works fine with <code>H2OClassificationMetrics</code> objects.</p>
+
+<p>Luckily,  provides some useful helper functions to extract the single metrics individually, which work all right!</p>
+
+<pre><code class="language-r">perf_gbm_model %&gt;% h2o.r2()
+## [1] 0.9875359
+
+perf_gbm_model %&gt;% h2o.rmse()
+## [1] 4036716
+</code></pre>
+
+<p>So I will be using these individual helpers to write a little function that runs <strong>predictions for all models</strong> on the test data and returns a handy tibble to house all the performance metrics.</p>
+
+<pre><code class="language-r">performance_metrics_fct &lt;- function(path, data_tbl) {
+    
+    model_h2o &lt;- h2o.loadModel(path)
+    perf_h2o  &lt;- h2o.performance(model_h2o, newdata = as.h2o(data_tbl)) 
+    
+    R2   &lt;- perf_h2o %&gt;% h2o.r2()  
+    RMSE &lt;- perf_h2o %&gt;% h2o.rmse()
+    
+    tibble(R2, RMSE)
+}
+</code></pre>
+
+<p>Now I can pass this formula to a <code>map</code> function from the <code>purrr</code> package to iterate calculations and compile <code>RMSE</code> and <code>R^2^</code> across all models. To correctly identify each model, I also make sure to extract the model&rsquo;s name from the path.</p>
+
+<pre><code class="language-r">perf_metrics_test_tbl &lt;- fs::dir_info(path = &quot;/02_models/final_models/&quot;) %&gt;%
+    select(path) %&gt;%
+    mutate(metrics = map(path, performance_metrics_fct, data_tbl = test_tbl),
+           path = str_split(path, pattern = &quot;/&quot;, simplify = T)[,2] 
+                            %&gt;% substr(1,3)) %&gt;%
+    rename(model = path) %&gt;% 
+    unnest(cols = c(metrics)) 
+</code></pre>
+
+<pre><code class="language-r">perf_metrics_test_tbl %&gt;% 
+  arrange(desc(R2)) 
+
+model 	     R2 	        RMSE
+AML 	   0.9933358 	   2951704
+GBM 	   0.9881890 	   3929538
+DRF 	   0.9751434 	   5700579
+GLM 	  -0.0391253 	  36858064
+</code></pre>
+
+<p><strong>All tree-based models</strong> achieve very high <code>R^2</code>, with the autoML model (which is a GBM, remember?) reaching a staggering <em>99.3%</em> and achieves the lowest <code>RMSE</code>. The <em>GLM</em> on the other hand scores a <strong>negative R^2</strong>.</p>
+
+<p>A <strong>negarive R^2</strong> is not unheard of: the R^2 compares the fit of a model with that of a horizontal straight line and calculates the proportion of the variance explained by the model compared to that of a straight line (the null hypothesis). If the fit is actually worse than just fitting a horizontal line then R-square can be negative.</p>
+
+<h3 id="actual-vs-predicted-plots">Actual vs Predicted plots</h3>
+
+<p>Last by not least, to provides an additional and more visual display of the models performance, I’m going to plot the <strong>actual versus predicted</strong> for all models.</p>
+
+<p>I&rsquo;m using a function similar to the one I&rsquo;ve used to calculate the performance metrics as the basic principle is the same.</p>
+
+<pre><code class="language-r">predict_fct &lt;- function(path, data_tbl) {
+    
+    model_h2o &lt;- h2o.loadModel(path)
+    pred_h2o  &lt;- h2o.predict(model_h2o, newdata = as.h2o(data_tbl)) 
+    
+    pred_h2o %&gt;% 
+      as_tibble() %&gt;% 
+      cbind(data_tbl %&gt;% select(order_date))
+    
+}
+</code></pre>
+
+<p>As I did before, I pass the formula to a <code>map</code> function to iterate calculations and compile <code>prediction</code> using the <code>test</code> data subset across all models.</p>
+
+<pre><code class="language-r">validation_tmp &lt;- fs::dir_info(path = &quot;/02_models/final_models/&quot;) %&gt;%
+    select(path) %&gt;%
+    mutate(pred = map(path, predict_fct, data_tbl = test_tbl),
+           path = str_split(path, pattern = &quot;/&quot;, simplify = T)[,2] %&gt;% 
+             substr(1,3)) %&gt;%
+    rename(model = path) 
+</code></pre>
+
+<p>However, the resulting <code>validation_tmp</code> is a nested tibble, with the predictions stored as lists in each cell.</p>
+
+<pre><code class="language-r">validation_tmp
+
+## # A tibble: 4 x 2
+##   model pred             
+##   &lt;chr&gt; &lt;list&gt;           
+## 1 AML   &lt;df[,2] [25 × 2]&gt;
+## 2 DRF   &lt;df[,2] [25 × 2]&gt;
+## 3 GBM   &lt;df[,2] [25 × 2]&gt;
+## 4 GLM   &lt;df[,2] [25 × 2]&gt;
+</code></pre>
+
+<p>This requires a couple of additional manipulations to get in in a shape that can be used for plotting: unnesting the list, &ldquo;pivot&rdquo; the predictions around the <code>order_date</code> and add the revenue as <code>actual</code>.</p>
+
+<pre><code class="language-r">validation_tbl &lt;- 
+    validation_tmp %&gt;% 
+    unnest(cols = c(pred)) %&gt;% 
+    pivot_wider(names_from = model, 
+                values_from = predict) %&gt;%
+    cbind(test_tbl %&gt;% 
+            select(actual = revenue)) %&gt;% 
+    rename(date = order_date)
+</code></pre>
+
+<p>Now, I&rsquo;m going to write this plotting function directly in <em>plotly</em></p>
+
+<pre><code class="language-r">validation_tbl %&gt;% 
+  plot_ly() %&gt;% 
+    add_lines(x = ~ date, y = ~ actual, name = 'Actual') %&gt;% 
+    add_lines(x = ~ date, y = ~ DRF, name = 'Random Forest', 
+              line = list(dash = 'dot')) %&gt;% 
+    add_lines(x = ~ date, y = ~ GBM, name = 'Gradient Boosting Machine', 
+              line = list(dash = 'dash')) %&gt;% 
+    add_lines(x = ~ date, y = ~ AML, name = 'Auto ML', 
+              line = list(dash = 'dot')) %&gt;% 
+    add_lines(x = ~ date, y = ~ GLM, name = 'Generalised Linear Model', 
+              line = list(dash = 'dash')) %&gt;% 
+    layout(title = 'Total Weekly Sales - Actual versus Predicted (various models)',
+           yaxis = list(title = 'Millions of Dollars'),
+           xaxis = list(title = ''),
+           legend = list(orientation = 'h')
+           )
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/10_avm_pred.png" alt="" /></p>
+
+<p>With the exception of the GLM model, which is producing a seemingly flat line prediction (remember the negative <em>R^2</em>?), all models are capturing well the peaks and troughs in the series. The prediction only start to miss the full extent of the response variation around the last 2 spikes.</p>
+
+<h2 id="forecasting">Forecasting</h2>
+
+<p>No need to write any new functions as the <code>performance_metrics_fct</code> and <code>predict_fct</code>can also be used for the forecasting.</p>
+
+<p>First, I take a look at the performance metrics</p>
+
+<pre><code class="language-r">perf_metrics_cast_tbl &lt;- fs::dir_info(path = &quot;/02_models/final_models/&quot;) %&gt;%
+    select(path) %&gt;%
+    mutate(metrics = map(path, performance_metrics_fct, data_tbl = forecast_tbl),
+           path = str_split(path, pattern = &quot;/&quot;, simplify = T)[,2] 
+                            %&gt;% substr(1,3)) %&gt;%
+    rename(model = path) %&gt;% 
+    unnest(cols = c(metrics)) 
+</code></pre>
+
+<pre><code class="language-r">perf_metrics_cast_tbl %&gt;% 
+  arrange(desc(R2)) 
+
+model 	      R2 	         RMSE
+GBM 	    0.8678649 	  14544327
+AML 	    0.8363565 	  16185792
+DRF 	    0.8042526 	  17702414
+GLM 	   -0.0617160 	  41227664
+</code></pre>
+
+<p>Interestingly, a little swap in the top position, with the &ldquo;manual&rdquo; GBM performing better in the forecast that the autoML model. The performance metrics worsened for all models when compared to the validation metrics.</p>
+
+<p>Then, I calculate the forecast&hellip;</p>
+
+<pre><code class="language-r">cast_tbl &lt;- fs::dir_info(path = &quot;/02_models/final_models/&quot;) %&gt;%
+    select(path) %&gt;%
+    mutate(pred = map(path, predict_fct, data_tbl = forecast_tbl),
+           path = str_split(path, pattern = &quot;/&quot;, simplify = T)[,2] %&gt;% 
+             substr(1,3)) %&gt;%
+    rename(model = path) %&gt;% 
+    unnest(cols = c(pred)) %&gt;% 
+    pivot_wider(names_from = model, values_from = predict) %&gt;%
+    cbind(forecast_tbl %&gt;% select(actual = revenue)) %&gt;% 
+    rename(date = order_date)
+</code></pre>
+
+<p>&hellip;and visualise it</p>
+
+<pre><code class="language-r">cast_tbl %&gt;% 
+  plot_ly() %&gt;% 
+    add_lines(x = ~ date, y = ~ actual, name = 'Actual') %&gt;% 
+    add_lines(x = ~ date, y = ~ DRF, name = 'Random Forest', 
+              line = list(dash = 'dot')) %&gt;% 
+    add_lines(x = ~ date, y = ~ GBM, name = 'Gradient Boosting Machine', 
+              line = list(dash = 'dash')) %&gt;% 
+    add_lines(x = ~ date, y = ~ AML, name = 'Auto ML', 
+              line = list(dash = 'dot')) %&gt;% 
+    add_lines(x = ~ date, y = ~ GLM, name = 'Generalised Linear Model', 
+              line = list(dash = 'dash')) %&gt;% 
+    layout(title = 'Total Weekly Sales - Actual versus Forecast (various models)',
+           yaxis = list(title = 'Millions of Dollars'),
+           xaxis = list(title = ''),
+           legend = list(orientation = 'h')
+           )
+</code></pre>
+
+<p><img src="/post/2019-12-11-time-series-machine-learning-analysis-and-demand-forecasting-with-h2o-tsstudio_files/11_avm_fore.png" alt="" /></p>
+
+<p>Aside from the <strong>GLM</strong> which unsurprisingly produces a flat line forecast, all models continue to capture well the 2-week-on, 2-week-off purchase pattern. Additionally, all models forecasts fail to capture the full extent of the response variable movements for all 3 spikes, suggesting that there could be another dynamic at play in 2007 that the current predictors are not controlling for.</p>
+
+<p>Taking a closer look at the <code>forecast_tbl</code> reveals that, for observations 9 throught to 11, both <code>season</code> and <code>lag_52</code> predictors are not perfectly alligned with the actual revenue, which explains why all models predict positive revenue for weeks with actual zero sales.</p>
+
+<pre><code class="language-r">forecast_tbl %&gt;% 
+  select(-trend, -trend_sqr) %&gt;% 
+  tail(10) 
+
+ 	  order_date 	revenue 	season 	rev_lag_52 	rev_lag_13
+4 	2007-04-16 	70869888 	    1 	41664162.8 	  63305793
+5 	2007-04-23 	       0 	    0 	  480138.8 	         0
+6 	2007-04-30 	       0 	    0 	       0.0 	         0
+7 	2007-05-07 	78585882 	    1 	41617508.0 	  64787291
+8 	2007-05-14 	78797822 	    1 	48403283.4 	  59552955
+9 	2007-05-21 	       0 	    1 	       0.0 	         0
+10 	2007-05-28 	       0 	    0 	       0.0 	        0
+11 	2007-06-04 	       0 	    0 	45696327.2 	         0
+12 	2007-06-11 	75486199 	    1 	53596289.9 	  70430702
+13 	2007-06-18 	86509530 	    1 	  774190.1 	  60094495
+</code></pre>
+
+<p>One final thing: don&rsquo;t forget to shut-down the <code>H2O</code> instance when you&rsquo;re done!</p>
+
+<pre><code class="language-r">h2o.shutdown(prompt = FALSE)
+</code></pre>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>In this project I have gone through the various steps needed to build a time series machine learning pipeline and generate a weekly revenue forecast.</p>
+
+<p>In particular, I have carried out a more &ldquo;traditional&rdquo; <strong>exploratory time series analysis</strong> with <code>TSstudio</code> and <strong>created a number of predictors</strong> using the insight I gathered. I&rsquo;ve then <strong>trained and validated</strong> an array of machine learning models with the open source library <code>H2O</code>, and <strong>compared the models&rsquo; accuracy</strong> using <strong>performance metrics</strong> and <strong>actual vs predicted</strong> plots.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+
+<p>This is just an first stab at producing a weekly revenue forecast and there clearly is plenty of room for improvement. Still, once you have a modelling and forecasting pipeline like this in place, it becomes much easier and faster to create and test several models and different predictors sets.</p>
+
+<p>The fact that the data series is artificially generated is not ideal as it does not necessarily incorporate dynamics that you would encounter in a real-life dataset. Nonetheless that challenged me to get inventive and made the whole exercise that more enjoyable.</p>
+
+<p>Forecasting total revenue may not be the best strategy and perhaps breaking down the response variable by <code>product line</code> or by <code>country</code> for instance may lead to improved and more accurate forecasts. This is behond the scope of this project but could well be the subject for a future project!</p>
+
+<p>One thing I take away from this exercise is that <code>H2O</code> is <strong>absolutely brilliant</strong>! It&rsquo;s fast, intuitive to set up and has a broad array of customisation options. <strong>AutoML</strong> is superb, has support with <strong>R</strong>, <strong>Python</strong> and <strong>Java</strong> and the fact that anyone can use it free of charge gives the likes of <strong>Google AutoML</strong> and <strong>AWS SageMaker AutoML</strong> platform a run for their money!</p>
+
+<h3 id="code-repository">Code Repository</h3>
+
+<p>The full R code can be found on <a href="https://github.com/DiegoUsaiUK/Customer_Analytics/tree/master/time_series_machine_learning"><strong>my GitHub profile</strong></a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li>For H2O website <a href="https://www.h2o.ai/"><strong>H2O Website</strong></a></li>
+<li>For H2O documentation <a href="http://docs.h2o.ai/h2o/latest-stable/index.html"><strong>H2O Documentation</strong></a></li>
+<li>For a thorough discussion on performing time series analysis and forecasting in R <a href="https://www.packtpub.com/big-data-and-business-intelligence/hands-time-series-analysis-r"><strong>Hands-On Time Series Analysis with R</strong></a></li>
+<li>For an introduction to TSstudio <a href="Introduction for the TSstudio Package"><strong>Introduction for the TSstudio Package</strong></a></li>
+<li>For an introduction to <a href="https://www.h2o.ai/wp-content/uploads/2019/08/An-Introduction-to-Machine-Learning-Interpretability-Second-Edition.pdf"><strong>Machine Learning interpretability</strong></a></li>
+</ul>
+    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+                <p></p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+<article class="read-next-card" 
+            style="background-image: url(/img/simon-zhu-TfRHSL2GKDc-unsplash.jpg);" >
+    <header class="read-next-card-header">
+        <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
+        
+        <h3 class="read-next-card-header-title"><a href="/tags/machine-learning/">#Machine Learning</a></h3>
+    </header>
+    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+    </div>
+
+    <div class="read-next-card-content">
+      
+        <ul>
+          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+        
+                      
+        
+          <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
+        
+          <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
+        
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
+        </ul>
+    </div>
+    <footer class="read-next-card-footer">
+      
+        <a href="/tags/machine-learning/">See all related posts →</a>
+    </footer>
+</article>
+
+
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2019/10/build-your-website-with-hugo-and-blogdown/">
+      <div class="post-card-image" style="background-image: url(/img/li-yang-a8iCZvtrHpQ-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2019/10/build-your-website-with-hugo-and-blogdown/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #blogdown 
+              #rstudio  </span>
+              
+              <h2 class="post-card-title">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>This year has been rather rewarding for me! After completing some of the excellent Business Science University courses, I have worked on a number of Customer Analytics &amp; Business Intelligence projects and summarised them into technical articles that I published on Medium&rsquo;s Towards Data Science. This opened up an entirely new world to me and generated many new connections within the analytics and data science community the world over! ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="/">
+      
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Time%20Series%20Machine%20Learning%20Analysis%20and%20Demand%20Forecasting%20with%20H2O%20%26%20TSstudio&amp;url=%2f2019%2f12%2ftime-series-machine-learning-analysis-and-demand-forecasting%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2019%2f12%2ftime-series-machine-learning-analysis-and-demand-forecasting%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">Diego Usai</a> © 2019 <br>
+      <span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        
+        
+        <a href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener">Github</a>
+        <a href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener">Medium</a>
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-151122416-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>
