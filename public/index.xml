@@ -81,16 +81,6 @@ parsnip is the brainchild of RStudio&amp;rsquo;s Max Khun (of caret fame) and Da
     </item>
     
     <item>
-      <title>Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</title>
-      <link>/2019/06/modelling-with-tidymodels-and-parsnip/</link>
-      <pubDate>Sat, 22 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/06/modelling-with-tidymodels-and-parsnip/</guid>
-      <description>Recently I have completed the online course Business Analysis With R focused on applied data and business science with R, which introduced me to a couple of new modelling concepts and approaches. One that especially captured my attention is parsnip and its attempt to implement a unified modelling and analysis interface (similar to python&amp;rsquo;s scikit-learn) to seamlessly access several modelling platforms in R.
-parsnip is the brainchild of RStudio&amp;rsquo;s Max Khun (of caret fame) and Davis Vaughan and forms part of tidymodels, a growing ensemble of tools to explore and iterate modelling tasks that shares a common philosophy (and a few libraries) with the tidyverse.</description>
-    </item>
-    
-    <item>
       <title>A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</title>
       <link>/2019/05/a-gentle-introduction-to-customer-segmentation/</link>
       <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
