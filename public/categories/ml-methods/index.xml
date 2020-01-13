@@ -6,10 +6,20 @@
     <description>Recent content in ML Methods on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Sat, 25 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 11 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/ml-methods/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</title>
+      <link>/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/</guid>
+      <description>Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, have been well-established for decades and find applications in fields as varied as business and finance (e.g. predict stock prices and analyse trends in financial markets), the energy sector (e.g. forecast electricity consumption) and academia (e.g. measure socio-political phenomena).
+In more recent times, the popularisation and wider availability of open source frameworks like Keras, TensorFlow and scikit-learn helped machine learning approaches like Random Forest, Extreme Gradient Boosting, Time Delay Neural Network and Recurrent Neural Network to gain momentum in time series applications.</description>
+    </item>
     
     <item>
       <title>A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</title>
