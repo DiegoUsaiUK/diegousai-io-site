@@ -4,16 +4,86 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-12-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/articles/</loc>
-    <lastmod>2019-12-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/machine-learning/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/multi-post-studies/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/optimisation/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/projects/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/propensity-modelling/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/04/propensity-modelling-3-of-3/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ml-interpretability/</loc>
+    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/model-selection/</loc>
+    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/03/propensity-modelling-2-of-3/</loc>
+    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-exploration/</loc>
+    <lastmod>2020-02-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-wrangling/</loc>
+    <lastmod>2020-02-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/02/propensity-modelling-1-of-3/</loc>
+    <lastmod>2020-02-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/articles/</loc>
     <lastmod>2019-12-11T00:00:00+00:00</lastmod>
   </url>
   
@@ -23,22 +93,7 @@
   </url>
   
   <url>
-    <loc>/tags/machine-learning/</loc>
-    <lastmod>2019-12-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/ml-methods/</loc>
-    <lastmod>2019-12-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-12-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2019-12-11T00:00:00+00:00</lastmod>
   </url>
   
@@ -103,22 +158,12 @@
   </url>
   
   <url>
-    <loc>/tags/data-wrangling/</loc>
-    <lastmod>2019-09-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/2019/09/loading-merging-and-joining-datasets/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/principal-component/</loc>
-    <lastmod>2019-09-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/projects/</loc>
     <lastmod>2019-09-23T00:00:00+00:00</lastmod>
   </url>
   
@@ -153,17 +198,17 @@
   </url>
   
   <url>
+    <loc>/tags/umap/</loc>
+    <lastmod>2019-05-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/data-product/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/market-basket-analysis/</loc>
-    <lastmod>2019-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/market-basket-analysis/</loc>
     <lastmod>2019-04-15T00:00:00+00:00</lastmod>
   </url>
   
