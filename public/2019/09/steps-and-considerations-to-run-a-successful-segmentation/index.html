@@ -243,7 +243,7 @@ library(gridExtra)
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation/recency plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/recency plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="frequency">Frequency</h4>
 
@@ -268,7 +268,7 @@ library(gridExtra)
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/Frequency plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/Frequency plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="total-and-average-sales">Total and Average Sales</h4>
 
@@ -301,7 +301,7 @@ p2 &lt;- customers_tbl %&gt;%
 grid.arrange(p1, p2, nrow = 2)
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/Total and Average Sales plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/Total and Average Sales plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="number-of-orders">Number of Orders</h4>
 
@@ -325,7 +325,7 @@ grid.arrange(p1, p2, nrow = 2)
       theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/Number of Orders plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/Number of Orders plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="average-order-value">Average Order Value</h4>
 
@@ -353,7 +353,7 @@ grid.arrange(p1, p2, nrow = 2)
       theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/Average Order Value plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/Average Order Value plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h2 id="multiple-variables-exploration">Multiple Variables Exploration</h2>
 
@@ -375,7 +375,7 @@ grid.arrange(p1, p2, nrow = 2)
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/rfm plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/rfm plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>The chart is not too easy to read with most data points being clumped on the left-hand side, which is no surprise given the severe right skew found for <code>recency</code> in the previous section. You can also notice that the large majority of points are of a paler hue of blue, denoting less frequent purchases.</p>
 
@@ -393,7 +393,7 @@ grid.arrange(p1, p2, nrow = 2)
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/rfm log plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/rfm log plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>Even the log scale does not help much with chart readability. Given the extreme right skew found in <code>recency</code>, I expect that the clustering algorithm may find it difficult to identify well defined groups.</p>
 
@@ -447,7 +447,7 @@ kmeans_map_tbl &lt;-
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/rfm scree plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/rfm scree plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h3 id="evaluating-the-clusters">Evaluating the Clusters</h3>
 
@@ -468,7 +468,7 @@ kmeans_4_tbl %&gt;%
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/rfm 4 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/rfm 4 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>In addition, the clusters are not particularly well balanced, with the 4th group containing nearly %80 of all <code>retailers</code>, which is of limited use for profiling your customers. Groups 1, 3 and 4 have a very similar <code>recency</code> values, with the 2nd one capturing some (but not all) of the &ldquo;less recent&rdquo; buyers.</p>
 
@@ -558,7 +558,7 @@ kmeans_4_tbl %&gt;%
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/alt plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/alt plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>Let&rsquo;s run the customer segmentation one more time with the new variables.</p>
 
@@ -598,7 +598,7 @@ kmeans_map_tbl_alt &lt;-
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/alt scree plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/alt scree plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h3 id="evaluating-the-alternative-clusters">Evaluating the Alternative Clusters</h3>
 
@@ -620,7 +620,7 @@ kmeans_4_tbl_alt %&gt;%
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/alt 4 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/alt 4 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>Clusters are much better defined with no one group dominating like before. Although not used in the model, I&rsquo;ve added <code>recency</code> to show that even the former problem child is now more evenly balanced across groups.</p>
 
@@ -757,7 +757,7 @@ cl7 &lt;- kmeans_map_tbl_alt %&gt;%
 grid.arrange(cl4, cl5, cl6, cl7, nrow = 2)
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/mult plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/mult plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h2 id="principal-components-analysis">Principal Components Analysis</h2>
 
@@ -795,7 +795,7 @@ summary(pca_obj)
         title = &quot;Variance Explained by Principal Component&quot;)
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/pca perc var exp plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/pca perc var exp plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>The first 2 components are explaining 97% of the variation in the data, which means that using the first 2 PCs will give us a very good understanding of the data and every subsequent PC will add very little information. This is obviously more relevant when you have a larger number of variables in your dataset.</p>
 
@@ -829,7 +829,7 @@ km_pca_4_tbl %&gt;%
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/pca 4 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/pca 4 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>The chart confirms that the segments are well separated in the 4-cluster configuration. Segments 1 and 3 show significant variability in different directions and there is a degree of overlapping between segments 2 and 4.</p>
 
@@ -949,7 +949,7 @@ kmeans_6_tbl %&gt;%
    theme_light()
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/pca 6 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/post/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/pca 6 cluster plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>The 6-segment set up broadly confirms the groups structure and separation found in the 4-split solution, showing good clusters stability. Former segments 1 and 3 further split out to create 2 <em>&ldquo;mid-of-the-range&rdquo;</em> groups, each &lsquo;borrowing&rsquo; from former segments 2 and 4.</p>
 
@@ -1118,7 +1118,7 @@ bootMean_df &lt;-
     theme(legend.position = &quot;none&quot;)
 </code></pre>
 
-<p><img src="/post/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation-with-k-means-principal-components-analysis-and-bootstrap-evaluation_files/clusters stability plot-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-09-23-steps-and-considerations-to-run-a-successful-segmentation/clusters stability plot-1.png" alt="" width="100%" height="100%"/></p>
 
 <h3 id="closing-thoughts">Closing thoughts</h3>
 
@@ -1172,27 +1172,6 @@ bootMean_df &lt;-
     
     
 
-<div id="disqus_thread"></div>
-<script>
-
-
-
-
-var disqus_config = function () {
-this.page.url = "\/2019\/09\/steps-and-considerations-to-run-a-successful-segmentation\/";  
-this.page.identifier = "\/2019\/09\/steps-and-considerations-to-run-a-successful-segmentation\/"; 
-};
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://diegousai-io.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
   </div>
 </main>
 
@@ -1216,11 +1195,11 @@ s.setAttribute('data-timestamp', +new Date());
         <ul>
           <li><a href="/2020/04/propensity-modelling-3-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</a></li>            
         
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3 - Market Basket Analysis with recommenderlab</a></li>            
         
-          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3: A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
+          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3 - A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
         
-          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">

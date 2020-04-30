@@ -141,11 +141,11 @@
 
 <p>To illustrate the principle, suppose that you have a set of elements like those in the picture below and want to classify them into <strong>3 clusters</strong></p>
 
-<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/random-points.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-05-25-a-gentle-introduction-to-customer-segmentation/random-points.png" alt="" width="100%" height="100%"/></p>
 
 <p>What K-Means would do for you is to group them up around the middle or <code>centre</code> of each cluster, represented here by the <strong>&ldquo;X&rdquo;&rsquo;s</strong>, in a way that minimises the distance of each element to its <code>centre</code></p>
 
-<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/random-points-clustered.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-05-25-a-gentle-introduction-to-customer-segmentation/random-points-clustered.png" alt="" width="100%" height="100%"/></p>
 
 <p>So how does that help you to <strong>better understand your customers</strong>? Well, in this case you can use their <strong>behavior</strong> (specifically, which offer they did or did not go for) as a way to grouping them up with similar minded customers.  You can now look into each of those groups to unearth trends and patterns and use them for shaping future offers.</p>
 
@@ -324,7 +324,7 @@ kmeans_map_tbl %&gt;% glimpse()
     labs(title = 'Scree Plot')
 </code></pre>
 
-<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/unnamed-chunk-5-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-05-25-a-gentle-introduction-to-customer-segmentation/unnamed-chunk-5-1.png" alt="" width="100%" height="100%"/></p>
 
 <h2 id="visualising-the-segments">Visualising the Segments</h2>
 
@@ -364,7 +364,7 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     theme(legend.position = 'none')
 </code></pre>
 
-<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/unnamed-chunk-8-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2019-05-25-a-gentle-introduction-to-customer-segmentation/unnamed-chunk-8-1.png" alt="" width="100%" height="100%"/></p>
 
 <h2 id="evaluating-the-clusters">Evaluating the Clusters</h2>
 
@@ -492,27 +492,6 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     
     
 
-<div id="disqus_thread"></div>
-<script>
-
-
-
-
-var disqus_config = function () {
-this.page.url = "\/2019\/05\/a-gentle-introduction-to-customer-segmentation\/";  
-this.page.identifier = "\/2019\/05\/a-gentle-introduction-to-customer-segmentation\/"; 
-};
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://diegousai-io.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
   </div>
 </main>
 
@@ -534,13 +513,13 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</a></li>            
         
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3 - Market Basket Analysis with recommenderlab</a></li>            
+        
+          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
         
           <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
-        
-          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -599,7 +578,7 @@ parsnip is the brainchild of RStudio&rsquo;s Max Khun (of caret fame) and Davis 
               #Data Product 
               #Market Basket Analysis  </span>
               
-              <h2 class="post-card-title">Market Basket Analysis - Part 3 of 3: A Shiny Product Recommender with Improved Collaborative Filtering</h2>
+              <h2 class="post-card-title">Market Basket Analysis - Part 3 of 3 - A Shiny Product Recommender with Improved Collaborative Filtering</h2>
           </header>
           <section class="post-card-excerpt">
               
