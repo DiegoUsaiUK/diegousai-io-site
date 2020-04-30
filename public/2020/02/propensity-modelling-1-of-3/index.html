@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en-UK" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="canonical" href="/2020/02/propensity-modelling-1-of-3/" />
+
+     <meta name="description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis"/>
+    <meta name="twitter:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations "/>
+    <meta name="twitter:url" content="/2020/02/propensity-modelling-1-of-3/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2020/02/propensity-modelling-1-of-3/" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " />
+
+    <meta property="article:published_time" content="2020-02-14T00:00:00Z" />
+    <meta property="article:tag" content="Data Wrangling" /><meta property="article:tag" content="Data Exploration" /><meta property="article:tag" content="Propensity Modelling" />
+
+    <meta property="og:image" content="/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.58.3" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+     <link rel="stylesheet" href="/css/override.css" /> 
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/articles/">Articles</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/multi-post-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/tags/">Tags</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/links/">Readings</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/about/">About</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    
+
+                    
+
+                    <a class="social-link" href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    <a class="social-link" href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 512 512"><path d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683 C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615 c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915 s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z" /></svg></a>
+
+                    <a class="social-link" href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 195"><path d="M46.5340803,65.2157554 C46.6968378,63.6076572 46.0836,62.018231 44.8828198,60.93592 L32.6512605,46.2010582 L32.6512605,44 L70.6302521,44 L99.9859944,108.380952 L125.794585,44 L162,44 L162,46.2010582 L151.542017,56.2281011 C150.640424,56.9153477 150.193188,58.0448862 150.380019,59.1628454 L150.380019,132.837155 C150.193188,133.955114 150.640424,135.084652 151.542017,135.771899 L161.755369,145.798942 L161.755369,148 L110.38282,148 L110.38282,145.798942 L120.963119,135.527337 C122.002801,134.487948 122.002801,134.182246 122.002801,132.592593 L122.002801,73.0417402 L92.585901,147.755438 L88.6106443,147.755438 L54.3622782,73.0417402 L54.3622782,123.115814 C54.0767278,125.221069 54.7759199,127.3406 56.2581699,128.863022 L70.0186741,145.55438 L70.0186741,147.755438 L31,147.755438 L31,145.55438 L44.7605042,128.863022 C46.2319621,127.338076 46.8903838,125.204485 46.5340803,123.115814 L46.5340803,65.2157554 Z"/></svg></a>
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2020-02-14">14 February 2020</time>
+                <span class="date-divider">/</span> <a href="/tags/data-wrangling/">#Data Wrangling</a>&nbsp;<a href="/tags/data-exploration/">#Data Exploration</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</h1>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        
+
+<p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.</p>
+
+<p>One trialled and tested approach to tease out this type of insight is <a href="https://en.wikipedia.org/wiki/Predictive_modelling"><strong>Propensity Modelling</strong></a>, which combines information such as a <strong>customers’ demographics</strong> (age, race, religion, gender, family size, ethnicity, income, education level), <strong>psycho-graphic</strong> (social class, lifestyle and personality characteristics), <strong>engagement</strong> (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.), <strong>user experience</strong> (customer service phone and email wait times, number of refunds, average shipping times), and <strong>user behaviour</strong> (purchase value on different time-scales, number of days since most recent purchase, time between offer and conversion, etc.) to estimate the likelihood of a certain customer profile to performing a certain type of behaviour (e.g. the purchase of a product).</p>
+
+<p>Once you understand the probability of a certain customer to interact with your brand, buy a product or a sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
+
+<h2 id="project-structure">Project Structure</h2>
+
+<p>In this project I&rsquo;m analysing the results of a bank <strong>direct marketing campaign</strong> to sell term deposits in order to identify what type of customer is more likely to respond. The marketing campaigns were based on phone calls and more than one contact to the same client was required at times.</p>
+
+<p>First, I am going to carry out an <strong>extensive data exploration</strong> and use the results and insights to prepare the data for analysis.</p>
+
+<p>Then, I&rsquo;m <strong>estimating a number of models</strong> and assess their performance and fit to the data using a <strong>model-agnostic methodology</strong> that enables to <strong>compare traditional &ldquo;glass-box&rdquo; models and &ldquo;black-box&rdquo; models</strong>.</p>
+
+<p>Last, I&rsquo;ll fit <strong>one final model</strong> that combines findings from the exploratory analysis and insight from models&rsquo; selection and use it to <strong>run a revenue optimisation</strong>.</p>
+
+<h2 id="the-data">The data</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(data.table)
+library(skimr)
+library(correlationfunnel)
+library(GGally)
+library(ggmosaic)
+library(knitr)
+</code></pre>
+
+<p>The Data is the <a href="https://archive.ics.uci.edu/ml/datasets/Bank+Marketing"><strong>Portuguese Bank Marketing</strong></a> set from the <a href="https://archive.ics.uci.edu/ml/datasets"><strong>UCI Machine Learning Repository</strong></a> and describes the direct marketing campaigns carried out by a Portuguese banking institution aimed at selling term deposits/certificate of deposits to their customers. The marketing campaigns were based on phone calls to potential buyers from May 2008 to November 2010.</p>
+
+<p>Of the four variants of the datasets available on the UCI repository, I&rsquo;ve chosen the <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip"><strong>bank-additional-full.csv</strong></a> which contains 41,188 examples with 21 different variables (10 continuous, 10 categorical plus the target variable). A full description of the variables is provided in the appendix.</p>
+
+<p>In particular, the target <strong>subscribed</strong> is a <strong>binary response variable</strong> indicating whether the client subscribed (‘Yes’ or numeric value 1) to a term deposit or not (‘No’ or numeric value 0), which make this a <a href="https://en.wikipedia.org/wiki/Binary_classification"><strong>binary classification problem</strong></a>.</p>
+
+<h2 id="loading-data-and-initial-inspection">Loading data and initial inspection</h2>
+
+<p>The data I&rsquo;m using ( <strong>bank-direct-marketing.csv</strong>) is a modified version of the full set mentioned earlier and can be found on my <a href="https://github.com/DiegoUsaiUK/Customer_Marketing_Engagement/tree/master/01_data"><strong>GitHub profile</strong></a>. As it contains lots of double quotation marks, some manipulation is required to get into a usable format.</p>
+
+<p>First, I load each row into one string</p>
+
+<pre><code class="language-r">data_raw &lt;- 
+   data.table::fread(
+      file = &quot;../01_data/bank_direct_marketing_modified.csv&quot;,
+      # use character NOT present in data so each row collapses to a string
+      sep = '~',
+      quote = '',
+      # include headers as first row
+      header = FALSE
+   )
+</code></pre>
+
+<p>Then, clean data by removing double quotation marks, splitting row strings into single variables and select target variable <code>subscribed</code> to sit on the left-hand side as first variable in data set</p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   # remove all double quotation marks &quot;
+   as_tibble(sapply(data_raw, function(x) gsub(&quot;\&quot;&quot;, &quot;&quot;, x))) %&gt;% 
+   # split out into 21 variables 
+   separate(col    = V1,
+            into   = c('age', 'job', 'marital', 'education', 'default', 
+                       'housing', 'loan', 'contact', 'month', 'day_of_week', 
+                       'duration', 'campaign', 'pdays', 'previous',
+                       'poutcome', 'emp_var_rate', 'cons_price_idx',
+                       'cons_conf_idx', 'euribor3m', 'nr_employed', 'subscribed'),
+            # using semicolumn as separator
+            sep    = &quot;;&quot;,
+            # to drop original field
+            remove = T) %&gt;% 
+   # drop first row, which contains 
+   slice((nrow(.) - 41187):nrow(.)) %&gt;% 
+   # move targer variable subscribed to be first variable in data set
+   select(subscribed, everything()) 
+</code></pre>
+
+<h2 id="initial-data-manipulation">Initial Data Manipulation</h2>
+
+<p>Let&rsquo;s have a look!</p>
+
+<p>All variables are set as character and some need adjusting.</p>
+
+<pre><code class="language-r">data_clean %&gt;% glimpse()
+## Observations: 41,188
+## Variables: 21
+## $ subscribed     &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;...
+## $ age            &lt;chr&gt; &quot;56&quot;, &quot;57&quot;, &quot;37&quot;, &quot;40&quot;, &quot;56&quot;, &quot;45&quot;, &quot;59&quot;, &quot;41&quot;, &quot;24&quot;...
+## $ job            &lt;chr&gt; &quot;housemaid&quot;, &quot;services&quot;, &quot;services&quot;, &quot;admin.&quot;, &quot;serv...
+## $ marital        &lt;chr&gt; &quot;married&quot;, &quot;married&quot;, &quot;married&quot;, &quot;married&quot;, &quot;married...
+## $ education      &lt;chr&gt; &quot;basic.4y&quot;, &quot;high.school&quot;, &quot;high.school&quot;, &quot;basic.6y&quot;...
+## $ default        &lt;chr&gt; &quot;no&quot;, &quot;unknown&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;unknown&quot;, &quot;no&quot;, ...
+## $ housing        &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;ye...
+## $ loan           &lt;chr&gt; &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;yes&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no&quot;, &quot;no...
+## $ contact        &lt;chr&gt; &quot;telephone&quot;, &quot;telephone&quot;, &quot;telephone&quot;, &quot;telephone&quot;, ...
+## $ month          &lt;chr&gt; &quot;may&quot;, &quot;may&quot;, &quot;may&quot;, &quot;may&quot;, &quot;may&quot;, &quot;may&quot;, &quot;may&quot;, &quot;ma...
+## $ day_of_week    &lt;chr&gt; &quot;mon&quot;, &quot;mon&quot;, &quot;mon&quot;, &quot;mon&quot;, &quot;mon&quot;, &quot;mon&quot;, &quot;mon&quot;, &quot;mo...
+## $ duration       &lt;chr&gt; &quot;261&quot;, &quot;149&quot;, &quot;226&quot;, &quot;151&quot;, &quot;307&quot;, &quot;198&quot;, &quot;139&quot;, &quot;21...
+## $ campaign       &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1...
+## $ pdays          &lt;chr&gt; &quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;999&quot;, &quot;99...
+## $ previous       &lt;chr&gt; &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0&quot;, &quot;0...
+## $ poutcome       &lt;chr&gt; &quot;nonexistent&quot;, &quot;nonexistent&quot;, &quot;nonexistent&quot;, &quot;nonexi...
+## $ emp_var_rate   &lt;chr&gt; &quot;1.1&quot;, &quot;1.1&quot;, &quot;1.1&quot;, &quot;1.1&quot;, &quot;1.1&quot;, &quot;1.1&quot;, &quot;1.1&quot;, &quot;1....
+## $ cons_price_idx &lt;chr&gt; &quot;93.994&quot;, &quot;93.994&quot;, &quot;93.994&quot;, &quot;93.994&quot;, &quot;93.994&quot;, &quot;9...
+## $ cons_conf_idx  &lt;chr&gt; &quot;-36.4&quot;, &quot;-36.4&quot;, &quot;-36.4&quot;, &quot;-36.4&quot;, &quot;-36.4&quot;, &quot;-36.4&quot;...
+## $ euribor3m      &lt;chr&gt; &quot;4.857&quot;, &quot;4.857&quot;, &quot;4.857&quot;, &quot;4.857&quot;, &quot;4.857&quot;, &quot;4.857&quot;...
+## $ nr_employed    &lt;chr&gt; &quot;5191&quot;, &quot;5191&quot;, &quot;5191&quot;, &quot;5191&quot;, &quot;5191&quot;, &quot;5191&quot;, &quot;519...
+</code></pre>
+
+<p>I&rsquo;ll start with setting the variables that are continuous in nature to numeric and change <code>pdays</code> 999 to 0 (999 means client was not previously contacted). I&rsquo;m also shortening level names of some categorical variables to ease visualisations.</p>
+
+<p>Note that, although numeric in nature, <code>campaign</code> is more of a categorical variable so I am leaving it as a character.</p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;%
+  
+    # recoding the majority class as 0 and the minority class as 1
+    mutate(subscribed = case_when(subscribed == 'no' ~ 0, 
+                                                TRUE ~ 1) %&gt;% 
+              as_factor) %&gt;% 
+  
+    # change continuous variables that are numeric to type double
+    mutate_at(c('age','duration', 'pdays', 'previous',
+                'emp_var_rate', 'cons_price_idx', 'cons_conf_idx',
+                'euribor3m', 'nr_employed'),
+                 as.double) %&gt;% 
+  
+    # change pdays 999 to 0 (zero)
+    mutate(pdays = case_when(pdays == '999' ~ 0,
+                            TRUE ~ pdays),
+          
+    # shortening level names of some categ. vars to ease visualisations
+    job = case_when(
+                    job ==  'housemaid'     ~ 'maid',
+                    job ==  'services'      ~ 'svcs',				
+                    job ==  'admin.'        ~	'adm',	
+                    job ==  'blue-collar'		~	'bcol',
+                    job ==  'technician'		~	'tech',
+                    job ==  'retired'				~ 'ret',
+                    job ==  'management'		~	'mgmt',
+                    job ==  'unemployed'		~	'uemp',
+                    job ==  'self-employed'	~	'self',
+                    job ==  'unknown'       ~ 'unk',
+                    job ==  'entrepreneur'	~	'entr',
+                    TRUE                    ~ 'stdn'),
+
+    marital = case_when(
+                    marital == 'married'  ~ 'mar',				
+                    marital == 'single'   ~ 'sig',				
+                    marital == 'divorced' ~ 'div',				
+                    TRUE                  ~ 'unk'),
+
+    education = case_when(
+                    education ==  'basic.4y'            ~ '4y',
+                    education ==  'basic.6y'            ~ '6y',				
+                    education ==  'basic.9y'            ~	'9y',	
+                    education ==  'high.school'		      ~	'hs',
+                    education ==  'professional.course'	~	'crse',
+                    education ==  'unknown'				      ~ 'unk',
+                    education ==  'university.degree'		~	'uni',
+                    TRUE                                ~ 'ilt'),
+
+    default = case_when(
+                    default == 'unknown' ~ 'unk',
+                    default == 'yes'     ~ 'yes',
+                    TRUE                 ~ 'no'),
+
+    contact = case_when(
+                    contact == 'telephone' ~ 'tel',
+                    contact == 'cellular'  ~ 'mob'),
+
+    poutcome = case_when(
+                    poutcome == 'nonexistent' ~ 'non',
+                    poutcome == 'failure'     ~ 'fail',
+                    TRUE                      ~ 'scs'),
+    housing = case_when(
+                    housing == 'unknown' ~ 'unk',
+                    default == 'yes'     ~ 'yes',
+                    TRUE                 ~ 'no'),
+    loan = case_when(
+                    loan == 'unknown' ~ 'unk',
+                    default == 'yes'  ~ 'yes',
+                    TRUE              ~ 'no')
+    )
+</code></pre>
+
+<p>There are no missing values in any of the variables (continuous or categorical) in this data set. For that reason, no imputation is necessary.</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+  skimr::skim()
+
+Data summary Name 	Piped data
+Number of rows     	41188
+Number of columns 	21
+_______________________ 	
+Column type frequency: 	
+character   11
+factor      1
+numeric     9
+________________________ 	
+Group variables 	None
+
+Variable type: character
+skim_var  n_missing  complete  min    max     empty    n_unique    whitespace
+job             0         1 	 3 	4 	  0 	   12 	        0
+marital         0         1 	 3 	3 	  0 	    4 	        0
+education       0         1 	 2 	4 	  0 	    8 	        0
+default         0         1 	 2 	3 	  0 	    3 	        0
+housing         0         1 	 2 	3 	  0 	    3 	        0
+loan            0         1 	 2 	3 	  0 	    3 	        0
+contact         0         1 	 3 	3 	  0 	    2 	        0
+month           0         1 	 3 	3 	  0 	   10 	        0
+day_of_week     0         1 	 3 	3 	  0 	    5 	        0
+campaign        0         1 	 1 	2 	  0 	   42 	        0
+poutcome        0         1 	 3 	4 	  0 	    3 	        0
+
+Variable type: factor
+
+skim_var    n_missing  complete  ordered   n_unique     top_counts
+subscribed        0 	     1 	   FALSE       2     0: 36548, 1: 4640
+
+Variable type: numeric
+
+skim_var n_missing complete  mean     sd     p0    p25    p50    p75   p100    hist
+age             0      1    40.02  10.42  17.00  32.00  38.00  47.00  98.00  ▅▇▃▁▁
+duration        0      1   258.29 259.28   0.00 102.00 180.00 319.00 4918.0  ▇▁▁▁▁
+pdays           0      1     0.22   1.35   0.00   0.00   0.00   0.00  27.00  ▇▁▁▁▁
+previous        0      1     0.17   0.49   0.00   0.00   0.00   0.00   7.00  ▇▁▁▁▁
+emp_var_rate    0      1     0.08   1.57  -3.40  -1.80   1.10   1.40   1.40  ▁▃▁▁▇
+cons_price_idx  0      1    93.58   0.58  92.20  93.08  93.75  93.99  94.77  ▁▆▃▇▂
+cons_conf_idx   0      1   -40.50   4.63 -50.80 -42.70 -41.80 -36.40 -26.90  ▅▇▁▇▁
+euribor3m       0      1     3.62   1.73   0.63   1.34   4.86   4.96   5.04  ▅▁▁▁▇
+nr_employed     0      1  5167.04  72.25 4963.6 5099.1 5191.0 5228.1 5228.1  ▁▁▃▁▇
+</code></pre>
+
+<p><strong>NOTE</strong>: I&rsquo;ve left all categorical variables as unordered as <strong>h2o</strong> (which I&rsquo;m going to be using for modelling) does not support ordered categorical variables</p>
+
+<h2 id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+
+<p>Although an integral part of any Data Science project and crucial to the full success of the analysis, <a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory Data Analysis (EDA)</a> can be an incredibly labour intensive and time consuming process. Recent years have seen a proliferation of approaches and libraries aimed at speeding up the process and in this project I&rsquo;m going to sample one of the &ldquo;new kids on the block&rdquo; ( the <a href="https://business-science.github.io/correlationfunnel/"><strong>correlationfunnel</strong></a> ) and combine its results with a more traditional EDA.</p>
+
+<h3 id="correlationfunnel"><em>correlationfunnel</em></h3>
+
+<p><code>correlationfunnel</code> is a package developed with the aim to speed up Exploratory Data Analysis (EDA), a process that can be very time consuming even for small data sets.</p>
+
+<p>With 3 simple steps we can produce a graph that arranges predictors top to bottom in descending order of absolute correlation with the target variable. Features at the top of the funnel are expected to have have stronger predictive power in a model.</p>
+
+<p>This approach offers a quick way to identify a hierarchy of expected predictive power for all variables and gives an early indication of which predictors should feature strongly/weakly in any model.</p>
+
+<pre><code class="language-r">data_clean %&gt;%  
+  
+  # turn numeric and categorical features into binary data
+  binarize(n_bins = 4, # bin number for converting features to discrete 
+           thresh_infreq = 0.01 # thresh. for assign categ. features into &quot;Other&quot;
+          ) %&gt;%
+  
+  # Correlate target variable to features in data set 
+  correlate(target = subscribed__1) %&gt;% 
+  
+  # correlation funnel visualisation
+  plot_correlation_funnel()
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-5-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Zooming in on the top 5 features we can see that certain characteristics have a greater correlation with the target variable (subscribing to the term deposit product) when:</p>
+
+<ul>
+<li>The <code>duration</code> of the last phone contact with the client is 319 seconds or longer</li>
+<li>The number of <code>days</code> that passed by after the client was last contacted is greater than 6</li>
+<li>The outcome of the <code>previous</code> marketing campaign was <code>success</code></li>
+<li>The number of employed is 5,099 thousands or higher</li>
+<li>The value of the euribor 3 month rate is 1.344 or higher</li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r">data_clean %&gt;%
+  select(subscribed, duration, pdays, poutcome, nr_employed, euribor3m) %&gt;%
+  binarize(n_bins = 4, # bin number for converting numeric features to discrete 
+           thresh_infreq = 0.01 # thresh. for assign categ. features into &quot;Other&quot;
+          ) %&gt;%
+  # Correlate target vriable to features in data set 
+  correlate(target = subscribed__1) %&gt;% 
+  plot_correlation_funnel(limits = c(-0.4, 0.4))
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-6-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Conversely, variables at the bottom of the funnel, such as <strong>day_of_week</strong>, <strong>housing</strong>, and <strong>loan</strong>. show very little variation compared to the target variable (i.e.: they are very close to the zero correlation point to the response). For that reason, I&rsquo;m not expecting these features to impact the response.</p>
+
+<pre><code class="language-r">data_clean %&gt;%
+  select(subscribed, education, campaign, day_of_week, housing, loan) %&gt;%
+  binarize(n_bins = 4, # bin number for converting numeric features to discrete 
+           thresh_infreq = 0.01 # thresh. for assign categ. features into &quot;Other&quot;
+          ) %&gt;%
+  # Correlate target vriable to features in data set 
+  correlate(target = subscribed__1) %&gt;% 
+  plot_correlation_funnel(limits = c(-0.4, 0.4))
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-7-1.png" alt="" width="100%" height="100%"/></p>
+
+<h3 id="features-exploration">Features exploration</h3>
+
+<p>Guided by the results of this visual correlation analysis, I will continue to explore the relationship between the target and each of the predictors in the next section. For this I will enlist the help of the brilliant <strong>GGally</strong> library to visualise a modified version of the correlation matrix with <code>Ggpairs</code>, and plot <code>mosaic charts</code> with the <strong>ggmosaic</strong> package, a great way to examine the relationship among two or more categorical variables.</p>
+
+<h4 id="target-variable">Target Variable</h4>
+
+<p>First things first, the <strong>target variable</strong>: <code>subscribed</code> shows a <strong>strong class imbalance</strong>, with nearly 89% in the <strong>No category</strong> to 11% in the <strong>Yes category</strong>.</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+  select(subscribed) %&gt;% 
+  group_by(subscribed) %&gt;% 
+  count() %&gt;%
+  # summarise(n = n()) %&gt;% # alternative to count() - here you can name it!
+  ungroup() %&gt;% 
+  mutate(perc = n / sum(n)) %&gt;% 
+  
+  ggplot(aes(x = subscribed, y = n, fill = subscribed) ) + 
+  geom_col() +
+  geom_text(aes(label = scales::percent(perc, accuracy = 0.1)),
+            nudge_y = -2000,
+            size = 4.5) +
+  theme_minimal() +
+  theme(legend.position = 'none',
+        plot.title    = element_text(hjust = 0.5)) +
+  labs(title = 'Target Variable',
+        x = 'Subscribed', 
+        y = 'Number of Responses')
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-8-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>I will address <strong>class imbalance</strong>  before entering the modelling phase with a <strong>re-sampling technique</strong>, which aims at rebalancing the dataset by &ldquo;shrinking&rdquo; the prevalent class (&ldquo;No&rdquo; or 0). This is to ensure that the model adequately detect what variables are driving the ‘yes’ and ‘no’ responses.</p>
+
+<h4 id="predictors">Predictors</h4>
+
+<p>Let&rsquo;s continue with some of the numerical features:</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   select(subscribed, duration, age, pdays, previous) %&gt;% 
+   plot_ggpairs_funct(colour = subscribed)
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/some continuous features-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Although the correlation funnel analysis revealed that <strong>duration</strong> has the strongest expected predictive power, it is unknown before a call (it’s obviously known afterwards) and offers very little actionable insight or predictive value. Therefore, it should be discarded from any realistic predictive model and will not be used in this analysis.</p>
+
+<p><strong>age</strong> &rsquo;s density plots have very similar variance compared to the target variable and are centred around the same area. For these reasons, it should not have a great impact on <strong>subscribed</strong>.</p>
+
+<p>Despite continuous in nature, <strong>pdays</strong> and <strong>previous</strong> are in fact categorical features and are also all strongly right skewed. For these reasons, they will need to be discretised into groups. Both variables are also moderately correlated, suggesting that they may capture the same behaviour.</p>
+
+<p>Next, I visualise the bank client data with the <strong>mosaic charts</strong>:</p>
+
+<pre><code class="language-r">job &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(job, subscribed), fill = job)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Job') 
+
+mar &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(marital, subscribed), fill = marital)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Marital')
+
+edu &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(education, subscribed), fill = education)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Education')
+
+def &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(default, subscribed), fill = default)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Default') 
+
+hou &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(housing, subscribed), fill = housing)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Housing')
+
+loa &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(loan, subscribed), fill = loan)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Loan')
+
+
+gridExtra::grid.arrange(job, mar, hou, edu, def, loa, nrow = 2)
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/bank client data all-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>In line with the <em>correlationfunnel</em> findings, <strong>job</strong>, <strong>education</strong>, <strong>marital</strong> and <strong>default</strong> all show a good level of variation compared to the target variable, indicating that they would impact the response. In contrast, <strong>housing</strong> and <strong>loan</strong> sat at the very bottom of the funnel and are expected to have little influence on the target, given the small variation when split by &ldquo;subscribed&rdquo; response.</p>
+
+<p><strong>default</strong> has only 3 observations in the ‘yes’ level, which will be rolled into the least frequent level as they&rsquo;re not enough to make a proper inference. Level ‘unknown’ of the <strong>housing</strong> and <strong>loan</strong> variables have a small number of observations and will be rolled into the second smallest category. Lastly, <strong>job</strong> and <strong>education</strong> would also benefit from grouping up of least common levels.</p>
+
+<p>Moving on to the other campaign attributes:</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   select(subscribed, campaign, poutcome) %&gt;% 
+   plot_ggpairs_funct(colour = subscribed)
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/other campaign attributes-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Although continuous in principal, <strong>campaign</strong> is more categorical in nature and strongly right skewed, and will need to be discretised into groups. However, we have learned from the earlier correlation analysis that is not expected be a strong drivers of variation in any model.</p>
+
+<p>On the other hand, <strong>poutcome</strong> is one of the attributes expected to be have a strong predictive power. The uneven distribution of levels would suggest to roll the least common occurring level (<strong>success</strong> or <code>scs</code>) into another category. However, contacting a client who previously purchased a term deposit is one of the catacteristics with highest predictive power and needs to be left ungrouped.</p>
+
+<p>Then, I&rsquo;m looking at last contact information:</p>
+
+<pre><code class="language-r">con &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(contact, subscribed), fill = contact)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Contact') 
+
+mth &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(month, subscribed), fill = month)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Month')
+
+dow &lt;- ggplot(data = data_clean) +
+   geom_mosaic(aes(x = product(day_of_week, subscribed), fill = day_of_week)) +
+   theme_minimal() +
+   theme(legend.position = 'none', 
+         plot.title = element_text(hjust = 0.5) ) +
+   labs(x = '', y = '', title = 'Day of Week')
+
+gridExtra::grid.arrange(con, mth, dow, nrow = 2)
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/last contact information-1.png" alt="" width="100%" height="100%"/></p>
+
+<p><strong>contact</strong> and <strong>month</strong> should impact the response variable as they both have a good level of variation compared to the target. <strong>month</strong> would also benefit from grouping up of least common levels.</p>
+
+<p>In contrast, <strong>day_of_week</strong> does not appear to impact the response as there is not enough variation between the levels.</p>
+
+<p>Last but not least, the social and economic attributes:</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   select(subscribed, emp_var_rate, cons_price_idx, 
+          cons_conf_idx, euribor3m, nr_employed) %&gt;% 
+   plot_ggpairs_funct(colour = subscribed)
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/social-economic context attributes-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>All <strong>social and economic attributes</strong> show a good level of variation compared to the target variable, which suggests that they should all impact the response. They all display a high degree of multi-modality and do not have an even spread through the density plot, and will need to be binned.</p>
+
+<p>It is also worth noting that, with the exception of _cons_confidence<em>index</em>, all other social and economic attributes are strongly correlated to each other, indicating that only one could be included in the model as they are all “picking up” similar economic trend.</p>
+
+<h2 id="data-processing-and-transformation">Data Processing and Transformation</h2>
+
+<p>Following up on the findings from the Exploratory Data Analysis, I&rsquo;m getting the data ready for modelling.</p>
+
+<h3 id="discretising-of-categorical-predictors">Discretising of categorical predictors</h3>
+
+<p>Here, I&rsquo;m using a helper function <a href="https://github.com/DiegoUsaiUK/Customer_Marketing_Engagement/tree/master/03_scripts"><code>plot_hist_funct</code></a> to take a look at features histograms. That helps understanding how to combine least common levels into &ldquo;other&rsquo; category.</p>
+
+<pre><code class="language-r">data_clean %&gt;%
+    select_if(is_character) %&gt;%
+    plot_hist_funct()
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-9-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>With the exception of <strong>day_of_week</strong> and <strong>contact</strong>, all categorical variables need some grouping up. I&rsquo;m going to go through the first one as an example of how I approached the problem and include all changes made at the end.</p>
+
+<h4 id="example-with-marital-status">Example with <em>marital</em> status</h4>
+
+<p>A 3-bin combination seems sensible for the <strong>marital</strong> status category</p>
+
+<pre><code class="language-r">data_clean %&gt;%
+    # combine least common factors into &quot;other' category
+    select(marital) %&gt;% 
+    mutate(marital_binned = marital %&gt;% fct_lump( 
+                              # n = how many categs to keep
+                              n = 2,  
+                              # name other category
+                              other_level = &quot;other&quot;
+                              )) %&gt;% 
+  plot_hist_funct()
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-10-1.png" alt="" width="100%" height="100%"/></p>
+
+<h3 id="discretising-of-continuous-variables">Discretising of continuous variables</h3>
+
+<p>Using the same approach as to categorical variables, I&rsquo;m plotting all numerical features.</p>
+
+<pre><code class="language-r">data_clean %&gt;%
+    select_if(is.numeric) %&gt;%
+    plot_hist_funct()
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-11-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>All continuous variables can benefit from some grouping. For simplicity and speed, I&rsquo;m using the bins calculated by the <code>correlationfunnel</code> package. <strong>duration</strong> will not be processed as I&rsquo;m NOT including it in any of my models.</p>
+
+<h4 id="example-with-consumer-confidence-index">Example with <em>consumer confidence index</em></h4>
+
+<p>A 3-level binning seems sensible for <code>cons_price_idx</code></p>
+
+<pre><code class="language-r">data_clean %&gt;%
+    select(cons_price_idx) %&gt;% 
+    mutate(cons_price_idx_binned = case_when(
+            between(cons_price_idx, -Inf, 93.056)   ~ &quot;Inf_93.056&quot;,
+            between(cons_price_idx, 93.056, 93.912) ~ &quot;93.056_93.912&quot;,
+            TRUE                                    ~  &quot;93.913_Inf&quot;)) %&gt;%  
+  
+    plot_hist_funct()
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-12-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>I create now a <code>data_final</code> file with all the binned variables, set all categorical variables to factors and take a good look at all of them.</p>
+
+<pre><code class="language-r">data_final &lt;- 
+  data_clean %&gt;%
+    # removing duration, which I'm not going to use for modelling 
+    select(-duration) %&gt;% 
+    # applying grouping
+    mutate(
+        job        = job %&gt;% fct_lump(n = 11, other_level = &quot;other&quot;),
+        marital    = marital %&gt;% fct_lump(n = 2, other_level = &quot;other&quot;),
+        education  = education %&gt;% fct_lump(n = 6, other_level = &quot;other&quot;),
+        default    = default %&gt;% fct_lump(n = 1, other_level = &quot;other&quot;),
+        housing    = housing %&gt;% fct_lump(n = 1, other_level = &quot;other&quot;),
+        loan       = loan %&gt;% fct_lump(n = 1, other_level = &quot;other&quot;),
+        # month      = month %&gt;% fct_lump(n = 6,other_level = &quot;other&quot;),
+        campaign   = campaign %&gt;% fct_lump(n = 3, other_level = &quot;other&quot;),
+        # poutcome = poutcome %&gt;% fct_lump(n = 1, other_level = &quot;other&quot;),
+        pdays = case_when(
+            pdays == 0 ~ &quot;Never&quot;,
+            TRUE       ~ &quot;Once_or_more&quot;),
+        previous = case_when(
+            previous == 0 ~ &quot;Never&quot;,
+            TRUE          ~ &quot;Once_or_more&quot;),
+        emp_var_rate = case_when(
+            between(emp_var_rate, -Inf, -1.8) ~ &quot;nInf_n1.8&quot;,
+            between(emp_var_rate, -1.9, -0.1) ~ &quot;n1.9_n0.1&quot;,
+            TRUE                              ~  &quot;n0.2_Inf&quot;),
+        cons_price_idx = case_when(
+            between(cons_price_idx, -Inf, 93.056)   ~ &quot;nInf_93.056&quot;,
+            between(cons_price_idx, 93.057, 93.912) ~ &quot;93.057_93.912&quot;,
+            TRUE                                    ~  &quot;93.913_Inf&quot;),
+        cons_conf_idx = case_when(
+            between(cons_conf_idx, -Inf, -46.19)  ~ &quot;nInf_n46.19&quot;,
+            between(cons_conf_idx, -46.2, -41.99) ~ &quot;n46.2_n41.9&quot;,
+            between(cons_conf_idx, -42.0, -39.99) ~ &quot;n42.0_n39.9&quot;,
+            between(cons_conf_idx, -40.0, -36.39) ~ &quot;n40.0_n36.4&quot;,
+            TRUE                                  ~ &quot;n36.5_Inf&quot;),
+        euribor3m = case_when(
+            between(euribor3m, -Inf, 1.298)  ~ &quot;nInf_1.298&quot;,
+            between(euribor3m, 1.299, 4.190) ~ &quot;1.299_4.190&quot;,
+            between(euribor3m, 1.191, 4.864) ~ &quot;1.299_4.864&quot;,
+            between(euribor3m, 1.865, 4.862) ~ &quot;1.299_4.962&quot;,
+            TRUE                             ~ &quot;4.963_Inf&quot;),
+        nr_employed = case_when(
+            between(nr_employed, -Inf, 5099.1)    ~ &quot;nInf_5099.1&quot;,
+            between(nr_employed, 5099.1, 5191.01) ~ &quot;5099.1_5191.01&quot;,
+            TRUE                                  ~ &quot;5191.02_Inf&quot;)
+           ) %&gt;% 
+  
+   # change categorical variables to factors 
+   mutate_at(c('contact', 'month', 'day_of_week', 'pdays', 'poutcome', 
+               'previous', 'emp_var_rate', 'cons_price_idx', 
+               'cons_conf_idx', 'euribor3m', 'nr_employed'),
+             as.factor)
+</code></pre>
+
+<p>It all looks fine!</p>
+
+<pre><code class="language-r">data_final %&gt;% str()
+## Classes 'tbl_df', 'tbl' and 'data.frame':    41188 obs. of  20 variables:
+##  $ subscribed    : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ age           : num  56 57 37 40 56 45 59 41 24 25 ...
+##  $ job           : Factor w/ 12 levels &quot;adm&quot;,&quot;bcol&quot;,&quot;entr&quot;,..: 4 9 9 1 9 9 1 2 10 9 ...
+##  $ marital       : Factor w/ 3 levels &quot;mar&quot;,&quot;sig&quot;,&quot;other&quot;: 1 1 1 1 1 1 1 1 2 2 ...
+##  $ education     : Factor w/ 7 levels &quot;4y&quot;,&quot;6y&quot;,&quot;9y&quot;,..: 1 5 5 2 5 3 4 7 4 5 ...
+##  $ default       : Factor w/ 2 levels &quot;no&quot;,&quot;other&quot;: 1 2 1 1 1 2 1 2 1 1 ...
+##  $ housing       : Factor w/ 2 levels &quot;no&quot;,&quot;other&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ loan          : Factor w/ 2 levels &quot;no&quot;,&quot;other&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ contact       : Factor w/ 2 levels &quot;mob&quot;,&quot;tel&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ month         : Factor w/ 10 levels &quot;apr&quot;,&quot;aug&quot;,&quot;dec&quot;,..: 7 7 7 7 7 7 7 7 7 7 ...
+##  $ day_of_week   : Factor w/ 5 levels &quot;fri&quot;,&quot;mon&quot;,&quot;thu&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ campaign      : Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;other&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ pdays         : Factor w/ 2 levels &quot;Never&quot;,&quot;Once_or_more&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ previous      : Factor w/ 2 levels &quot;Never&quot;,&quot;Once_or_more&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ poutcome      : Factor w/ 3 levels &quot;fail&quot;,&quot;non&quot;,&quot;scs&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ emp_var_rate  : Factor w/ 3 levels &quot;n0.2_Inf&quot;,&quot;n1.9_n0.1&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ cons_price_idx: Factor w/ 3 levels &quot;93.057_93.912&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ cons_conf_idx : Factor w/ 5 levels &quot;n36.5_Inf&quot;,&quot;n40.0_n36.4&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ euribor3m     : Factor w/ 4 levels &quot;1.299_4.190&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ nr_employed   : Factor w/ 3 levels &quot;5099.1_5191.01&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+</code></pre>
+
+<h2 id="summary-of-exploratory-data-analysis-preparation">Summary of Exploratory Data Analysis &amp; Preparation</h2>
+
+<ul>
+<li><p>Correlation analysis with <strong>correlationfunnel</strong> helped identify a hierarchy of expected predictive power for all variables</p></li>
+
+<li><p><strong>duration</strong> (eqpt_rent) has strongest correlation with target variable whereas some of the bank client data like <strong>housing</strong> and <strong>loan</strong> shows the weakest correlation</p></li>
+
+<li><p>However, <strong>duration</strong> will <strong>NOT</strong> be used in the analysis as it is unknown before a call. As such it offers very little actionable insight or predictive value and should be discarded from any realistic predictive model</p></li>
+
+<li><p>The target variable <strong>subscribed</strong> shows strong class imbalance, with nearly 89% of <strong>No churn</strong>, which will need to be addresses before the modelling analysis can begin</p></li>
+
+<li><p>Most predictors benefited from grouping up of least common levels</p></li>
+
+<li><p>Further feature exploration revealed the most <strong>social and economic context attributes</strong>
+are strongly correlated to each other, suggesting that only a selection of them could be considered in a final model</p></li>
+</ul>
+
+<h3 id="save-final-dataset">Save final dataset</h3>
+
+<p>Lastly, I save the <code>data_final</code> set for the next phase of the analysis.</p>
+
+<pre><code class="language-r"># Saving clensed data for analysis phase
+saveRDS(data_final, &quot;../01_data/data_final.rds&quot;)
+</code></pre>
+
+<h3 id="code-repository">Code Repository</h3>
+
+<p>The full R code and all relevant files can be found on my GitHub profile @ <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"><strong>Propensity Modelling</strong></a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li><p>For the original paper that used the data set see: <a href="http://repositorium.sdum.uminho.pt/bitstream/1822/30994/1/dss-v3.pdf"><strong>A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems</strong></a>, S. Moro, P. Cortez and P. Rita.</p></li>
+
+<li><p>To Speed Up Exploratory Data Analysis see: <a href="https://business-science.github.io/correlationfunnel/"><strong>correlationfunnel Package Vignette</strong></a></p></li>
+</ul>
+
+<h2 id="appendix">Appendix</h2>
+
+<h3 id="table-1-variables-description">Table 1 – Variables Description</h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">Category</th>
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+<th align="left">Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Target</td>
+<td align="left">subscribed</td>
+<td align="left">has the client subscribed a term deposit?</td>
+<td align="left">binary: &ldquo;yes&rdquo;,&ldquo;no&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">age</td>
+<td align="left">-</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">job</td>
+<td align="left">type of job</td>
+<td align="left">categorical</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">marital</td>
+<td align="left">marital status</td>
+<td align="left">categorical</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">education</td>
+<td align="left">-</td>
+<td align="left">categorical</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">default</td>
+<td align="left">has credit in default?</td>
+<td align="left">categorical: &ldquo;no&rdquo;,&ldquo;yes&rdquo;,&ldquo;unknown&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">housing</td>
+<td align="left">has housing loan?</td>
+<td align="left">categorical: &ldquo;no&rdquo;,&ldquo;yes&rdquo;,&ldquo;unknown&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Client Data</td>
+<td align="left">loan</td>
+<td align="left">has personal loan?</td>
+<td align="left">categorical:&ldquo;no&rdquo;,&ldquo;yes&rdquo;,&ldquo;unknown&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Last Contact Info</td>
+<td align="left">contact</td>
+<td align="left">contact communication type</td>
+<td align="left">categorical:&ldquo;cellular&rdquo;,&ldquo;telephone&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Last Contact Info</td>
+<td align="left">month</td>
+<td align="left">last contact month of year</td>
+<td align="left">categorical</td>
+</tr>
+
+<tr>
+<td align="left">Last Contact Info</td>
+<td align="left">day_of_week</td>
+<td align="left">last contact day of the week</td>
+<td align="left">categorical: &ldquo;mon&rdquo;,&ldquo;tue&rdquo;,&ldquo;wed&rdquo;,&ldquo;thu&rdquo;,&ldquo;fri&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Last Contact Info</td>
+<td align="left">duration</td>
+<td align="left">last contact duration, in seconds</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Campaigns attrib.</td>
+<td align="left">campaign</td>
+<td align="left">number of contacts during this campaign and for this client</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Campaigns attrib.</td>
+<td align="left">pdays</td>
+<td align="left">number of days after client was last contacted from previous campaign</td>
+<td align="left">numeric; 999 means client was not previously contacted</td>
+</tr>
+
+<tr>
+<td align="left">Campaigns attrib.</td>
+<td align="left">previous</td>
+<td align="left">number of contacts before this campaign and for this client</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Campaigns attrib.</td>
+<td align="left">poutcome</td>
+<td align="left">outcome of previous marketing campaign</td>
+<td align="left">categorical: &ldquo;failure&rdquo;,&ldquo;nonexistent&rdquo;,&ldquo;success&rdquo;</td>
+</tr>
+
+<tr>
+<td align="left">Social &amp; Economic</td>
+<td align="left">emp.var.rate</td>
+<td align="left">employment variation rate - quarterly indicator</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Social &amp; Economic</td>
+<td align="left">cons.price.idx</td>
+<td align="left">consumer price index - monthly indicator</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Social &amp; Economic</td>
+<td align="left">cons.conf.idx</td>
+<td align="left">consumer confidence index - monthly indicator</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Social &amp; Economic</td>
+<td align="left">euribor3m</td>
+<td align="left">euribor 3 month rate - daily indicator</td>
+<td align="left">numeric</td>
+</tr>
+
+<tr>
+<td align="left">Social &amp; Economic</td>
+<td align="left">nr.employed</td>
+<td align="left">number of employees - quarterly indicator</td>
+<td align="left">numeric</td>
+</tr>
+</tbody>
+</table>
+    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+                <p></p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2020\/02\/propensity-modelling-1-of-3\/";  
+this.page.identifier = "\/2020\/02\/propensity-modelling-1-of-3\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+<article class="read-next-card" 
+            style="background-image: url(/img/simon-zhu-TfRHSL2GKDc-unsplash.jpg);" >
+    <header class="read-next-card-header">
+        <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
+        
+        <h3 class="read-next-card-header-title"><a href="/tags/data-wrangling/">#Data Wrangling</a></h3>
+    </header>
+    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+    </div>
+
+    <div class="read-next-card-content">
+      
+        <ul>
+          <li><a href="/2020/03/propensity-modelling-2-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</a></li>            
+        
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
+        
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+        
+          <li><a href="/2020/04/propensity-modelling-3-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</a></li>            
+        </ul>
+    </div>
+    <footer class="read-next-card-footer">
+      
+        <a href="/tags/data-wrangling/">See all related posts →</a>
+    </footer>
+</article>
+
+
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/03/propensity-modelling-2-of-3/">
+      <div class="post-card-image" style="background-image: url(/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/03/propensity-modelling-2-of-3/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Machine Learning 
+              #Propensity Modelling 
+              #ML Interpretability 
+              #Model Selection  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">
+      <div class="post-card-image" style="background-image: url(/img/ben-elwood-rsCB-A69lUc-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Machine Learning 
+              #Time Series 
+              #Forecasting 
+              #Data Exploration  </span>
+              
+              <h2 class="post-card-title">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, have been well-established for decades and find applications in fields as varied as business and finance (e.g. predict stock prices and analyse trends in financial markets), the energy sector (e.g. forecast electricity consumption) and academia (e.g. measure socio-political phenomena).
+In more recent times, the popularisation and wider availability of open source frameworks like Keras, TensorFlow and scikit-learn helped machine learning approaches like Random Forest, Extreme Gradient Boosting, Time Delay Neural Network and Recurrent Neural Network to gain momentum in time series applications. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="/">
+      
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Propensity%20Modelling%20-%20Using%20h2o%20and%20DALEX%20to%20Estimate%20the%20Likelihood%20of%20Purchasing%20a%20Financial%20Product%20-%20Part%201%20of%203%3a%20Data%20Preparation%20and%20Exploratory%20Data%20Analysis&amp;url=%2f2020%2f02%2fpropensity-modelling-1-of-3%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f02%2fpropensity-modelling-1-of-3%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">Diego Usai</a> © 2019 <br>
+      <span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        
+        
+        <a href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener">Github</a>
+        <a href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener">Medium</a>
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-151122416-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>

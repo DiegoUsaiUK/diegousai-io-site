@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en-UK" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="canonical" href="/2020/03/propensity-modelling-2-of-3/" />
+
+     <meta name="description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology"/>
+    <meta name="twitter:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations "/>
+    <meta name="twitter:url" content="/2020/03/propensity-modelling-2-of-3/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2020/03/propensity-modelling-2-of-3/" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " />
+
+    <meta property="article:published_time" content="2020-03-17T00:00:00Z" />
+    <meta property="article:tag" content="Machine Learning" /><meta property="article:tag" content="Propensity Modelling" /><meta property="article:tag" content="ML Interpretability" /><meta property="article:tag" content="Model Selection" />
+
+    <meta property="og:image" content="/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.58.3" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+     <link rel="stylesheet" href="/css/override.css" /> 
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/articles/">Articles</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/multi-post-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/tags/">Tags</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/links/">Readings</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/about/">About</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    
+
+                    
+
+                    <a class="social-link" href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    <a class="social-link" href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 512 512"><path d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683 C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615 c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915 s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z" /></svg></a>
+
+                    <a class="social-link" href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 195"><path d="M46.5340803,65.2157554 C46.6968378,63.6076572 46.0836,62.018231 44.8828198,60.93592 L32.6512605,46.2010582 L32.6512605,44 L70.6302521,44 L99.9859944,108.380952 L125.794585,44 L162,44 L162,46.2010582 L151.542017,56.2281011 C150.640424,56.9153477 150.193188,58.0448862 150.380019,59.1628454 L150.380019,132.837155 C150.193188,133.955114 150.640424,135.084652 151.542017,135.771899 L161.755369,145.798942 L161.755369,148 L110.38282,148 L110.38282,145.798942 L120.963119,135.527337 C122.002801,134.487948 122.002801,134.182246 122.002801,132.592593 L122.002801,73.0417402 L92.585901,147.755438 L88.6106443,147.755438 L54.3622782,73.0417402 L54.3622782,123.115814 C54.0767278,125.221069 54.7759199,127.3406 56.2581699,128.863022 L70.0186741,145.55438 L70.0186741,147.755438 L31,147.755438 L31,145.55438 L44.7605042,128.863022 C46.2319621,127.338076 46.8903838,125.204485 46.5340803,123.115814 L46.5340803,65.2157554 Z"/></svg></a>
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2020-03-17">17 March 2020</time>
+                <span class="date-divider">/</span> <a href="/tags/machine-learning/">#Machine Learning</a>&nbsp;<a href="/tags/propensity-modelling/">#Propensity Modelling</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</h1>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        
+
+<p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.</p>
+
+<p>One trialled and tested approach to tease out this type of insight is <a href="https://en.wikipedia.org/wiki/Predictive_modelling"><strong>Propensity Modelling</strong></a>, which combines information such as a <strong>customers’ demographics</strong> (age, race, religion, gender, family size, ethnicity, income, education level), <strong>psycho-graphic</strong> (social class, lifestyle and personality characteristics), <strong>engagement</strong> (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.), <strong>user experience</strong> (customer service phone and email wait times, number of refunds, average shipping times), and <strong>user behaviour</strong> (purchase value on different time-scales, number of days since most recent purchase, time between offer and conversion, etc.) to estimate the likelihood of a certain customer profile to performing a certain type of behaviour (e.g. the purchase of a product).</p>
+
+<p>Once you understand the probability of a certain customer to interact with your brand, buy a product or a sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
+
+<h2 id="project-structure">Project Structure</h2>
+
+<p>In this project I&rsquo;m analysing the results of a bank <strong>direct marketing campaign</strong> to sell term deposits in order to identify what type of customer is more likely to respond. The marketing campaigns were based on phone calls and more than one contact to the same client was required at times.</p>
+
+<p>First, I am going to carry out an <strong>extensive data exploration</strong> and use the results and insights to prepare the data for analysis.</p>
+
+<p>Then, I&rsquo;m <strong>estimating a number of models</strong> and assess their performance and fit to the data using a <strong>model-agnostic methodology</strong> that enables to <strong>compare traditional &ldquo;glass-box&rdquo; models and &ldquo;black-box&rdquo; models</strong>.</p>
+
+<p>Last, I&rsquo;ll fit <strong>one final model</strong> that combines findings from the exploratory analysis and insight from models&rsquo; selection and use it to <strong>run a revenue optimisation</strong>.</p>
+
+<h2 id="modelling-strategy">Modelling strategy</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(skimr)
+library(h2o)
+library(DALEX)
+library(knitr)
+library(tictoc)
+</code></pre>
+
+<p>In order to stick to a reasonable project running time, I&rsquo;ve opted for <strong>h2o</strong> as my modelling platform as it offers a number of advantages:</p>
+
+<ul>
+<li><p>it very easy to use and you can <strong>estimate several Machine Learning models</strong> in no time</p></li>
+
+<li><p>it does <strong>not require to pre-treat character/factor variables by “binarising” them</strong> (this is done &ldquo;internally&rdquo;), which further reduces data formatting time</p></li>
+
+<li><p>it has a functionality that <strong>takes care of the class imbalance</strong> highlighted in the Data Exploration phase - I simply set <code>balance_classes</code> = TRUE in the model specification, more on this later on</p></li>
+
+<li><p><strong>cross-validation</strong> can be enabled without the need for a separate <code>validation frame</code> to be &ldquo;carved out&rdquo; of the training set</p></li>
+
+<li><p><strong>hyper-parameters fine tuning</strong> (a.k.a. grid search) can be implemented alogside a number of strategies that ensure running time is capped without compromising on performance</p></li>
+</ul>
+
+<h3 id="creating-the-training-and-validation-sets">Creating the training and validation sets</h3>
+
+<p>Before I begin, I load the cleansed data saved at the end of the exploratory analysis</p>
+
+<pre><code class="language-r"># Loading clensed data
+data_final &lt;- readRDS(file = &quot;../01_data/data_final.rds&quot;)
+</code></pre>
+
+<p>I&rsquo;m starting by creating a randomised training and validation set with <code>rsample</code></p>
+
+<pre><code class="language-r">set.seed(seed = 1975) 
+
+train_test_split &lt;-
+  rsample::initial_split(
+    data = data_final,     
+    prop = 0.80   
+  ) 
+
+train_test_split
+
+## &lt;32951/8237/41188&gt;
+</code></pre>
+
+<p>Of the 41,188 total customers, 32,951 have been assigned to the training set and 8,237 to the test set. I save them as <code>train_tbl</code> and <code>test_tbl</code>.</p>
+
+<pre><code class="language-r">train_tbl &lt;- train_test_split %&gt;% rsample::training() 
+test_tbl  &lt;- train_test_split %&gt;% rsample::testing() 
+</code></pre>
+
+<h3 id="building-models-with-h2o">Building models with h2o</h3>
+
+<p>The next step is to start a <strong>h2o cluster</strong>. I specify the size of the memory cluster to “16G” to help speed things up a bit and turn off the progress bar.</p>
+
+<pre><code class="language-r"># initialize h2o session and switch off progress bar
+h2o.no_progress() 
+h2o.init(max_mem_size = &quot;16G&quot;)
+
+## 
+## H2O is not running yet, starting it now...
+## 
+## Note:  In case of errors look at the following log files:
+##     C:\Users\LENOVO\AppData\Local\Temp\RtmpoJnEwn/h2o_LENOVO_started_from_r.out
+##     C:\Users\LENOVO\AppData\Local\Temp\RtmpoJnEwn/h2o_LENOVO_started_from_r.err
+## 
+## 
+## Starting H2O JVM and connecting: ... Connection successful!
+## 
+## R is connected to the H2O cluster: 
+##     H2O cluster uptime:         7 seconds 431 milliseconds 
+##     H2O cluster timezone:       Europe/Berlin 
+##     H2O data parsing timezone:  UTC 
+##     H2O cluster version:        3.28.0.4 
+##     H2O cluster version age:    2 months and 4 days  
+##     H2O cluster name:           H2O_started_from_R_LENOVO_frm928 
+##     H2O cluster total nodes:    1 
+##     H2O cluster total memory:   14.22 GB 
+##     H2O cluster total cores:    4 
+##     H2O cluster allowed cores:  4 
+##     H2O cluster healthy:        TRUE 
+##     H2O Connection ip:          localhost 
+##     H2O Connection port:        54321 
+##     H2O Connection proxy:       NA 
+##     H2O Internal Security:      FALSE 
+##     H2O API Extensions:         Amazon S3, Algos, AutoML, Core V3, TargetEncoder, Core V4 
+##     R Version:                  R version 3.6.3 (2020-02-29)
+</code></pre>
+
+<p>Next, I sort out response and predictor variables sets. For a classification to be performed, I need to <strong>ensure that the response variable is a factor</strong> (otherwise h2o will carry out a regression). This was sorted out during the data clensing and formatting phase.</p>
+
+<pre><code class="language-r"># response variable
+y &lt;- &quot;subscribed&quot;
+
+# predictors set: remove response variable
+x &lt;- setdiff(names(train_tbl %&gt;% as.h2o()), y)
+</code></pre>
+
+<h3 id="fitting-the-models">Fitting the models</h3>
+
+<p>Use the random grid to search for best hyper-parameters</p>
+
+<p>It&rsquo;s now time to fit some models: for this project I&rsquo;m estimating a <strong>Generalised Linear Model</strong> (a.k.a. Elastic Net), a <strong>Random Forest</strong> (which h2o refers to at <em>Distributed Random Forest</em>) and a <strong>Gradient Boosting Machine</strong> (or GBM).</p>
+
+<p>Before tackling the actual model formulations, I need to set up a random grid for the <code>tree-based</code> models (DRF and GBM) to search for best hyper-parameters. To do so, I create a number of arguments for the <code>h2o.grid()</code> function.</p>
+
+<p>First, I define the <strong>search parameters</strong> to be passed to the <code>hyper_params</code>argument:</p>
+
+<ul>
+<li><p><code>sample_rate</code> is used to set the row sampling rate for each tree</p></li>
+
+<li><p><code>col_sample_rate_per_tree</code> defines the column sampling for each tree</p></li>
+
+<li><p><code>max_depth</code> specifies the maximum tree depth</p></li>
+
+<li><p><code>min_rows</code> to fix the minimum number of observations per leaf</p></li>
+
+<li><p><code>mtries</code>(DRF only) indicates the columns to randomly select on each node of the tree</p></li>
+
+<li><p><code>learn_rate</code>(GBM only) specifies the rate at which the model learns when building a model</p>
+
+<pre><code class="language-r"># DRF hyperparameters
+hyper_params_drf &lt;- 
+list(
+ mtries                   = seq(2, 5, by = 1), 
+ sample_rate              = c(0.65, 0.8, 0.95),
+ col_sample_rate_per_tree = c(0.5, 0.9, 1.0),
+ max_depth                = seq(1, 30, by = 3),
+ min_rows                 = c(1, 2, 5, 10)
+)
+
+# GBM hyperparameters
+hyper_params_gbm &lt;- 
+list(
+learn_rate               = c(0.01, 0.1),
+sample_rate              = c(0.65, 0.8, 0.95),
+col_sample_rate_per_tree = c(0.5, 0.9, 1.0),
+max_depth                = seq(1, 30, by = 3),
+min_rows                 = c(1, 2, 5, 10)
+)
+</code></pre></li>
+</ul>
+
+<p>To help manage the models&rsquo; estimation running time, I’m also defining some <em>control parameters</em> to be passed to the <code>search_criteria</code> argument:</p>
+
+<ul>
+<li><p>The <code>strategy</code> argument is set to <strong>RandomDiscrete</strong> for the search to randomly select a combination from the grid search parameters</p></li>
+
+<li><p>Setting <code>stopping_metric</code> to AUC as the error metric for early stopping - the models will stop building new trees when the metric ceases to improve</p></li>
+
+<li><p>With <code>stopping_rounds</code> I’m specifying the number of training rounds before early stopping is considered</p></li>
+
+<li><p>I’m using <code>stopping_tolerance</code> to set minimal improvement needed for the training process to continue</p></li>
+
+<li><p><code>max_runtime_secs</code> restricts the search time to <strong>one hour per model</strong></p>
+
+<pre><code class="language-r">search_criteria_all &lt;- 
+list(
+  strategy           = &quot;RandomDiscrete&quot;,
+  stopping_metric    = &quot;AUC&quot;,    
+  stopping_rounds    = 10,
+  stopping_tolerance = 0.0001,
+  max_runtime_secs   = 60 * 60
+)
+</code></pre></li>
+</ul>
+
+<p>At last, I can set up the models&rsquo; formulations. Note that all models have 2 parameters in common:</p>
+
+<ul>
+<li><p>the <code>nfolds</code> parameter, which enables <strong>cross-validation</strong> to be carried out without the need for a validation_frame - if set to 5 for instance, it will perform a 5-fold cross-validation</p></li>
+
+<li><p>the <code>balance_classes</code> parameter is set to <em>TRUE</em> to account for the imbalance in the target variable highlighted during the exploratory analysis. When enabled, h2o will either under-sample the majority class or oversample the minority class.</p>
+
+<pre><code class="language-r"># elastic net model 
+glm_model &lt;- 
+h2o.glm(
+x               = x,
+y               = y, 
+training_frame  = train_tbl %&gt;% as.h2o(),
+balance_classes = TRUE,
+nfolds          = 10,
+family          = &quot;binomial&quot;,
+seed            = 1975
+)
+
+# random forest model
+drf_model_grid &lt;- 
+h2o.grid(
+algorithm       = &quot;randomForest&quot;, 
+x               = x, 
+y               = y,
+training_frame  = train_tbl %&gt;% as.h2o(),
+balance_classes = TRUE, 
+nfolds          = 10,
+ntrees          = 1000,
+grid_id         = &quot;drf_grid&quot;,
+hyper_params    = hyper_params_drf,
+search_criteria = search_criteria_all,
+seed            = 1975
+)
+
+# gradient boosting machine model
+gbm_model_grid &lt;- 
+h2o.grid(
+algorithm       = &quot;gbm&quot;,
+x               = x, 
+y               = y,
+training_frame  = train_tbl %&gt;% as.h2o(),
+balance_classes = TRUE, 
+nfolds          = 10,
+ntrees          = 1000,
+grid_id         = &quot;gbm_grid&quot;,
+hyper_params    = hyper_params_gbm,
+search_criteria = search_criteria_all,
+seed            = 1975
+)
+</code></pre></li>
+</ul>
+
+<p>I sort the tree-based model by <em>AUC</em> score and retrieve the lead models from the grid</p>
+
+<pre><code class="language-r"># Get the DRM grid results, sorted by AUC 
+drf_grid_perf &lt;- 
+  h2o.getGrid(grid_id     = &quot;drf_grid&quot;,
+               sort_by    = &quot;AUC&quot;,
+               decreasing = TRUE)
+
+# Fetch the top DRF model, chosen by validation AUC
+drf_model &lt;- 
+  h2o.getModel(drf_grid_perf@model_ids[[1]])
+
+# Get the GBM grid results, sorted by AUC 
+gbm_grid_perf &lt;- 
+  h2o.getGrid(grid_id     = &quot;gbm_grid&quot;,
+               sort_by    = &quot;AUC&quot;,
+               decreasing = TRUE)
+
+# Fetch the top GBM model, chosen by validation AUC
+gbm_model &lt;- 
+  h2o.getModel(gbm_grid_perf@model_ids[[1]])
+</code></pre>
+
+<p><strong>ALWAYS REMEMBER</strong> that <strong>h2o</strong> requires a live connection to their servers to operate properly. For that reason it is important that you <strong>save away all models you estimate in your current live connection</strong> so that they can be accessed at any time.</p>
+
+<pre><code class="language-r"># set path to get around model path being different from project path
+path = &quot;../03_models/&quot;
+
+# Save GLM model
+h2o.saveModel(glm_model, path)
+
+# Save RF model
+h2o.saveModel(drf_model, path)
+
+# Save GBM model
+h2o.saveModel(gbm_model, path)
+</code></pre>
+
+<p>This is especially important in the event of momentary loss of web connection, which I figured out to my expense. In case connection is lost and you have to restart the <strong>h2o cluster</strong>, models that are still in the RStudio environment but estimated in the previous session are NOT recognised as part of the current cluster and need to be re-estimated. This could be a little annoying, especially when you fit complex models that require extensive running time to converge.</p>
+
+<h2 id="performance-assessment">Performance assessment</h2>
+
+<p>There are many libraries (like <em>IML</em>, <em>PDP</em>, <em>VIP</em>, and <em>DALEX</em> to name but the more popular) that help with <strong>Machine Learning Interpretability</strong>, <strong>feature explanation</strong> and <strong>general performance assessment</strong> and they all have gained in popularity in recent years.</p>
+
+<p>There are many methodologies to interpret machine learning results (i.e. <em>local interpretable model-agnostic explanations</em>, <em>partial dependence plots</em>, <em>permutation-based variable importance</em>) but in this project I examine the <code>DALEX</code> package, which focuses on <strong>Model-Agnostic Interpretability</strong> and provides a convenient way to comparing performance across multiple models with different structures.</p>
+
+<p>One of the key <strong>advantages</strong> of the model-agnostic approach is that you can compare contributions of traditional &ldquo;glass-box&rdquo; models as well as black-box models on the same scale. However, being permutation-based, one of its main <strong>drawbacks</strong> is that it do not deal well with large number of predictor variables and larger datasets.</p>
+
+<h3 id="the-dalex-procedure">The DALEX procedure</h3>
+
+<p>Currently <code>DALEX</code> does not support some of the more recent ML packages like <strong>h2o</strong> or <strong>xgboost</strong>. To make it compatible with such objects, I&rsquo;ve followed the procedure illustrated by <strong>Bradley Boehmke</strong> in his brilliant study <a href="https://uc-r.github.io/dalex"><strong>Model Interpretability with DALEX</strong></a>, from which I&rsquo;ve drawn lots of inspiration and borrowed some code.</p>
+
+<p>First, the dataset needs to be in a specific format:</p>
+
+<pre><code class="language-r"># convert feature variables to a data frame - tibble is also a data frame 
+x_valid &lt;- test_tbl %&gt;% select(-subscribed) %&gt;% as_tibble()
+
+# change response variable to a numeric binary vector
+y_valid &lt;- as.vector(as.numeric(as.character(test_tbl$subscribed)))
+</code></pre>
+
+<p>Then, I create a predict function returning a vector of numeric values, which extracts the probability of the response for binary classification problems.</p>
+
+<pre><code class="language-r"># create custom predict function
+pred &lt;- function(model, newdata)  {
+  results &lt;- as.data.frame(h2o.predict(model, newdata %&gt;% as.h2o()))
+  return(results[[3L]])
+  }
+</code></pre>
+
+<p>Now I can convert my machine learning models into DALEK &ldquo;explainers&rdquo; with the <code>explain()</code> function, which works as a &ldquo;container&rdquo; for the parameters.</p>
+
+<pre><code class="language-r"># generalised linear model explainer
+explainer_glm &lt;- explain(
+  model            = glm_model, 
+  type             = &quot;classification&quot;,
+  data             = x_valid,
+  y                = y_valid,
+  predict_function = pred,
+  label            = &quot;h2o_glm&quot;
+  )
+
+# random forest model explainer
+explainer_drf &lt;- explain(
+  model            = drf_model, 
+  type             = &quot;classification&quot;,
+  data             = x_valid,
+  y                = y_valid,
+  predict_function = pred,
+  label            = &quot;h2o_drf&quot;
+  )
+
+# gradient boosting machine explainer
+explainer_gbm &lt;- explain(
+  model            = gbm_model, 
+  type             = &quot;classification&quot;,
+  data             = x_valid,
+  y                = y_valid,
+  predict_function = pred,
+  label            = &quot;h2o_gbm&quot;
+  )
+</code></pre>
+
+<p>At last, I&rsquo;m ready to pass the <strong>explainer objects</strong> to several DALEX functions that will help assess and compare the performance of the different models.</p>
+
+<h2 id="assessing-the-models">Assessing the models</h2>
+
+<p>Given that performance measures may reflect a different aspect of the predictive performance of a model, it is important to evaluate and compare several metrics when appraising a model and DALEX does just that!</p>
+
+<p>To evaluate and compare my models&rsquo; performance, I&rsquo;ve drawn inspiration from the framework used by Przemyslaw Biecek and Tomasz Burzykowski in their book, <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, which is structured around key questions:</p>
+
+<ul>
+<li><p>1 - Are the models well fitted?</p></li>
+
+<li><p>2 - How do the models compare with one another?</p></li>
+
+<li><p>3 - Which variables are important in the models?</p></li>
+
+<li><p>4 - How does a single variable affect the average prediction?</p></li>
+</ul>
+
+<h3 id="1-are-the-models-well-fitted">1 - Are the models well fitted?</h3>
+
+<h4 id="general-model-fit">General Model Fit</h4>
+
+<p>To get an initial feel for how well my models fit the data, I can use the self-explanatory <code>model_performance()</code> function, which calculates selected model performance measures.</p>
+
+<pre><code class="language-r">model_performance(explainer_glm)
+
+## Measures for:  classification
+## recall   : 0 
+## precision: NaN 
+## f1       : NaN 
+## accuracy : 0.8914653 
+## auc      : 0.7500738
+## 
+## Residuals:
+##          0%         10%         20%         30%         40%         50% 
+## -0.48867133 -0.16735197 -0.09713539 -0.07193152 -0.06273300 -0.05418778 
+##         60%         70%         80%         90%        100% 
+## -0.04661088 -0.03971492 -0.03265955  0.63246516  0.98072521
+</code></pre>
+
+<pre><code class="language-r">model_performance(explainer_drf)
+
+## Measures for:  classification
+## recall   : 0.1700224 
+## precision: 0.76 
+## f1       : 0.2778793 
+## accuracy : 0.9040913 
+## auc      : 0.7993824
+## 
+## Residuals:
+##          0%         10%         20%         30%         40%         50% 
+## -0.87841486 -0.13473277 -0.07933048 -0.06305297 -0.05556507 -0.04869549 
+##         60%         70%         80%         90%        100% 
+## -0.04172427 -0.03453394 -0.02891645  0.33089059  0.98046626
+</code></pre>
+
+<pre><code class="language-r">model_performance(explainer_gbm)
+
+## Measures for:  classification
+## recall   : 0.2192394 
+## precision: 0.7340824 
+## f1       : 0.33764 
+## accuracy : 0.9066408 
+## auc      : 0.7988382
+## 
+## Residuals:
+##          0%         10%         20%         30%         40%         50% 
+## -0.83600975 -0.14609749 -0.08115376 -0.06542395 -0.05572322 -0.04789869 
+##         60%         70%         80%         90%        100% 
+## -0.04068165 -0.03371074 -0.02750033  0.29004942  0.98274727
+</code></pre>
+
+<p>Based on the metrics available for all models ( <strong>accuracy</strong> and <strong>AUC</strong>), I can see that <strong>elastic net</strong> and <strong>gradient boosting</strong> are performing roughly in par with one another, with <strong>random forest</strong> not far behind. AUC ranges between .78-.80 whereas accuracy has a slightly narrower range of .89-.90</p>
+
+<h4 id="residual-diagnostics">Residual diagnostics</h4>
+
+<p>As shown in the previous paragraph, <code>model_performance()</code> also produces residual quantiles that can be plotted to compare absolute residual values across models.</p>
+
+<pre><code class="language-r"># compute and assign residuals to an object
+resids_glm &lt;- model_performance(explainer_glm)
+resids_drf &lt;- model_performance(explainer_drf)
+resids_gbm &lt;- model_performance(explainer_gbm)
+
+# compare residuals plots
+p1 &lt;- plot(resids_glm, resids_drf, resids_gbm) +
+        theme_minimal() +
+        theme(legend.position = 'bottom',
+              plot.title = element_text(hjust = 0.5)) + 
+        labs(y = '')
+p2 &lt;- plot(resids_glm, resids_drf, resids_gbm, geom = &quot;boxplot&quot;) +
+        theme_minimal() +
+        theme(legend.position = 'bottom',
+              plot.title = element_text(hjust = 0.5)) 
+
+gridExtra::grid.arrange(p2, p1, nrow = 1)
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-16-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>The DRF and GBM models appear to perform on a par with one another, given the median absolute residuals. Looking at the residuals distribution on the right-hand side, you can see that the median residuals are the lowest for these two models, with the GLM seeing a higher number of tail residuals. This is also mirrored by the boxplots on the left-hand side, where the tree-based models both achieve the lowest median absolute residual value.</p>
+
+<h3 id="2-how-do-the-models-compare-with-one-another">2 - How do the models compare with one another?</h3>
+
+<h4 id="roc-and-auc">ROC and AUC</h4>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic"><strong>Receiver Operating Characteristic (ROC)</strong></a> curve is a graphical method that allows to visualise a classification model performance against a random guess, which is represented by the striped line on the graph. The curve plots the true positive rate (TPR) on the y-axis against the false positive rate (FPR) on the x-axis.</p>
+
+<pre><code class="language-r">eva_glm &lt;- DALEX::model_performance(explainer_glm)
+eva_dfr &lt;- DALEX::model_performance(explainer_drf)
+eva_gbm &lt;- DALEX::model_performance(explainer_gbm)
+
+plot(eva_glm, eva_dfr, eva_gbm, geom = &quot;roc&quot;) +
+  ggtitle(&quot;ROC Curves - All Models&quot;,  
+          &quot;AUC_glm = 0.750  AUC_drf = 0.799  AUC_gbm = 0.798&quot;) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-17-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>The insight from a ROC curve is two-fold:</p>
+
+<ul>
+<li><p><strong>Direct read</strong>: All models are performing much better than a random guess</p></li>
+
+<li><p><strong>Comparing read</strong>: the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve"><strong>AUC (Area Under the Curve)</strong></a> summarises the ROC curve and can be used to directly compare models performance - the perfect classifier would have AUC = 1.</p></li>
+</ul>
+
+<p>All models performs much better that random guessing and achieves a AUC of .75-.80, with the DRF achieving the highest score of 0.799.</p>
+
+<h3 id="3-which-variables-are-important-in-the-models">3 - Which variables are important in the models?</h3>
+
+<h4 id="variable-importance-plots">Variable importance plots</h4>
+
+<p>Each ML algorithm has its own way to assess the importance of each variable: linear models for instance refer to their coefficients, whereas tree-based models look at impurity, which makes it difficult to compare variable importance across models.</p>
+
+<p>DALEX calculates variable importance measures via permutation, which is model agnostics, allowing for direct comparison between models of different structure. However, with variable importance scores based on permutations, we should remember that calculations slow down when the number of features increases.</p>
+
+<p>Once again, I&rsquo;m passing the &ldquo;explainer&rdquo; for each single model to the <code>feature_importance()</code> function and setting <code>n_sample</code> to 8000 to use practically all available observations. Although not exorbitant, the total execution time was <strong>nearly 30 minute</strong> but this is based on a relatively small dataset. But don&rsquo;t forget that computation speed can be increased by reducing <code>n_sample</code>, which is especially important for larger datasets.</p>
+
+<pre><code class="language-r"># measure execution time
+tictoc::tic()
+
+# compute permutation-based variable importance
+vip_glm &lt;- feature_importance(explainer_glm, n_sample = 8000,
+                               loss_function = loss_root_mean_square) 
+
+vip_drf &lt;- feature_importance(explainer_drf, n_sample = 8000, 
+                               loss_function = loss_root_mean_square)
+
+vip_gbm &lt;- feature_importance(explainer_gbm, n_sample = 8000, 
+                               loss_function = loss_root_mean_square)
+
+# show total execution time
+tictoc::toc()
+
+## 1663.78 sec elapsed
+</code></pre>
+
+<p>Now I only have to pass the <strong>vip</strong> objects to a plotting function: as suggested by the auto-generated x-axis label ( <strong>Drop-out loss</strong>), the main intuition behind how variable importance is calculated lies in how much the model fit would decrease if the contribution of a selected explanatory variable was removed. The larger the segment, the larger the loss when that variable is dropped from the model.</p>
+
+<pre><code class="language-r"># plotting top 10 feature only for clarity of reading
+plot(vip_glm, vip_drf, vip_gbm, max_vars = 10) +
+  ggtitle(&quot;Permutation variable importance&quot;, 
+          &quot;Average variable importance based on 8,000 permutations&quot;) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-19-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>I like this plot as it brings together a wealth of information!</p>
+
+<p>First of all you can notice that, although with slightly different relative weights, the top 5 features are common to each models, with <code>nr_employed</code> ( <strong>employed in the economy</strong>) being the single most important predictor in all of them. This consistency is reassuring as it tells us that all models are picking up the same structure and interactions in the data, and gives us assurance that these features have strong predictive power.</p>
+
+<p>You can also notice the <strong>distinct starting point</strong> for the x-axis left edge, which reflects the difference in the RMSE loss between the three models: in this case the <strong>elastic net</strong> model has the highest RMSE, suggesting the higher number of tail residuals seen earlier in the residual diagnostics is probably penalising the RMSE score.</p>
+
+<h3 id="4-how-does-a-single-variable-affect-the-average-prediction">4 - How does a single variable affect the average prediction?</h3>
+
+<h4 id="partial-dependence-profiles">Partial Dependence profiles</h4>
+
+<p>After we have identified the relative predictive power of each variable, we may want to investigate how their relationship with the predicted response differ across all three models. <strong>Partial Dependence (PD) plots</strong>, sometimes also referred to as <em>PD profiles</em>, offer a great way to inspect how each model is responding to a particular predictor.</p>
+
+<p>We can start with having a look at the single most important feature, <code>nr_employed</code>:</p>
+
+<pre><code class="language-r"># compute PDP for a given variable
+pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;nr_employed&quot;, type = &quot;partial&quot;)
+pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;nr_employed&quot;, type = &quot;partial&quot;)
+pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;nr_employed&quot;, type = &quot;partial&quot;)
+
+plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
+  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-20-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Although with different average prediction weights, all three models found that bank customers are more likely to sigh up to a term deposit when the level of <strong>employed in the economy</strong> is up to 5.099m (<code>nInf_5099.1</code>). Both <strong>elastic net</strong> and <strong>random forest</strong> have found the exact same hierarchy of predictive power among the 3 different levels of <code>nr_employed</code> (less pronounced for the <strong>random forest</strong>) that we observed in the <code>correlationfunnel</code> analysis, with <strong>GBM</strong> being the one slightly out of kilter.</p>
+
+<p>Let&rsquo;s now take a look at <code>age</code>, a predictor that, if you recall from the EDA, was NOT expected to have an impact on the target variable:</p>
+
+<pre><code class="language-r"># compute PDP for a given variable
+pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;age&quot;, type = &quot;partial&quot;)
+pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;age&quot;, type = &quot;partial&quot;)
+pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;age&quot;, type = &quot;partial&quot;)
+
+plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
+  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-21-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>One thing we notice is that the range of variation in the average prediction (x-axis) is relatively shallow across the age spectrum (y-axis), confirming the finding from the exploratory analysis that this variable would have a low predictive power. Also, both <strong>GBM</strong> and <strong>random forest</strong> are using <code>age</code> in a non-linear way, whereas the <strong>elastic net</strong> model is unable to capture this non-linear dynamic.</p>
+
+<p>Partial Dependence plots could also work as a diagnostic tool: looking at <code>poutcome</code> (outcome of the <code>previous</code> marketing campaign) reveals that <strong>GBM</strong> and <strong>random forest</strong> correctly picked up on a higher probability of signing up when the outcome of a previous campaign was success (<code>scs</code>).</p>
+
+<pre><code class="language-r"># compute PDP for a given variable
+pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;poutcome&quot;, type = &quot;partial&quot;)
+pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;poutcome&quot;, type = &quot;partial&quot;)
+pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;poutcome&quot;, type = &quot;partial&quot;)
+
+plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
+  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-22-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>However, the <strong>elastic net</strong> model fails to do the same, which could represents a serious flaw as success in a previous campaign had a very strong positive correlation with the target variable.</p>
+
+<p>I&rsquo;m going to finish with the <code>month</code> feature as it offers a great example of one of those cases where you may want to override the model&rsquo;s outcome with industry knowledge and some common sense. Specifically, the <strong>GBM</strong> model seems to suggest that <strong>March</strong>,  <strong>October</strong> and <strong>December</strong> are periods associated with much better odds of success.</p>
+
+<pre><code class="language-r"># compute PDP for a given variable
+pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;month&quot;, type = &quot;partial&quot;)
+pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;month&quot;, type = &quot;partial&quot;)
+pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;month&quot;, type = &quot;partial&quot;)
+
+plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
+  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-23-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Based on my previous analysis experience of similar financial products, I would not advise a banking organisation to ramp up their direct marketing activity around the weeks in the run to Christmas as this is a period of the year where the consumers&rsquo; focus shifts away from this type of purchases.</p>
+
+<h3 id="final-model">Final model</h3>
+
+<p>All in all <strong>random forest</strong> is my final model of choice: it appears the more balanced of the three and does not display some of the &ldquo;oddities&rdquo; seen with variables like <code>month</code> and <code>poutcome</code>.</p>
+
+<p>I can now further refine my model and reduce its complexity by combining findings from the Exploratory analysis, insight from models&rsquo; assessment and a number of industry-specific/common sense considerations.</p>
+
+<p>In particular, my <strong>final model</strong>:</p>
+
+<ul>
+<li><p>Excludes a number of features (<code>age</code>, <code>housing</code>, <code>loan</code>, <code>campaign</code>, <code>cons_price_idx</code>) that have low predictive power</p></li>
+
+<li><p>Removes <code>previous</code>, which shows little difference between its 2 levels in the PD plot - it&rsquo;s also moderately correlated with <code>pdays</code>, suggesting that they may capturing the same behaviour</p></li>
+
+<li><p>Also drops <code>emp_var_rate</code> because of its strong correlation with <code>nr_employed</code> and also because conceptually they are controlling for a very similar economic behaviour</p></li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r"># response variable remains unaltered
+y &lt;- &quot;subscribed&quot;
+
+# predictors set: remove response variable and 7 predictors
+x_final &lt;- setdiff(names(train_tbl %&gt;% 
+                           select(-c(age, housing, loan, campaign, previous,
+                                     cons_price_idx, emp_var_rate)) %&gt;% 
+                           as.h2o()), y)
+</code></pre>
+
+<p>For the final model, I&rsquo;m using the same specification as to the original random forest</p>
+
+<pre><code class="language-r"># random forest model
+drf_final &lt;- 
+  h2o.grid(
+     algorithm       = &quot;randomForest&quot;, 
+     x               = x_final, 
+     y               = y,
+     training_frame  = train_tbl %&gt;% as.h2o(),
+     balance_classes = TRUE, 
+     nfolds          = 10,
+     ntrees          = 1000,
+     grid_id         = &quot;drf_grid_final&quot;,
+     hyper_params    = hyper_params_drf,
+     search_criteria = search_criteria_all,
+     seed            = 1975
+   )
+</code></pre>
+
+<p>Once again, we sort the model by AUC score and retrieve the lead model</p>
+
+<pre><code class="language-r"># Get the grid results, sorted by AUC 
+drf_grid_perf_final &lt;- 
+  h2o.getGrid(grid_id = &quot;drf_grid_final&quot;,
+               sort_by = &quot;AUC&quot;,
+               decreasing = TRUE)
+
+# Fetch the top DRF model, chosen by validation AUC
+drf_final &lt;- 
+  h2o.getModel(drf_grid_perf_final@model_ids[[1]])
+</code></pre>
+
+<p>Always remember to save your models!</p>
+
+<pre><code class="language-r"># set path to get around model path being different from project path
+path = &quot;../03_models/&quot;
+
+# Save Final RF model
+h2o.saveModel(drf_final, path)
+</code></pre>
+
+<h4 id="final-model-evaluation">Final model evaluation</h4>
+
+<p>For brevity, I am visualising the variable importance plot with the <code>vip()</code> function from the namesake package, which returns the ranked contribution of each variable.</p>
+
+<pre><code class="language-r">vip::vip(drf_final, num_features = 12) +
+  ggtitle(&quot;Variable Importance&quot;, &quot;&quot;) + 
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-28-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Removing <code>emp_var_rate</code> has allowed <code>education</code> to come into the top 10 features. Understandably, the variables hierarchy and relative predictive power has adjusted and changed slightly but it&rsquo;s reassuring to see that the other 9 variables were in the previous model&rsquo;s top 10.</p>
+
+<p>Lastly, I&rsquo;m comparing the model’s performance with the original <strong>random forest</strong> model.</p>
+
+<pre><code class="language-r">drf_final %&gt;% h2o.performance(newdata = test_tbl %&gt;% as.h2o()) %&gt;% h2o.auc()
+
+## [1] 0.7926509
+</code></pre>
+
+<pre><code class="language-r">drf_model %&gt;% h2o.performance(newdata = test_tbl %&gt;% as.h2o()) %&gt;% h2o.auc()
+
+## [1] 0.7993973
+</code></pre>
+
+<p>The <strong>AUC</strong> has only changed by a fraction of a percent, telling me that the model has maintained its predictive power.</p>
+
+<h3 id="a-important-observation-on-partial-dependence-plots">A important observation on Partial Dependence Plots</h3>
+
+<p>Being already familiar with odds ratios in the context of a logistic regression, I set out to understand whether the same intuition could be extended to black-box classification models. During my research one very interesting post on <a href="https://stats.stackexchange.com/"><strong>Cross Validated</strong></a> stood out for drawing a parallel between <a href="https://stats.stackexchange.com/questions/93202/odds-ratio-from-decision-tree-and-random-forest"><strong>odds ratio from decision tree and random forest</strong></a>.</p>
+
+<p>Basically, this tells us that Partial Dependence plots can be used in a similar way to how odds ratios to define what characteristics of a customer profile influence his/her propensity to performing a certain type of behaviour.</p>
+
+<p>For example, features like <code>job</code>, <code>month</code> and <code>contact</code> would provide context around <strong>who</strong>, <strong>when</strong> and <strong>how</strong> to target:</p>
+
+<ul>
+<li><p>Looking at <code>job</code> will tell us that a customer in an <em>admin</em> role is roughly 25% more likely to subscribe that a <em>self employed</em>.</p></li>
+
+<li><p>Getting in touch with a prospective customer in the <code>month</code> of <em>October</em> will more then double the chance of a positive outcome than in <em>May</em>.</p></li>
+
+<li><p><code>contacting</code> your customer on their <em>mobile</em> increases the chances of subscription by nearly a quarter compared to a <em>telephone</em> call.</p></li>
+</ul>
+
+<p><strong>NOTE THAT Partial Dependence Plots for all final model&rsquo;s predictors can be found in the Appendix</strong></p>
+
+<p>Armed with such insight, one can help <strong>shaping overall marketing and communication plans</strong> to focus on customers more likely to subscribe to a term deposit.</p>
+
+<p>However, these are based on model-level explainers, which reflect an overall, aggregated view. If you&rsquo;re interested to understand how a model yields a prediction for a single observation (i.e. what factors influence the likelihood to engage <strong>at single customer level</strong>), you can resort to the <a href="https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/"><strong>Local Interpretable Model-agnostic Explanations (LIME)</strong></a> method that exploits the concept of a &ldquo;local model&rdquo;. I will be exploring the LIME methodology in a future post.</p>
+
+<h3 id="summary-of-model-estimation-and-assessment">Summary of model estimation and assessment</h3>
+
+<p>For the analysis part of this project I opted for <strong>h2o</strong> as my modelling platform. h2o is not only very easy to use but also has a number of built-in functionalities that help speeding up data preparation: it takes care of <strong>class imbalance</strong> with no need for pre-modelling resampling, automatically <strong>“binarises“ character/factor</strong> variables, and implements <strong>cross-validation</strong> without the need for a separate <code>validation frame</code> to be &ldquo;carved out&rdquo; of the training set.</p>
+
+<p>After setting up a random grid to <strong>search for best hyper-parameters</strong>, I&rsquo;ve estimated a number of models ( a <em>logistic regression</em>, a <em>random forest</em> and a <em>gradient boosting machines</em>) and used the <strong>DALEX</strong> library to <strong>assess and compare their performance</strong> through an array of metrics. This library employs a <strong>model-agnostic approach</strong> that enables to <strong>compare traditional &ldquo;glass-box&rdquo; models and &ldquo;black-box&rdquo; models</strong> on the same scale.</p>
+
+<p>My final model of choice is the <strong>random forest</strong>, which I further refined by combining findings from the exploratory analysis, insight gathered from the models&rsquo; evaluation and a number of industry-specific/common sense considerations. This ensured a reduced model complexity without compromising on predictive power.</p>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>In the past decade <strong>machine learning</strong> has gained prominence across many analytics fields and has become a stable presence in the data scientist&rsquo;s toolkit. Along with it, the field of <strong>Machine Learning Interpretability</strong> has gathered momentum and witnessed the flourishing of many libraries (like <em>IML</em>, <em>PDP</em>, <em>VIP</em>, and <em>DALEX</em> to name but the more popular) that help with <strong>feature explanation</strong> and <strong>general performance assessment</strong>.</p>
+
+<p>I this project I&rsquo;ve explored in particular the <strong>DALEX</strong> package, which focuses on <strong>Model-Agnostic Interpretability</strong> and provides a convenient way of comparing performance across multiple models with different structures.</p>
+
+<p>One of its key <strong>advantages</strong> is the ability to compare contributions of traditional &ldquo;glass-box&rdquo; models as well as black-box models on the same scale. However, being permutation-based, one of its main <strong>drawbacks</strong> is that it does not scale well to large number of predictors and larger datasets.</p>
+
+<p>Depending on the scale of your dataset and number of explanatory variables you want/need to include in your model, you should carefully consider whether to make DALEX your <strong>Machine Learning Interpretability</strong> library of choice.</p>
+
+<h3 id="code-repository">Code Repository</h3>
+
+<p>The full R code and all relevant files can be found on my GitHub profile @ <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"><strong>Propensity Modelling</strong></a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li><p>For the original paper that used the data set see: <a href="http://repositorium.sdum.uminho.pt/bitstream/1822/30994/1/dss-v3.pdf"><strong>A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems</strong></a>, S. Moro, P. Cortez and P. Rita.</p></li>
+
+<li><p>For a technically rigorous but applied take on Machine Learning Interpretability see Bradley Boehmke&rsquo;s <a href="https://uc-r.github.io/dalex"><strong>Model Interpretability with DALEX</strong></a></p></li>
+
+<li><p>For a in-depth look at tools and techniques to examine fully-trained machine-learning models and compare their performance in a model-agnostic framework see: <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, P. Biecek, T. Burzykowski</p></li>
+</ul>
+
+<h2 id="appendix">Appendix</h2>
+
+<h3 id="final-model-pd-profiles">Final Model PD Profiles</h3>
+
+<p>Update DALEX explainer inputs for the final model</p>
+
+<pre><code class="language-r"># convert feature variables to a data frame
+x_final &lt;- test_tbl %&gt;% select(-c(subscribed, age, housing, loan, campaign,
+                                     previous, cons_price_idx, emp_var_rate)) %&gt;% as_tibble()
+
+# change response variable to a numeric binary vector
+y_final &lt;- as.vector(as.numeric(as.character(test_tbl$subscribed)))
+</code></pre>
+
+<p>Create an explainer for the final model</p>
+
+<pre><code class="language-r"># final random forest model explainer
+explainer_final &lt;- explain(
+  model            = drf_final, 
+  type             = &quot;classification&quot;,
+  data             = x_final,
+  y                = y_final,
+  predict_function = pred,
+  label            = &quot;h2o_drf&quot;
+  )
+</code></pre>
+
+<p>Compute PD Plots for all final model&rsquo;s features</p>
+
+<pre><code class="language-r"># compute PDP for a given variable
+model_profile(explainer_final, variable = &quot;nr_employed&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-33-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;euribor3m&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-34-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;month&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-35-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;job&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-36-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;pdays&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-37-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;cons_conf_idx&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-38-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;education&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-39-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;day_of_week&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-40-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;poutcome&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-41-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;contact&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-42-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;marital&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-43-1.png" alt="" width="100%" height="100%"/></p>
+
+<pre><code class="language-r">model_profile(explainer_final, variable = &quot;default&quot;, type = &quot;partial&quot;) %&gt;% 
+  plot() + 
+  theme_minimal() +
+  theme(plot.title    = element_text(hjust = 0.5), 
+        plot.subtitle = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-44-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>One final thing: don’t forget to shut-down the h2o instance when you’re done!</p>
+
+<pre><code class="language-r">h2o.shutdown(prompt = FALSE)
+</code></pre>
+    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+                <p></p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2020\/03\/propensity-modelling-2-of-3\/";  
+this.page.identifier = "\/2020\/03\/propensity-modelling-2-of-3\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+<article class="read-next-card" 
+            style="background-image: url(/img/simon-zhu-TfRHSL2GKDc-unsplash.jpg);" >
+    <header class="read-next-card-header">
+        <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
+        
+        <h3 class="read-next-card-header-title"><a href="/tags/machine-learning/">#Machine Learning</a></h3>
+    </header>
+    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+    </div>
+
+    <div class="read-next-card-content">
+      
+        <ul>
+          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
+        
+          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+        
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
+        
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+        </ul>
+    </div>
+    <footer class="read-next-card-footer">
+      
+        <a href="/tags/machine-learning/">See all related posts →</a>
+    </footer>
+</article>
+
+
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/04/propensity-modelling-3-of-3/">
+      <div class="post-card-image" style="background-image: url(/img/david-sury-X6M3svSX8dc-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/04/propensity-modelling-3-of-3/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Propensity Modelling 
+              #Machine Learning 
+              #Optimisation  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/02/propensity-modelling-1-of-3/">
+      <div class="post-card-image" style="background-image: url(/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/02/propensity-modelling-1-of-3/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Data Wrangling 
+              #Data Exploration 
+              #Propensity Modelling  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="/">
+      
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Propensity%20Modelling%20-%20Using%20h2o%20and%20DALEX%20to%20Estimate%20the%20Likelihood%20of%20Purchasing%20a%20Financial%20Product%20-%20Part%202%20of%203%20-%20Estimate%20Several%20Models%20and%20Compare%20Their%20Performance%20Using%20a%20Model-agnostic%20Methodology&amp;url=%2f2020%2f03%2fpropensity-modelling-2-of-3%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f03%2fpropensity-modelling-2-of-3%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">Diego Usai</a> © 2019 <br>
+      <span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        
+        
+        <a href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener">Github</a>
+        <a href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener">Medium</a>
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-151122416-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>
