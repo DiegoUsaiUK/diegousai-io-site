@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</title>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</title>
       <link>/2020/02/propensity-modelling-1-of-3/</link>
       <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
       
@@ -33,7 +33,7 @@ The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&
     </item>
     
     <item>
-      <title>Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</title>
+      <title>Market Basket Analysis - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</title>
       <link>/2019/03/market-basket-analysis-part-1-of-3/</link>
       <pubDate>Wed, 13 Mar 2019 00:00:00 +0000</pubDate>
       
