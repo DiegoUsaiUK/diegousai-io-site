@@ -73,7 +73,7 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/market-basket-analysis">projects</a>
+              <a href="/categories/multi-post-studies/">projects</a>
             </li>
         
             <li class="" role="menuitem">
@@ -157,6 +157,7 @@ library(tibble)
 
 <pre><code class="language-r">telco %&gt;% 
   skimr::skim()
+
 ## Skim summary statistics
 ##  n obs: 7043 
 ##  n variables: 21 
@@ -225,6 +226,7 @@ train_test_split &lt;-
   ) 
 
 train_test_split
+
 ## &lt;5626/1406/7032&gt;
 </code></pre>
 
@@ -291,6 +293,7 @@ fit(Churn ~ ., data = train_baked)
   bind_cols(test_baked %&gt;% select(Churn))
 
 head(predictions_glm)
+
 ## # A tibble: 6 x 2
 ##   .pred_class Churn
 ##   &lt;fct&gt;       &lt;fct&gt;
@@ -317,7 +320,7 @@ head(predictions_glm)
   geom_text(aes(label = n), colour = &quot;white&quot;, alpha = 1, size = 8)
 </code></pre>
 
-<p><img src="/post/Tidymodels_Classification_Churn_files/figure-html/unnamed-chunk-10-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-06-22-modelling-with-tidymodels-and-parsnip-a-tidy-approach-to-a-classification-problem_files/unnamed-chunk-10-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>The model&rsquo;s <strong>Accuracy</strong> is the fraction of predictions the model got right and can be easily calculated by passing the <code>predictions_glm</code> to the <code>metrics</code> function. However, accuracy is not a very reliable metric as it will provide misleading results if the data set is unbalanced.</p>
 
@@ -333,15 +336,15 @@ head(predictions_glm)
 <table>
 <thead>
 <tr>
-<th>.metric</th>
-<th>.estimate</th>
+<th align="left">.metric</th>
+<th align="left">.estimate</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>accuracy</td>
-<td>0.8058321</td>
+<td align="left">accuracy</td>
+<td align="left">0.8058321</td>
 </tr>
 </tbody>
 </table>
@@ -365,15 +368,15 @@ head(predictions_glm)
 <table>
 <thead>
 <tr>
-<th>precision</th>
-<th>recall</th>
+<th align="left">precision</th>
+<th align="left">recall</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>0.8466368</td>
-<td>0.9024857</td>
+<td align="left">0.8466368</td>
+<td align="left">0.9024857</td>
 </tr>
 </tbody>
 </table>
@@ -389,15 +392,15 @@ head(predictions_glm)
 <table>
 <thead>
 <tr>
-<th>.metric</th>
-<th>.estimate</th>
+<th align="left">.metric</th>
+<th align="left">.estimate</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>f_meas</td>
-<td>0.8736696</td>
+<td align="left">f_meas</td>
+<td align="left">0.8736696</td>
 </tr>
 </tbody>
 </table>
@@ -413,6 +416,7 @@ head(predictions_glm)
 <pre><code class="language-r">cross_val_tbl &lt;- vfold_cv(train_tbl, v = 10)
 
 cross_val_tbl
+
 ## #  10-fold cross-validation 
 ## # A tibble: 10 x 2
 ##    splits             id    
@@ -433,6 +437,7 @@ cross_val_tbl
 
 <pre><code class="language-r">cross_val_tbl$splits %&gt;%
   pluck(1)
+
 ## &lt;5063/563/5626&gt;
 </code></pre>
 
@@ -501,6 +506,7 @@ cross_val_tbl
 )
 
 head(pred_rf)
+
 ## # A tibble: 6 x 3
 ##   id     truth prediction
 ##   &lt;chr&gt;  &lt;fct&gt; &lt;fct&gt;     
@@ -526,30 +532,30 @@ head(pred_rf)
 <table>
 <thead>
 <tr>
-<th>.metric</th>
-<th>.estimate</th>
+<th align="left">.metric</th>
+<th align="left">.estimate</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>accuracy</td>
-<td>0.7979026</td>
+<td align="left">accuracy</td>
+<td align="left">0.7979026</td>
 </tr>
 
 <tr>
-<td>precision</td>
-<td>0.8250436</td>
+<td align="left">precision</td>
+<td align="left">0.8250436</td>
 </tr>
 
 <tr>
-<td>recall</td>
-<td>0.9186301</td>
+<td align="left">recall</td>
+<td align="left">0.9186301</td>
 </tr>
 
 <tr>
-<td>f_meas</td>
-<td>0.8693254</td>
+<td align="left">f_meas</td>
+<td align="left">0.8693254</td>
 </tr>
 </tbody>
 </table>
@@ -591,6 +597,27 @@ head(pred_rf)
     
     
 
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2019\/06\/modelling-with-tidymodels-and-parsnip\/";  
+this.page.identifier = "\/2019\/06\/modelling-with-tidymodels-and-parsnip\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
   </div>
 </main>
 
@@ -614,11 +641,13 @@ head(pred_rf)
         <ul>
           <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
         
+          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
+        
+                      
+        
           <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
         
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
-        
-          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -640,8 +669,8 @@ head(pred_rf)
       <a class="post-card-content-link" href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">
           <header class="post-card-header">
               <span class="post-card-tags">
-              #Principal Component 
               #Bootstrap 
+              #Principal Component 
               #Clustering 
               #Customer Segmentation  </span>
               
@@ -675,7 +704,9 @@ Earlier this year I&rsquo;ve used the popular K-Means clustering algorithm to se
           <header class="post-card-header">
               <span class="post-card-tags">
               #Clustering 
-              #Customer Segmentation  </span>
+              #Customer Segmentation 
+              #Data Exploration 
+              #UMAP  </span>
               
               <h2 class="post-card-title">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</h2>
           </header>

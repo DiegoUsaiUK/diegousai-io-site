@@ -34,7 +34,7 @@
     <meta property="og:description" content="My objective for this piece of work is to carry out a Market Basket Analysis as an end-to-end data science project. I have split the output into three parts, of" />
 
     <meta property="article:published_time" content="2019-03-13T00:00:00Z" />
-    <meta property="article:tag" content="Data Wrangling" /><meta property="article:tag" content="Market Basket Analysis" />
+    <meta property="article:tag" content="Data Wrangling" /><meta property="article:tag" content="Data Exploration" />
 
     <meta property="og:image" content="/img/tina-bosse-WSw-taiyZPk-unsplash.jpg"/>
 
@@ -73,7 +73,7 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/market-basket-analysis">projects</a>
+              <a href="/categories/multi-post-studies/">projects</a>
             </li>
         
             <li class="" role="menuitem">
@@ -117,7 +117,7 @@
     <header class="post-full-header">
         <section class="post-full-meta">
             <time class="post-full-meta-date" datetime="2019-03-13">13 March 2019</time>
-                <span class="date-divider">/</span> <a href="/tags/data-wrangling/">#Data Wrangling</a>&nbsp;<a href="/tags/market-basket-analysis/">#Market Basket Analysis</a>&nbsp;
+                <span class="date-divider">/</span> <a href="/tags/data-wrangling/">#Data Wrangling</a>&nbsp;<a href="/tags/data-exploration/">#Data Exploration</a>&nbsp;
         </section>
         <h1 class="post-full-title">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</h1>
     </header>
@@ -287,6 +287,7 @@ retail &lt;- read_excel(&quot;Online Retail.xlsx&quot;, trim_ws = TRUE)
 
 <pre><code class="language-r"># First glance at the data
 retail %&gt;%  skim()
+
 ## Skim summary statistics
 ##  n obs: 541909 
 ##  n variables: 8 
@@ -322,6 +323,7 @@ retail %&gt;%  skim()
 <pre><code class="language-r">retail %&gt;% 
   filter(grepl(&quot;C&quot;, retail$InvoiceNo)) %&gt;% 
   summarise(Total = n())
+
 ## # A tibble: 1 x 1
 ##   Total
 ##   &lt;int&gt;
@@ -346,6 +348,7 @@ retail %&gt;%  skim()
   summarise(count = n()) %&gt;%
   arrange(desc(count)) %&gt;% 
   ungroup()
+
 ## # A tibble: 139 x 3
 ##    Description            UnitPrice count
 ##    &lt;chr&gt;                      &lt;dbl&gt; &lt;int&gt;
@@ -385,6 +388,7 @@ stc &lt;- c('AMAZONFEE', 'BANK CHARGES', 'C2', 'DCGSSBOY', 'DCGSSGIRL',
   summarise(count = n()) %&gt;%
   arrange(desc(count)) %&gt;% 
   ungroup()
+
 ## # A tibble: 19 x 3
 ##    StockCode    Description                        count
 ##    &lt;chr&gt;        &lt;chr&gt;                              &lt;int&gt;
@@ -453,6 +457,7 @@ descr &lt;- c( &quot;check&quot;, &quot;check?&quot;, &quot;?&quot;, &quot;??&qu
 <p>Last but not least, there are also some 600 NAs in <em>Description</em>.</p>
 
 <pre><code class="language-r">sum(is.na(retail$Description))
+
 ## [1] 584
 </code></pre>
 
@@ -470,6 +475,7 @@ descr &lt;- c( &quot;check&quot;, &quot;check?&quot;, &quot;?&quot;, &quot;??&qu
 
 <pre><code class="language-r">retail$CustomerID %&gt;%  
   skim()
+
 ## 
 ## Skim summary statistics
 ## 
@@ -483,6 +489,7 @@ descr &lt;- c( &quot;check&quot;, &quot;check?&quot;, &quot;?&quot;, &quot;??&qu
 <p>As I will discuss in the <strong>modelling</strong> part, for the analysis I need to arrange data in a <strong>user-item</strong> format, where <em>&ldquo;users&rdquo;</em> can be either customers or orders. Given that there are almost 5 times as many <em>Orders</em> as there are <em>Customers</em>, I am going to use <code>InvoiceNo</code> for orders in the analysis, which should make for a richer information set.</p>
 
 <pre><code class="language-r">sapply(retail[,c('InvoiceNo','CustomerID')], function(x) length(unique(x)))
+
 ##  InvoiceNo CustomerID 
 ##      19792       4336
 </code></pre>
@@ -502,6 +509,7 @@ descr &lt;- c( &quot;check&quot;, &quot;check?&quot;, &quot;?&quot;, &quot;??&qu
   mutate(Time = as.factor(format(InvoiceDate,&quot;%H:%M:%S&quot;))) 
 
 glimpse(retail)
+
 ## Observations: 528,148
 ## Variables: 10
 ## $ InvoiceNo   &lt;dbl&gt; 536365, 536365, 536365, 536365, 536365, 536365, 53...
@@ -536,7 +544,7 @@ glimpse(retail)
   theme_grey(base_size = 12)
 </code></pre>
 
-<p><img src="/post/UCI_MBA_Part_1_files/figure-html/unnamed-chunk-14-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-03-13-market-basket-analysis-part-1-of-3-data-preparation-and-exploratory-data-analysis_files/unnamed-chunk-14-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>Top 10 most sold products represent around 3% of total items sold by the company</p>
 
@@ -547,9 +555,8 @@ glimpse(retail)
   arrange(desc(pct)) %&gt;% 
   ungroup() %&gt;% 
   top_n(10, wt = pct)
-</code></pre>
 
-<pre><code>## # A tibble: 10 x 3
+## # A tibble: 10 x 3
 ##    Description                        count   pct
 ##    &lt;fct&gt;                              &lt;int&gt; &lt;dbl&gt;
 ##  1 WHITE HANGING HEART T-LIGHT HOLDER  2327 0.441
@@ -575,7 +582,7 @@ glimpse(retail)
   theme_grey(base_size = 12)
 </code></pre>
 
-<p><img src="/post/UCI_MBA_Part_1_files/figure-html/unnamed-chunk-16-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-03-13-market-basket-analysis-part-1-of-3-data-preparation-and-exploratory-data-analysis_files/unnamed-chunk-16-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="what-day-of-the-week-do-people-buy-more-often">What day of the week do people buy more often?</h4>
 
@@ -591,7 +598,7 @@ glimpse(retail)
   theme_grey(base_size = 14)
 </code></pre>
 
-<p><img src="/post/UCI_MBA_Part_1_files/figure-html/unnamed-chunk-17-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-03-13-market-basket-analysis-part-1-of-3-data-preparation-and-exploratory-data-analysis_files/unnamed-chunk-17-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="how-many-items-does-each-customer-buy">How many items does each customer buy?</h4>
 
@@ -608,7 +615,7 @@ glimpse(retail)
   theme_grey(base_size = 14)
 </code></pre>
 
-<p><img src="/post/UCI_MBA_Part_1_files/figure-html/unnamed-chunk-18-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-03-13-market-basket-analysis-part-1-of-3-data-preparation-and-exploratory-data-analysis_files/unnamed-chunk-18-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="what-is-the-average-value-per-order">What is the average value per order?</h4>
 
@@ -626,7 +633,7 @@ glimpse(retail)
   theme_grey(base_size = 14)
 </code></pre>
 
-<p><img src="/post/UCI_MBA_Part_1_files/figure-html/unnamed-chunk-19-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-03-13-market-basket-analysis-part-1-of-3-data-preparation-and-exploratory-data-analysis_files/unnamed-chunk-19-1.png" alt="" width="100%" height="100%"/></p>
 
 <h4 id="which-countries-do-they-sell-their-goods-to">Which countries do they sell their goods to?</h4>
 
@@ -640,7 +647,7 @@ glimpse(retail)
         border.col = &quot;grey40&quot;)
 </code></pre>
 
-<p><img src="/post/UCI_MBA_Part_1_files/figure-html/unnamed-chunk-20-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-03-13-market-basket-analysis-part-1-of-3-data-preparation-and-exploratory-data-analysis_files/unnamed-chunk-21-1.png" alt="" width="100%" height="100%"/></p>
 
 <h3 id="comments">Comments</h3>
 
@@ -674,6 +681,27 @@ glimpse(retail)
     
     
 
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2019\/03\/market-basket-analysis-part-1-of-3\/";  
+this.page.identifier = "\/2019\/03\/market-basket-analysis-part-1-of-3\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
   </div>
 </main>
 
@@ -695,15 +723,13 @@ glimpse(retail)
     <div class="read-next-card-content">
       
         <ul>
+          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
+        
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+        
+          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3: A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
+        
           <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
-        
-                      
-        
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
-        
-          <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
-        
-          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -726,7 +752,8 @@ glimpse(retail)
           <header class="post-card-header">
               <span class="post-card-tags">
               #Machine Learning 
-              #Market Basket Analysis  </span>
+              #Market Basket Analysis 
+              #Model Selection  </span>
               
               <h2 class="post-card-title">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</h2>
           </header>

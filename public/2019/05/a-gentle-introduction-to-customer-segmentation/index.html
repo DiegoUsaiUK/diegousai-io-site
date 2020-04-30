@@ -34,7 +34,7 @@
     <meta property="og:description" content="Market segmentation refers to the process of dividing a consumer market of existing and/or potential customers into groups (or segments) based on shared attribu" />
 
     <meta property="article:published_time" content="2019-05-25T00:00:00Z" />
-    <meta property="article:tag" content="Clustering" /><meta property="article:tag" content="Customer Segmentation" />
+    <meta property="article:tag" content="Clustering" /><meta property="article:tag" content="Customer Segmentation" /><meta property="article:tag" content="Data Exploration" /><meta property="article:tag" content="UMAP" />
 
     <meta property="og:image" content="/img/nick-karvounis-SWIoVDRZWUY-unsplash.jpg"/>
 
@@ -73,7 +73,7 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/market-basket-analysis">projects</a>
+              <a href="/categories/multi-post-studies/">projects</a>
             </li>
         
             <li class="" role="menuitem">
@@ -141,11 +141,11 @@
 
 <p>To illustrate the principle, suppose that you have a set of elements like those in the picture below and want to classify them into <strong>3 clusters</strong></p>
 
-<p><img src="/post/K_Mean_Clustering_files/random-points.png" alt="" width="85%"/></p>
+<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/random-points.png" alt="" width="100%" height="100%"/></p>
 
 <p>What K-Means would do for you is to group them up around the middle or <code>centre</code> of each cluster, represented here by the <strong>&ldquo;X&rdquo;&rsquo;s</strong>, in a way that minimises the distance of each element to its <code>centre</code></p>
 
-<p><img src="/post/K_Mean_Clustering_files/random-points-clustered.png" alt="" width="85%"/></p>
+<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/random-points-clustered.png" alt="" width="100%" height="100%"/></p>
 
 <p>So how does that help you to <strong>better understand your customers</strong>? Well, in this case you can use their <strong>behavior</strong> (specifically, which offer they did or did not go for) as a way to grouping them up with similar minded customers.  You can now look into each of those groups to unearth trends and patterns and use them for shaping future offers.</p>
 
@@ -173,9 +173,8 @@ offers_tbl &lt;- offers_tbl %&gt;%
                     'disc_pct','origin', 'past_peak'))
 
 head(offers_tbl)
-</code></pre>
 
-<pre><code>## # A tibble: 6 x 7
+## # A tibble: 6 x 7
 ##   offer campaign varietal          min_qty_kg disc_pct origin     past_peak
 ##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;    
 ## 1     1 January  Malbec                    72       56 France     FALSE    
@@ -192,9 +191,8 @@ transac_tbl &lt;- transac_tbl %&gt;%
         set_names(c('customer', 'offer'))
 
 head(transac_tbl)
-</code></pre>
 
-<pre><code>## # A tibble: 6 x 2
+## # A tibble: 6 x 2
 ##   customer offer
 ##   &lt;chr&gt;    &lt;dbl&gt;
 ## 1 Smith        2
@@ -215,9 +213,8 @@ head(transac_tbl)
     spread(customer,value, fill = 0) 
 
 head(wine_tbl)
-</code></pre>
 
-<pre><code>## # A tibble: 6 x 107
+## # A tibble: 6 x 107
 ##   offer campaign varietal min_qty_kg disc_pct origin past_peak Adams Allen
 ##   &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1 January  Malbec           72       56 France FALSE         0     0
@@ -266,6 +263,7 @@ kmeans_obj &lt;- user_item_tbl %&gt;%
 <p>I can quickly inspect the model with<code>glance()</code>from the <code>broom</code>package, which provides an summary of model-level statistics</p>
 
 <pre><code class="language-r">glance(kmeans_obj) %&gt;% glimpse()
+
 ## Observations: 1
 ## Variables: 4
 ## $ totss        &lt;dbl&gt; 283.1875
@@ -285,6 +283,7 @@ kmeans_obj &lt;- user_item_tbl %&gt;%
 </code></pre>
 
 <pre><code class="language-r">4 %&gt;% kmeans_map() %&gt;%  glance()
+
 ## # A tibble: 1 x 4
 ##   totss tot.withinss betweenss  iter
 ##   &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -302,9 +301,8 @@ kmeans_obj &lt;- user_item_tbl %&gt;%
                                           # model’s summary metrics in column 3
 
 kmeans_map_tbl %&gt;% glimpse()
-</code></pre>
 
-<pre><code>## Observations: 15
+## Observations: 15
 ## Variables: 3
 ## $ centers &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 ## $ k_means &lt;list&gt; [&lt;1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
@@ -326,7 +324,7 @@ kmeans_map_tbl %&gt;% glimpse()
     labs(title = 'Scree Plot')
 </code></pre>
 
-<p><img src="/post/K_Mean_Clustering_files/figure-html/unnamed-chunk-5-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/unnamed-chunk-5-1.png" alt="" width="100%" height="100%"/></p>
 
 <h2 id="visualising-the-segments">Visualising the Segments</h2>
 
@@ -366,7 +364,7 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     theme(legend.position = 'none')
 </code></pre>
 
-<p><img src="/post/K_Mean_Clustering_files/figure-html/unnamed-chunk-8-1.png" width="100%" height="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/2019-05-25-a-gentle-introduction-to-customer-segmentation-using-k-means-clustering-to-understand-marketing-response_files/unnamed-chunk-8-1.png" alt="" width="100%" height="100%"/></p>
 
 <h2 id="evaluating-the-clusters">Evaluating the Clusters</h2>
 
@@ -388,9 +386,8 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     filter(.cluster == 1 | .cluster == 2) %&gt;% 
     count(.cluster, varietal, origin, min_qty_kg, disc_pct) %&gt;%
     select(-n)
-</code></pre>
 
-<pre><code>## # A tibble: 9 x 5
+## # A tibble: 9 x 5
 ##   .cluster varietal     origin       min_qty_kg disc_pct
 ##   &lt;fct&gt;    &lt;chr&gt;        &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 1        Champagne    France               72       48
@@ -413,9 +410,8 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     group_by() %&gt;%
     count(.cluster, varietal, origin, min_qty_kg, disc_pct) %&gt;%
     select(-n) 
-</code></pre>
 
-<pre><code>## # A tibble: 6 x 5
+## # A tibble: 6 x 5
 ##   .cluster varietal   origin    min_qty_kg disc_pct
 ##   &lt;fct&gt;    &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;
 ## 1 3        Pinot Noir Australia        144       83
@@ -434,9 +430,8 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     filter(.cluster == 5 ) %&gt;% 
     count(.cluster, varietal, origin, min_qty_kg, disc_pct) %&gt;%
     select(-n) 
-</code></pre>
 
-<pre><code>## # A tibble: 17 x 5
+## # A tibble: 17 x 5
 ##    .cluster varietal           origin       min_qty_kg disc_pct
 ##    &lt;fct&gt;    &lt;chr&gt;              &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;
 ##  1 5        Cabernet Sauvignon France               12       56
@@ -497,6 +492,27 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     
     
 
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2019\/05\/a-gentle-introduction-to-customer-segmentation\/";  
+this.page.identifier = "\/2019\/05\/a-gentle-introduction-to-customer-segmentation\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
   </div>
 </main>
 
@@ -518,15 +534,13 @@ umap_tbl &lt;- umap_obj$layout %&gt;%
     <div class="read-next-card-content">
       
         <ul>
+          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+        
           <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
         
           <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
         
-          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
-        
-                      
-        
-          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">

@@ -73,7 +73,7 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/market-basket-analysis">projects</a>
+              <a href="/categories/multi-post-studies/">projects</a>
             </li>
         
             <li class="" role="menuitem">
@@ -164,6 +164,7 @@ library(recommenderlab)
 <p>In this section I am using the <code>retail</code> dataset from <a href="https://https://diegousai.io/2019/03/market-basket-analysis-part-2-of-3"><strong>Part 2</strong></a> to prepare the data files needed for the Shiny App. <strong>Note</strong> that in Part 2 I have carried out the extra formatting step of removing those orders that contained the same item more than once.</p>
 
 <pre><code class="language-r">glimpse(retail)
+
 ## Observations: 517,354
 ## Variables: 10
 ## $ InvoiceNo   &lt;dbl&gt; 536365, 536365, 536365, 536365, 536365, 536365, 53...
@@ -270,13 +271,14 @@ source(&quot;similarity_measures.R&quot;)
 <p>And finally I can fit the <code>item-based CF</code> model with the <code>Improved CF</code> and check the runtime.</p>
 
 <pre><code class="language-r">start &lt;- Sys.time()
+
 recomm &lt;- predict_cf(all_orders_dgc, prediction_indices,
                      &quot;ibcf&quot;, FALSE, cal_cos, 3, FALSE, 4000, 2000)
+
 end &lt;- Sys.time()
 cat('runtime', end - start)
-</code></pre>
 
-<pre><code>## runtime 0.4830279
+## runtime 0.630003
 </code></pre>
 
 <p>Wow! That was lightning fast!</p>
@@ -290,11 +292,15 @@ all_orders_brm &lt;- as(all_orders_dgc, &quot;realRatingMatrix&quot;)
 
 # Run run IBCF model on recommenderlab
 start &lt;- Sys.time()
+
 recomm &lt;- Recommender(all_orders_brm, 
                       method = &quot;IBCF&quot;,  
                       param = list(k = 5))
+
 end &lt;- Sys.time()
 cat('runtime', end - start)
+
+## runtime 12.75939
 </code></pre>
 
 <p>The speed gain is around 20 times and is consistent with what <em>Philipp Spachtholz</em> witnessed in his work. This is rather promising for the Shiny App!</p>
@@ -354,6 +360,27 @@ cat('runtime', end - start)
     
     
 
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2019\/04\/market-basket-analysis-part-3-of-3\/";  
+this.page.identifier = "\/2019\/04\/market-basket-analysis-part-3-of-3\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
   </div>
 </main>
 
@@ -375,13 +402,13 @@ cat('runtime', end - start)
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
         
-          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
-        
-          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
+          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</a></li>            
         
           <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+        
+          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -404,7 +431,9 @@ cat('runtime', end - start)
           <header class="post-card-header">
               <span class="post-card-tags">
               #Clustering 
-              #Customer Segmentation  </span>
+              #Customer Segmentation 
+              #Data Exploration 
+              #UMAP  </span>
               
               <h2 class="post-card-title">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</h2>
           </header>
@@ -436,7 +465,8 @@ For this mini-project I will use the popular K-Means clustering algorithm to seg
           <header class="post-card-header">
               <span class="post-card-tags">
               #Machine Learning 
-              #Market Basket Analysis  </span>
+              #Market Basket Analysis 
+              #Model Selection  </span>
               
               <h2 class="post-card-title">Market Basket Analysis - Part 2 of 3: Market Basket Analysis with recommenderlab</h2>
           </header>

@@ -73,7 +73,7 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/market-basket-analysis">projects</a>
+              <a href="/categories/multi-post-studies/">projects</a>
             </li>
         
             <li class="" role="menuitem">
@@ -139,7 +139,7 @@
 
 <p>And <em>Matt Dancho</em> has even been kind enough to <strong>feature my newly created webpage</strong> on his <em>23-Oct-2019</em> webinar <a href="https://github.com/business-science/presentations/tree/master/2019_10_23_lab_21_SQL_for_Data_Science"><strong>SQL for Data Science</strong></a>!</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/0_learninglab.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/0_learninglab.jpg" alt="" width="75%"/></p>
 
 <h2 id="overview">Overview</h2>
 
@@ -192,7 +192,7 @@
 
 <p>Once you&rsquo;ve decided which theme suits you best, click on the <code>Homepage</code> button on its Theme page. This will take you to the github repository housing the theme. Here&rsquo;s the Casper-Two repository.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/1_github_theme_repo.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/1_github_theme_repo.jpg" alt="" width="75%"/></p>
 
 <p>Take a look at the top left-hand side of the page: this tells you that the theme is owned by <code>eueung</code> and it&rsquo;s housed in the <code>hugo-casper-two</code> folder. Make a note of the location address (or copy it to clipboard).</p>
 
@@ -202,11 +202,11 @@
 
 <p>in RStudio, go to  <strong>File → New Project → New Directory → Website using Blogdown</strong></p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/2_website_using_blogdown.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/2_website_using_blogdown.jpg" alt="" width="75%"/></p>
 
 <p>In the following page, pick a <em>directory name</em> for your website and write/paste the github <em>theme location</em> from the previous step</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/3_create_new_website.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/3_create_new_website.jpg" alt="" width="75%"/></p>
 
 <p>You can now hit <code>Create Project</code> and RStudio will import all files from the Github repository and populate the new directory with a series of folders.</p>
 
@@ -214,7 +214,7 @@
 
 <p>Let&rsquo;s take a look at the folder structure that has just been created</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/6_folder_str.jpg" alt="" width="65%" /></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/6_folder_str.jpg" alt="" width="65%" /></p>
 
 <p>Most parameters are self explanatory but more details can be found on the <a href="https://bookdown.org/yihui/blogdown/configuration.html"><strong>Configuration</strong></a> chapter of the <em>blogdown book</em></p>
 
@@ -253,7 +253,7 @@
 
 <p>This also has a <code>Serve Site</code> Addin version</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/4_serve_site.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/4_serve_site.jpg" alt="" width="75%"/></p>
 
 <h3 id="project-options">Project options</h3>
 
@@ -263,7 +263,7 @@
 
 <p>To prevent that, there is something you can change in the <code>Project Options</code> settings. Go to <strong>Tools → Project Options → Build Tools</strong> and un-tick the <code>Re-knit current preview</code> box.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/5_project_options.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/5_project_options.jpg" alt="" width="75%"/></p>
 
 <p>Now you can make and save several changes in a row but remember that to visualise them you&rsquo;ll need to re-run <code>Serve Site</code> every single time.</p>
 
@@ -291,7 +291,7 @@ weight = 120
 
 <p>All key files are in <code>Themes</code> under the <code>layouts</code> and <code>static</code> folders:</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/7_theme_folder_str.jpg" alt="" width="65%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/7_theme_folder_str.jpg" alt="" width="65%"/></p>
 
 <p>If you want to change something that is controlled by, say, the <strong>singles</strong> code in <code>themes/layouts/page</code>, you need to create a new folder called <code>layouts/page</code> under the project root and save an &ldquo;override&rdquo; version of the <strong>singles</strong> code in that folder.</p>
 
@@ -359,7 +359,7 @@ image: /img/nick-karvounis-SWIoVDRZWUY-unsplash.jpg
 
 <p>When you <code>Serve Site</code> for the first time, you will notice that the home page is pointing to the posts folder and this requires an additional click to show your posts.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/8_main_page.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/8_main_page.jpg" alt="" width="75%"/></p>
 
 <p>This is due to the fact that the <code>Casper-Two</code> Theme hasn’t been updated to work with Hugo 0.58 and later versions. Thankfully, I&rsquo;ve come across this
 <a href="https://discourse.gohugo.io/t/hugo-casper-two-theme-home-page-redirect-issue/20817/2"><strong>posts</strong></a> that shows a quick solution.</p>
@@ -382,7 +382,7 @@ image: /img/nick-karvounis-SWIoVDRZWUY-unsplash.jpg
 
 <p>This was a more complex issue I only became aware of when I had already invested several days of work in the project. Basically, paragraphs do not render properly in mobile format, cutting off at the edges.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/9_rmd_issue.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/9_rmd_issue.jpg" alt="" width="75%"/></p>
 
 <p>To make matter worst, external pictures would not show either, even when added through the <code>Insert image</code> Addin.</p>
 
@@ -437,15 +437,15 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
 
 <p>To do that, I first need to link Netlify to the relevant Github repository: from the <code>Sites</code> tab in Netlify, click on <code>New site from Git</code> and select <code>GitHub</code> to grant it access to your repositories.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/10_netlify_github_1.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/10_netlify_github_1.jpg" alt="" width="75%"/></p>
 
 <p>Once you&rsquo;ve authorised Netlify, you can search and locate the website repository for your site (in my case <code>diegousai-io-site</code>)</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/11_netlify_github_2.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/11_netlify_github_2.jpg" alt="" width="75%"/></p>
 
 <p>The next step is to set the build options. Make sure to leave the <code>build</code> window blank (it plays up otherwise) and point the <em>Publish Directory</em> to <code>public/</code>.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/12_netlify_github_3.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/12_netlify_github_3.jpg" alt="" width="75%"/></p>
 
 <p>Click on <code>Deploy site</code> and Netlify bots will concoct all files into your website for you.</p>
 
@@ -455,15 +455,15 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
 
 <p>Last thing you need to do is to tell Netlify to use your personal domain instead of its random-generated one. On your <strong>Netlify</strong> homepage Navigation bar, click on <code>Domains</code> and select <code>Add or register domain</code>.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/13_custom_domain_1.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/13_custom_domain_1.jpg" alt="" width="75%"/></p>
 
 <p>Follow the instructions and you will be provided with some <code>nameservers</code> codes (usually 4 of them), which are used to link you website and you domain. Now, go back to <a href="https://www.namecheap.com"><strong>Namecheap</strong></a>, enter <code>Domain List</code> and select the relevant one with <code>manage</code> and on the <code>domain</code> tab scroll to <code>nameservers</code>,  type the 4 codes you got from Netlify and save.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/14_custom_domain_2.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/14_custom_domain_2.jpg" alt="" width="75%"/></p>
 
 <p>To verify that this worked, check if the <strong>Netlify</strong> site changed its <em>random domain</em> name to your <strong>custom domain</strong>.</p>
 
-<p><img src="/post/Build-Your-Own-Website-with-Hugo-and-blogdown_files/15_custom_domain_3.jpg" alt="" width="75%"/></p>
+<p><img src="/img/2019-10-28-build-your-website-with-hugo-and-blogdown/15_custom_domain_3.jpg" alt="" width="75%"/></p>
 
 <h2 id="enable-seo">Enable SEO</h2>
 
@@ -533,7 +533,7 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
       <section class="author-card">
         <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
         <section class="author-card-content">
-            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+            <h4 class="author-card-name"><a href="/">Duegoi Usai</a></h4>
                 <p></p>
         </section>
       </section>
@@ -542,6 +542,27 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
     
     
     
+
+<div id="disqus_thread"></div>
+<script>
+
+
+
+
+var disqus_config = function () {
+this.page.url = "\/2019\/10\/build-your-website-with-hugo-and-blogdown\/";  
+this.page.identifier = "\/2019\/10\/build-your-website-with-hugo-and-blogdown\/"; 
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://diegousai-io.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 
   </div>
 </main>
@@ -564,13 +585,15 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
     <div class="read-next-card-content">
       
         <ul>
+          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3: A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
+        
           <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
         
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+          <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
+        
+                      
         
           <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3: Data Preparation and Exploratory Data Analysis</a></li>            
-        
-          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -594,7 +617,8 @@ And I&rsquo;m especially happy with <strong>how much I&rsquo;ve learned</strong>
               <span class="post-card-tags">
               #Machine Learning 
               #Time Series 
-              #Forecasting  </span>
+              #Forecasting 
+              #Data Exploration  </span>
               
               <h2 class="post-card-title">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</h2>
           </header>
@@ -625,7 +649,8 @@ In more recent times, the popularisation and wider availability of open source f
       <a class="post-card-content-link" href="/2019/09/loading-merging-and-joining-datasets/">
           <header class="post-card-header">
               <span class="post-card-tags">
-              #Data Wrangling  </span>
+              #Data Wrangling 
+              #Data Exploration  </span>
               
               <h2 class="post-card-title">Loading, Merging and Joining Datasets</h2>
           </header>
