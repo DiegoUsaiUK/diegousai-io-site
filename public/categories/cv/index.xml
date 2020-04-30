@@ -1,32 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>CV on </title>
-    <link>/diegousai.io/categories/cv/</link>
-    <description>Recent content in CV on </description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-UK</language>
-    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/diegousai.io/categories/cv/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Diego Usai</title>
-      <link>/diegousai.io/page/diego_usai_cv_enhanced/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/diegousai.io/page/diego_usai_cv_enhanced/</guid>
-      <description>AsideDiego Usai
-Contact Info diegousaiuk@gmail.com LinkedIn Website Towards Data Science githubSkillsAnalytics &amp;amp; Insight Generation
-Data Reporting &amp;amp; Visualisation
-Team Leadership &amp;amp; Coaching
-Project &amp;amp; Stakeholder Management
-Business Intelligence &amp;amp; Marketing Analytics
-Customer Segmentation &amp;amp; Targeting
-Wrangle large structured &amp;amp; unstructured data with R &amp;amp; SQL
-Working knowledge of supervised &amp;amp; unsupervised ML techniques: regression, classification, clustering, time series analysis, recommender systems, sentiment analysis, neural networks</description>
-    </item>
-    
-  </channel>
-</rss>
