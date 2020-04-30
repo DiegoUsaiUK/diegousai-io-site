@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on </title>
-    <link>/categories/projects/</link>
-    <description>Recent content in Projects on </description>
+    <title>Multi Post Studies on </title>
+    <link>/categories/multi-post-studies/</link>
+    <description>Recent content in Multi Post Studies on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
     <lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/projects/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/multi-post-studies/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -39,17 +39,6 @@ One trialled and tested approach to tease out this type of insight is Propensity
       <guid>/2020/02/propensity-modelling-1-of-3/</guid>
       <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
 One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
-    </item>
-    
-    <item>
-      <title>Loading, Merging and Joining Datasets</title>
-      <link>/2019/09/loading-merging-and-joining-datasets/</link>
-      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/09/loading-merging-and-joining-datasets/</guid>
-      <description>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like sorting variables names, creating essential features and sorting out variables order
-I will continue to add to this code should the need arise for other features to be created.
-The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&amp;rsquo;m using here accompanies a Redbooks publication called Building 360-Degree Information Applications which is available as a free PDF download.</description>
     </item>
     
     <item>
