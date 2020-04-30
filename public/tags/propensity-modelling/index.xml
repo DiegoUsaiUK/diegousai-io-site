@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Propensity Modelling on </title>
+    <link>/tags/propensity-modelling/</link>
+    <description>Recent content in Propensity Modelling on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-UK</language>
+    <lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/propensity-modelling/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</title>
+      <link>/2020/04/propensity-modelling-3-of-3/</link>
+      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/propensity-modelling-3-of-3/</guid>
+      <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
+    </item>
+    
+    <item>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</title>
+      <link>/2020/03/propensity-modelling-2-of-3/</link>
+      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/propensity-modelling-2-of-3/</guid>
+      <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
+    </item>
+    
+    <item>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3: Data Preparation and Exploratory Data Analysis</title>
+      <link>/2020/02/propensity-modelling-1-of-3/</link>
+      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/02/propensity-modelling-1-of-3/</guid>
+      <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
+    </item>
+    
+  </channel>
+</rss>

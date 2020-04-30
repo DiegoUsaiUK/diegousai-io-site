@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Data Wrangling on </title>
-    <link>/tags/data-wrangling/</link>
-    <description>Recent content in Data Wrangling on </description>
+    <title>Data Exploration on </title>
+    <link>/tags/data-exploration/</link>
+    <description>Recent content in Data Exploration on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
     <lastBuildDate>Fri, 14 Feb 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/data-wrangling/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/data-exploration/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,6 +22,16 @@ One trialled and tested approach to tease out this type of insight is Propensity
     </item>
     
     <item>
+      <title>Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</title>
+      <link>/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/</guid>
+      <description>Traditional approaches to time series analysis and forecasting, like Linear Regression, Holt-Winters Exponential Smoothing, ARMA/ARIMA/SARIMA and ARCH/GARCH, have been well-established for decades and find applications in fields as varied as business and finance (e.g. predict stock prices and analyse trends in financial markets), the energy sector (e.g. forecast electricity consumption) and academia (e.g. measure socio-political phenomena).
+In more recent times, the popularisation and wider availability of open source frameworks like Keras, TensorFlow and scikit-learn helped machine learning approaches like Random Forest, Extreme Gradient Boosting, Time Delay Neural Network and Recurrent Neural Network to gain momentum in time series applications.</description>
+    </item>
+    
+    <item>
       <title>Loading, Merging and Joining Datasets</title>
       <link>/2019/09/loading-merging-and-joining-datasets/</link>
       <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
@@ -30,6 +40,16 @@ One trialled and tested approach to tease out this type of insight is Propensity
       <description>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like sorting variables names, creating essential features and sorting out variables order
 I will continue to add to this code should the need arise for other features to be created.
 The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&amp;rsquo;m using here accompanies a Redbooks publication called Building 360-Degree Information Applications which is available as a free PDF download.</description>
+    </item>
+    
+    <item>
+      <title>A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</title>
+      <link>/2019/05/a-gentle-introduction-to-customer-segmentation/</link>
+      <pubDate>Sat, 25 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/05/a-gentle-introduction-to-customer-segmentation/</guid>
+      <description>Market segmentation refers to the process of dividing a consumer market of existing and/or potential customers into groups (or segments) based on shared attributes, interests, and behaviours.
+For this mini-project I will use the popular K-Means clustering algorithm to segment customers based on their response to a series of marketing campaigns. The basic concept is that consumers who share common traits would respond to marketing communication in a similar way so that companies can reach out for each group in a relevant and effective way.</description>
     </item>
     
     <item>
