@@ -22,13 +22,22 @@ One trialled and tested approach to tease out this type of insight is Propensity
     </item>
     
     <item>
-      <title>Loading, Merging and Joining Datasets</title>
-      <link>/2019/09/loading-merging-and-joining-datasets/</link>
-      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
+      <title>Loading, Merging and Several Joining Datasets - PostgreSQL EDT</title>
+      <link>/2019/08/loading-merging-and-joining-datasets-postgresql-edt/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/09/loading-merging-and-joining-datasets/</guid>
-      <description>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like sorting variables names, creating essential features and sorting out variables order
-I will continue to add to this code should the need arise for other features to be created.
+      <guid>/2019/08/loading-merging-and-joining-datasets-postgresql-edt/</guid>
+      <description>This is the coding necessary to assemble the various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks.
+In order to simulate normal working conditions I would face if the data was stored on a database, I&amp;rsquo;ve uploaded the excel files onto a local PostgreSQL database that I&amp;rsquo;ve created on my machine. I am going to go through the steps I followed to set up a connection between RStudio and said database and extract the information I needed.</description>
+    </item>
+    
+    <item>
+      <title>Loading, Merging and Several Joining Datasets - Excel EDT</title>
+      <link>/2019/07/loading-merging-and-joining-datasets-excel-edt/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/loading-merging-and-joining-datasets-excel-edt/</guid>
+      <description>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like shortening variables names to ease visualisations, creating essential new features and sorting out variables order
 The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&amp;rsquo;m using here accompanies a Redbooks publication called Building 360-Degree Information Applications which is available as a free PDF download.</description>
     </item>
     

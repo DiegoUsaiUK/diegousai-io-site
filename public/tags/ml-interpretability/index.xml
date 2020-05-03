@@ -6,10 +6,20 @@
     <description>Recent content in ML Interpretability on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/ml-interpretability/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</title>
+      <link>/2020/05/propensity-modelling-abridged/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/05/propensity-modelling-abridged/</guid>
+      <description>In this day and age, a business that leverages data to understand the drivers of customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease this type of insight out of data is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
+    </item>
     
     <item>
       <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</title>

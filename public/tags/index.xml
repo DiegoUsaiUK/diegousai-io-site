@@ -6,42 +6,33 @@
     <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Data Exploration</title>
+      <link>/tags/data-exploration/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-exploration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Machine Learning</title>
       <link>/tags/machine-learning/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Optimisation</title>
-      <link>/tags/optimisation/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/optimisation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Propensity Modelling</title>
-      <link>/tags/propensity-modelling/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/propensity-modelling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>ML Interpretability</title>
       <link>/tags/ml-interpretability/</link>
-      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/ml-interpretability/</guid>
       <description></description>
@@ -50,18 +41,27 @@
     <item>
       <title>Model Selection</title>
       <link>/tags/model-selection/</link>
-      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/model-selection/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data Exploration</title>
-      <link>/tags/data-exploration/</link>
-      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      <title>Optimisation</title>
+      <link>/tags/optimisation/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/data-exploration/</guid>
+      <guid>/tags/optimisation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Propensity Modelling</title>
+      <link>/tags/propensity-modelling/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/propensity-modelling/</guid>
       <description></description>
     </item>
     
