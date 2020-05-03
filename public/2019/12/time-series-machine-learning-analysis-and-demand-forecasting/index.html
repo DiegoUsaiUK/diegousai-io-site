@@ -69,11 +69,15 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/articles/">Articles</a>
+              <a href="/categories/articles/">articles</a>
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/multi-post-studies/">projects</a>
+              <a href="/categories/multi-article-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/data-handling">data</a>
             </li>
         
             <li class="" role="menuitem">
@@ -173,7 +177,7 @@ library(knitr)
 
 <p>The dataset I&rsquo;m using here accompanies a <a href="https://www.redbooks.ibm.com/abstracts/sg248133.html?Open">Redbooks publication</a> and is available as a free download in the <a href="ftp://www.redbooks.ibm.com/redbooks/SG248133">Additional Material</a> section. The data covers <strong>3 &amp; <sup>1</sup>&frasl;<sub>2</sub> years</strong> worth of sales <code>orders</code> for the <strong>Sample Outdoors Company</strong>, a fictitious B2B outdoor equipment retailer enterprise and comes with details about the <code>products</code> they sell as well as their customers (which in their case are <code>retailers</code>). Due to its <strong>artificial nature</strong>, the series presents a few oddities and quirks, which I am going to point out throughout this project.</p>
 
-<p>Here I&rsquo;m simply loading up the compiled dataset but if you want to follow along I&rsquo;ve also written a post called <a href="https://diegousai.io/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a> where I show how I&rsquo;ve assembled the various data feeds and sorted out the likes of variable naming, new features creation and some general housekeeping tasks.</p>
+<p>Here I&rsquo;m simply loading up the compiled dataset but if you want to follow along I&rsquo;ve also written a number of posts where I show how I&rsquo;ve assembled the various data feeds and sorted out variable names, new features creation and some general housekeeping tasks. There is a version for those that prefer to <a href="https://diegousai.io/2019/07/loading-merging-and-joining-datasets-excel-edt/"><strong>handle data in excel using R</strong></a> and one where I fetch the data by <a href="https://diegousai.io/2019/08/loading-merging-and-joining-datasets-postgresql-edt/"><strong>linking R to a PosgreSQL database</strong></a>.</p>
 
 <pre><code class="language-r"># Import orders
 orders_tmp &lt;- 
@@ -1123,15 +1127,13 @@ GLM 	   -0.0617160 	  41227664
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
-        
-          <li><a href="/2020/03/propensity-modelling-2-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</a></li>            
-        
-          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3 - Market Basket Analysis with recommenderlab</a></li>            
-        
-                      
+          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3 - A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
         
           <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</a></li>            
+        
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+        
+          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">

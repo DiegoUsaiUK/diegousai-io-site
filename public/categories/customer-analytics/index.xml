@@ -12,17 +12,6 @@
     
     
     <item>
-      <title>Loading, Merging and Joining Datasets</title>
-      <link>/2019/09/loading-merging-and-joining-datasets/</link>
-      <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/09/loading-merging-and-joining-datasets/</guid>
-      <description>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like sorting variables names, creating essential features and sorting out variables order
-I will continue to add to this code should the need arise for other features to be created.
-The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&amp;rsquo;m using here accompanies a Redbooks publication called Building 360-Degree Information Applications which is available as a free PDF download.</description>
-    </item>
-    
-    <item>
       <title>Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</title>
       <link>/2019/09/steps-and-considerations-to-run-a-successful-segmentation/</link>
       <pubDate>Mon, 23 Sep 2019 00:00:00 +0000</pubDate>

@@ -69,11 +69,15 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/articles/">Articles</a>
+              <a href="/categories/articles/">articles</a>
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/multi-post-studies/">projects</a>
+              <a href="/categories/multi-article-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/data-handling">data</a>
             </li>
         
             <li class="" role="menuitem">
@@ -227,7 +231,7 @@ h2o.init(max_mem_size = &quot;16G&quot;)
 
 <h3 id="the-threshold-and-the-f1-score">The threshold and the F1 score</h3>
 
-<p>The question the model is trying to answer is &ldquo; <em>Has this customer signed up for a term deposit following a direct marketing campaign?</em> &ldquo; and the cut-off (a.k.a. the threshold) is the value that divides the predictions into <code>Yes</code> and  <code>No</code>.</p>
+<p>The question the model is trying to answer is &ldquo; <em>Has this customer signed up for a term deposit following a direct marketing campaign?</em> &ldquo; and the cut-off (a.k.a. the threshold) is the value that divides the model&rsquo;s predictions into <code>Yes</code> and  <code>No</code>.</p>
 
 <p>To illustrate the point, I first calculate some predictions by passing the <code>test_tbl</code> data set to the <code>h2o.performance</code> function.</p>
 
@@ -368,7 +372,7 @@ as_tibble(drf_predict) %&gt;%
 <li><p>Conversely, at <strong>threshold one</strong> ( <em>highest precision, lowest recall</em>) the model tells you that nobody is likely to subscribe so you should <strong>contact no one</strong>. This would save you tons of money in marketing cost but you&rsquo;d be missing out on the additional revenue from those customers who would&rsquo;ve subscribed, had they been notified about the term deposit through direct marketing. Once again, not an optimal strategy.</p></li>
 </ul>
 
-<p>With this in mind, when moving to a higher threshold the model becomes more &ldquo;choosy&rdquo; on who it classifies as <code>subscribed = Yes</code>. As a consequence, you become more conservative on who to contact ( <strong>higher precision</strong>) and reduce your acquisition cost, but at the same time you increase your chance of not reaching prospective subscribes ( <strong>lower recall</strong>), missing out on potential revenue.</p>
+<p>When moving to a higher threshold the model becomes more &ldquo;choosy&rdquo; on who it classifies as <code>subscribed = Yes</code>. As a consequence, you become more conservative on who to contact ( <strong>higher precision</strong>) and reduce your acquisition cost, but at the same time you increase your chance of not reaching prospective subscribes ( <strong>lower recall</strong>), missing out on potential revenue.</p>
 
 <p>The key question here is <strong>where do you stop?</strong> Is there a &ldquo;sweet spot&rdquo; and if so, how do you find it? Well, that will depend entirely on the goal you want to achieve. In the next section I&rsquo;ll be running a mini-optimisation with the goal to <strong>maximise profit</strong>.</p>
 
@@ -423,7 +427,7 @@ expected_rates
 
 <p>Finally, there’s the <strong>true negative</strong> (TN) scenario where we correctly predict that a customer won’t subscribe. In this case we won’t spend any money but won&rsquo;t earn any revenue.</p>
 
-<p>Here’s a quick recap of the cost scenarios:</p>
+<p>Here’s a quick recap of the scenarios:</p>
 
 <ul>
 <li><p><strong>True Positive</strong> (TP) - predict will subscribe, and they actually do: COST: -£30; REV £80</p></li>
@@ -435,7 +439,7 @@ expected_rates
 <li><p><strong>False Negative</strong> (FN) - predict won&rsquo;t subscribe, but they actually do: COST: £0; REV £0</p></li>
 </ul>
 
-<p>I create a function to calculate the expected cost using the probability of a <em>positive case</em> (p1) and the cost/benefit associated with a <em>true positive</em> (cb_tp) and a <em>false positive</em> (cb_fp). No need to include the <em>true negative</em> or <em>false negative</em> here as they&rsquo;re both zero.</p>
+<p>I create a function to calculate the expected profit using the probability of a <em>positive case</em> (p1) and the cost/benefit associated with a <em>true positive</em> (cb_tp) and a <em>false positive</em> (cb_fp). No need to include the <em>true negative</em> or <em>false negative</em> here as they&rsquo;re both zero.</p>
 
 <p>I&rsquo;m also including the <strong>expected_rates</strong> data frame created previously with the expected rates for each threshold (400 thresholds, ranging from 0 to 1).</p>
 
@@ -463,7 +467,7 @@ expected_profit_func &lt;- function(p1, cb_tp, cb_fp) {
 
 <h3 id="multi-customer-optimization">Multi-Customer Optimization</h3>
 
-<p>Now to understand how a multi customer dynamic would work, I&rsquo;m creating a hypothetical 10 customer group to test my function on. This is a simplified view in that I&rsquo;m applying the same structure to all customers but the cost/benefit framework can be tailored to the individual customer to reflect their separate product and service level set up and the process can be easily adapted to optimise towards different KPIs (like net profit, CLV, acquisitions, etc.)</p>
+<p>Now to understand how a multi customer dynamic would work, I&rsquo;m creating a <strong>hypothetical 10 customer group</strong> to test my function on. This is a <strong>simplified</strong> view in that I&rsquo;m applying the <strong>same cost and revenue structure to all customers</strong> but the cost/benefit framework can be tailored to the individual customer to reflect their separate product and service level set up and the process can be easily adapted to optimise towards different KPIs (like <em>net profit</em>, <em>CLV</em>, <em>number of subscriptions</em>, etc.)</p>
 
 <pre><code class="language-r"># Ten Hypothetical Customers 
 ten_cust &lt;- tribble(
@@ -481,9 +485,9 @@ ten_cust &lt;- tribble(
 )
 </code></pre>
 
-<p>I use <code>purrr</code> to map the <code>expected_profit_func()</code> to each customer, returning a data frame of expected cost per customer by threshold value. This operation creates a nester tibble, which I have to <code>unnest()</code> to expand the data frame to one level.</p>
+<p>I use <code>purrr</code> to map the <code>expected_profit_func()</code> to each customer, returning a data frame of expected profit per customer by threshold value. This operation creates a nester tibble, which I have to <code>unnest()</code> to expand the data frame to one level.</p>
 
-<pre><code class="language-r"># calculate expected cost for each at each threshold
+<pre><code class="language-r"># calculate expected profit for each at each threshold
 expected_profit_ten_cust &lt;- ten_cust %&gt;%
     # pmap to map expected_profit_func() to each item
     mutate(expected_profit = pmap(.l = list(p1, cb_tp, cb_fp), 
@@ -492,11 +496,9 @@ expected_profit_ten_cust &lt;- ten_cust %&gt;%
     select(cust, p1, threshold, expected_profit) 
 </code></pre>
 
-<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-11-1.png" alt="" width="100%" height="100%"/></p>
+<p>Then, I can visualize the expected profit curves for each customer.</p>
 
-<p>Then, I can visualize the expected cost curves for each customer.</p>
-
-<pre><code class="language-r"># Visualising Expected Cost 
+<pre><code class="language-r"># Visualising Expected Profit 
 expected_profit_ten_cust %&gt;%
     ggplot(aes(threshold, expected_profit, 
                colour = factor(cust)), 
@@ -509,11 +511,11 @@ expected_profit_ten_cust %&gt;%
     theme(plot.title = element_text(hjust = 0.5))
 </code></pre>
 
-<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-12-1.png" alt="" width="100%" height="100%"/></p>
+<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-11-1.png" alt="" width="100%" height="100%"/></p>
 
-<p>Finally, I can aggregate the expected cost, visualise the final curve and highlight the optimal threshold.</p>
+<p>Finally, I can aggregate the expected profit, visualise the final curve and highlight the optimal threshold.</p>
 
-<pre><code class="language-r"># Aggregate expected cost by threshold 
+<pre><code class="language-r"># Aggregate expected profit by threshold 
 total_expected_profit_ten_cust &lt;- expected_profit_ten_cust %&gt;%
     group_by(threshold) %&gt;%
     summarise(expected_profit_total = sum(expected_profit)) 
@@ -533,6 +535,8 @@ total_expected_profit_ten_cust %&gt;%
                           max_expected_profit$threshold %&gt;% round(3))) +
     theme(plot.title = element_text(hjust = 0.5))
 </code></pre>
+
+<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-12-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>This has <strong>some important business implications</strong>. Based on our hypothetical 10-customer group, choosing the optimised threshold of <code>0.092</code> would yield a total profit of nearly <strong>£164</strong> compared to the nearly <strong>£147</strong> associated with the automatically selected cut-off of <code>0.190</code>.</p>
 
@@ -617,13 +621,13 @@ total_expected_profit_ten_cust %&gt;%
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
+          <li><a href="/2020/05/propensity-modelling-abridged/">Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</a></li>            
         
-          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</a></li>            
+          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
         
-          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
         
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -633,6 +637,41 @@ total_expected_profit_ten_cust %&gt;%
 </article>
 
 
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/05/propensity-modelling-abridged/">
+      <div class="post-card-image" style="background-image: url(/img/dan-meyers-MQ8-4HYTgOc-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/05/propensity-modelling-abridged/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Propensity Modelling 
+              #Data Exploration 
+              #ML Interpretability 
+              #Model Selection 
+              #Optimisation 
+              #Machine Learning  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease this type of insight out of data is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
       
       
       <article class="post-card post"> 

@@ -4,39 +4,39 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology &middot; </title>
+    <title>Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version &middot; </title>
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="canonical" href="/2020/03/propensity-modelling-2-of-3/" />
+    <link rel="canonical" href="/2020/05/propensity-modelling-abridged/" />
 
-     <meta name="description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " /> 
+     <meta name="description" content="In this day and age, a business that leverages data to understand the drivers of customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can " /> 
 
      
     
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:image" content="/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg"/>
+    <meta name="twitter:image" content="/img/dan-meyers-MQ8-4HYTgOc-unsplash.jpg"/>
     
  
-    <meta name="twitter:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology"/>
-    <meta name="twitter:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations "/>
-    <meta name="twitter:url" content="/2020/03/propensity-modelling-2-of-3/" />
+    <meta name="twitter:title" content="Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version"/>
+    <meta name="twitter:description" content="In this day and age, a business that leverages data to understand the drivers of customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can "/>
+    <meta name="twitter:url" content="/2020/05/propensity-modelling-abridged/" />
     <meta name="twitter:site" content="@"/>
 
     <meta property="og:site_name" content="" />
-    <meta property="og:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology &middot; Lifelong Learning" />
-    <meta property="og:url" content="/2020/03/propensity-modelling-2-of-3/" />
+    <meta property="og:title" content="Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2020/05/propensity-modelling-abridged/" />
     
 
     <meta property="og:type" content="article" />
-    <meta property="og:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " />
+    <meta property="og:description" content="In this day and age, a business that leverages data to understand the drivers of customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can " />
 
-    <meta property="article:published_time" content="2020-03-17T00:00:00Z" />
-    <meta property="article:tag" content="Machine Learning" /><meta property="article:tag" content="Propensity Modelling" /><meta property="article:tag" content="ML Interpretability" /><meta property="article:tag" content="Model Selection" />
+    <meta property="article:published_time" content="2020-05-02T00:00:00Z" />
+    <meta property="article:tag" content="Propensity Modelling" /><meta property="article:tag" content="Data Exploration" /><meta property="article:tag" content="ML Interpretability" /><meta property="article:tag" content="Model Selection" /><meta property="article:tag" content="Optimisation" /><meta property="article:tag" content="Machine Learning" />
 
-    <meta property="og:image" content="/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg"/>
+    <meta property="og:image" content="/img/dan-meyers-MQ8-4HYTgOc-unsplash.jpg"/>
 
 
     <meta name="generator" content="Hugo 0.58.3" />
@@ -120,28 +120,28 @@
       <article class="post-full post"> 
     <header class="post-full-header">
         <section class="post-full-meta">
-            <time class="post-full-meta-date" datetime="2020-03-17">17 March 2020</time>
-                <span class="date-divider">/</span> <a href="/tags/machine-learning/">#Machine Learning</a>&nbsp;<a href="/tags/propensity-modelling/">#Propensity Modelling</a>&nbsp;
+            <time class="post-full-meta-date" datetime="2020-05-02">2 May 2020</time>
+                <span class="date-divider">/</span> <a href="/tags/propensity-modelling/">#Propensity Modelling</a>&nbsp;<a href="/tags/data-exploration/">#Data Exploration</a>&nbsp;
         </section>
-        <h1 class="post-full-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</h1>
+        <h1 class="post-full-title">Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</h1>
     </header>
     
-    <figure class="post-full-image" style="background-image: url(/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg)">
+    <figure class="post-full-image" style="background-image: url(/img/dan-meyers-MQ8-4HYTgOc-unsplash.jpg)">
     </figure>
 
     <section class="post-full-content">
         <div class="kg-card-markdown">
         
 
-<p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.</p>
+<p>In this day and age, a business that leverages data to understand the drivers of customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.</p>
 
-<p>One trialled and tested approach to tease out this type of insight is <a href="https://en.wikipedia.org/wiki/Predictive_modelling"><strong>Propensity Modelling</strong></a>, which combines information such as a <strong>customers’ demographics</strong> (age, race, religion, gender, family size, ethnicity, income, education level), <strong>psycho-graphic</strong> (social class, lifestyle and personality characteristics), <strong>engagement</strong> (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.), <strong>user experience</strong> (customer service phone and email wait times, number of refunds, average shipping times), and <strong>user behaviour</strong> (purchase value on different time-scales, number of days since most recent purchase, time between offer and conversion, etc.) to estimate the likelihood of a certain customer profile to performing a certain type of behaviour (e.g. the purchase of a product).</p>
+<p>One trialled and tested approach to tease this type of insight out of data is <a href="https://en.wikipedia.org/wiki/Predictive_modelling"><strong>Propensity Modelling</strong></a>, which combines information such as a <strong>customers’ demographics</strong> (age, race, religion, gender, family size, ethnicity, income, education level), <strong>psycho-graphic</strong> (social class, lifestyle and personality characteristics), <strong>engagement</strong> (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.), <strong>user experience</strong> (customer service phone and email wait times, number of refunds, average shipping times), and <strong>user behaviour</strong> (purchase value on different time-scales, number of days since most recent purchase, time between offer and conversion, etc.) to estimate the likelihood of a certain customer profile to performing a certain type of behaviour (e.g. the purchase of a product).</p>
 
-<p>Once you understand the probability of a certain customer to interact with your brand, buy a product or a sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
+<p>Once you understand the probability of a certain customer to interact with a brand, buy a product or a sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
 
 <h2 id="project-structure">Project Structure</h2>
 
-<p>In this project I&rsquo;m analysing the results of a bank <strong>direct marketing campaign</strong> to sell term deposits in order to identify what type of customer is more likely to respond. The marketing campaigns were based on phone calls and more than one contact to the same client was required at times.</p>
+<p>In this project I&rsquo;m analysing the results of a bank <strong>direct marketing campaign</strong> to sell term a deposit its existing clients in order to identify what type of characteristics make a customer more likely to respond. The marketing campaigns were based on phone calls and more than one contact to the same person was required at times.</p>
 
 <p>First, I am going to carry out an <strong>extensive data exploration</strong> and use the results and insights to prepare the data for analysis.</p>
 
@@ -149,15 +149,154 @@
 
 <p>Last, I&rsquo;ll fit <strong>one final model</strong> that combines findings from the exploratory analysis and insight from models&rsquo; selection and use it to <strong>run a revenue optimisation</strong>.</p>
 
-<h2 id="modelling-strategy">Modelling strategy</h2>
+<h2 id="the-data">The data</h2>
 
 <pre><code class="language-r">library(tidyverse)
+library(data.table)
 library(skimr)
+library(correlationfunnel)
+library(GGally)
+library(ggmosaic)
+library(knitr)
 library(h2o)
 library(DALEX)
 library(knitr)
 library(tictoc)
 </code></pre>
+
+<p>The Data is the <a href="https://archive.ics.uci.edu/ml/datasets/Bank+Marketing"><strong>Portuguese Bank Marketing</strong></a> set from the <a href="https://archive.ics.uci.edu/ml/datasets">UCI Machine Learning Repository</a> and describes the direct marketing campaigns carried out by a Portuguese banking institution aimed at selling term deposits/certificate of deposits to their customers. The marketing campaigns were based on phone calls to potential buyers from May 2008 to November 2010.</p>
+
+<p>The data I&rsquo;m using <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling/tree/master/01_data/bank-direct-marketing.csv"><strong>bank-direct-marketing.csv</strong></a> is a modified version of <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip">bank-additional-full.csv</a> and contains 41,188 examples with 21 different variables (10 continuous, 10 categorical plus the target variable). In particular, the target <strong>subscribed</strong> is a <strong>binary response variable</strong> indicating whether the client subscribed (‘Yes’ or numeric value 1) to a term deposit or not (‘No’ or numeric value 0), which make this a <a href="https://en.wikipedia.org/wiki/Binary_classification"><em>binary classification problem</em></a>.</p>
+
+<p>The data required some manipulation to get into a usable format, details of which can be found on my webpage: <a href="https://diegousai.io/2020/02/propensity-modelling-1-of-3/"> <strong>Propensity Modelling - Data Preparation and Exploratory Data Analysis</strong></a>. Here I simply load up the pre-cleansed data I am hosting <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"> <strong>on my GitHub repo for this project</strong></a></p>
+
+<pre><code class="language-r">data_clean &lt;- 
+  readRDS(file = &quot;https://raw.githubusercontent.com/DiegoUsaiUK/Propensity_Modelling/master/01_data/data_clean.rds&quot;)
+</code></pre>
+
+<h2 id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+
+<p>Although an integral part of any Data Science project and crucial to the full success of the analysis, <a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory Data Analysis (EDA)</a> can be an incredibly labour intensive and time consuming process. Recent years have seen a proliferation of approaches and libraries aimed at speeding up the process and in this project I&rsquo;m going to sample one of the &ldquo;new kids on the block&rdquo; ( the <a href="https://business-science.github.io/correlationfunnel/"><strong>correlationfunnel</strong></a> ) and combine its results with a more traditional EDA.</p>
+
+<h3 id="correlationfunnel"><em>correlationfunnel</em></h3>
+
+<p>With 3 simple steps <code>correlationfunnel</code> can produce a graph that arranges predictors top to bottom in descending order of absolute correlation with the target variable. Features at the top of the funnel are expected to have have stronger predictive power in a model.</p>
+
+<p>This approach offers a quick way to identify a hierarchy of expected predictive power for all variables and gives an early indication of which predictors should feature strongly/weakly in any model.</p>
+
+<pre><code class="language-r">data_clean %&gt;%  
+      # turn numeric and categorical features into binary data
+  binarize(n_bins = 4, # bin number for converting to discrete features
+           thresh_infreq = 0.01 # thresh. for assign categ. features into &quot;Other&quot;
+          ) %&gt;%
+      # correlate target variable to features 
+  correlate(target = subscribed__1) %&gt;% 
+      # correlation funnel visualisation
+  plot_correlation_funnel()
+</code></pre>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-5-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Zooming in on the top 5 features we can see that certain characteristics have a greater correlation with the target variable (subscribing to the term deposit product) when:</p>
+
+<ul>
+<li>The <code>duration</code> of the last phone contact with the client is 319 seconds or longer</li>
+<li>The number of <code>days</code> that passed by after the client was last contacted is greater than 6</li>
+<li>The outcome of the <code>previous</code> marketing campaign was <code>success</code></li>
+<li>The number of employed is 5,099 thousands or higher</li>
+<li>The value of the euribor 3 month rate is 1.344 or higher</li>
+</ul>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-6-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Conversely, variables at the bottom of the funnel, such as <strong>day_of_week</strong>, <strong>housing</strong>, and <strong>loan</strong>. show very little variation compared to the target variable (i.e.: they are very close to the zero correlation point to the response). For that reason, I&rsquo;m not expecting these features to impact the response.</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-7-1.png" alt="" width="100%" height="100%"/></p>
+
+<h3 id="features-exploration">Features exploration</h3>
+
+<p>Guided by the results of this visual correlation analysis, I will continue to explore the relationship between the target and each of the predictors in the next section. For this I am going to enlist the help of the brilliant <strong>GGally</strong> library to visualise a modified version of the correlation matrix with <code>Ggpairs</code>, and plot <code>mosaic charts</code> with the <strong>ggmosaic</strong> package, a great way to examine the relationship among two or more categorical variables.</p>
+
+<h4 id="target-variable">Target Variable</h4>
+
+<p>First things first, the <strong>target variable</strong>: <code>subscribed</code> shows a <strong>strong class imbalance</strong>, with nearly 89% in the <strong>No category</strong> to 11% in the <strong>Yes category</strong>.</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-8-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>I am going to address <strong>class imbalance</strong>  during the modelling phase by enabling  <strong>re-sampling</strong>, in <strong>h2o</strong>. This will rebalance the dataset by &ldquo;shrinking&rdquo; the prevalent class (&ldquo;No&rdquo; or 0) and ensure that the model adequately detects what variables are driving the ‘yes’ and ‘no’ responses.</p>
+
+<h4 id="predictors">Predictors</h4>
+
+<p>Let&rsquo;s continue with <strong>some of the numerical features</strong>:</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/some continuous features-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Although the correlation funnel analysis revealed that <strong>duration</strong> has the strongest expected predictive power, it is unknown before a call (it’s obviously known afterwards) and offers very little actionable insight or predictive value. Therefore, it should be discarded from any realistic predictive model and will not be used in this analysis.</p>
+
+<p><strong>age</strong> &rsquo;s density plots have very similar variance compared to the target variable and are centred around the same area. For these reasons, it should not have a great impact on <strong>subscribed</strong>.</p>
+
+<p>Despite continuous in nature, <strong>pdays</strong> and <strong>previous</strong> are in fact categorical features and are also all strongly right skewed. For these reasons, they will need to be discretised into groups. Both variables are also moderately correlated, suggesting that they may capture the same behaviour.</p>
+
+<p>Next, I visualise the <strong>bank client data</strong> with the <em>mosaic charts</em>:</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/bank client data all-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>In line with the <em>correlationfunnel</em> findings, <strong>job</strong>, <strong>education</strong>, <strong>marital</strong> and <strong>default</strong> all show a good level of variation compared to the target variable, indicating that they would impact the response. In contrast, <strong>housing</strong> and <strong>loan</strong> sat at the very bottom of the funnel and are expected to have little influence on the target, given the small variation when split by &ldquo;subscribed&rdquo; response.</p>
+
+<p><strong>default</strong> has only 3 observations in the ‘yes’ level, which will be rolled into the least frequent level as they&rsquo;re not enough to make a proper inference. Level ‘unknown’ of the <strong>housing</strong> and <strong>loan</strong> variables have a small number of observations and will be rolled into the second smallest category. Lastly, <strong>job</strong> and <strong>education</strong> would also benefit from grouping up of least common levels.</p>
+
+<p>Moving on to the <strong>other campaign attributes</strong>:</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/other campaign attributes-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Although continuous in principal, <strong>campaign</strong> is more categorical in nature and strongly right skewed, and will need to be discretised into groups. However, we have learned from the earlier correlation analysis that is not expected be a strong drivers of variation in any model.</p>
+
+<p>On the other hand, <strong>poutcome</strong> is one of the attributes expected to be have a strong predictive power. The uneven distribution of levels would suggest to roll the least common occurring level (<strong>success</strong> or <code>scs</code>) into another category. However, contacting a client who previously purchased a term deposit is one of the catacteristics with highest predictive power and needs to be left ungrouped.</p>
+
+<p>Then, I&rsquo;m looking at <strong>last contact information</strong>:</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/last contact information-1.png" alt="" width="100%" height="100%"/></p>
+
+<p><strong>contact</strong> and <strong>month</strong> should impact the response variable as they both have a good level of variation compared to the target. <strong>month</strong> would also benefit from grouping up of least common levels.</p>
+
+<p>In contrast, <strong>day_of_week</strong> does not appear to impact the response as there is not enough variation between the levels.</p>
+
+<p>Last but not least, the <strong>social and economic attributes</strong>:</p>
+
+<p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/social-economic context attributes-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>All <em>social and economic attributes</em> show a good level of variation compared to the target variable, which suggests that they should all impact the response. They all display a <strong>high degree of multi-modality</strong> and do not have an even spread through the density plot, and will need to be binned.</p>
+
+<p>It is also worth noting that, with the exception of _cons_confidence<em>index</em>, all other social and economic attributes are strongly correlated to each other, indicating that only one could be included in the model as they are all “picking up” similar economic trend.</p>
+
+<h2 id="summary-of-exploratory-data-analysis-preparation">Summary of Exploratory Data Analysis &amp; Preparation</h2>
+
+<ul>
+<li><p>Correlation analysis with <strong>correlationfunnel</strong> helped identify a hierarchy of expected predictive power for all variables</p></li>
+
+<li><p><strong>duration</strong> (eqpt_rent) has strongest correlation with target variable whereas some of the bank client data like <strong>housing</strong> and <strong>loan</strong> shows the weakest correlation</p></li>
+
+<li><p>However, <strong>duration</strong> will <strong>NOT</strong> be used in the analysis as it is unknown before a call. As such it offers very little actionable insight or predictive value and should be discarded from any realistic predictive model</p></li>
+
+<li><p>The target variable <strong>subscribed</strong> shows strong class imbalance, with nearly 89% of <strong>No churn</strong>, which will need to be addresses before the modelling analysis can begin</p></li>
+
+<li><p>Most predictors would benefit from grouping up of least common levels</p></li>
+
+<li><p>Further feature exploration revealed the most <strong>social and economic context attributes</strong>
+are strongly correlated to each other, suggesting that only a selection of them could be considered in a final model</p></li>
+</ul>
+
+<h3 id="final-data-processing-and-transformation">Final Data Processing and Transformation</h3>
+
+<p>Following up on the findings from the Exploratory Data Analysis, I&rsquo;ve discretised categorical and continuous predictors by combining least common levels into &ldquo;other&rsquo; category, set all variables but <code>age</code> as unordered factors ( <strong>h2o</strong> does not support ordered categorical variables) and shorted level names of some categorical variables to ease visualisations. You can find all the details and the full code on my webpage: <a href="https://diegousai.io/2020/02/propensity-modelling-1-of-3/"><strong>Propensity Modelling - Data Preparation and Exploratory Data Analysis</strong></a>.</p>
+
+<p>Here I simply load up the final dataset hosted <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"> <strong>on my GitHub repo</strong></a>:</p>
+
+<pre><code class="language-r">data_final &lt;- 
+  readRDS(file = &quot;https://raw.githubusercontent.com/DiegoUsaiUK/Propensity_Modelling/master/01_data/data_final.rds&quot;)
+</code></pre>
+
+<h2 id="modelling-strategy">Modelling strategy</h2>
 
 <p>In order to stick to a reasonable project running time, I&rsquo;ve opted for <strong>h2o</strong> as my modelling platform as it offers a number of advantages:</p>
 
@@ -173,15 +312,9 @@ library(tictoc)
 <li><p><strong>hyper-parameters fine tuning</strong> (a.k.a. grid search) can be implemented alogside a number of strategies that ensure running time is capped without compromising on performance</p></li>
 </ul>
 
-<h3 id="creating-the-training-and-validation-sets">Creating the training and validation sets</h3>
+<h3 id="building-models-with-h2o">Building models with h2o</h3>
 
-<p>Before I begin, I load the cleansed data saved at the end of the exploratory analysis</p>
-
-<pre><code class="language-r"># Loading clensed data
-data_final &lt;- readRDS(file = &quot;../01_data/data_final.rds&quot;)
-</code></pre>
-
-<p>I&rsquo;m starting by creating a randomised training and validation set with <code>rsample</code></p>
+<p>I&rsquo;m starting by creating a randomised training and validation set with <code>rsample</code> and save them as <code>train_tbl</code> and <code>test_tbl</code>.</p>
 
 <pre><code class="language-r">set.seed(seed = 1975) 
 
@@ -191,20 +324,11 @@ train_test_split &lt;-
     prop = 0.80   
   ) 
 
-train_test_split
-
-## &lt;32951/8237/41188&gt;
-</code></pre>
-
-<p>Of the 41,188 total customers, 32,951 have been assigned to the training set and 8,237 to the test set. I save them as <code>train_tbl</code> and <code>test_tbl</code>.</p>
-
-<pre><code class="language-r">train_tbl &lt;- train_test_split %&gt;% rsample::training() 
+train_tbl &lt;- train_test_split %&gt;% rsample::training() 
 test_tbl  &lt;- train_test_split %&gt;% rsample::testing() 
 </code></pre>
 
-<h3 id="building-models-with-h2o">Building models with h2o</h3>
-
-<p>The next step is to start a <strong>h2o cluster</strong>. I specify the size of the memory cluster to “16G” to help speed things up a bit and turn off the progress bar.</p>
+<p>Then, I start an <strong>h2o cluster</strong>. I specify the size of the memory cluster to “16G” to help speed things up a bit and turn off the progress bar.</p>
 
 <pre><code class="language-r"># initialize h2o session and switch off progress bar
 h2o.no_progress() 
@@ -253,7 +377,7 @@ x &lt;- setdiff(names(train_tbl %&gt;% as.h2o()), y)
 
 <p>For this project I&rsquo;m estimating a <strong>Generalised Linear Model</strong> (a.k.a. Elastic Net), a <strong>Random Forest</strong> (which <strong>h2o</strong> refers to at <em>Distributed Random Forest</em>) and a <strong>Gradient Boosting Machine</strong> (or GBM).</p>
 
-<p>To implement a grid search for the <code>tree-based</code> models (DRF and GBM), I need to set up a random grid to <strong>search for optimal hyper-parameters</strong> for the <code>h2o.grid()</code> function . To do so, I define the <strong>search parameters</strong> to be passed to the <code>hyper_params</code>argument:</p>
+<p>To implement a grid search for the <code>tree-based</code> models (DRF and GBM), I need to set up a random grid to <strong>search for optimal hyper-parameters</strong> for the <code>h2o.grid()</code> function . To do so, I start with defining the <strong>search parameters</strong> to be passed to the <code>hyper_params</code>argument:</p>
 
 <ul>
 <li><p><code>sample_rate</code> is used to set the row sampling rate for each tree</p></li>
@@ -390,23 +514,6 @@ gbm_model &lt;-
   h2o.getModel(gbm_grid_perf@model_ids[[1]])
 </code></pre>
 
-<p><strong>ALWAYS REMEMBER</strong> that <strong>h2o</strong> requires a live connection to their servers to operate properly. For that reason it is important that you <strong>save away all models you estimate in your current live connection</strong> so that they can be accessed at any time.</p>
-
-<pre><code class="language-r"># set path to get around model path being different from project path
-path = &quot;../03_models/&quot;
-
-# Save GLM model
-h2o.saveModel(glm_model, path)
-
-# Save RF model
-h2o.saveModel(drf_model, path)
-
-# Save GBM model
-h2o.saveModel(gbm_model, path)
-</code></pre>
-
-<p>This is especially important in the event of momentary loss of web connection, which I figured out to my expense. In case connection is lost and you have to restart the <strong>h2o cluster</strong>, models that are still in the RStudio environment but estimated in the previous session are NOT recognised as part of the current cluster and need to be re-estimated. This could be a little annoying, especially when you fit complex models that require extensive running time to converge.</p>
-
 <h2 id="performance-assessment">Performance assessment</h2>
 
 <p>There are many libraries (like <em>IML</em>, <em>PDP</em>, <em>VIP</em>, and <em>DALEX</em> to name but the more popular) that help with <strong>Machine Learning Interpretability</strong>, <strong>feature explanation</strong> and <strong>general performance assessment</strong> and they all have gained in popularity in recent years.</p>
@@ -472,9 +579,9 @@ explainer_gbm &lt;- explain(
 
 <h2 id="assessing-the-models">Assessing the models</h2>
 
-<p>At last, I&rsquo;m ready to pass the <strong>explainer objects</strong> to several DALEX functions that will help assess and compare the performance of the different models. Given that performance measures may reflect a different aspect of the predictive performance of a model, it is important to evaluate and compare several metrics when appraising a model and DALEX does just that!</p>
+<p>At last, I&rsquo;m ready to pass the <strong>explainer objects</strong> to several DALEX functions that will help assess and compare the performance of the different models. Given that performance measures may reflect a different aspect of the predictive performance of a model, it is <strong>important to evaluate and compare several metrics when appraising a model</strong> and DALEX does just that!</p>
 
-<p>To evaluate and compare my models&rsquo; performance, I&rsquo;ve drawn inspiration from the framework used by Przemyslaw Biecek and Tomasz Burzykowski in their book, <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, which is structured around key questions:</p>
+<p>To evaluate and compare my models&rsquo; performance, I&rsquo;ve drawn inspiration from the framework used by <em>Przemyslaw Biecek</em> and <em>Tomasz Burzykowski</em> in their book, <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, which is structured around key questions:</p>
 
 <ul>
 <li><p>1 - Are the models well fitted?</p></li>
@@ -540,7 +647,7 @@ explainer_gbm &lt;- explain(
 ## -0.04068165 -0.03371074 -0.02750033  0.29004942  0.98274727
 </code></pre>
 
-<p>Based on the metrics available for all models ( <strong>accuracy</strong> and <strong>AUC</strong>), I can see that <strong>elastic net</strong> and <strong>gradient boosting</strong> are performing roughly in par with one another, with <strong>random forest</strong> not far behind. AUC ranges between .78-.80 whereas accuracy has a slightly narrower range of .89-.90</p>
+<p>Based on the metrics available for all models ( <strong>accuracy</strong> and <strong>AUC</strong>), I can see that <strong>elastic net</strong> and <strong>gradient boosting</strong> are performing roughly on par with one another, with <strong>random forest</strong> not far behind. AUC ranges between .78-.80 whereas accuracy has a slightly narrower range of .89-.90</p>
 
 <h4 id="residual-diagnostics">Residual diagnostics</h4>
 
@@ -567,7 +674,7 @@ gridExtra::grid.arrange(p2, p1, nrow = 1)
 
 <p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-16-1.png" alt="" width="100%" height="100%"/></p>
 
-<p>The DRF and GBM models appear to perform on a par with one another, given the median absolute residuals. Looking at the residuals distribution on the right-hand side, you can see that the median residuals are the lowest for these two models, with the GLM seeing a higher number of tail residuals. This is also mirrored by the boxplots on the left-hand side, where the tree-based models both achieve the lowest median absolute residual value.</p>
+<p>The <strong>DRF and GBM</strong> models appear to perform <strong>on a par with one another</strong>, given the median absolute residuals. Looking at the residuals distribution on the right-hand side, you can see that the median residuals are the lowest for these two models, with <strong>the GLM seeing a higher number of tail residuals</strong>. This is also mirrored by the boxplots on the left-hand side, where the tree-based models both achieve the lowest median absolute residual value.</p>
 
 <h3 id="2-how-do-the-models-compare-with-one-another">2 - How do the models compare with one another?</h3>
 
@@ -593,7 +700,7 @@ plot(eva_glm, eva_dfr, eva_gbm, geom = &quot;roc&quot;) +
 <ul>
 <li><p><strong>Direct read</strong>: All models are performing much better than a random guess</p></li>
 
-<li><p><strong>Comparing read</strong>: the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve"><strong>AUC (Area Under the Curve)</strong></a> summarises the ROC curve and can be used to directly compare models performance - the perfect classifier would have AUC = 1.</p></li>
+<li><p><strong>Compared read</strong>: the <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve"><strong>AUC (Area Under the Curve)</strong></a> summarises the ROC curve and can be used to directly compare models performance - the perfect classifier would have AUC = 1.</p></li>
 </ul>
 
 <p>All models performs much better that random guessing and achieves a AUC of .75-.80, with the DRF achieving the highest score of 0.799.</p>
@@ -604,9 +711,9 @@ plot(eva_glm, eva_dfr, eva_gbm, geom = &quot;roc&quot;) +
 
 <p>Each ML algorithm has its own way to assess the importance of each variable: linear models for instance refer to their coefficients, whereas tree-based models look at impurity, which makes it difficult to compare variable importance across models.</p>
 
-<p>DALEX calculates variable importance measures via permutation, which is model agnostics, allowing for direct comparison between models of different structure. However, with variable importance scores based on permutations, we should remember that calculations slow down when the number of features increases.</p>
+<p>DALEX calculates variable importance measures via permutation, which is model agnostics and allows for <strong>direct comparison between models of different structure</strong>. However, when variable importance scores are based on permutations, we should remember that <strong>calculations slow down when the number of features increases</strong>.</p>
 
-<p>Once again, I&rsquo;m passing the &ldquo;explainer&rdquo; for each single model to the <code>feature_importance()</code> function and setting <code>n_sample</code> to 8000 to use practically all available observations. Although not exorbitant, the total execution time was <strong>nearly 30 minute</strong> but this is based on a relatively small dataset. But don&rsquo;t forget that computation speed can be increased by reducing <code>n_sample</code>, which is especially important for larger datasets.</p>
+<p>Once again, I&rsquo;m passing the &ldquo;explainer&rdquo; for each single model to the <code>feature_importance()</code> function and setting <code>n_sample</code> to 8000 to use practically all available observations. Although not exorbitant, the total execution time was <strong>nearly 30 minute</strong> but this is based on a relatively small dataset and number of variables. Don&rsquo;t forget that computation speed can be increased by reducing <code>n_sample</code>, which is especially important for larger datasets.</p>
 
 <pre><code class="language-r"># measure execution time
 tictoc::tic()
@@ -639,7 +746,7 @@ plot(vip_glm, vip_drf, vip_gbm, max_vars = 10) +
 
 <p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-19-1.png" alt="" width="100%" height="100%"/></p>
 
-<p>I like this plot as it brings together a wealth of information!</p>
+<p>I like this plot as it brings together a wealth of information.</p>
 
 <p>First of all you can notice that, although with slightly different relative weights, the top 5 features are common to each models, with <code>nr_employed</code> ( <strong>employed in the economy</strong>) being the single most important predictor in all of them. This consistency is reassuring as it tells us that all models are picking up the same structure and interactions in the data, and gives us assurance that these features have strong predictive power.</p>
 
@@ -670,33 +777,11 @@ plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
 
 <p>Let&rsquo;s now take a look at <code>age</code>, a predictor that, if you recall from the EDA, was NOT expected to have an impact on the target variable:</p>
 
-<pre><code class="language-r"># compute PDP for a given variable
-pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;age&quot;, type = &quot;partial&quot;)
-pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;age&quot;, type = &quot;partial&quot;)
-pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;age&quot;, type = &quot;partial&quot;)
-
-plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
-  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
-</code></pre>
-
 <p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-21-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>One thing we notice is that the range of variation in the average prediction (x-axis) is relatively shallow across the age spectrum (y-axis), confirming the finding from the exploratory analysis that this variable would have a low predictive power. Also, both <strong>GBM</strong> and <strong>random forest</strong> are using <code>age</code> in a non-linear way, whereas the <strong>elastic net</strong> model is unable to capture this non-linear dynamic.</p>
 
 <p>Partial Dependence plots could also work as a diagnostic tool: looking at <code>poutcome</code> (outcome of the <code>previous</code> marketing campaign) reveals that <strong>GBM</strong> and <strong>random forest</strong> correctly picked up on a higher probability of signing up when the outcome of a previous campaign was success (<code>scs</code>).</p>
-
-<pre><code class="language-r"># compute PDP for a given variable
-pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;poutcome&quot;, type = &quot;partial&quot;)
-pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;poutcome&quot;, type = &quot;partial&quot;)
-pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;poutcome&quot;, type = &quot;partial&quot;)
-
-plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
-  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
-</code></pre>
 
 <p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-22-1.png" alt="" width="100%" height="100%"/></p>
 
@@ -704,22 +789,11 @@ plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
 
 <p>I&rsquo;m going to finish with the <code>month</code> feature as it offers a great example of one of those cases where you may want to override the model&rsquo;s outcome with industry knowledge and some common sense. Specifically, the <strong>GBM</strong> model seems to suggest that <strong>March</strong>,  <strong>October</strong> and <strong>December</strong> are periods associated with much better odds of success.</p>
 
-<pre><code class="language-r"># compute PDP for a given variable
-pdp_glm  &lt;- model_profile(explainer_glm, variable = &quot;month&quot;, type = &quot;partial&quot;)
-pdp_drf  &lt;- model_profile(explainer_drf, variable = &quot;month&quot;, type = &quot;partial&quot;)
-pdp_gbm  &lt;- model_profile(explainer_gbm, variable = &quot;month&quot;, type = &quot;partial&quot;)
-
-plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
-  ggtitle(&quot;Contrastive Partial Dependence Profiles&quot;, &quot;&quot;) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5))
-</code></pre>
-
 <p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-23-1.png" alt="" width="100%" height="100%"/></p>
 
 <p>Based on my previous analysis experience of similar financial products, I would not advise a banking organisation to ramp up their direct marketing activity around the weeks in the run to Christmas as this is a period of the year where the consumers&rsquo; focus shifts away from this type of purchases.</p>
 
-<h3 id="final-model">Final model</h3>
+<h2 id="final-model">Final model</h2>
 
 <p>All in all <strong>random forest</strong> is my final model of choice: it appears the more balanced of the three and does not display some of the &ldquo;oddities&rdquo; seen with variables like <code>month</code> and <code>poutcome</code>.</p>
 
@@ -730,22 +804,20 @@ plot(pdp_glm$agr_profiles, pdp_drf$agr_profiles, pdp_gbm$agr_profiles) +
 <ul>
 <li><p>Excludes a number of features (<code>age</code>, <code>housing</code>, <code>loan</code>, <code>campaign</code>, <code>cons_price_idx</code>) that have low predictive power</p></li>
 
-<li><p>Removes <code>previous</code>, which shows little difference between its 2 levels in the PD plot - it&rsquo;s also moderately correlated with <code>pdays</code>, suggesting that they may capturing the same behaviour</p></li>
+<li><p>Removes <code>previous</code>, which shows little difference between its 2 levels in the PD plot - it&rsquo;s also moderately correlated with <code>pdays</code>, suggesting that they may be capturing the same behaviour</p></li>
 
-<li><p>Also drops <code>emp_var_rate</code> because of its strong correlation with <code>nr_employed</code> and also because conceptually they are controlling for a very similar economic behaviour</p></li>
-</ul>
-
-<p>.</p>
+<li><p>Also drops <code>emp_var_rate</code> because of its strong correlation with <code>nr_employed</code> and also because conceptually they are controlling for a very similar economic behaviour</p>
 
 <pre><code class="language-r"># response variable remains unaltered
 y &lt;- &quot;subscribed&quot;
 
 # predictors set: remove response variable and 7 predictors
 x_final &lt;- setdiff(names(train_tbl %&gt;% 
-                           select(-c(age, housing, loan, campaign, previous,
-                                     cons_price_idx, emp_var_rate)) %&gt;% 
-                           as.h2o()), y)
-</code></pre>
+                       select(-c(age, housing, loan, campaign, previous,
+                                 cons_price_idx, emp_var_rate)) %&gt;% 
+                       as.h2o()), y)
+</code></pre></li>
+</ul>
 
 <p>For the final model, I&rsquo;m using the same specification as to the original random forest</p>
 
@@ -779,16 +851,7 @@ drf_final &lt;-
   h2o.getModel(drf_grid_perf_final@model_ids[[1]])
 </code></pre>
 
-<p>Always remember to save your models!</p>
-
-<pre><code class="language-r"># set path to get around model path being different from project path
-path = &quot;../03_models/&quot;
-
-# Save Final RF model
-h2o.saveModel(drf_final, path)
-</code></pre>
-
-<h4 id="final-model-evaluation">Final model evaluation</h4>
+<h3 id="final-model-evaluation">Final model evaluation</h3>
 
 <p>For brevity, I am visualising the variable importance plot with the <code>vip()</code> function from the namesake package, which returns the ranked contribution of each variable.</p>
 
@@ -832,13 +895,13 @@ h2o.saveModel(drf_final, path)
 <li><p><code>contacting</code> your customer on their <em>mobile</em> increases the chances of subscription by nearly a quarter compared to a <em>telephone</em> call.</p></li>
 </ul>
 
-<p><strong>NOTE THAT Partial Dependence Plots for all final model&rsquo;s predictors can be found in the Appendix</strong></p>
+<p><strong>NOTE THAT</strong> Partial Dependence Plots for all final model&rsquo;s predictors can be found on my webpage: on my webpage: <a href="https://diegousai.io/2020/03/propensity-modelling-2-of-3/"><strong>Propensity Modelling - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</strong></a>.</p>
 
 <p>Armed with such insight, one can help <strong>shaping overall marketing and communication plans</strong> to focus on customers more likely to subscribe to a term deposit.</p>
 
 <p>However, these are based on model-level explainers, which reflect an overall, aggregated view. If you&rsquo;re interested to understand how a model yields a prediction for a single observation (i.e. what factors influence the likelihood to engage <strong>at single customer level</strong>), you can resort to the <a href="https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/"><strong>Local Interpretable Model-agnostic Explanations (LIME)</strong></a> method that exploits the concept of a &ldquo;local model&rdquo;. I will be exploring the LIME methodology in a future post.</p>
 
-<h3 id="summary-of-model-estimation-and-assessment">Summary of model estimation and assessment</h3>
+<h2 id="summary-of-model-estimation-and-assessment">Summary of model estimation and assessment</h2>
 
 <p>For the analysis part of this project I opted for <strong>h2o</strong> as my modelling platform. h2o is not only very easy to use but also has a number of built-in functionalities that help speeding up data preparation: it takes care of <strong>class imbalance</strong> with no need for pre-modelling resampling, automatically <strong>“binarises“ character/factor</strong> variables, and implements <strong>cross-validation</strong> without the need for a separate <code>validation frame</code> to be &ldquo;carved out&rdquo; of the training set.</p>
 
@@ -846,15 +909,307 @@ h2o.saveModel(drf_final, path)
 
 <p>My final model of choice is the <strong>random forest</strong>, which I further refined by combining findings from the exploratory analysis, insight gathered from the models&rsquo; evaluation and a number of industry-specific/common sense considerations. This ensured a reduced model complexity without compromising on predictive power.</p>
 
+<h2 id="optimising-for-expected-profit">Optimising for expected profit</h2>
+
+<p>Now that I have my final model, the last piece of the puzzle is the final “So what?” question that puts all into perspective. The estimate for the probability of a customer to sign up for a term deposit can be used to create a number of optimised scenarios, ranging from minimising your <strong>marketing expenditure</strong>, maximising your <strong>overall acquisition targets</strong>, to driving a certain number of <strong>cross-sell opportunities</strong>.</p>
+
+<p>Before I can do that, there are a couple of <strong>housekeeping tasks</strong>  needed to &ldquo;set up the work scene&rdquo; and a couple of important concepts to introduce:</p>
+
+<ul>
+<li><p>the threshold and the F1 score</p></li>
+
+<li><p>precision and recall</p></li>
+</ul>
+
+<h3 id="the-threshold-and-the-f1-score">The threshold and the F1 score</h3>
+
+<p>The question the model is trying to answer is &ldquo; <em>Has this customer signed up for a term deposit following a direct marketing campaign?</em> &ldquo; and the cut-off (a.k.a. the threshold) is the value that divides the predictions into <code>Yes</code> and  <code>No</code>.</p>
+
+<p>To illustrate the point, I first calculate some predictions by passing the <code>test_tbl</code> data set to the <code>h2o.performance</code> function.</p>
+
+<pre><code class="language-r">perf_drf_final &lt;- h2o.performance(drf_final, newdata = test_tbl %&gt;% as.h2o()) 
+
+perf_drf_final@metrics$max_criteria_and_metric_scores
+
+## Maximum Metrics: Maximum metrics at their respective thresholds
+##                         metric threshold       value idx
+## 1                       max f1  0.189521    0.508408 216
+## 2                       max f2  0.108236    0.560213 263
+## 3                 max f0point5  0.342855    0.507884 143
+## 4                 max accuracy  0.483760    0.903848  87
+## 5                max precision  0.770798    0.854167  22
+## 6                   max recall  0.006315    1.000000 399
+## 7              max specificity  0.930294    0.999864   0
+## 8             max absolute_mcc  0.189521    0.444547 216
+## 9   max min_per_class_accuracy  0.071639    0.721231 300
+## 10 max mean_per_class_accuracy  0.108236    0.755047 263
+## 11                     max tns  0.930294 7342.000000   0
+## 12                     max fns  0.930294  894.000000   0
+## 13                     max fps  0.006315 7343.000000 399
+## 14                     max tps  0.006315  894.000000 399
+## 15                     max tnr  0.930294    0.999864   0
+## 16                     max fnr  0.930294    1.000000   0
+## 17                     max fpr  0.006315    1.000000 399
+## 18                     max tpr  0.006315    1.000000 399
+</code></pre>
+
+<p>Like many other machine learning modelling platforms, <strong>h2o</strong> uses the threshold value associated with the maximum <a href="https://en.wikipedia.org/wiki/F1_score">F1 score</a>, which is nothing but a weighted average between precision and recall. In this case the threshold @ Max F1 is <strong>0.190</strong>.</p>
+
+<p>Now, I use the <code>h2o.predict</code> function to make predictions using the test set. The prediction output comes with three columns: the actual model predictions (<code>predict</code>), and the probabilities associated with that prediction (<code>p0</code>, and <code>p1</code>, corresponding to <code>No</code> and <code>Yes</code> respectively). As you can see, the <code>p1</code> probability associated with the current cut-off is around <strong>0.0646</strong>.</p>
+
+<pre><code class="language-r">drf_predict &lt;- h2o.predict(drf_final, newdata = test_tbl %&gt;% as.h2o())
+
+# I converte to a tibble for ease of use
+as_tibble(drf_predict) %&gt;%
+  arrange(p0) %&gt;% 
+  slice(3088:3093) %&gt;%
+  kable()
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">predict</th>
+<th align="left">p0</th>
+<th align="left">p1</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">0.9352865</td>
+<td align="left">0.0647135</td>
+</tr>
+
+<tr>
+<td align="left">1</td>
+<td align="left">0.9352865</td>
+<td align="left">0.0647135</td>
+</tr>
+
+<tr>
+<td align="left">1</td>
+<td align="left">0.9352865</td>
+<td align="left">0.0647135</td>
+</tr>
+
+<tr>
+<td align="left">0</td>
+<td align="left">0.9354453</td>
+<td align="left">0.0645547</td>
+</tr>
+
+<tr>
+<td align="left">0</td>
+<td align="left">0.9354453</td>
+<td align="left">0.0645547</td>
+</tr>
+
+<tr>
+<td align="left">0</td>
+<td align="left">0.9354453</td>
+<td align="left">0.0645547</td>
+</tr>
+</tbody>
+</table>
+
+<p>However, the <em>F1 score</em> is only one way to identify the cut-off. Depending on our goal, we could also decide to use a threshold that, for instance, maximises precision or recall. In a commercial setting, the pre-selected threshold @ Max F1 may not necessarily be the optimal choice: enter <strong>Precision and Recall</strong>!</p>
+
+<h3 id="precision-and-recall">Precision and Recall</h3>
+
+<p><strong>Precision</strong> shows how sensitive models are to False Positives (i.e. predicting a customer is <em>subscribing</em> when he-she is actually NOT) whereas <strong>Recall</strong> looks at how sensitive models are to False Negatives (i.e. forecasting that a customer is <em>NOT subscribing</em> whilst he-she is in fact going to do so).</p>
+
+<p>These metrics are <strong>very relevant in a business context</strong> because organisations are particularly interested in accurately predicting which customers are truly likely to <code>subscribe</code> <strong>(high precision)</strong> so that they can target them with advertising strategies and other incentives. At the same time they want to minimise efforts towards customers incorrectly classified as <code>subscribing</code> <strong>(high recall)</strong> who are instead unlikely to sign up.</p>
+
+<p>However, as you can see from the chart below, when precision gets higher, recall gets lower and vice versa. This is often referred to as the <strong>Precision-Recall tradeoff</strong>.</p>
+
+<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-6-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>To fully comprehend this dynamic and its implications, let&rsquo;s start with taking a look at the <strong>cut-off zero</strong> and <strong>cut-off one</strong> points and then see what happens when you start moving the threshold between the two positions:</p>
+
+<ul>
+<li><p>At <strong>threshold zero</strong> ( <em>lowest precision, highest recall</em>) the model classifies every customer as <code>subscribed = Yes</code>. In such scenario, you would <strong>contact every single customers</strong> with direct marketing activity but waste precious resourses by also including those less likely to subcsribe. Clearly this is not an optimal strategy as you&rsquo;d incur in a higher overall acquisition cost.</p></li>
+
+<li><p>Conversely, at <strong>threshold one</strong> ( <em>highest precision, lowest recall</em>) the model tells you that nobody is likely to subscribe so you should <strong>contact no one</strong>. This would save you tons of money in marketing cost but you&rsquo;d be missing out on the additional revenue from those customers who would&rsquo;ve subscribed, had they been notified about the term deposit through direct marketing. Once again, not an optimal strategy.</p></li>
+</ul>
+
+<p>When moving to a higher threshold the model becomes more &ldquo;choosy&rdquo; on who it classifies as <code>subscribed = Yes</code>. As a consequence, you become more conservative on who to contact ( <strong>higher precision</strong>) and reduce your acquisition cost, but at the same time you increase your chance of not reaching prospective subscribes ( <strong>lower recall</strong>), missing out on potential revenue.</p>
+
+<p>The key question here is <strong>where do you stop?</strong> Is there a &ldquo;sweet spot&rdquo; and if so, how do you find it? Well, that will depend entirely on the goal you want to achieve. In the next section I&rsquo;ll be running a mini-optimisation with the goal to <strong>maximise profit</strong>.</p>
+
+<h2 id="finding-the-optimal-threshold">Finding the optimal threshold</h2>
+
+<p>For this mini-optimisation I&rsquo;m implementing a <strong>simple profit maximisation</strong> based on generic costs connected to acquiring a new customer and benefits derived from said acquisition. This can be evolved to include more complex scenarios but it would be outside the scope of this exercise.</p>
+
+<p>To understand which cut-off value is optimal to use we need to simulate the cost-benefit associated with each threshold point. This is a concept derived from the <strong>Expected Value Framework</strong> as seen on <a href="https://www.goodreads.com/book/show/17912916-data-science-for-business"><em>Data Science for Business</em></a></p>
+
+<p>To do so I need 2 things:</p>
+
+<ul>
+<li><p><strong>Expected Rates for each threshold</strong> - These can be retrieved from the confusion matrix</p></li>
+
+<li><p><strong>Cost/Benefit for each customer</strong> - I will need to simulate these based on assumptions</p></li>
+</ul>
+
+<p><strong>Expected rates</strong> can be conveniently retrieved for all cut-off points using <code>h2o.metric</code>.</p>
+
+<pre><code class="language-r"># Get expected rates by cutoff
+expected_rates &lt;- h2o.metric(perf_drf_final) %&gt;%
+    as.tibble() %&gt;%
+    select(threshold, tpr, fpr, fnr, tnr)
+</code></pre>
+
+<p>The <strong>cost-benefit matrix</strong> is a business assessment of the cost and benefit for each of four potential outcomes. To create such matrix I will have to make a few assumptions about the <strong>expenses and advantages</strong> that an organisation should consider when carrying out <strong>an advertising-led procurement drive</strong>.</p>
+
+<p>Let&rsquo;s assume that the <strong>cost of selling a term deposits</strong> is of <strong>£30 per customer</strong>. This would include the likes of performing the direct marketing activity (training the call centre reps, setting time aside for active calls, etc.) and incentives such as offering a discounts on another financial product or on boarding onto membership schemes offering benefits and perks. A banking organisation will incur in this type of cost in two cases: when they correctly predict that a customer will subscribe ( <strong>true positive</strong>, TP), and when they incorrectly predict that a customer will subscribe ( <strong>false positive</strong>, FP).</p>
+
+<p>Let’s also assume that the <strong>revenue of selling a term deposits</strong> to an existing customer is of <strong>£80 per customer</strong>. The organisation will guarantee this revenue stream when the model predicts that a customer will subscribe and they actually do ( <strong>true positive</strong>, TP).</p>
+
+<p>Finally, there’s the <strong>true negative</strong> (TN) scenario where we correctly predict that a customer won’t subscribe. In this case we won’t spend any money but won&rsquo;t earn any revenue.</p>
+
+<p>Here’s a quick recap of the scenarios:</p>
+
+<ul>
+<li><p><strong>True Positive</strong> (TP) - predict will subscribe, and they actually do: COST: -£30; REV £80</p></li>
+
+<li><p><strong>False Positive</strong> (FP) - predict will subscribe, when they actually wouldn’t: COST: -£30; REV £0</p></li>
+
+<li><p><strong>True Negative</strong> (TN) - predict won&rsquo;t subscribe, and they actually don’t: COST: £0; REV £0</p></li>
+
+<li><p><strong>False Negative</strong> (FN) - predict won&rsquo;t subscribe, but they actually do: COST: £0; REV £0</p></li>
+</ul>
+
+<p>I create a function to calculate the expected profit using the probability of a <em>positive case</em> (p1) and the cost/benefit associated with a <em>true positive</em> (cb_tp) and a <em>false positive</em> (cb_fp). No need to include the <em>true negative</em> or <em>false negative</em> here as they&rsquo;re both zero.</p>
+
+<p>I&rsquo;m also including the <strong>expected_rates</strong> data frame created previously with the expected rates for each threshold (400 thresholds, ranging from 0 to 1).</p>
+
+<pre><code class="language-r"># Function to calculate expected profit
+expected_profit_func &lt;- function(p1, cb_tp, cb_fp) {
+  
+    tibble(
+        p1    = p1,
+        cb_tp = cb_tp,
+        cb_fp = cb_fp
+        ) %&gt;%
+    
+        # add expected rates
+        mutate(expected_rates = list(expected_rates)) %&gt;%
+        unnest() %&gt;%
+    
+        # calculate the expected profit
+        mutate(
+            expected_profit =   p1    * (tpr * cb_tp) + 
+                             (1 - p1) * (fpr * cb_fp)
+        ) %&gt;%
+        select(threshold, expected_profit)
+}
+</code></pre>
+
+<h3 id="multi-customer-optimization">Multi-Customer Optimization</h3>
+
+<p>Now to understand how a multi customer dynamic would work, I&rsquo;m creating a <strong>hypothetical 10 customer group</strong> to test my function on. This is a <strong>simplified</strong> view in that I&rsquo;m applying the <strong>same cost and revenue structure to all customers</strong> but the cost/benefit framework can be tailored to the individual customer to reflect their separate product and service level set up and the process can be easily adapted to optimise towards different KPIs (like <em>net profit</em>, <em>CLV</em>, <em>number of subscriptions</em>, etc.)</p>
+
+<pre><code class="language-r"># Ten Hypothetical Customers 
+ten_cust &lt;- tribble(
+    ~&quot;cust&quot;,   ~&quot;p1&quot;,  ~&quot;cb_tp&quot;,  ~&quot;cb_fp&quot;,
+    'ID1001',   0.1,    80 - 30,     -30,
+    'ID1002',   0.2,    80 - 30,     -30,
+    'ID1003',   0.3,    80 - 30,     -30,
+    'ID1004',   0.4,    80 - 30,     -30,
+    'ID1005',   0.5,    80 - 30,     -30,
+    'ID1006',   0.6,    80 - 30,     -30,
+    'ID1007',   0.7,    80 - 30,     -30,
+    'ID1008',   0.8,    80 - 30,     -30,
+    'ID1009',   0.9,    80 - 30,     -30,
+    'ID1010',   1.0,    80 - 30,     -30
+)
+</code></pre>
+
+<p>I use <code>purrr</code> to map the <code>expected_profit_func()</code> to each customer, returning a data frame of expected profit per customer by threshold value. This operation creates a nester tibble, which I have to <code>unnest()</code> to expand the data frame to one level.</p>
+
+<pre><code class="language-r"># calculate expected profit for each at each threshold
+expected_profit_ten_cust &lt;- ten_cust %&gt;%
+    # pmap to map expected_profit_func() to each item
+    mutate(expected_profit = pmap(.l = list(p1, cb_tp, cb_fp), 
+                                  .f = expected_profit_func)) %&gt;%
+    unnest() %&gt;%
+    select(cust, p1, threshold, expected_profit) 
+</code></pre>
+
+<p>Then, I can visualize the expected profit curves for each customer.</p>
+
+<pre><code class="language-r"># Visualising Expected Cost 
+expected_profit_ten_cust %&gt;%
+    ggplot(aes(threshold, expected_profit, 
+               colour = factor(cust)), 
+               group = cust) +
+    geom_line(size = 1) +
+    theme_minimal()  +
+    tidyquant::scale_color_tq() +
+    labs(title = &quot;Expected Profit Curves&quot;,
+         colour = &quot;Customer No.&quot; ) +
+    theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-11-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Finally, I can aggregate the expected profit, visualise the final curve and highlight the optimal threshold.</p>
+
+<pre><code class="language-r"># Aggregate expected profit by threshold 
+total_expected_profit_ten_cust &lt;- expected_profit_ten_cust %&gt;%
+    group_by(threshold) %&gt;%
+    summarise(expected_profit_total = sum(expected_profit)) 
+
+# Get maximum optimal threshold 
+max_expected_profit &lt;- total_expected_profit_ten_cust %&gt;%
+    filter(expected_profit_total == max(expected_profit_total))
+
+# Visualize the total expected profit curve
+total_expected_profit_ten_cust %&gt;%
+    ggplot(aes(threshold, expected_profit_total)) +
+    geom_line(size = 1) +
+    geom_vline(xintercept = max_expected_profit$threshold) +
+    theme_minimal() +
+    labs(title = &quot;Expected Profit Curve - Total Expected Profit&quot;,
+         caption  = paste0('threshold @ max = ', 
+                          max_expected_profit$threshold %&gt;% round(3))) +
+    theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-04-20-propensity-modelling-3-of-3-optimise-profit-with-the-expected-value-framework/unnamed-chunk-12-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>This has <strong>some important business implications</strong>. Based on our <em>hypothetical 10-customer group</em>, choosing the optimised threshold of <code>0.092</code> would yield a total profit of nearly <strong>£164</strong> compared to the nearly <strong>£147</strong> associated with the automatically selected cut-off of <code>0.190</code>.</p>
+
+<p>This would result in an additional expected profit of <strong>nearly £1.7 per customer</strong>. Assuming that we have a customer base of approximately <strong>500,000</strong>, switching to the optimised model could generate an additional <strong>expected profit of £850k</strong>!</p>
+
+<pre><code class="language-r">total_expected_profit_ten_cust %&gt;% 
+  slice(184, 121) %&gt;%
+  round(3) %&gt;%
+  mutate(diff = expected_profit_total - lag(expected_profit_total)) 
+## # A tibble: 2 x 3
+##   threshold expected_profit_total  diff
+##       &lt;dbl&gt;                 &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.19                   147.  NA  
+## 2     0.092                  164.  16.9
+</code></pre>
+
+<p>It is easy to see that, depending on the size of your business, the magnitude of potential profit increase could be a significant.</p>
+
 <h2 id="closing-thoughts">Closing thoughts</h2>
 
-<p>In the past decade <strong>machine learning</strong> has gained prominence across many analytics fields and has become a stable presence in the data scientist&rsquo;s toolkit. Along with it, the field of <strong>Machine Learning Interpretability</strong> has gathered momentum and witnessed the flourishing of many libraries (like <em>IML</em>, <em>PDP</em>, <em>VIP</em>, and <em>DALEX</em> to name but the more popular) that help with <strong>feature explanation</strong> and <strong>general performance assessment</strong>.</p>
+<p>In this project, I&rsquo;ve used a publicly available dataset to estimate the likelihood of a bank&rsquo;s existing customers to purchase a financial product following a direct marketing campaign.</p>
 
-<p>I this project I&rsquo;ve explored in particular the <strong>DALEX</strong> package, which focuses on <strong>Model-Agnostic Interpretability</strong> and provides a convenient way of comparing performance across multiple models with different structures.</p>
+<p>Following a thorough exploration and cleansing of the data, I estimate several models and compare their performance and fit to the data using the <strong>DALEX</strong> library, which focuses on <strong>Model-Agnostic Interpretability</strong>. One of its key <strong>advantages</strong> is the ability to compare contributions of traditional &ldquo;glass-box&rdquo; models as well as black-box models <strong>on the same scale</strong>. However, being permutation-based, one of its main <strong>drawbacks</strong> is that it does not scale well to large number of predictors and larger datasets.</p>
 
-<p>One of its key <strong>advantages</strong> is the ability to compare contributions of traditional &ldquo;glass-box&rdquo; models as well as black-box models on the same scale. However, being permutation-based, one of its main <strong>drawbacks</strong> is that it does not scale well to large number of predictors and larger datasets.</p>
+<p>Lastly, I take my <strong>final model</strong> and implemented a <strong>multi-customer profit optimization</strong> that reveals a potential additional expected profit of <strong>nearly £1.7 per customer</strong> (or <strong>£850k</strong> if you had a 500,000 customer base). Furthermore, I discuss key concepts like the <strong>threshold and F1 score</strong> and the <strong>precision-recall tradeoff</strong> and explain why it&rsquo;s highly important to decide which cutoff to adopt.</p>
 
-<p>Depending on the scale of your dataset and number of explanatory variables you want/need to include in your model, you should carefully consider whether to make DALEX your <strong>Machine Learning Interpretability</strong> library of choice.</p>
+<p>After exploring and cleansing the data, fitting and comparing multiple models and choosing the best one, sticking with the default threshold @ Max F1 would be stopping short of the ultimate &ldquo;so what?&rdquo; that puts all that hard work into prospective.</p>
+
+<p><strong>One final thing</strong>: don’t forget to shut-down the h2o instance when you’re done!</p>
+
+<pre><code class="language-r">h2o.shutdown(prompt = FALSE)
+</code></pre>
 
 <h3 id="code-repository">Code Repository</h3>
 
@@ -865,153 +1220,16 @@ h2o.saveModel(drf_final, path)
 <ul>
 <li><p>For the original paper that used the data set see: <a href="http://repositorium.sdum.uminho.pt/bitstream/1822/30994/1/dss-v3.pdf"><strong>A Data-Driven Approach to Predict the Success of Bank Telemarketing. Decision Support Systems</strong></a>, S. Moro, P. Cortez and P. Rita.</p></li>
 
-<li><p>For a technically rigorous but applied take on Machine Learning Interpretability see Bradley Boehmke&rsquo;s <a href="https://uc-r.github.io/dalex"><strong>Model Interpretability with DALEX</strong></a></p></li>
+<li><p>To Speed Up <strong>Exploratory Data Analysis</strong> see: <a href="https://business-science.github.io/correlationfunnel/"><strong>correlationfunnel Package Vignette</strong></a></p></li>
 
-<li><p>For a in-depth look at tools and techniques to examine fully-trained machine-learning models and compare their performance in a model-agnostic framework see: <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, P. Biecek, T. Burzykowski</p></li>
+<li><p>For a technically rigorous but applied take on <strong>Machine Learning Interpretability</strong> see Bradley Boehmke&rsquo;s <a href="https://uc-r.github.io/dalex"><strong>Model Interpretability with DALEX</strong></a></p></li>
+
+<li><p>For a in-depth look at tools and techniques to <strong>examine fully-trained machine-learning models and compare their performance</strong> in a model-agnostic framework see: <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, P. Biecek, T. Burzykowski</p></li>
+
+<li><p>For an advanced tutorial on sales forecasting and product backorders <strong>optimisation</strong> see Matt Dancho&rsquo;s <a href="https://www.business-science.io/business/2017/10/16/sales_backorder_prediction.html"><strong>Predictive Sales Analytics: Use Machine Learning to Predict and Optimize Product Backorders</strong></a></p></li>
+
+<li><p>For the <strong>Expected Value Framework</strong> see: <a href="https://www.goodreads.com/book/show/17912916-data-science-for-business"><em>Data Science for Business</em></a></p></li>
 </ul>
-
-<h2 id="appendix">Appendix</h2>
-
-<h3 id="final-model-pd-profiles">Final Model PD Profiles</h3>
-
-<p>Update DALEX explainer inputs for the final model</p>
-
-<pre><code class="language-r"># convert feature variables to a data frame
-x_final &lt;- test_tbl %&gt;% select(-c(subscribed, age, housing, loan, campaign,
-                                     previous, cons_price_idx, emp_var_rate)) %&gt;% as_tibble()
-
-# change response variable to a numeric binary vector
-y_final &lt;- as.vector(as.numeric(as.character(test_tbl$subscribed)))
-</code></pre>
-
-<p>Create an explainer for the final model</p>
-
-<pre><code class="language-r"># final random forest model explainer
-explainer_final &lt;- explain(
-  model            = drf_final, 
-  type             = &quot;classification&quot;,
-  data             = x_final,
-  y                = y_final,
-  predict_function = pred,
-  label            = &quot;h2o_drf&quot;
-  )
-</code></pre>
-
-<p>Compute PD Plots for all final model&rsquo;s features</p>
-
-<pre><code class="language-r"># compute PDP for a given variable
-model_profile(explainer_final, variable = &quot;nr_employed&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-33-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;euribor3m&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-34-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;month&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-35-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;job&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-36-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;pdays&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-37-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;cons_conf_idx&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-38-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;education&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-39-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;day_of_week&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-40-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;poutcome&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-41-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;contact&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-42-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;marital&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-43-1.png" alt="" width="100%" height="100%"/></p>
-
-<pre><code class="language-r">model_profile(explainer_final, variable = &quot;default&quot;, type = &quot;partial&quot;) %&gt;% 
-  plot() + 
-  theme_minimal() +
-  theme(plot.title    = element_text(hjust = 0.5), 
-        plot.subtitle = element_text(hjust = 0.5))
-</code></pre>
-
-<p><img src="/img/2020-03-17-propensity-modelling-2-of-3-estimate-and-compare-performance-of-several-models/unnamed-chunk-44-1.png" alt="" width="100%" height="100%"/></p>
-
-<p>One final thing: don’t forget to shut-down the h2o instance when you’re done!</p>
-
-<pre><code class="language-r">h2o.shutdown(prompt = FALSE)
-</code></pre>
     
         </div>
     </section>
@@ -1043,7 +1261,7 @@ model_profile(explainer_final, variable = &quot;nr_employed&quot;, type = &quot;
     <header class="read-next-card-header">
         <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
         
-        <h3 class="read-next-card-header-title"><a href="/tags/machine-learning/">#Machine Learning</a></h3>
+        <h3 class="read-next-card-header-title"><a href="/tags/propensity-modelling/">#Propensity Modelling</a></h3>
     </header>
     <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
     </div>
@@ -1051,24 +1269,25 @@ model_profile(explainer_final, variable = &quot;nr_employed&quot;, type = &quot;
     <div class="read-next-card-content">
       
         <ul>
-                      
-        
           <li><a href="/2019/08/loading-merging-and-joining-datasets-postgresql-edt/">Loading, Merging and Several Joining Datasets - PostgreSQL EDT</a></li>            
         
-          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
+          <li><a href="/2020/03/propensity-modelling-2-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</a></li>            
         
-          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</a></li>            
+        
+                      
         
           <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3 - Market Basket Analysis with recommenderlab</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
       
-        <a href="/tags/machine-learning/">See all related posts →</a>
+        <a href="/tags/propensity-modelling/">See all related posts →</a>
     </footer>
 </article>
 
 
+      
       
       <article class="post-card post"> 
     
@@ -1102,39 +1321,6 @@ One trialled and tested approach to tease out this type of insight is Propensity
     </div>
 </article>
       
-      
-      <article class="post-card post"> 
-    
-    <a class="post-card-image-link" href="/2020/02/propensity-modelling-1-of-3/">
-      <div class="post-card-image" style="background-image: url(/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg)"></div>
-    </a>
-    
-
-    <div class="post-card-content">
-      <a class="post-card-content-link" href="/2020/02/propensity-modelling-1-of-3/">
-          <header class="post-card-header">
-              <span class="post-card-tags">
-              #Data Wrangling 
-              #Data Exploration 
-              #Propensity Modelling  </span>
-              
-              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</h2>
-          </header>
-          <section class="post-card-excerpt">
-              
-                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
-One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
-              
-          </section>
-      </a>
-
-      <footer class="post-card-meta">
-          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
-          <span class="post-card-author"><a href="/">Diego Usai</a></span>
-      </footer>
-    </div>
-</article>
-      
     </div>
   </div>
 </aside>
@@ -1147,17 +1333,17 @@ One trialled and tested approach to tease out this type of insight is Propensity
     </a>
   </div>
   <span class="floating-header-divider">&mdash;</span>
-  <div class="floating-header-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</div>
+  <div class="floating-header-title">Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</div>
   <div class="floating-header-share">
     <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
      <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
     </div>
     
-    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Propensity%20Modelling%20-%20Using%20h2o%20and%20DALEX%20to%20Estimate%20the%20Likelihood%20of%20Purchasing%20a%20Financial%20Product%20-%20Part%202%20of%203%20-%20Estimate%20Several%20Models%20and%20Compare%20Their%20Performance%20Using%20a%20Model-agnostic%20Methodology&amp;url=%2f2020%2f03%2fpropensity-modelling-2-of-3%2f"
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Propensity%20Modelling%20-%20Using%20h2o%20and%20DALEX%20to%20Estimate%20Likelihood%20to%20Purchase%20a%20Financial%20Product%20-%20Abridged%20Version&amp;url=%2f2020%2f05%2fpropensity-modelling-abridged%2f"
           onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
       </a>
-      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f03%2fpropensity-modelling-2-of-3%2f"
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f05%2fpropensity-modelling-abridged%2f"
           onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
       </a>

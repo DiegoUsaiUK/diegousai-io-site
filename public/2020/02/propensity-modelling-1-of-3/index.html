@@ -69,11 +69,15 @@
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/articles/">Articles</a>
+              <a href="/categories/articles/">articles</a>
             </li>
         
             <li class="" role="menuitem">
-              <a href="/categories/multi-post-studies/">projects</a>
+              <a href="/categories/multi-article-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/data-handling">data</a>
             </li>
         
             <li class="" role="menuitem">
@@ -164,7 +168,7 @@ library(knitr)
 
 <h2 id="loading-data-and-initial-inspection">Loading data and initial inspection</h2>
 
-<p>The data I&rsquo;m using ( <strong>bank-direct-marketing.csv</strong>) is a modified version of the full set mentioned earlier and can be found on my <a href="https://github.com/DiegoUsaiUK/Customer_Marketing_Engagement/tree/master/01_data"><strong>GitHub profile</strong></a>. As it contains lots of double quotation marks, some manipulation is required to get into a usable format.</p>
+<p>The data I&rsquo;m using ( <strong>bank-direct-marketing.csv</strong>) is a modified version of the full set mentioned earlier and can be found on my <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling/tree/master/01_data"><strong>GitHub profile</strong></a>. As it contains lots of double quotation marks, some manipulation is required to get into a usable format.</p>
 
 <p>First, I load each row into one string</p>
 
@@ -458,7 +462,7 @@ nr_employed     0      1  5167.04  72.25 4963.6 5099.1 5191.0 5228.1 5228.1  ▁
 
 <p><img src="/img/2020-02-14-propensity-modelling-1-of-3-data-preparation-and-exploratory-data-analysis/unnamed-chunk-8-1.png" alt="" width="100%" height="100%"/></p>
 
-<p>I will address <strong>class imbalance</strong>  before entering the modelling phase with a <strong>re-sampling technique</strong>, which aims at rebalancing the dataset by &ldquo;shrinking&rdquo; the prevalent class (&ldquo;No&rdquo; or 0). This is to ensure that the model adequately detect what variables are driving the ‘yes’ and ‘no’ responses.</p>
+<p>I am going to address <strong>class imbalance</strong>  during the modelling phase by enabling  <strong>re-sampling</strong>, in <strong>h2o</strong>. This will rebalance the dataset by &ldquo;shrinking&rdquo; the prevalent class (&ldquo;No&rdquo; or 0) and ensure that the model adequately detects what variables are driving the ‘yes’ and ‘no’ responses.</p>
 
 <h4 id="predictors">Predictors</h4>
 
@@ -477,7 +481,7 @@ nr_employed     0      1  5167.04  72.25 4963.6 5099.1 5191.0 5228.1 5228.1  ▁
 
 <p>Despite continuous in nature, <strong>pdays</strong> and <strong>previous</strong> are in fact categorical features and are also all strongly right skewed. For these reasons, they will need to be discretised into groups. Both variables are also moderately correlated, suggesting that they may capture the same behaviour.</p>
 
-<p>Next, I visualise the bank client data with the <strong>mosaic charts</strong>:</p>
+<p>Next, I visualise the <strong>bank client data</strong> with the <em>mosaic charts</em>:</p>
 
 <pre><code class="language-r">job &lt;- ggplot(data = data_clean) +
    geom_mosaic(aes(x = product(job, subscribed), fill = job)) +
@@ -531,7 +535,7 @@ gridExtra::grid.arrange(job, mar, hou, edu, def, loa, nrow = 2)
 
 <p><strong>default</strong> has only 3 observations in the ‘yes’ level, which will be rolled into the least frequent level as they&rsquo;re not enough to make a proper inference. Level ‘unknown’ of the <strong>housing</strong> and <strong>loan</strong> variables have a small number of observations and will be rolled into the second smallest category. Lastly, <strong>job</strong> and <strong>education</strong> would also benefit from grouping up of least common levels.</p>
 
-<p>Moving on to the other campaign attributes:</p>
+<p>Moving on to the <strong>other campaign attributes</strong>:</p>
 
 <pre><code class="language-r">data_clean %&gt;% 
    select(subscribed, campaign, poutcome) %&gt;% 
@@ -544,7 +548,7 @@ gridExtra::grid.arrange(job, mar, hou, edu, def, loa, nrow = 2)
 
 <p>On the other hand, <strong>poutcome</strong> is one of the attributes expected to be have a strong predictive power. The uneven distribution of levels would suggest to roll the least common occurring level (<strong>success</strong> or <code>scs</code>) into another category. However, contacting a client who previously purchased a term deposit is one of the catacteristics with highest predictive power and needs to be left ungrouped.</p>
 
-<p>Then, I&rsquo;m looking at last contact information:</p>
+<p>Then, I&rsquo;m looking at <strong>last contact information</strong>:</p>
 
 <pre><code class="language-r">con &lt;- ggplot(data = data_clean) +
    geom_mosaic(aes(x = product(contact, subscribed), fill = contact)) +
@@ -576,7 +580,7 @@ gridExtra::grid.arrange(con, mth, dow, nrow = 2)
 
 <p>In contrast, <strong>day_of_week</strong> does not appear to impact the response as there is not enough variation between the levels.</p>
 
-<p>Last but not least, the social and economic attributes:</p>
+<p>Last but not least, the <strong>social and economic attributes</strong>:</p>
 
 <pre><code class="language-r">data_clean %&gt;% 
    select(subscribed, emp_var_rate, cons_price_idx, 
@@ -596,7 +600,7 @@ gridExtra::grid.arrange(con, mth, dow, nrow = 2)
 
 <h3 id="discretising-of-categorical-predictors">Discretising of categorical predictors</h3>
 
-<p>Here, I&rsquo;m using a helper function <a href="https://github.com/DiegoUsaiUK/Customer_Marketing_Engagement/tree/master/03_scripts"><code>plot_hist_funct</code></a> to take a look at features histograms. That helps understanding how to combine least common levels into &ldquo;other&rsquo; category.</p>
+<p>Here, I&rsquo;m using a helper function <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling/tree/master/03_scripts"><code>plot_hist_funct</code></a> to take a look at features histograms. That helps understanding how to combine least common levels into &ldquo;other&rsquo; category.</p>
 
 <pre><code class="language-r">data_clean %&gt;%
     select_if(is_character) %&gt;%
@@ -763,7 +767,7 @@ saveRDS(data_final, &quot;../01_data/data_final.rds&quot;)
 
 <h3 id="code-repository">Code Repository</h3>
 
-<p>The full R code and all relevant files can be found on my GitHub profile @ <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"><strong>Propensity Modelling</strong></a></p>
+<p>The full R code and all relevant data files can be found on my GitHub profile @ <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"><strong>Propensity Modelling</strong></a></p>
 
 <h3 id="references">References</h3>
 
@@ -975,13 +979,13 @@ saveRDS(data_final, &quot;../01_data/data_final.rds&quot;)
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/09/loading-merging-and-joining-datasets/">Loading, Merging and Joining Datasets</a></li>            
+          <li><a href="/2019/03/market-basket-analysis-part-1-of-3/">Market Basket Analysis - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</a></li>            
         
-          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
-        
-          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
         
           <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3 - A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
+        
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">

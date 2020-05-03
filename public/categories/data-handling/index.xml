@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Handling on </title>
+    <link>/categories/data-handling/</link>
+    <description>Recent content in Data Handling on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-UK</language>
+    <lastBuildDate>Sun, 18 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/data-handling/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Loading, Merging and Several Joining Datasets - PostgreSQL EDT</title>
+      <link>/2019/08/loading-merging-and-joining-datasets-postgresql-edt/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/loading-merging-and-joining-datasets-postgresql-edt/</guid>
+      <description>This is the coding necessary to assemble the various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks.
+In order to simulate normal working conditions I would face if the data was stored on a database, I&amp;rsquo;ve uploaded the excel files onto a local PostgreSQL database that I&amp;rsquo;ve created on my machine. I am going to go through the steps I followed to set up a connection between RStudio and said database and extract the information I needed.</description>
+    </item>
+    
+    <item>
+      <title>Loading, Merging and Several Joining Datasets - Excel EDT</title>
+      <link>/2019/07/loading-merging-and-joining-datasets-excel-edt/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/loading-merging-and-joining-datasets-excel-edt/</guid>
+      <description>This is the minimal coding necessary to assemble various data feeds and sort out the likes of variables naming &amp;amp; new features creation plus some general housekeeping tasks. It includes general housekeeping tasks like shortening variables names to ease visualisations, creating essential new features and sorting out variables order
+The Dataset library(tidyverse) library(lubridate) library(readr)  The dataset I&amp;rsquo;m using here accompanies a Redbooks publication called Building 360-Degree Information Applications which is available as a free PDF download.</description>
+    </item>
+    
+  </channel>
+</rss>
