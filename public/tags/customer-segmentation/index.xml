@@ -6,10 +6,20 @@
     <description>Recent content in Customer Segmentation on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Mon, 23 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/customer-segmentation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data</title>
+      <link>/2020/04/mixed-type-data-segmentation-k-medoids/</link>
+      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/mixed-type-data-segmentation-k-medoids/</guid>
+      <description>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the corona-virus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.
+In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit clustering, one of my favourite analytic methods.</description>
+    </item>
     
     <item>
       <title>Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</title>
