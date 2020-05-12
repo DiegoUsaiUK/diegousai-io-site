@@ -21,9 +21,18 @@
     </item>
     
     <item>
+      <title>Articles</title>
+      <link>/categories/articles/</link>
+      <pubDate>Sat, 02 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/articles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Multi Article Studies</title>
       <link>/categories/multi-article-studies/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/categories/multi-article-studies/</guid>
       <description></description>
@@ -32,18 +41,9 @@
     <item>
       <title>Projects</title>
       <link>/categories/projects/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/categories/projects/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Articles</title>
-      <link>/categories/articles/</link>
-      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/articles/</guid>
       <description></description>
     </item>
     

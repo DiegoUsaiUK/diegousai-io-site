@@ -137,7 +137,7 @@
 
 <p>One trialled and tested approach to tease this type of insight out of data is <a href="https://en.wikipedia.org/wiki/Predictive_modelling"><strong>Propensity Modelling</strong></a>, which combines information such as a <strong>customers’ demographics</strong> (age, race, religion, gender, family size, ethnicity, income, education level), <strong>psycho-graphic</strong> (social class, lifestyle and personality characteristics), <strong>engagement</strong> (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.), <strong>user experience</strong> (customer service phone and email wait times, number of refunds, average shipping times), and <strong>user behaviour</strong> (purchase value on different time-scales, number of days since most recent purchase, time between offer and conversion, etc.) to estimate the likelihood of a certain customer profile to performing a certain type of behaviour (e.g. the purchase of a product).</p>
 
-<p>Once you understand the probability of a certain customer to interact with a brand, buy a product or a sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
+<p>Once you understand the probability of a certain customer to interact with a brand, buy a product or sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
 
 <h2 id="project-structure">Project Structure</h2>
 
@@ -168,7 +168,7 @@ library(tictoc)
 
 <p>The data I&rsquo;m using <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling/tree/master/01_data/bank-direct-marketing.csv"><strong>bank-direct-marketing.csv</strong></a> is a modified version of <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip">bank-additional-full.csv</a> and contains 41,188 examples with 21 different variables (10 continuous, 10 categorical plus the target variable). In particular, the target <strong>subscribed</strong> is a <strong>binary response variable</strong> indicating whether the client subscribed (‘Yes’ or numeric value 1) to a term deposit or not (‘No’ or numeric value 0), which make this a <a href="https://en.wikipedia.org/wiki/Binary_classification"><em>binary classification problem</em></a>.</p>
 
-<p>The data required some manipulation to get into a usable format, details of which can be found on my webpage: <a href="https://diegousai.io/2020/02/propensity-modelling-1-of-3/"> <strong>Propensity Modelling - Data Preparation and Exploratory Data Analysis</strong></a>. Here I simply load up the pre-cleansed data I am hosting <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"> <strong>on my GitHub repo for this project</strong></a></p>
+<p>The data required some manipulation to get into a usable format, details of which can be found on my webpage: <a href="https://diegousai.io/2020/01/propensity-modelling-data-preparation/"> <strong>Propensity Modelling - Data Preparation and Exploratory Data Analysis</strong></a>. Here I simply load up the pre-cleansed data I am hosting <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"> <strong>on my GitHub repo for this project</strong></a></p>
 
 <pre><code class="language-r">data_clean &lt;- 
   readRDS(file = &quot;https://raw.githubusercontent.com/DiegoUsaiUK/Propensity_Modelling/master/01_data/data_clean.rds&quot;)
@@ -267,7 +267,7 @@ library(tictoc)
 
 <p>All <em>social and economic attributes</em> show a good level of variation compared to the target variable, which suggests that they should all impact the response. They all display a <strong>high degree of multi-modality</strong> and do not have an even spread through the density plot, and will need to be binned.</p>
 
-<p>It is also worth noting that, with the exception of _cons_confidence<em>index</em>, all other social and economic attributes are strongly correlated to each other, indicating that only one could be included in the model as they are all “picking up” similar economic trend.</p>
+<p>It is also worth noting that, with the exception of <em>consumer confidence index</em> , all other social and economic attributes are strongly correlated to each other, indicating that only one could be included in the model as they are all “picking up” similar economic trend.</p>
 
 <h2 id="summary-of-exploratory-data-analysis-preparation">Summary of Exploratory Data Analysis &amp; Preparation</h2>
 
@@ -288,7 +288,7 @@ are strongly correlated to each other, suggesting that only a selection of them 
 
 <h3 id="final-data-processing-and-transformation">Final Data Processing and Transformation</h3>
 
-<p>Following up on the findings from the Exploratory Data Analysis, I&rsquo;ve discretised categorical and continuous predictors by combining least common levels into &ldquo;other&rsquo; category, set all variables but <code>age</code> as unordered factors ( <strong>h2o</strong> does not support ordered categorical variables) and shorted level names of some categorical variables to ease visualisations. You can find all the details and the full code on my webpage: <a href="https://diegousai.io/2020/02/propensity-modelling-1-of-3/"><strong>Propensity Modelling - Data Preparation and Exploratory Data Analysis</strong></a>.</p>
+<p>Following up on the findings from the Exploratory Data Analysis, I&rsquo;ve discretised categorical and continuous predictors by combining least common levels into &ldquo;other&rdquo; category, set all variables but <code>age</code> as unordered factors ( <strong>h2o</strong> does not support ordered categorical variables) and shorted level names of some categorical variables to ease visualisations. You can find all the details and the full code on my webpage: <a href="https://diegousai.io/2020/01/propensity-modelling-data-preparation"><strong>Propensity Modelling - Data Preparation and Exploratory Data Analysis</strong></a>.</p>
 
 <p>Here I simply load up the final dataset hosted <a href="https://github.com/DiegoUsaiUK/Propensity_Modelling"> <strong>on my GitHub repo</strong></a>:</p>
 
@@ -301,7 +301,7 @@ are strongly correlated to each other, suggesting that only a selection of them 
 <p>In order to stick to a reasonable project running time, I&rsquo;ve opted for <strong>h2o</strong> as my modelling platform as it offers a number of advantages:</p>
 
 <ul>
-<li><p>it very easy to use and you can <strong>estimate several Machine Learning models</strong> in no time</p></li>
+<li><p>it&rsquo;s very easy to use and you can <strong>estimate several Machine Learning models</strong> in no time</p></li>
 
 <li><p>it does <strong>not require to pre-treat character/factor variables by “binarising” them</strong> (this is done &ldquo;internally&rdquo;), which further reduces data formatting time</p></li>
 
@@ -579,7 +579,7 @@ explainer_gbm &lt;- explain(
 
 <h2 id="assessing-the-models">Assessing the models</h2>
 
-<p>At last, I&rsquo;m ready to pass the <strong>explainer objects</strong> to several DALEX functions that will help assess and compare the performance of the different models. Given that performance measures may reflect a different aspect of the predictive performance of a model, it is <strong>important to evaluate and compare several metrics when appraising a model</strong> and DALEX does just that!</p>
+<p>At last, I&rsquo;m ready to pass the <strong>explainer objects</strong> to several DALEX functions that will help assess and compare the performance of the different models. Given that performance measures may reflect a different aspect of the predictive performance of a model, it is <strong>important to evaluate and compare several metrics when appraising a model</strong> and with DALEX you can do just that!</p>
 
 <p>To evaluate and compare my models&rsquo; performance, I&rsquo;ve drawn inspiration from the framework used by <em>Przemyslaw Biecek</em> and <em>Tomasz Burzykowski</em> in their book, <a href="https://pbiecek.github.io/ema/introduction.html"><strong>Explanatory Model Analysis</strong></a>, which is structured around key questions:</p>
 
@@ -647,7 +647,7 @@ explainer_gbm &lt;- explain(
 ## -0.04068165 -0.03371074 -0.02750033  0.29004942  0.98274727
 </code></pre>
 
-<p>Based on the metrics available for all models ( <strong>accuracy</strong> and <strong>AUC</strong>), I can see that <strong>elastic net</strong> and <strong>gradient boosting</strong> are performing roughly on par with one another, with <strong>random forest</strong> not far behind. AUC ranges between .78-.80 whereas accuracy has a slightly narrower range of .89-.90</p>
+<p>Based on the metrics available for all models ( <strong>accuracy</strong> and <strong>AUC</strong>), I can see that <strong>random forest</strong> and <strong>gradient boosting</strong> are performing roughly in par with one another, with <strong>elastic net</strong> far behind. AUC ranges between .75-.80 whereas accuracy has a slightly narrower range of .89-.90</p>
 
 <h4 id="residual-diagnostics">Residual diagnostics</h4>
 
@@ -883,7 +883,7 @@ drf_final &lt;-
 
 <p>Being already familiar with odds ratios in the context of a logistic regression, I set out to understand whether the same intuition could be extended to black-box classification models. During my research one very interesting post on <a href="https://stats.stackexchange.com/"><strong>Cross Validated</strong></a> stood out for drawing a parallel between <a href="https://stats.stackexchange.com/questions/93202/odds-ratio-from-decision-tree-and-random-forest"><strong>odds ratio from decision tree and random forest</strong></a>.</p>
 
-<p>Basically, this tells us that Partial Dependence plots can be used in a similar way to how odds ratios to define what characteristics of a customer profile influence his/her propensity to performing a certain type of behaviour.</p>
+<p>Basically, this tells us that Partial Dependence plots can be used in a similar way to odds ratios to define what characteristics of a customer profile influence his/her propensity to performing a certain type of behaviour.</p>
 
 <p>For example, features like <code>job</code>, <code>month</code> and <code>contact</code> would provide context around <strong>who</strong>, <strong>when</strong> and <strong>how</strong> to target:</p>
 
@@ -895,7 +895,7 @@ drf_final &lt;-
 <li><p><code>contacting</code> your customer on their <em>mobile</em> increases the chances of subscription by nearly a quarter compared to a <em>telephone</em> call.</p></li>
 </ul>
 
-<p><strong>NOTE THAT</strong> Partial Dependence Plots for all final model&rsquo;s predictors can be found on my webpage: on my webpage: <a href="https://diegousai.io/2020/03/propensity-modelling-2-of-3/"><strong>Propensity Modelling - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</strong></a>.</p>
+<p><strong>NOTE THAT</strong> Partial Dependence Plots for all final model&rsquo;s predictors can be found on my webpage: <a href="https://diegousai.io/2020/02/propensity-modelling-estimate-compare-models/"><strong>Propensity Modelling - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</strong></a>.</p>
 
 <p>Armed with such insight, one can help <strong>shaping overall marketing and communication plans</strong> to focus on customers more likely to subscribe to a term deposit.</p>
 
@@ -1198,9 +1198,9 @@ total_expected_profit_ten_cust %&gt;%
 
 <h2 id="closing-thoughts">Closing thoughts</h2>
 
-<p>In this project, I&rsquo;ve used a publicly available dataset to estimate the likelihood of a bank&rsquo;s existing customers to purchase a financial product following a direct marketing campaign.</p>
+<p>In this project, I use a <strong>publicly available dataset</strong> to estimate the likelihood of a bank&rsquo;s existing customers to purchase a financial product following a direct marketing campaign.</p>
 
-<p>Following a thorough exploration and cleansing of the data, I estimate several models and compare their performance and fit to the data using the <strong>DALEX</strong> library, which focuses on <strong>Model-Agnostic Interpretability</strong>. One of its key <strong>advantages</strong> is the ability to compare contributions of traditional &ldquo;glass-box&rdquo; models as well as black-box models <strong>on the same scale</strong>. However, being permutation-based, one of its main <strong>drawbacks</strong> is that it does not scale well to large number of predictors and larger datasets.</p>
+<p>Following a thorough exploration and cleansing of the data, I <strong>estimate several models</strong> and <strong>compare their performance and fit to the data</strong> using the <strong>DALEX</strong> library, which focuses on <strong>Model-Agnostic Interpretability</strong>. One of its key <strong>advantages</strong> is the ability to compare contributions of traditional &ldquo;glass-box&rdquo; models as well as black-box models <strong>on the same scale</strong>. However, being permutation-based, one of its main <strong>drawbacks</strong> is that it does not scale well to large number of predictors and larger datasets.</p>
 
 <p>Lastly, I take my <strong>final model</strong> and implemented a <strong>multi-customer profit optimization</strong> that reveals a potential additional expected profit of <strong>nearly £1.7 per customer</strong> (or <strong>£850k</strong> if you had a 500,000 customer base). Furthermore, I discuss key concepts like the <strong>threshold and F1 score</strong> and the <strong>precision-recall tradeoff</strong> and explain why it&rsquo;s highly important to decide which cutoff to adopt.</p>
 
@@ -1269,15 +1269,13 @@ total_expected_profit_ten_cust %&gt;%
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/08/loading-merging-and-joining-datasets-postgresql-edt/">Loading, Merging and Several Joining Datasets - PostgreSQL EDT</a></li>            
+          <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
         
-          <li><a href="/2020/03/propensity-modelling-2-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</a></li>            
+          <li><a href="/2020/04/mixed-type-data-segmentation-k-medoids/">Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data</a></li>            
         
-          <li><a href="/2020/02/propensity-modelling-1-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</a></li>            
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
         
-                      
-        
-          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3 - Market Basket Analysis with recommenderlab</a></li>            
+          <li><a href="/2019/07/loading-merging-and-joining-datasets-excel-edt/">Loading, Merging and Joining Several Datasets - Excel EDT</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -1291,25 +1289,26 @@ total_expected_profit_ten_cust %&gt;%
       
       <article class="post-card post"> 
     
-    <a class="post-card-image-link" href="/2020/04/propensity-modelling-3-of-3/">
-      <div class="post-card-image" style="background-image: url(/img/david-sury-X6M3svSX8dc-unsplash.jpg)"></div>
+    <a class="post-card-image-link" href="/2020/04/mixed-type-data-segmentation-k-medoids/">
+      <div class="post-card-image" style="background-image: url(/img/joyce-mccown-1Q4TjXPlrVQ-unsplash.jpg)"></div>
     </a>
     
 
     <div class="post-card-content">
-      <a class="post-card-content-link" href="/2020/04/propensity-modelling-3-of-3/">
+      <a class="post-card-content-link" href="/2020/04/mixed-type-data-segmentation-k-medoids/">
           <header class="post-card-header">
               <span class="post-card-tags">
-              #Propensity Modelling 
-              #Machine Learning 
-              #Optimisation  </span>
+              #Clustering 
+              #t-SNE 
+              #Customer Segmentation 
+              #Machine Learning  </span>
               
-              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</h2>
+              <h2 class="post-card-title">Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data</h2>
           </header>
           <section class="post-card-excerpt">
               
-                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
-One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+                <p>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the corona-virus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.
+In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit clustering, one of my favourite analytic methods. ...  </p>
               
           </section>
       </a>

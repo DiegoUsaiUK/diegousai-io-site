@@ -6,37 +6,57 @@
     <description>Recent content in Projects on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-UK</language>
-    <lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</title>
-      <link>/2020/04/propensity-modelling-3-of-3/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <title>Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data</title>
+      <link>/2020/04/mixed-type-data-segmentation-k-medoids/</link>
+      <pubDate>Wed, 22 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/04/propensity-modelling-3-of-3/</guid>
+      <guid>/2020/04/mixed-type-data-segmentation-k-medoids/</guid>
+      <description>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the corona-virus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.
+In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit clustering, one of my favourite analytic methods.</description>
+    </item>
+    
+    <item>
+      <title>Segmenting with Mixed Type Data - Initial data inspection and manupulation</title>
+      <link>/2020/04/mixed-type-data-segmentation-initial-data-exploration/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/mixed-type-data-segmentation-initial-data-exploration/</guid>
+      <description>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the coronavirus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.
+In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit clustering, one of my favourite analytic methods.</description>
+    </item>
+    
+    <item>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Optimise Profit With the Expected Value Framework</title>
+      <link>/2020/03/propensity-modelling-profit-optimisation/</link>
+      <pubDate>Fri, 20 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/propensity-modelling-profit-optimisation/</guid>
       <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
 One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
     </item>
     
     <item>
-      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</title>
-      <link>/2020/03/propensity-modelling-2-of-3/</link>
-      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</title>
+      <link>/2020/02/propensity-modelling-estimate-compare-models/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/03/propensity-modelling-2-of-3/</guid>
+      <guid>/2020/02/propensity-modelling-estimate-compare-models/</guid>
       <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
 One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
     </item>
     
     <item>
-      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</title>
-      <link>/2020/02/propensity-modelling-1-of-3/</link>
-      <pubDate>Fri, 14 Feb 2020 00:00:00 +0000</pubDate>
+      <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Data Preparation and Exploratory Data Analysis</title>
+      <link>/2020/01/propensity-modelling-data-preparation/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>/2020/02/propensity-modelling-1-of-3/</guid>
+      <guid>/2020/01/propensity-modelling-data-preparation/</guid>
       <description>In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
 One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.</description>
     </item>

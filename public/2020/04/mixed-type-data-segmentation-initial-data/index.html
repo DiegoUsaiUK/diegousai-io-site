@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en-UK" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Segmenting with Mixed Type Data - Initial data inspection and manupulation &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="canonical" href="/2020/04/mixed-type-data-segmentation-initial-data/" />
+
+     <meta name="description" content="With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a h" /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="/img/nuno-silva-wmYP3jGL5wo-unsplash.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Segmenting with Mixed Type Data - Initial data inspection and manupulation"/>
+    <meta name="twitter:description" content="With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a h"/>
+    <meta name="twitter:url" content="/2020/04/mixed-type-data-segmentation-initial-data/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Segmenting with Mixed Type Data - Initial data inspection and manupulation &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2020/04/mixed-type-data-segmentation-initial-data/" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a h" />
+
+    <meta property="article:published_time" content="2020-04-11T00:00:00Z" />
+    <meta property="article:tag" content="Data Wrangling" /><meta property="article:tag" content="Data Exploration" />
+
+    <meta property="og:image" content="/img/nuno-silva-wmYP3jGL5wo-unsplash.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.58.3" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+     <link rel="stylesheet" href="/css/override.css" /> 
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/articles/">articles</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/multi-article-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/data-handling">data</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/tags/">Tags</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/links/">Readings</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/about/">About</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    
+
+                    
+
+                    <a class="social-link" href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    <a class="social-link" href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 512 512"><path d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683 C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615 c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915 s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z" /></svg></a>
+
+                    <a class="social-link" href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 195"><path d="M46.5340803,65.2157554 C46.6968378,63.6076572 46.0836,62.018231 44.8828198,60.93592 L32.6512605,46.2010582 L32.6512605,44 L70.6302521,44 L99.9859944,108.380952 L125.794585,44 L162,44 L162,46.2010582 L151.542017,56.2281011 C150.640424,56.9153477 150.193188,58.0448862 150.380019,59.1628454 L150.380019,132.837155 C150.193188,133.955114 150.640424,135.084652 151.542017,135.771899 L161.755369,145.798942 L161.755369,148 L110.38282,148 L110.38282,145.798942 L120.963119,135.527337 C122.002801,134.487948 122.002801,134.182246 122.002801,132.592593 L122.002801,73.0417402 L92.585901,147.755438 L88.6106443,147.755438 L54.3622782,73.0417402 L54.3622782,123.115814 C54.0767278,125.221069 54.7759199,127.3406 56.2581699,128.863022 L70.0186741,145.55438 L70.0186741,147.755438 L31,147.755438 L31,145.55438 L44.7605042,128.863022 C46.2319621,127.338076 46.8903838,125.204485 46.5340803,123.115814 L46.5340803,65.2157554 Z"/></svg></a>
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2020-04-11">11 April 2020</time>
+                <span class="date-divider">/</span> <a href="/tags/data-wrangling/">#Data Wrangling</a>&nbsp;<a href="/tags/data-exploration/">#Data Exploration</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Segmenting with Mixed Type Data - Initial data inspection and manupulation</h1>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(/img/nuno-silva-wmYP3jGL5wo-unsplash.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        
+
+<p>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the coronavirus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.</p>
+
+<p>In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit <code>clustering</code>, one of my favourite analytic methods. Only this time the set up is a lot closer to a real-world situation in that the data I had to analyse came with a <strong>mix of categorical and numerical</strong> feature. Simply put, this <strong>could not be tackled</strong> with a bog-standard <strong>K-means</strong> algorithm as it&rsquo;s based on <em>pairwise Euclidean distances</em> and has no direct application to categorical data.</p>
+
+<h2 id="the-data">The data</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(readxl) 
+library(skimr)
+library(knitr)
+library(janitor)
+</code></pre>
+
+<p>The data represents all <strong>online acquisitions</strong> in February 2018 and their subcripion status 3 mohnths later (9th June 2018) for a <strong>Fictional News Aggregator Subscription</strong> business. It contains a number of parameters describing each account, like <strong>account creation date</strong>, <strong>campaign attributed to acquisition</strong>, <strong>payment method</strong> and <strong>length of product trial</strong>. A full description of the variables can be found in the <strong>Appendix</strong>.</p>
+
+<p>I got hold of this dataset in the course of a recruitment selection process as I was asked to carry out an analysis and present results and recommendations that could <strong>helps improve their product take up</strong> in my final meeting.</p>
+
+<p>Although fictitius in nature, I thought it best to <strong>further anonimise the dataset</strong> by changing names and values of most of the variables as well as removing several features that were of no use to the analysis. You can find the dataset on <a href="https://github.com/DiegoUsaiUK/K_Medoid_Clustering"><strong>my GitHub profile</strong></a>, along with the scripts I used to carry out the analysis.</p>
+
+<p>In this project I&rsquo;m also testing quite a few of the <code>adorn_</code> and the <code>tabyl</code> functions from the <code>janitor</code> library, a family of functions created to help expedite the initial data exploration and cleaning but also very useful to create and format summary tables.</p>
+
+<h2 id="data-loading-inspection-and-manupulation">Data loading, inspection and manupulation</h2>
+
+<p>As this is raw data, it needed some cleansing and rearranging. Let&rsquo;s start with loading up the data and make some adjustments to the variable names.</p>
+
+<pre><code class="language-r">data_raw &lt;-
+   readxl::read_xlsx(
+      path = &quot;../00_data/Subscription Data.xlsx&quot;,
+      sheet = 'Data',
+      trim_ws = TRUE,
+      col_names = TRUE,
+      guess_max = 2000
+   ) %&gt;% 
+   # all headers to lower case
+   set_names(names(.) %&gt;% str_to_lower) %&gt;% 
+   # shortening some names
+   rename_at(vars(contains(&quot;cancellation&quot;)),
+             funs(str_replace_all(., &quot;cancellation&quot;, &quot;canc&quot;))) %&gt;% 
+   # swapping space with underscore in some names
+   rename_at(vars(contains(&quot; &quot;)),
+             funs(str_replace_all(., &quot;[ ]&quot;, &quot;_&quot;)))
+</code></pre>
+
+<p>A first glance at the data structure and it all looks in good order: all variables are in the format I would expect them to be.</p>
+
+<pre><code class="language-r">data_raw %&gt;% glimpse()
+
+Observations: 4,853
+Variables: 16
+$ account_id             &lt;chr&gt; &quot;ID0026621&quot;, &quot;ID0033642&quot;, &quot;ID0036592&quot;, &quot;ID003770...
+$ created_date           &lt;dttm&gt; 2008-11-20, 2008-11-20, 2008-11-20, 2008-11-20,...
+$ country                &lt;chr&gt; &quot;United Kingdom&quot;, &quot;United Kingdom&quot;, &quot;United King...
+$ status                 &lt;chr&gt; &quot;Cancelled&quot;, &quot;Cancelled&quot;, &quot;Active&quot;, &quot;Cancelled&quot;,...
+$ product_group          &lt;chr&gt; &quot;Premium&quot;, &quot;Standard&quot;, &quot;Premium&quot;, &quot;Standard&quot;, &quot;S...
+$ payment_frequency      &lt;chr&gt; &quot;Monthly&quot;, &quot;Monthly&quot;, &quot;Annual&quot;, &quot;Monthly&quot;, &quot;Annu...
+$ campaign_code          &lt;chr&gt; &quot;55372&quot;, &quot;57472&quot;, &quot;38072&quot;, &quot;56472&quot;, &quot;56572&quot;, &quot;57...
+$ start_date             &lt;dttm&gt; 2018-02-01, 2018-02-12, 2018-02-05, 2018-02-07,...
+$ end_date               &lt;dttm&gt; 2019-02-01, 2019-02-12, 2019-02-05, 2019-02-07,...
+$ canc_date              &lt;dttm&gt; 2018-02-01, 2018-03-12, NA, 2018-02-12, NA, NA,...
+$ canc_reason            &lt;chr&gt; &quot;Amendment&quot;, &quot;Lack of time&quot;, NA, &quot;Failed Direct ...
+$ monthly_price          &lt;dbl&gt; 15.00, 6.99, 16.67, 0.00, 3.75, 6.99, 11.67, 6.9...
+$ contract_monthly_price &lt;dbl&gt; 15.00, 6.99, 16.67, 6.99, 3.75, 6.99, 11.67, 6.9...
+$ trial_length           &lt;chr&gt; NA, NA, NA, &quot;1M&quot;, NA, &quot;1M&quot;, NA, &quot;1M&quot;, &quot;1M&quot;, NA, ...
+$ trial_monthly_price    &lt;dbl&gt; NA, NA, NA, 0, NA, 0, NA, 0, 0, NA, NA, NA, 0, 0...
+$ payment_method         &lt;chr&gt; &quot;Credit Card&quot;, &quot;Credit Card&quot;, &quot;Direct Debit&quot;, &quot;D...
+</code></pre>
+
+<pre><code class="language-r">data_raw %&gt;% skim()
+
+-- Data Summary ------------------------
+                           Values    
+Name                       Piped data
+Number of rows             4853      
+Number of columns          16        
+_______________________              
+Column type frequency:               
+  character                9         
+  numeric                  3         
+  POSIXct                  4         
+________________________             
+Group variables            None      
+
+-- Variable type: character --------------------------------------------------------
+# A tibble: 9 x 8
+  skim_variable     n_missing complete_rate   min   max empty n_unique whitespace
+* &lt;chr&gt;                 &lt;int&gt;         &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;
+1 account_id                0         1         9     9     0     4824          0
+2 country                   7         0.999     4    20     0       77          0
+3 status                    0         1         6    20     0        4          0
+4 product_group             0         1         7     8     0        2          0
+5 payment_frequency         0         1         6    10     0        3          0
+6 campaign_code             0         1         5     7     0       73          0
+7 canc_reason            3547         0.269     5    27     0       20          0
+8 trial_length            473         0.903     2     2     0        4          0
+9 payment_method            0         1         6    12     0        4          0
+
+-- Variable type: numeric ----------------------------------------------------------
+# A tibble: 3 x 11
+  skim_variable          n_missing complete_rate    mean    sd    p0   p25   p50
+* &lt;chr&gt;                      &lt;int&gt;         &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 monthly_price                  0         1     7.34    3.79      0  6.99  6.99
+2 contract_monthly_price         0         1     8.20    3.21      0  6.99  6.99
+3 trial_monthly_price          474         0.902 0.00158 0.105     0  0     0   
+    p75  p100 hist 
+* &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1  6.99 26    ▁▇▁▁▁
+2  6.99 26    ▁▇▁▁▁
+3  0     6.94 ▇▁▁▁▁
+
+-- Variable type: POSIXct ----------------------------------------------------------
+# A tibble: 4 x 7
+  skim_variable n_missing complete_rate min                 max                
+* &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+1 created_date          0         1     2008-11-20 00:00:00 2018-02-28 00:00:00
+2 start_date            0         1     2018-02-01 00:00:00 2018-02-28 00:00:00
+3 end_date              0         1     2018-03-01 00:00:00 2019-02-28 00:00:00
+4 canc_date          3549         0.269 2017-10-31 00:00:00 2019-02-21 00:00:00
+  median              n_unique
+* &lt;dttm&gt;                 &lt;int&gt;
+1 2017-12-20 00:00:00      971
+2 2018-02-14 00:00:00       28
+3 2019-02-13 00:00:00       47
+4 2018-04-01 00:00:00      156
+</code></pre>
+
+<h2 id="individual-variables-exploration">Individual variables exploration</h2>
+
+<h3 id="account-id-duplicates">account_id duplicates</h3>
+
+<p>There are 29 (58 / 2) duplicate account_id</p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   # selecting custoomer IDs that appear more than once
+   group_by(account_id) %&gt;% 
+   count() %&gt;% 
+   filter(n &gt; 1) %&gt;% 
+   ungroup() %&gt;% 
+   adorn_totals()
+
+ account_id  n
+  ID0677A2A  2
+  ID0741332  2
+  ID1391299  2
+  ID13A4A40  2
+  ID13A9243  2
+  ID1424249  2
+  ID1512645  2
+  ID1524272  2
+  ID155207A  2
+  ID193604A  2
+  ID1A1923A  2
+  ID1A32751  2
+  ID2761201  2
+  ID35A3764  2
+  ID4233600  2
+  ID4492593  2
+  ID4A21A21  2
+  ID4AA7757  2
+  ID5050A03  2
+  ID5245472  2
+  ID5672544  2
+  ID5679641  2
+  ID5709A95  2
+  ID5736607  2
+  ID5770621  2
+  ID5774546  2
+  ID5775354  2
+  ID57753A9  2
+  ID5A03505  2
+      Total 58
+</code></pre>
+
+<p>It looks like the large majority of duplicate customer ID are linked to an Amendment on their account.</p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   group_by(account_id) %&gt;% 
+   count() %&gt;% 
+   filter(n &gt; 1) %&gt;% 
+   ungroup() %&gt;% 
+   # appending all data back in
+   left_join(data_raw) %&gt;% 
+   # select some columns for a closer look
+   select(account_id, canc_reason) %&gt;% 
+   arrange(canc_reason)
+
+account_id canc_reason
+&lt;chr&gt;       &lt;chr&gt;
+ID0741332	Amendment			
+ID13A4A40	Amendment			
+ID155207A	Amendment			
+ID193604A	Amendment			
+ID1A1923A	Amendment			
+ID1A32751	Amendment			
+ID2761201	Amendment			
+ID35A3764	Amendment			
+ID4233600	Amendment			
+ID4492593	Amendment			
+ID4A21A21	Amendment			
+ID4AA7757	Amendment			
+ID4AA7757	Amendment			
+ID5050A03	Amendment			
+ID5245472	Amendment			
+ID5679641	Amendment			
+ID5709A95	Amendment			
+ID5774546	Amendment			
+ID5775354	Amendment			
+ID57753A9	Amendment
+ID5A03505	Amendment			
+ID5709A95	Competitor			
+ID155207A	Failed Credit Card Payment			
+ID1A32751	Failed Credit Card Payment			
+ID13A4A40	Lack of time			
+ID5774546	Lack of time			
+ID1424249	Not known			
+ID5736607	Not known			
+ID0677A2A	Product switch			
+ID1391299	Product switch
+ID5672544	Product switch			
+ID5770621	Product switch			
+ID13A9243	Unknown			
+ID1512645	Unknown			
+ID1524272	Unknown			
+ID0677A2A	NA			
+ID0741332	NA			
+ID1391299	NA			
+ID13A9243	NA			
+ID1424249	NA
+ID1512645	NA			
+ID1524272	NA			
+ID193604A	NA			
+ID1A1923A	NA			
+ID2761201	NA			
+ID35A3764	NA			
+ID4233600	NA			
+ID4492593	NA			
+ID4A21A21	NA			
+ID5050A03	NA
+ID5245472	NA			
+ID5672544	NA			
+ID5679641	NA			
+ID5736607	NA			
+ID5770621	NA			
+ID5775354	NA			
+ID57753A9	NA			
+ID5A03505	NA
+</code></pre>
+
+<p>Given the very small number of duplicates compared to the total, I&rsquo;m simply removing the duplicates.</p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_raw %&gt;% 
+   group_by(account_id) %&gt;% 
+   count() %&gt;% 
+   filter(n == 1) %&gt;% 
+   ungroup() %&gt;% 
+   # appending all data back in
+   left_join(data_raw) %&gt;% 
+   select(-n)
+</code></pre>
+
+<h3 id="country">country</h3>
+
+<p>Overwhelming majority of subscriptions are UK based</p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   group_by(country) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   arrange(desc(n)) %&gt;% 
+   ungroup() %&gt;% 
+   mutate(country = country %&gt;% as_factor()) %&gt;% 
+   filter(n &gt; 7) %&gt;%
+   
+   ggplot(aes(x = country, y = n)) +
+   geom_col(fill = &quot;#E69F00&quot;, colour = &quot;red&quot;) +
+   theme_minimal() +
+   labs(title     = 'Number of subscriptions by acquisition country',
+         caption  = '',
+         x        = 'Country of Residence',
+         y        = 'Number of Subscribers') +
+   theme(plot.title = element_text(hjust = 0.5),
+         axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+</code></pre>
+
+<p><img src="/img/2020-04-11-mixed-type-data-segmentation-initial-data/unnamed-chunk-6-1.png" alt="" width="100%" height="100%"/></p>
+
+<h3 id="status">status</h3>
+
+<p>Majority of accounts are either <code>Active</code> or <code>Cancelled</code></p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   group_by(status) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   janitor::adorn_totals()
+
+               status    n
+               Active 3542
+            Cancelled 1257
+               Lapsed    7
+ Pending Cancellation   47
+                Total 4853
+</code></pre>
+
+<p>I&rsquo;m rolling <code>Lapsed</code> and <code>Pending Cancellation</code> into <code>Cancelled</code></p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;%
+   mutate(status = 
+             case_when(status == 'Lapsed' ~ 'Cancelled',
+                       status == 'Pending Cancellation' ~ 'Cancelled',
+                       TRUE ~ status)
+   )
+</code></pre>
+
+<h3 id="product-group">Product group</h3>
+
+<p>All looks OK here</p>
+
+<pre><code class="language-r"># no NAs
+data_raw %&gt;% 
+   group_by(product_group) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   janitor::adorn_totals()
+
+ product_group    n
+       Premium  666
+      Standard 4187
+         Total 4853
+</code></pre>
+
+<h3 id="payment-frequency">Payment Frequency</h3>
+
+<p>Under payment frequency there are only a handful of <code>Fixed Term</code></p>
+
+<pre><code class="language-r"># no NAs
+data_raw %&gt;% 
+   group_by(payment_frequency) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   janitor::adorn_totals()
+
+ payment_frequency    n
+            Annual  318
+        Fixed Term   11
+           Monthly 4524
+             Total 4853
+</code></pre>
+
+<p>I&rsquo;m dropping <code>Fixed Term</code></p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;% 
+   filter(payment_frequency != 'Fixed Term') 
+</code></pre>
+
+<h3 id="campaign">Campaign</h3>
+
+<p>Top three campaigns account for over 72% of total acquisitions in February 2018</p>
+
+<pre><code class="language-r"># no NAs
+data_raw %&gt;% 
+   group_by(campaign_code) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   arrange(desc(n)) %&gt;% 
+   ungroup() %&gt;% 
+   mutate(campaign_code = campaign_code %&gt;% as_factor()) %&gt;% 
+   filter(n &gt; 3) %&gt;% 
+   
+   ggplot(aes(x = campaign_code, y = n)) +
+   geom_col(fill = &quot;steelblue&quot;, colour = &quot;blue&quot;) +
+   theme_minimal() +
+   labs(title     = 'Number of subscriptions by acquisition campaign',
+         caption  = '',
+         x        = 'Campaign Code',
+         y        = 'Number of Subscribers') +
+   theme(plot.title = element_text(hjust = 0.5),
+         axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+</code></pre>
+
+<p><img src="/img/2020-04-11-mixed-type-data-segmentation-initial-data/unnamed-chunk-12-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Dropping <code>unknown</code> campaign code</p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;% 
+   filter(campaign_code != 'Unknown') 
+</code></pre>
+
+<h3 id="trial-end-date">Trial end date</h3>
+
+<p><code>trial_monthly_price</code> price should be zero for all</p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   select(contains('trial'), monthly_price) %&gt;% 
+   # filter(!(trial_end_date)) %&gt;% 
+   arrange(desc(trial_length)) %&gt;% 
+   head() %&gt;% 
+   kable(align = 'c')
+
+trial_length	trial_monthly_price	monthly_price
+      6M	            6.94		            6.94
+      6M		         0.00		            0.00
+      6M		         0.00	               0.00
+      6M		         0.00	               0.00
+      6M		         0.00	               0.00
+      6M		         0.00	               0.00
+</code></pre>
+
+<p>Amending <code>trial_monthly_price</code> to zero and the 6.94 <code>monthly_price</code> to 6.99</p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;% 
+   mutate(trial_monthly_price = 
+             case_when(trial_monthly_price == 6.94 ~ 0,
+                       TRUE ~ trial_monthly_price),
+          monthly_price = 
+             case_when(monthly_price == 6.94 ~ 6.99,
+                       TRUE ~ monthly_price)
+          )
+</code></pre>
+
+<h3 id="cancellation-date-reason">Cancellation date / reason</h3>
+
+<p>there&rsquo;s too much noise in the <code>cancellation reasons</code>, which needs simplifying to get a clear read</p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   group_by(status, canc_reason) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   arrange(status, n) %&gt;% 
+   janitor::adorn_totals()
+
+               status                 canc_reason    n
+               Active                     Unknown   16
+               Active                        &lt;NA&gt; 3526
+            Cancelled                  Apple news    1
+            Cancelled                    Download    1
+            Cancelled             App performance    2
+            Cancelled                   Political    4
+            Cancelled       No compatible devices    6
+            Cancelled               Look and feel   10
+            Cancelled              Product switch   16
+            Cancelled                  Competitor   17
+            Cancelled                   Editorial   18
+            Cancelled      Duplicate subscription   19
+            Cancelled             Lack of content   21
+            Cancelled                        &lt;NA&gt;   21
+            Cancelled                     Unknown   30
+            Cancelled               Functionality   40
+            Cancelled                   Amendment   74
+            Cancelled Failed Direct Debit Payment   84
+            Cancelled                       Price  100
+            Cancelled       Failed PayPal Payment  144
+            Cancelled                   Not known  190
+            Cancelled                Lack of time  228
+            Cancelled  Failed Credit Card Payment  231
+               Lapsed                     Unknown    7
+ Pending Cancellation                  Competitor    1
+ Pending Cancellation               Functionality    1
+ Pending Cancellation             Lack of content    1
+ Pending Cancellation                       Price    1
+ Pending Cancellation                     Unknown    1
+ Pending Cancellation Failed Direct Debit Payment    2
+ Pending Cancellation  Failed Credit Card Payment   10
+ Pending Cancellation                   Not known   14
+ Pending Cancellation                Lack of time   16
+                Total                           - 4853
+</code></pre>
+
+<p>Grouping up some of the reason for cancelling and dealing with the NAs</p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;% 
+      mutate(
+         canc_reason = 
+          case_when(
+            status == 'Active' &amp; canc_reason == 'Unknown' ~ '-',
+            
+            # setting all NAs to zero as they're easier to deal with
+            is.na(canc_reason)  ~ '-',
+            
+            canc_reason == 'App performance' | 
+            canc_reason == 'No compatible devices' |
+            canc_reason == 'Look and feel'   | 
+            canc_reason == 'Functionality' |
+            canc_reason == 'Download'                      ~ 'UX Related',
+            
+            canc_reason == 'Failed Credit Card Payment' | 
+            canc_reason == 'Failed PayPal Payment' |
+            canc_reason == 'Failed Direct Debit Payment'   ~ 'Failed Payment',
+            
+            canc_reason == 'Political' |
+            canc_reason == 'Editorial' |
+            canc_reason == 'Lack of content'               ~ 'Editorial',
+            
+            canc_reason == 'Competitor' |
+            canc_reason == 'Apple news'                    ~ 'Competitor',
+            
+            canc_reason == 'Product switch' |
+            canc_reason == 'Amendment' |                  
+            canc_reason == 'Duplicate subscription'        ~ 'Other',
+            
+            canc_reason == 'Not known' | 
+            canc_reason == 'Unknown'                       ~ '-',
+            
+            TRUE                                           ~ canc_reason)
+      )  
+</code></pre>
+
+<h3 id="trial-length">trial length</h3>
+
+<p>Majority of subscriptions go for 1M (one month) trial. I&rsquo;ve triangulated dates with trial length and they all check out. NAs represent subscribers already enrolled so no trial for them</p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   group_by(trial_length) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   janitor::adorn_totals()
+
+trial_length    n
+      1M      4277
+      2M         1
+      3M        95
+      6M         7
+     &lt;NA&gt;      473
+    Total     4853
+</code></pre>
+
+<h3 id="price">price</h3>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   filter(country == 'United Kingdom') %&gt;% 
+   group_by( 
+      monthly_price,
+      contract_monthly_price
+      ) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   arrange(desc(n)) %&gt;% 
+   janitor::adorn_totals()
+
+ monthly_price contract_monthly_price    n
+          6.99                   6.99 2904
+            15                  15.00  363
+             0                   6.99  273
+          8.33                   8.33  132
+             0                  15.00   52
+          9.65                   9.65   48
+             0                   9.65   21
+          3.75                   3.75   21
+         20.83                  20.83   21
+            26                  26.00   19
+          12.5                  12.50   18
+             0                   0.00   17
+         16.67                  16.67   14
+             0                  26.00   13
+         11.67                  11.67    9
+             1                   6.99    5
+          6.25                   6.25    4
+          6.67                   6.67    3
+          19.5                  19.50    3
+         17.33                  17.33    2
+         21.67                  21.67    2
+             1                  15.00    1
+             5                   5.00    1
+             5                  15.00    1
+           6.5                  15.00    1
+          6.99                   9.65    1
+          7.33                  11.67    1
+           7.5                   7.50    1
+         10.83                  10.83    1
+         13.33                  13.33    1
+            15                  26.00    1
+         15.17                  15.17    1
+         18.33                  18.33    1
+            20                  20.00    1
+         Total                 449.92 3957
+</code></pre>
+
+<p>Where  <code>monthly_price</code> is zero they&rsquo;ve all cancelled. I believe it coincides with old customers who cancelled on Feb-18</p>
+
+<pre><code class="language-r">data_clean %&gt;%
+   filter(trial_length == '1M') %&gt;% # 4233 are 1M subscriptions or 90% of total
+   group_by( 
+            product_group,
+            trial_monthly_price, # all zero
+            monthly_price, 
+            contract_monthly_price) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   janitor::adorn_totals()
+
+
+ product_group trial_monthly_price monthly_price contract_monthly_price    n
+       Premium                   0          0.00                  15.00   54
+       Premium                   0          5.00                  15.00    1
+       Premium                   0          6.50                  15.00    1
+       Premium                   0         15.00                  15.00  343
+      Standard                   0          0.00                   6.99  308
+      Standard                   0          0.00                   9.65   33
+      Standard                   0          1.00                   6.99    6
+      Standard                   0          6.99                   6.99 3392
+      Standard                   0          9.65                   9.65   95
+         Total                   0         44.14                 100.27 4233
+</code></pre>
+
+<h3 id="payment-method">payment method</h3>
+
+<p>A handful of <code>Unknown</code> are to be found in <code>payment_method</code></p>
+
+<pre><code class="language-r">data_raw %&gt;% 
+   group_by(payment_method) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   adorn_totals()
+
+payment_method    n
+    Credit Card 2966
+   Direct Debit  632
+         PayPal 1244
+        Unknown   11
+          Total 4853
+</code></pre>
+
+<p>Dropping <code>unknown</code></p>
+
+<pre><code class="language-r">data_clean &lt;- 
+   data_clean %&gt;% 
+   filter(payment_method != 'Unknown') 
+</code></pre>
+
+<p>A final look at the cleansed data: I&rsquo;m happy with everything here!</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   skim()
+
+-- Data Summary ------------------------
+                           Values    
+Name                       Piped data
+Number of rows             4749      
+Number of columns          16        
+_______________________              
+Column type frequency:               
+  character                9         
+  numeric                  3         
+  POSIXct                  4         
+________________________             
+Group variables            None      
+
+-- Variable type: character ------------------------------------------------------
+# A tibble: 9 x 8
+  skim_variable     n_missing complete_rate   min   max empty n_unique whitespace
+* &lt;chr&gt;                 &lt;int&gt;         &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;      &lt;int&gt;
+1 account_id                0         1         9     9     0     4749          0
+2 country                   1         1.00      4    20     0       77          0
+3 status                    0         1         6     9     0        2          0
+4 product_group             0         1         7     8     0        2          0
+5 payment_frequency         0         1         6     7     0        2          0
+6 campaign_code             0         1         5     5     0       70          0
+7 canc_reason               0         1         1    14     0        8          0
+8 trial_length            413         0.913     2     2     0        4          0
+9 payment_method            0         1         6    12     0        3          0
+
+-- Variable type: numeric --------------------------------------------------------
+# A tibble: 3 x 11
+  skim_variable          n_missing complete_rate  mean    sd    p0   p25   p50
+* &lt;chr&gt;                      &lt;int&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 monthly_price                  0         1      7.34  3.69     0  6.99  6.99
+2 contract_monthly_price         0         1      8.17  3.12     0  6.99  6.99
+3 trial_monthly_price          413         0.913  0     0        0  0     0   
+    p75  p100 hist 
+* &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+1  6.99    26 ▁▇▁▁▁
+2  6.99    26 ▁▇▁▁▁
+3  0        0 ▁▁▇▁▁
+
+-- Variable type: POSIXct --------------------------------------------------------
+# A tibble: 4 x 7
+  skim_variable n_missing complete_rate min                 max                
+* &lt;chr&gt;             &lt;int&gt;         &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+1 created_date          0         1     2008-11-20 00:00:00 2018-02-28 00:00:00
+2 start_date            0         1     2018-02-01 00:00:00 2018-02-28 00:00:00
+3 end_date              0         1     2018-03-04 00:00:00 2019-02-28 00:00:00
+4 canc_date          3511         0.261 2017-10-31 00:00:00 2019-02-19 00:00:00
+  median              n_unique
+* &lt;dttm&gt;                 &lt;int&gt;
+1 2017-12-25 00:00:00      958
+2 2018-02-13 00:00:00       28
+3 2019-02-13 00:00:00       29
+4 2018-04-04 00:00:00      153
+</code></pre>
+
+<h2 id="saving-data-clean">Saving data_clean</h2>
+
+<pre><code class="language-r"># Saving clensed data for analysis phase
+saveRDS(data_clean, &quot;../00_data/data_clean.rds&quot;)
+</code></pre>
+
+<h3 id="code-repository">Code Repository</h3>
+
+<p>The full R code and all relevant files can be found on my GitHub profile @ <a href="https://github.com/DiegoUsaiUK/K_Medoid_Clustering"><strong>K Medoid Clustering</strong></a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li><p>For the article that inspired my foray into K-medois clustering see this excellent TDS post by <em>Thomas Filaire</em>: <a href="https://towardsdatascience.com/clustering-on-mixed-type-data-8bbd0a2569c3"><strong>Clustering on mixed type data</strong></a></p></li>
+
+<li><p>For a tidy and fully-featured approach to counting things, see the <a href="https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html"><strong>tabyls Function Vignette</strong></a></p></li>
+</ul>
+
+<h3 id="appendix">Appendix</h3>
+
+<p><strong>Table 1 – Variable Definitions</strong></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Account ID</td>
+<td align="left">Unique account ID</td>
+</tr>
+
+<tr>
+<td align="left">Created Date</td>
+<td align="left">Date of original account creation</td>
+</tr>
+
+<tr>
+<td align="left">Country</td>
+<td align="left">Country of account holder</td>
+</tr>
+
+<tr>
+<td align="left">Status</td>
+<td align="left">Current status - active/inactive</td>
+</tr>
+
+<tr>
+<td align="left">Product Group</td>
+<td align="left">Product type</td>
+</tr>
+
+<tr>
+<td align="left">Payment Frequency</td>
+<td align="left">Most subscriptions are a 1 year contract term - payable annually or monthly</td>
+</tr>
+
+<tr>
+<td align="left">Campaign Code</td>
+<td align="left">Unique identifier for campaign attributed to acquisition</td>
+</tr>
+
+<tr>
+<td align="left">Start Date</td>
+<td align="left">Start date of the trial</td>
+</tr>
+
+<tr>
+<td align="left">End Date</td>
+<td align="left">Scheduled end of term</td>
+</tr>
+
+<tr>
+<td align="left">Cancellation Date</td>
+<td align="left">Date of instruction to cancel</td>
+</tr>
+
+<tr>
+<td align="left">Cancellation Reason</td>
+<td align="left">Reason given for cancellation</td>
+</tr>
+
+<tr>
+<td align="left">Monthly Price</td>
+<td align="left">Current monthly price of subscription</td>
+</tr>
+
+<tr>
+<td align="left">Contract Monthly Price</td>
+<td align="left">Price after promo period</td>
+</tr>
+
+<tr>
+<td align="left">Trial Length</td>
+<td align="left">Length of trial</td>
+</tr>
+
+<tr>
+<td align="left">Trial Monthly Price</td>
+<td align="left">Price during trial</td>
+</tr>
+
+<tr>
+<td align="left">Payment Method</td>
+<td align="left">Payment method</td>
+</tr>
+</tbody>
+</table>
+    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+                <p></p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+<article class="read-next-card" 
+            style="background-image: url(/img/simon-zhu-TfRHSL2GKDc-unsplash.jpg);" >
+    <header class="read-next-card-header">
+        <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
+        
+        <h3 class="read-next-card-header-title"><a href="/tags/data-wrangling/">#Data Wrangling</a></h3>
+    </header>
+    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+    </div>
+
+    <div class="read-next-card-content">
+      
+        <ul>
+          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
+        
+          <li><a href="/2019/09/steps-and-considerations-to-run-a-successful-segmentation/">Steps and considerations to run a successful segmentation with K-means, Principal Components Analysis and Bootstrap Evaluation</a></li>            
+        
+          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
+        
+          <li><a href="/2019/08/loading-merging-and-joining-datasets-postgresql-edt/">Loading, Merging and Joining Several Datasets - PostgreSQL EDT</a></li>            
+        </ul>
+    </div>
+    <footer class="read-next-card-footer">
+      
+        <a href="/tags/data-wrangling/">See all related posts →</a>
+    </footer>
+</article>
+
+
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/04/propensity-modelling-3-of-3/">
+      <div class="post-card-image" style="background-image: url(/img/david-sury-X6M3svSX8dc-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/04/propensity-modelling-3-of-3/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Propensity Modelling 
+              #Machine Learning 
+              #Optimisation  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 3 of 3 - Optimise Profit With the Expected Value Framework</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/03/propensity-modelling-2-of-3/">
+      <div class="post-card-image" style="background-image: url(/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/03/propensity-modelling-2-of-3/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Machine Learning 
+              #Propensity Modelling 
+              #ML Interpretability 
+              #Model Selection  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of its customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease out this type of insight is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="/">
+      
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Segmenting with Mixed Type Data - Initial data inspection and manupulation</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Segmenting%20with%20Mixed%20Type%20Data%20-%20Initial%20data%20inspection%20and%20manupulation&amp;url=%2f2020%2f04%2fmixed-type-data-segmentation-initial-data%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f04%2fmixed-type-data-segmentation-initial-data%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">Diego Usai</a> © 2019 <br>
+      <span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        
+        
+        <a href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener">Github</a>
+        <a href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener">Medium</a>
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-151122416-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>

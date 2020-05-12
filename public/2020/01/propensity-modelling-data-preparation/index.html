@@ -4,13 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis &middot; </title>
+    <title>Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Data Preparation and Exploratory Data Analysis &middot; </title>
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="canonical" href="/2020/02/propensity-modelling-1-of-3/" />
+    <link rel="canonical" href="/2020/01/propensity-modelling-data-preparation/" />
 
      <meta name="description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " /> 
 
@@ -20,20 +20,20 @@
     <meta name="twitter:image" content="/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg"/>
     
  
-    <meta name="twitter:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis"/>
+    <meta name="twitter:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Data Preparation and Exploratory Data Analysis"/>
     <meta name="twitter:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations "/>
-    <meta name="twitter:url" content="/2020/02/propensity-modelling-1-of-3/" />
+    <meta name="twitter:url" content="/2020/01/propensity-modelling-data-preparation/" />
     <meta name="twitter:site" content="@"/>
 
     <meta property="og:site_name" content="" />
-    <meta property="og:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis &middot; Lifelong Learning" />
-    <meta property="og:url" content="/2020/02/propensity-modelling-1-of-3/" />
+    <meta property="og:title" content="Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Data Preparation and Exploratory Data Analysis &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2020/01/propensity-modelling-data-preparation/" />
     
 
     <meta property="og:type" content="article" />
     <meta property="og:description" content="In this day and age, a business that leverages data to understand the drivers of its customers&amp;rsquo; behaviour has a true competitive advantage. Organisations " />
 
-    <meta property="article:published_time" content="2020-02-14T00:00:00Z" />
+    <meta property="article:published_time" content="2020-01-14T00:00:00Z" />
     <meta property="article:tag" content="Data Wrangling" /><meta property="article:tag" content="Data Exploration" /><meta property="article:tag" content="Propensity Modelling" />
 
     <meta property="og:image" content="/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg"/>
@@ -120,10 +120,10 @@
       <article class="post-full post"> 
     <header class="post-full-header">
         <section class="post-full-meta">
-            <time class="post-full-meta-date" datetime="2020-02-14">14 February 2020</time>
+            <time class="post-full-meta-date" datetime="2020-01-14">14 January 2020</time>
                 <span class="date-divider">/</span> <a href="/tags/data-wrangling/">#Data Wrangling</a>&nbsp;<a href="/tags/data-exploration/">#Data Exploration</a>&nbsp;
         </section>
-        <h1 class="post-full-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</h1>
+        <h1 class="post-full-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Data Preparation and Exploratory Data Analysis</h1>
     </header>
     
     <figure class="post-full-image" style="background-image: url(/img/pavan-trikutam-71CjSSB83Wo-unsplash.jpg)">
@@ -137,7 +137,7 @@
 
 <p>One trialled and tested approach to tease out this type of insight is <a href="https://en.wikipedia.org/wiki/Predictive_modelling"><strong>Propensity Modelling</strong></a>, which combines information such as a <strong>customers’ demographics</strong> (age, race, religion, gender, family size, ethnicity, income, education level), <strong>psycho-graphic</strong> (social class, lifestyle and personality characteristics), <strong>engagement</strong> (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc.), <strong>user experience</strong> (customer service phone and email wait times, number of refunds, average shipping times), and <strong>user behaviour</strong> (purchase value on different time-scales, number of days since most recent purchase, time between offer and conversion, etc.) to estimate the likelihood of a certain customer profile to performing a certain type of behaviour (e.g. the purchase of a product).</p>
 
-<p>Once you understand the probability of a certain customer to interact with your brand, buy a product or a sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
+<p>Once you understand the probability of a certain customer to interact with your brand, buy a product or sign up for a service, you can use this information to create scenarios, be it minimising <strong>marketing expenditure</strong>, maximising <strong>acquisition targets</strong>, and optimise <strong>email send frequency</strong> or <strong>depth of discount</strong>.</p>
 
 <h2 id="project-structure">Project Structure</h2>
 
@@ -592,7 +592,7 @@ gridExtra::grid.arrange(con, mth, dow, nrow = 2)
 
 <p>All <strong>social and economic attributes</strong> show a good level of variation compared to the target variable, which suggests that they should all impact the response. They all display a high degree of multi-modality and do not have an even spread through the density plot, and will need to be binned.</p>
 
-<p>It is also worth noting that, with the exception of _cons_confidence<em>index</em>, all other social and economic attributes are strongly correlated to each other, indicating that only one could be included in the model as they are all “picking up” similar economic trend.</p>
+<p>It is also worth noting that, with the exception of <em>consumer confidence index</em>, all other social and economic attributes are strongly correlated to each other, indicating that only one could be included in the model as they are all “picking up” similar economic trend.</p>
 
 <h2 id="data-processing-and-transformation">Data Processing and Transformation</h2>
 
@@ -745,7 +745,7 @@ gridExtra::grid.arrange(con, mth, dow, nrow = 2)
 <ul>
 <li><p>Correlation analysis with <strong>correlationfunnel</strong> helped identify a hierarchy of expected predictive power for all variables</p></li>
 
-<li><p><strong>duration</strong> (eqpt_rent) has strongest correlation with target variable whereas some of the bank client data like <strong>housing</strong> and <strong>loan</strong> shows the weakest correlation</p></li>
+<li><p><strong>duration</strong> has strongest correlation with target variable whereas some of the bank client data like <strong>housing</strong> and <strong>loan</strong> shows the weakest correlation</p></li>
 
 <li><p>However, <strong>duration</strong> will <strong>NOT</strong> be used in the analysis as it is unknown before a call. As such it offers very little actionable insight or predictive value and should be discarded from any realistic predictive model</p></li>
 
@@ -979,13 +979,13 @@ saveRDS(data_final, &quot;../01_data/data_final.rds&quot;)
     <div class="read-next-card-content">
       
         <ul>
-          <li><a href="/2019/12/time-series-machine-learning-analysis-and-demand-forecasting/">Time Series Machine Learning Analysis and Demand Forecasting with H2O &amp; TSstudio</a></li>            
+          <li><a href="/2019/07/loading-merging-and-joining-datasets-excel-edt/">Loading, Merging and Joining Several Datasets - Excel EDT</a></li>            
         
-          <li><a href="/2020/03/propensity-modelling-2-of-3/">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</a></li>            
+          <li><a href="/2019/05/a-gentle-introduction-to-customer-segmentation/">A gentle Introduction to Customer Segmentation - Using K-Means Clustering to Understand Marketing Response</a></li>            
+        
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
         
           <li><a href="/2019/06/modelling-with-tidymodels-and-parsnip/">Modelling with Tidymodels and Parsnip - A Tidy Approach to a Classification Problem</a></li>            
-        
-          <li><a href="/2019/03/market-basket-analysis-part-2-of-3/">Market Basket Analysis - Part 2 of 3 - Market Basket Analysis with recommenderlab</a></li>            
         </ul>
     </div>
     <footer class="read-next-card-footer">
@@ -998,13 +998,13 @@ saveRDS(data_final, &quot;../01_data/data_final.rds&quot;)
       
       <article class="post-card post"> 
     
-    <a class="post-card-image-link" href="/2020/03/propensity-modelling-2-of-3/">
+    <a class="post-card-image-link" href="/2020/02/propensity-modelling-estimate-compare-models/">
       <div class="post-card-image" style="background-image: url(/img/bruna-branco-7r1HxvVC7AY-unsplash.jpg)"></div>
     </a>
     
 
     <div class="post-card-content">
-      <a class="post-card-content-link" href="/2020/03/propensity-modelling-2-of-3/">
+      <a class="post-card-content-link" href="/2020/02/propensity-modelling-estimate-compare-models/">
           <header class="post-card-header">
               <span class="post-card-tags">
               #Machine Learning 
@@ -1012,7 +1012,7 @@ saveRDS(data_final, &quot;../01_data/data_final.rds&quot;)
               #ML Interpretability 
               #Model Selection  </span>
               
-              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 2 of 3 - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</h2>
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Estimate Several Models and Compare Their Performance Using a Model-agnostic Methodology</h2>
           </header>
           <section class="post-card-excerpt">
               
@@ -1075,17 +1075,17 @@ In more recent times, the popularisation and wider availability of open source f
     </a>
   </div>
   <span class="floating-header-divider">&mdash;</span>
-  <div class="floating-header-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Part 1 of 3 - Data Preparation and Exploratory Data Analysis</div>
+  <div class="floating-header-title">Propensity Modelling - Using h2o and DALEX to Estimate the Likelihood of Purchasing a Financial Product - Data Preparation and Exploratory Data Analysis</div>
   <div class="floating-header-share">
     <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
      <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
     </div>
     
-    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Propensity%20Modelling%20-%20Using%20h2o%20and%20DALEX%20to%20Estimate%20the%20Likelihood%20of%20Purchasing%20a%20Financial%20Product%20-%20Part%201%20of%203%20-%20Data%20Preparation%20and%20Exploratory%20Data%20Analysis&amp;url=%2f2020%2f02%2fpropensity-modelling-1-of-3%2f"
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Propensity%20Modelling%20-%20Using%20h2o%20and%20DALEX%20to%20Estimate%20the%20Likelihood%20of%20Purchasing%20a%20Financial%20Product%20-%20Data%20Preparation%20and%20Exploratory%20Data%20Analysis&amp;url=%2f2020%2f01%2fpropensity-modelling-data-preparation%2f"
           onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
       </a>
-      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f02%2fpropensity-modelling-1-of-3%2f"
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f01%2fpropensity-modelling-data-preparation%2f"
           onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
       </a>

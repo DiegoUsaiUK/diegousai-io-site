@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en-UK" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data &middot; </title>
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="canonical" href="/2020/04/mixed-type-data-segmentation-k-medoids/" />
+
+     <meta name="description" content="With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a h" /> 
+
+     
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content="/img/joyce-mccown-1Q4TjXPlrVQ-unsplash.jpg"/>
+    
+ 
+    <meta name="twitter:title" content="Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data"/>
+    <meta name="twitter:description" content="With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a h"/>
+    <meta name="twitter:url" content="/2020/04/mixed-type-data-segmentation-k-medoids/" />
+    <meta name="twitter:site" content="@"/>
+
+    <meta property="og:site_name" content="" />
+    <meta property="og:title" content="Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data &middot; Lifelong Learning" />
+    <meta property="og:url" content="/2020/04/mixed-type-data-segmentation-k-medoids/" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a h" />
+
+    <meta property="article:published_time" content="2020-04-22T00:00:00Z" />
+    <meta property="article:tag" content="Clustering" /><meta property="article:tag" content="t-SNE" /><meta property="article:tag" content="Customer Segmentation" /><meta property="article:tag" content="Machine Learning" />
+
+    <meta property="og:image" content="/img/joyce-mccown-1Q4TjXPlrVQ-unsplash.jpg"/>
+
+
+    <meta name="generator" content="Hugo 0.58.3" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/built/screen.css" /> 
+    <link rel="stylesheet" type="text/css" href="/css/casper-two.css" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" />
+     <link rel="stylesheet" href="/css/override.css" /> 
+
+     
+
+</head>
+
+
+<body class="post-template">
+  <div class="site-wrapper"> 
+
+<header class="site-header outer">
+  <div class="inner">
+    <nav class="site-nav">
+      <div class="site-nav-left">
+
+        <ul class="nav" role="menu">
+        
+        
+        
+            <li class="" role="menuitem">
+              <a href="/">Home</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/articles/">articles</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/multi-article-studies/">projects</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/categories/data-handling">data</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/tags/">Tags</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/links/">Readings</a>
+            </li>
+        
+            <li class="" role="menuitem">
+              <a href="/page/about/">About</a>
+            </li>
+        
+      </ul></div>
+
+      <div class="site-nav-right">
+        <div class="social-links">
+                    
+
+                    
+
+                    <a class="social-link" href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+
+                    <a class="social-link" href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 50 512 512"><path d="M150.65,100.682c0,27.992-22.508,50.683-50.273,50.683c-27.765,0-50.273-22.691-50.273-50.683 C50.104,72.691,72.612,50,100.377,50C128.143,50,150.65,72.691,150.65,100.682z M143.294,187.333H58.277V462h85.017V187.333z M279.195,187.333h-81.541V462h81.541c0,0,0-101.877,0-144.181c0-38.624,17.779-61.615,51.807-61.615 c31.268,0,46.289,22.071,46.289,61.615c0,39.545,0,144.181,0,144.181h84.605c0,0,0-100.344,0-173.915 s-41.689-109.131-99.934-109.131s-82.768,45.369-82.768,45.369V187.333z" /></svg></a>
+
+                    <a class="social-link" href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195 195"><path d="M46.5340803,65.2157554 C46.6968378,63.6076572 46.0836,62.018231 44.8828198,60.93592 L32.6512605,46.2010582 L32.6512605,44 L70.6302521,44 L99.9859944,108.380952 L125.794585,44 L162,44 L162,46.2010582 L151.542017,56.2281011 C150.640424,56.9153477 150.193188,58.0448862 150.380019,59.1628454 L150.380019,132.837155 C150.193188,133.955114 150.640424,135.084652 151.542017,135.771899 L161.755369,145.798942 L161.755369,148 L110.38282,148 L110.38282,145.798942 L120.963119,135.527337 C122.002801,134.487948 122.002801,134.182246 122.002801,132.592593 L122.002801,73.0417402 L92.585901,147.755438 L88.6106443,147.755438 L54.3622782,73.0417402 L54.3622782,123.115814 C54.0767278,125.221069 54.7759199,127.3406 56.2581699,128.863022 L70.0186741,145.55438 L70.0186741,147.755438 L31,147.755438 L31,145.55438 L44.7605042,128.863022 C46.2319621,127.338076 46.8903838,125.204485 46.5340803,123.115814 L46.5340803,65.2157554 Z"/></svg></a>
+        </div>  
+            
+      </div>
+
+    </nav>  
+
+  </div>
+</header>
+
+<main id="site-main" class="site-main outer" role="main">
+  <div class="inner">
+    
+      <article class="post-full post"> 
+    <header class="post-full-header">
+        <section class="post-full-meta">
+            <time class="post-full-meta-date" datetime="2020-04-22">22 April 2020</time>
+                <span class="date-divider">/</span> <a href="/tags/clustering/">#Clustering</a>&nbsp;<a href="/tags/t-sne/">#t-SNE</a>&nbsp;
+        </section>
+        <h1 class="post-full-title">Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data</h1>
+    </header>
+    
+    <figure class="post-full-image" style="background-image: url(/img/joyce-mccown-1Q4TjXPlrVQ-unsplash.jpg)">
+    </figure>
+
+    <section class="post-full-content">
+        <div class="kg-card-markdown">
+        
+
+<p>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the corona-virus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.</p>
+
+<p>In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit <code>clustering</code>, one of my favourite analytic methods. Only this time the set up is a lot closer to a real-world situation in that the data I had to analyse came with a <strong>mix of categorical and numerical</strong> feature. Simply put, this <strong>could not be tackled</strong> with a bog-standard <strong>K-means</strong> algorithm as it&rsquo;s based on <em>pairwise Euclidean distances</em> and has no direct application to categorical data.</p>
+
+<h2 id="the-data">The data</h2>
+
+<pre><code class="language-r">library(tidyverse)
+library(readxl)
+library(skimr)
+library(knitr) 
+library(janitor)
+library(cluster)
+library(Rtsne)
+</code></pre>
+
+<p>The data represents all <strong>online acquisitions</strong> in February 2018 and their subscription status 3 months later (9th June 2018) for a <strong>Fictional News Aggregator Subscription</strong> business. It contains a number of parameters describing each account, like <strong>account creation date</strong>, <strong>campaign attributed to acquisition</strong>, <strong>payment method</strong> and <strong>length of product trial</strong>. A full description of the variables can be found in the <strong>Appendix</strong></p>
+
+<p>I got hold of this dataset in the course of a recruitment selection process as I was asked to carry out an analysis and present results and recommendations that could <strong>helps improve their products sign up</strong> in my final meeting. Although fictitious in nature, I thought it best to <strong>further anonimise the dataset</strong> by changing names and values of most of the variables as well as removing several features that were of no use to the analysis</p>
+
+<p>The data was raw and required some cleansing and manipulation before it could be used for analysis. You can find the anonimised dataset on <a href="https://github.com/DiegoUsaiUK/K_Medoid_Clustering"><strong>my GitHub profile</strong></a>, along with the scripts I used to cleanse the data and perform the analysis</p>
+
+<h3 id="data-exploration">Data Exploration</h3>
+
+<p>This is a vital part of any data analysis study, often overlooked in favour of the fancier and &ldquo;sexier&rdquo; modelling/playing with the algos. In fact, I find it one of the <strong>most creative phases</strong> of any project, where you <strong>&ldquo;join the dots&rdquo;</strong> among the different variables and start <strong>formulating interesting hypothesis</strong> for you to test later on</p>
+
+<pre><code class="language-r">data_clean &lt;- readRDS(&quot;../00_data/data_clean.rds&quot;)
+</code></pre>
+
+<p>Here I&rsquo;m loading the cleaned data before I explore a selection of the features, run through a number of considerations to set up the analysis as well as show you some of the interesting insight I gathered. You can find the post covering data cleansing and formatting on my webpage @ <a href="https://diegousai.io/2020/04/mixed-type-data-segmentation-initial-data-exploration/"><strong>Segmenting with Mixed Type Data - Initial data inspection and manupulation</strong></a></p>
+
+<p>In this project I&rsquo;m also testing quite a few of the <code>adorn_</code> and the <code>tabyl</code> functions from the <code>janitor</code> library, a family of functions created to help expedite the initial data exploration and cleaning but also very useful to create and format summary tables.</p>
+
+<h4 id="country-of-residence">Country of Residence</h4>
+
+<p>Let&rsquo;s start with the geographic distribution of subscribers, the overwhelming majority of whom are UK based</p>
+
+<p><img src="/img/2020-04-22-mixed-type-data-segmentation-k-medoids/unnamed-chunk-2-1.png" alt="" width="100%" height="100%"/></p>
+
+<h4 id="cancellations">Cancellations</h4>
+
+<p>The dynamics of <code>cancellations</code> are definitely something that <strong>warrants further investigation</strong> (outside the scope of this study). In fact, <code>Failed payments</code> represent roughly <strong>10%</strong> of total subscriptions and a staggering <strong>38%</strong> when looking at cancellations alone</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   tabyl(canc_reason, status) %&gt;%
+   adorn_totals(c(&quot;row&quot;, &quot;col&quot;)) %&gt;% 
+   adorn_percentages(&quot;col&quot;) %&gt;%
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1) %&gt;% 
+   adorn_ns() %&gt;%
+   adorn_title(&quot;combined&quot;) %&gt;%
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">canc_reason/status</th>
+<th align="left">Active</th>
+<th align="left">Cancelled</th>
+<th align="left">Total</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">-</td>
+<td align="left">100.0% (3510)</td>
+<td align="left">18.1% (224)</td>
+<td align="left">78.6% (3734)</td>
+</tr>
+
+<tr>
+<td align="left">Competitor</td>
+<td align="left">0.0% (0)</td>
+<td align="left">1.5% (18)</td>
+<td align="left">0.4% (18)</td>
+</tr>
+
+<tr>
+<td align="left">Editorial</td>
+<td align="left">0.0% (0)</td>
+<td align="left">3.6% (44)</td>
+<td align="left">0.9% (44)</td>
+</tr>
+
+<tr>
+<td align="left"><strong>Failed Payment</strong></td>
+<td align="left">0.0% (0)</td>
+<td align="left"><strong>37.9%</strong> (469)</td>
+<td align="left"><strong>9.9%</strong> (469)</td>
+</tr>
+
+<tr>
+<td align="left">Lack of time</td>
+<td align="left">0.0% (0)</td>
+<td align="left">19.5% (242)</td>
+<td align="left">5.1% (242)</td>
+</tr>
+
+<tr>
+<td align="left">Other</td>
+<td align="left">0.0% (0)</td>
+<td align="left">6.5% (81)</td>
+<td align="left">1.7% (81)</td>
+</tr>
+
+<tr>
+<td align="left">Price</td>
+<td align="left">0.0% (0)</td>
+<td align="left">8.2% (101)</td>
+<td align="left">2.1% (101)</td>
+</tr>
+
+<tr>
+<td align="left">UX Related</td>
+<td align="left">0.0% (0)</td>
+<td align="left">4.8% (60)</td>
+<td align="left">1.3% (60)</td>
+</tr>
+
+<tr>
+<td align="left">Total</td>
+<td align="left">100.0% (3510)</td>
+<td align="left">100.0% (1239)</td>
+<td align="left">100.0% (4749)</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>RECOMMENDATION 1</strong>: <strong>Review causes of high failed payment rate</strong> as it could result in a 10% boost in overall subscriptions</p>
+
+<h4 id="payment-methods">Payment Methods</h4>
+
+<p>Credit Card is the preferred payment method for over two fifths (61%) of subscribers</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   tabyl(payment_method) %&gt;%
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1) %&gt;% 
+   arrange(desc(n)) %&gt;%  
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">payment_method</th>
+<th align="left">n</th>
+<th align="left">percent</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Credit Card</td>
+<td align="left">2905</td>
+<td align="left">61.2%</td>
+</tr>
+
+<tr>
+<td align="left">PayPal</td>
+<td align="left">1230</td>
+<td align="left">25.9%</td>
+</tr>
+
+<tr>
+<td align="left">Direct Debit</td>
+<td align="left">614</td>
+<td align="left">12.9%</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="campaigns">Campaigns</h4>
+
+<p>Three acquisition campaigns drove the largest majority of subscriptions in February 2018</p>
+
+<p><img src="/img/2020-04-22-mixed-type-data-segmentation-k-medoids/unnamed-chunk-5-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>The analysis is going to focus on these <strong>top 3 campaigns</strong>, which account for over 73% of total acquisitions. Adding additional campaigns to the analysis would likely see them all lumped into one “hybrid” cluster and result in less focused insight.</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   tabyl(campaign_code) %&gt;%
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1) %&gt;% 
+   arrange(desc(n)) %&gt;% 
+   top_n(10, wt = n) %&gt;% 
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">campaign_code</th>
+<th align="left">n</th>
+<th align="left">percent</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><strong>57572</strong></td>
+<td align="left">1546</td>
+<td align="left"><strong>32.6%</strong></td>
+</tr>
+
+<tr>
+<td align="left"><strong>56472</strong></td>
+<td align="left">1061</td>
+<td align="left"><strong>22.3%</strong></td>
+</tr>
+
+<tr>
+<td align="left"><strong>56972</strong></td>
+<td align="left">885</td>
+<td align="left"><strong>18.6%</strong></td>
+</tr>
+
+<tr>
+<td align="left">51372</td>
+<td align="left">178</td>
+<td align="left">3.7%</td>
+</tr>
+
+<tr>
+<td align="left">51472</td>
+<td align="left">154</td>
+<td align="left">3.2%</td>
+</tr>
+
+<tr>
+<td align="left">57272</td>
+<td align="left">141</td>
+<td align="left">3.0%</td>
+</tr>
+
+<tr>
+<td align="left">47672</td>
+<td align="left">104</td>
+<td align="left">2.2%</td>
+</tr>
+
+<tr>
+<td align="left">53872</td>
+<td align="left">104</td>
+<td align="left">2.2%</td>
+</tr>
+
+<tr>
+<td align="left">48272</td>
+<td align="left">95</td>
+<td align="left">2.0%</td>
+</tr>
+
+<tr>
+<td align="left">52972</td>
+<td align="left">92</td>
+<td align="left">1.9%</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="trial-length">Trial Length</h4>
+
+<p>Potential subscribes have a number of options available but the analysis is going to take into account <strong>only customers that took the 1-month trial</strong> before sign-up.</p>
+
+<p>Given that all acquisitions refer to a particular month and their current status <strong>3 MONTHS LATER</strong>, this will ensure a clear cut window for the analysis AND cover the vast majority of subscriptions (nearly 90%)</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   tabyl(trial_length) %&gt;%
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1) %&gt;% 
+   select(-valid_percent) %&gt;% 
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">trial_length</th>
+<th align="left">n</th>
+<th align="left">percent</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><strong>1M</strong></td>
+<td align="left">4233</td>
+<td align="left"><strong>89.1%</strong></td>
+</tr>
+
+<tr>
+<td align="left">2M</td>
+<td align="left">1</td>
+<td align="left">0.0%</td>
+</tr>
+
+<tr>
+<td align="left">3M</td>
+<td align="left">95</td>
+<td align="left">2.0%</td>
+</tr>
+
+<tr>
+<td align="left">6M</td>
+<td align="left">7</td>
+<td align="left">0.1%</td>
+</tr>
+
+<tr>
+<td align="left">NA</td>
+<td align="left">413</td>
+<td align="left">8.7%</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="product-pricing">Product Pricing</h4>
+
+<p>Zooming in on the top 3 campaigns for clarity, we can see the two price points of <strong>£6.99</strong>  for the <strong>Standard</strong> product and <strong>£15</strong> for the <strong>Premium</strong> one.</p>
+
+<p>Surprisingly, campaign <code>56472</code> is attributed to the acquisition of both products. It is good practice to <strong>keep acquisition campaigns more closely aligned to a single product</strong> as it would ensure better accountability and understanding of acquisition dynamics.</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   filter(campaign_code %in% c('57572', '56472', '56972')) %&gt;% 
+   filter(trial_length == '1M') %&gt;% 
+   group_by(product_group, campaign_code,
+            contract_monthly_price) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;%
+   arrange(campaign_code) %&gt;% 
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">product_group</th>
+<th align="left">campaign_code</th>
+<th align="left">contract_monthly_price</th>
+<th align="left">n</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Standard</td>
+<td align="left">56472</td>
+<td align="left">6.99</td>
+<td align="left">1061</td>
+</tr>
+
+<tr>
+<td align="left"><strong>Premium</strong></td>
+<td align="left"><strong>56972</strong></td>
+<td align="left">15.00</td>
+<td align="left">264</td>
+</tr>
+
+<tr>
+<td align="left"><strong>Standard</strong></td>
+<td align="left"><strong>56972</strong></td>
+<td align="left">6.99</td>
+<td align="left">587</td>
+</tr>
+
+<tr>
+<td align="left">Standard</td>
+<td align="left">57572</td>
+<td align="left">6.99</td>
+<td align="left">1521</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="subscription-rate">Subscription Rate</h4>
+
+<p>For the majority of the top 10 campaigns, <strong>sign up after trial</strong> hovers in the <strong>74-76% range</strong>. This offers a good benchmark for the general subscription levels we can expect after trial.</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   # selecting top n campaigns by number of 
+   filter(campaign_code %in% c(
+      '57572', '56472', '56972', '51372', '57272',
+      '51472', '47672', '53872', '52972', '54072'
+                               )) %&gt;% 
+   filter(trial_length == '1M') %&gt;%
+   group_by(campaign_code, status) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   # lag to allign past (lagging) obs to present obs
+   mutate(lag_1 = lag(n, n = 1)) %&gt;% 
+   # sort out NAs
+   tidyr::fill(lag_1, .direction = &quot;up&quot;) %&gt;% 
+   # calculate cancelled to total rate perc difference
+   mutate(act_to_tot = 
+            (lag_1 / (n + lag_1)))  %&gt;% 
+   filter(status == 'Cancelled') %&gt;%
+   select(campaign_code, act_to_tot) %&gt;% 
+   arrange(desc(campaign_code)) %&gt;% 
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1) %&gt;% 
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">campaign_code</th>
+<th align="left">act_to_tot</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">57572</td>
+<td align="left">75.5%</td>
+</tr>
+
+<tr>
+<td align="left">57272</td>
+<td align="left">75.6%</td>
+</tr>
+
+<tr>
+<td align="left">56972</td>
+<td align="left">72.5%</td>
+</tr>
+
+<tr>
+<td align="left">56472</td>
+<td align="left">75.8%</td>
+</tr>
+
+<tr>
+<td align="left">54072</td>
+<td align="left">86.4%</td>
+</tr>
+
+<tr>
+<td align="left">53872</td>
+<td align="left">71.3%</td>
+</tr>
+
+<tr>
+<td align="left">52972</td>
+<td align="left">73.9%</td>
+</tr>
+
+<tr>
+<td align="left"><strong>51472</strong></td>
+<td align="left"><strong>48.1%</strong></td>
+</tr>
+
+<tr>
+<td align="left">51372</td>
+<td align="left">68.8%</td>
+</tr>
+
+<tr>
+<td align="left">47672</td>
+<td align="left">74.8%</td>
+</tr>
+</tbody>
+</table>
+
+<p>The low subscription rate for campaign <code>51472</code> may be due to the higher <strong>contract price</strong> after trial (<code>contract_monthly_price</code>) of <strong>£9.65</strong> compared to <strong>£6.99</strong> seen for other Standard product contracts.</p>
+
+<pre><code class="language-r">data_clean %&gt;% 
+   filter(campaign_code == '51472') %&gt;% 
+   filter(trial_length == '1M') %&gt;% 
+   group_by(contract_monthly_price, product_group, campaign_code) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">contract_monthly_price</th>
+<th align="left">product_group</th>
+<th align="left">campaign_code</th>
+<th align="left">n</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">9.65</td>
+<td align="left">Standard</td>
+<td align="left">51472</td>
+<td align="left">128</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>RECOMMENDATION 2</strong>: <strong>Investigate different price points for standard product</strong> as lower price point could boost take up</p>
+
+<h2 id="analysis-structure">Analysis Structure</h2>
+
+<p>In this analysis I want to understand what factors <strong>make a customer subscribe after a trial</strong> and to do so, I need to identify <strong>what approach</strong> is best suited for the type and cut of data I have at my disposal, and to define a <strong>measure of success</strong>.</p>
+
+<ul>
+<li><p><strong>APPROACH</strong>: The data is a snapshot in time and as such does not lend itself to any time-based type of analysis. In such cases, one of the <strong>best suited approaches</strong> to extract insight is <code>clustering</code>, which is especially good when you have no prior domain knowledge to guide you. However, the fact that data is a <strong>mix of categorical and numerical</strong> features requires a slightly different approach, which I discuss in the next section.</p></li>
+
+<li><p><strong>MEASURE</strong>: The perfect candidate to <strong>measure success</strong> is <strong>Subscription Rate</strong> defined as <strong>Active / Total</strong> Subscribers. The an focus on 1-month trial subscribers also ensures a clear cut window for analysis as their <code>status</code> reflects whether they signed up <strong>3 MONTHS AFTERWARDS</strong>.</p></li>
+</ul>
+
+<h2 id="methodology">Methodology</h2>
+
+<p>When I started to research cluster analysis with mix categorical and numerical data, I came across an excellent post on Towards Data Science entitled  <a href="https://towardsdatascience.com/clustering-on-mixed-type-data-8bbd0a2569c3"><strong>Clustering on mixed type data</strong></a>, from which I borrowed the core analysis coding and adjusted it to my needs. In his article, <em>Thomas Filaire</em> shows how to use the <strong>PAM clustering algorithm</strong> (Partitioning Around Medoids) to perform the clustering and the <strong>silhouette coefficient</strong> to select the optimal number of clusters.</p>
+
+<p>The <a href="https://en.wikipedia.org/wiki/K-medoids"><strong>K-medoid</strong></a>, also know as <strong>PAM</strong>, is a clustering algorithm similar to the more popular <strong>K-means</strong> algorithm. K-means and K-medoids work in similar ways in that they <strong>create groups</strong> in your data and <strong>work on distances</strong> (often referred to as <strong>dissimilarities</strong>) as they ensure that elements in each group are very similar to one another by minimising the distance within each cluster. However, K-medoids has the advantage of working on <strong>distances other than numerical</strong> and lends itself well to analyse mixed-type data that include both numerical and categorical features.</p>
+
+<p>I&rsquo;m going to calculate the dissimilarities between observations with the help of the <code>daisy</code> function from the <code>cluster</code> library, which allows to choose between a number of methods (&ldquo;euclidean&rdquo;, &ldquo;manhattan&rdquo; and &ldquo;gower&rdquo;) to run the calculations. The <strong>Gower&rsquo;s distance (1971)</strong> is of particular interest to us as it computes dissimilarities on a [0 1] range <strong>regardless</strong> of whether the input is numerical or categorical, hence making them comparable.</p>
+
+<h2 id="clustering">Clustering</h2>
+
+<p>I&rsquo;m going to segment the subscription data by the following 5 dimensions:</p>
+
+<ul>
+<li><strong>Status</strong>: Active / Cancelled</li>
+<li><strong>Product Group</strong>: Standard / Premium</li>
+<li><strong>Top 3 Campaigns by Subscription Numbers</strong>: 56472 / 56972 / 57572</li>
+<li><strong>Payment Method</strong>: Credit Card / Direct Debit /  PayPal</li>
+<li><strong>Contract Monthly Price</strong>: £6.99 / £15</li>
+</ul>
+
+<p>I&rsquo;ll start with selecting the cut of the data I need for the clustering. I&rsquo;m keeping <code>account_id</code> for my reference but will not pass it to the algorithm.</p>
+
+<pre><code class="language-r">clust_data &lt;-
+   data_clean %&gt;% 
+   # filtering by the top 3 campaigns
+   filter(campaign_code %in% c('57572', '56472', '56972')) %&gt;%
+   # selecting 1M trial subscriptions
+   filter(trial_length == '1M') %&gt;% 
+   # select features to cluster by
+   select(account_id, status, product_group, campaign_code, 
+          contract_monthly_price, payment_method
+          ) %&gt;% 
+   # setting all features as factors
+   mutate(
+        account_id           = account_id %&gt;% as_factor(),
+        status                 = status %&gt;% as_factor(),
+        product_group          = product_group %&gt;% as_factor(),
+        campaign_code          = campaign_code %&gt;% as_factor(),
+        contract_monthly_price = contract_monthly_price %&gt;% as_factor(),
+        payment_method         = payment_method %&gt;% as_factor()
+    )
+</code></pre>
+
+<p>Then, I compute the <strong>Gower distance</strong> with the <code>daisy</code> function from the <code>cluster</code> package. The “Gower&rsquo;s distance” would automatically be selected if some features in the data are not numeric but I prefer to spell it out anyway.</p>
+
+<pre><code class="language-r">gower_dist &lt;- 
+  clust_data %&gt;% 
+    # de-select account_id
+    select(2:6) %&gt;%   
+    daisy(metric = &quot;gower&quot;)
+</code></pre>
+
+<p>And that&rsquo;s that! You&rsquo;re set to go!</p>
+
+<h3 id="assessing-the-clusters">Assessing the Clusters</h3>
+
+<p>There are a number of methods to establish the <a href="https://en.wikipedia.org/wiki/Determining_the_number_of_clusters_in_a_data_set"><strong>optimal number of clusters</strong></a> to use but in this study I&rsquo;m using the <a href="https://en.wikipedia.org/wiki/Silhouette_(clustering)"><code>silhouette coefficient</code></a>, which contrasts the average distance of elements <strong>in the same cluster</strong> with average distance of elements <strong>in other clusters</strong>. In other words, each additional cluster is <strong>adding &ldquo;compactness&rdquo;</strong> to the individual segment, bringing their elements closer together, whilst <strong>&ldquo;moving&rdquo; each cluster further apart</strong> from one another.</p>
+
+<p>First, I&rsquo;m calculating the <strong>Partition Around Medoids</strong> (a.k.a. PAM) using the <code>pam</code> function from the <code>cluster</code> library. The one number to keep an eye on is the <strong>average silhouette width</strong> (or <code>avg.width</code>), which I&rsquo;m storing away in the <code>sil_width</code> parameter.</p>
+
+<pre><code class="language-r">sil_width &lt;- c(NA)
+
+for (i in 2:8) {  
+  pam_fit &lt;- pam(gower_dist, diss = TRUE, k = i)  
+  sil_width[i] &lt;- pam_fit$silinfo$avg.width  
+}
+</code></pre>
+
+<p>In a business context, we want a number of clusters to be both meaningful and easy to handle, (i.e. 2 to 8) and 5-cluster configuration seems a good starting point to investigate.</p>
+
+<pre><code class="language-r">sil_width %&gt;% 
+  as_tibble() %&gt;% 
+   rowid_to_column() %&gt;% 
+   filter(rowid %in% c(2:8)) %&gt;% 
+   ggplot(aes(rowid, value)) +
+   geom_line(colour  = 'black', size = 0.7) +
+   geom_point(colour = 'black', size = 1.3) +
+   theme_minimal() +
+   labs(title = 'Silhouette Widths of k-medoid Clusters',
+        x     = &quot;Number of clusters&quot;,
+        y     = 'Silhouette Width') +
+   theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-04-22-mixed-type-data-segmentation-k-medoids/unnamed-chunk-14-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>When deciding on the optimal number of clusters, <strong>DO NOT</strong> rely exclusively on the <strong>output of mathematical methods</strong>. Make sure you combine it with <em>domain knowledge</em> and <em>your own judgement</em> as often adding an extra segment (say, going from 5 to 6) may only add complexity for no extra insight.</p>
+
+<h3 id="visualising-the-segments-with-t-sne">Visualising the Segments with t-SNE</h3>
+
+<p>Now that I have a potential optimal number of clusters, I want to visualise them. To do so, I use the <a href="https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding"><strong>t-SNE</strong></a> ( <em>t-distributed stochastic neighbour embedding</em>), a dimensionality reduction technique that assists with cluster visualisation in a similar way to <a href="https://en.wikipedia.org/wiki/Principal_component_analysis"><strong>Principal Component Analysis</strong></a> and <a href="https://umap-learn.readthedocs.io/en/latest/"><strong>UMAP</strong></a>.</p>
+
+<p>First, I pull the partitioning data for the 5-cluster configuration from  <code>gower_dist</code></p>
+
+<pre><code class="language-r">pam_fit &lt;- 
+  gower_dist %&gt;% 
+    # diss = TRUE to treat argument as dissimilarity matrix
+    pam(k = 5, diss = TRUE)
+</code></pre>
+
+<p>Then I construct the 2D projection of my 5-dimensional space with <code>Rtsne</code> and plot it</p>
+
+<pre><code class="language-r">tsne_obj &lt;- Rtsne(gower_dist, is_distance = TRUE)
+
+
+tsne_obj$Y %&gt;%
+  data.frame() %&gt;%
+  setNames(c(&quot;X&quot;, &quot;Y&quot;)) %&gt;%
+  mutate(cluster = factor(pam_fit$clustering)) %&gt;% 
+
+  # plot
+  ggplot(aes(x = X, y = Y, colour = cluster)) +
+  geom_point() +
+  theme_light() +
+  labs(title       = 't-SNE 2D Projections of k-medoid Clusters')  +
+  theme(plot.title = element_text(hjust = 0.5))
+</code></pre>
+
+<p><img src="/img/2020-04-22-mixed-type-data-segmentation-k-medoids/unnamed-chunk-16-1.png" alt="" width="100%" height="100%"/></p>
+
+<p>Aside from a few elements, there is a general good separation between clusters as well as closeness of elements within clusters, which confirms the segmentation relevance</p>
+
+<h3 id="evaluating-the-clusters">Evaluating the Clusters</h3>
+
+<p>At this stage of a project you get to appreciate the main difference between <strong>Supervised</strong> and <strong>Unsupervised</strong> approaches. With the latter is the algorithm that does all the leg work but it&rsquo;s still up to you to interpret the results and understand what the algorithm has found.</p>
+
+<p>To properly evaluate the clusters, you want to first pull all information into one tibble that you can easily manipulate. I start by appending the <strong>cluster number</strong> from the <code>pam_fit</code> list to the <code>clust_data</code>.</p>
+
+<pre><code class="language-r">pam_results &lt;- clust_data %&gt;%
+   # append the cluster information onto clust_data
+  mutate(cluster = pam_fit$clustering) %&gt;% 
+   # sort out variable order
+  select(account_id, cluster, everything()) %&gt;% 
+   # attach some extra data features from the data_clean file
+  left_join(select(data_clean, 
+                   c(account_id, canc_reason)), by = 'account_id') %&gt;%
+  mutate_if(is.character, funs(factor(.)))
+</code></pre>
+
+<p><strong>NOTE THAT</strong> I&rsquo;m also bringing in <strong>canc_reason</strong> from <code>data_clean</code>, a dimension that I did NOT use in the calculations. It does not always work but sometimes it may reveal patterns you have not explicitly considered.</p>
+
+<p>From experience I found that a very good exercise is to <strong>print out the summaries</strong> (on screen or paper) of each single cluster - here&rsquo;s an example for <strong>cluster 2</strong>.</p>
+
+<p>Lay all the summaries before you and let your <strong>inner Sherlock Holmes</strong> comes out to play! The story usually unfolds before your very eyes when you start comparing the differences between clusters.</p>
+
+<pre><code class="language-r">pam_results %&gt;% 
+  filter(cluster == 2) %&gt;%
+  select(-c(account_id , cluster, contract_monthly_price)) %&gt;% 
+  summary() 
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">status</th>
+<th align="left">product_group</th>
+<th align="left">campaign_code</th>
+<th align="left">payment_method</th>
+<th align="left">canc_reason</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Cancelled:202</td>
+<td align="left">Standard:900</td>
+<td align="left">56472:  0</td>
+<td align="left">Direct Debit:  0</td>
+<td align="left">-             :738</td>
+</tr>
+
+<tr>
+<td align="left">Active   :698</td>
+<td align="left">Premium :  0</td>
+<td align="left">57572:900</td>
+<td align="left">Credit Card :900</td>
+<td align="left">Failed Payment: 81</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">56972:  0</td>
+<td align="left">PayPal      :  0</td>
+<td align="left">Lack of time  : 46</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Price         : 16</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Editorial     :  8</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">Other         :  5</td>
+</tr>
+
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">(Other)       :  6</td>
+</tr>
+</tbody>
+</table>
+
+<p>When you have your story, you may want to frame it in a nice table or graph. Here I&rsquo;m showing the code I used to assemble my own overall summary and then discuss the results but feel free to tailor it to your own taste and needs!</p>
+
+<p>First I calculate <strong>subscription rate</strong> (my measure of success) and <strong>failed payment rate</strong> for each cluster&hellip;</p>
+
+<pre><code class="language-r"># subscription rate - my measure of success... 
+subscr &lt;- 
+   pam_results %&gt;%
+   group_by(cluster, status) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;% 
+   # lag to allign past (lagging) obs to present obs
+   mutate(lag_1 = lag(n, n = 1)) %&gt;% 
+   # sort out NAs
+   tidyr::fill(lag_1, .direction = &quot;up&quot;) %&gt;% 
+   # calculate active to total rate perc difference
+   mutate(sub_rate =  (n / (n + lag_1)))  %&gt;% 
+   filter(status == 'Active') %&gt;%
+   select(Cluster = cluster, Subsc.Rate = sub_rate) %&gt;% 
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1)
+
+# ... and failed payment rate
+fail_pymt &lt;-
+   pam_results %&gt;%
+   group_by(cluster , canc_reason) %&gt;% 
+   count() %&gt;% 
+   ungroup() %&gt;%
+   group_by(cluster) %&gt;% 
+   mutate(tot = sum(n)) %&gt;% 
+   # calculate failed payment rate to total 
+   mutate(fail_pymt_rate = (n / tot)) %&gt;% 
+   ungroup() %&gt;%
+   filter(canc_reason == 'Failed Payment') %&gt;%
+   select(Cluster = cluster, Failed.Pymt.Rate = fail_pymt_rate) %&gt;%
+   adorn_pct_formatting(rounding = &quot;half up&quot;, digits = 1)
+</code></pre>
+
+<p>Then, I bring all together in a handy table so that we can have a closer look</p>
+
+<pre><code class="language-r">pam_results %&gt;% 
+   group_by(Cluster   = cluster, 
+            Campaign  = campaign_code, 
+            Product   = product_group, 
+            Mth.Price = contract_monthly_price) %&gt;% 
+   summarise(Cluster.Size = n()) %&gt;% 
+   ungroup() %&gt;%  
+   arrange(Campaign) %&gt;% 
+   # attach subscription rate from subscr
+   left_join(select(subscr, c(Cluster, Subsc.Rate)), by = 'Cluster') %&gt;% 
+   # attach failed payment rate from fail_pymt
+   left_join(select(fail_pymt, c(Cluster, Failed.Pymt.Rate)), by = 'Cluster') %&gt;% 
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Cluster</th>
+<th align="left">Campaign</th>
+<th align="left">Product</th>
+<th align="left">Mth.Price</th>
+<th align="left">Cluster.Size</th>
+<th align="left">Subsc.Rate</th>
+<th align="left">Failed.Pymt.Rate</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">56472</td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">1061</td>
+<td align="left">75.8%</td>
+<td align="left">11.0%</td>
+</tr>
+
+<tr>
+<td align="left">2</td>
+<td align="left"><strong>57572</strong></td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">900</td>
+<td align="left">77.6%</td>
+<td align="left">9.0%</td>
+</tr>
+
+<tr>
+<td align="left">5</td>
+<td align="left"><strong>57572</strong></td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">621</td>
+<td align="left"><strong>72.5%</strong></td>
+<td align="left">15.0%</td>
+</tr>
+
+<tr>
+<td align="left">3</td>
+<td align="left">56972</td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">587</td>
+<td align="left">76.0%</td>
+<td align="left">9.9%</td>
+</tr>
+
+<tr>
+<td align="left">4</td>
+<td align="left">56972</td>
+<td align="left">Premium</td>
+<td align="left">15</td>
+<td align="left">264</td>
+<td align="left">64.8%</td>
+<td align="left">9.5%</td>
+</tr>
+</tbody>
+</table>
+
+<p>Having focused on the top 3 campaigns was a good tactic and resulted in <strong>clear separation of the groups</strong>, which meant that the K-medoid discovered <strong>sub-groups within 2 campaigns</strong>.</p>
+
+<p>Let’s take a look at <strong>campaign 57572</strong> first:</p>
+
+<ul>
+<li><p><strong>cluster 5</strong> has a <strong>lower Subscription Rate</strong> than most campaigns (74-76%, remember?) AND <strong>higher Failed Payment Rate</strong></p></li>
+
+<li><p>Further inspection reveals that the lower subscription rate is associated with <strong>Direct Debit</strong> and <strong>PayPal</strong> payments</p></li>
+</ul>
+
+<p>.</p>
+
+<pre><code class="language-r">pam_results %&gt;% 
+   group_by(Cluster     = cluster, 
+            Pymt.Method = payment_method) %&gt;% 
+   summarise(Cluster.Size = n()) %&gt;% 
+   ungroup() %&gt;%  
+   filter(Cluster %in% c(2,5)) %&gt;%
+   # attach subscription rate from subscr
+   left_join(select(subscr, c(Cluster, Subsc.Rate)), by = 'Cluster') %&gt;%
+   kable(align = 'c')
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">Cluster</th>
+<th align="left">Pymt.Method</th>
+<th align="left">Cluster.Size</th>
+<th align="left">Subsc.Rate</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">2</td>
+<td align="left">Credit Card</td>
+<td align="left">900</td>
+<td align="left">77.6%</td>
+</tr>
+
+<tr>
+<td align="left">5</td>
+<td align="left">Direct Debit</td>
+<td align="left">165</td>
+<td align="left"><strong>72.5%</strong></td>
+</tr>
+
+<tr>
+<td align="left">5</td>
+<td align="left">PayPal</td>
+<td align="left">456</td>
+<td align="left"><strong>72.5%</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>RECOMMENDATION 3</strong>: there may be potential to <strong>incentivise Credit Card payments</strong> as they seem to associate with higher Subscription Rate</p>
+
+<p>Let’s move on to <strong>campaign 56972</strong>:</p>
+
+<ul>
+<li><p>We already found this campaign is attributed to <strong>acquisition of both products</strong>, and has a <strong>lower overall subscription rate</strong> of 72.5% if compared to our benchmark of 74-76%</p></li>
+
+<li><p>K-medoid split this out into two groups, revealing that <strong>premium product</strong> has a <strong>lower subscription rate</strong> than its <strong>standard</strong> counterpart</p></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="left">Cluster</th>
+<th align="left">Campaign</th>
+<th align="left">Product</th>
+<th align="left">Mth.Price</th>
+<th align="left">Cluster.Size</th>
+<th align="left">Subsc.Rate</th>
+<th align="left">Failed.Pymt.Rate</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">56472</td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">1061</td>
+<td align="left">75.8%</td>
+<td align="left">11.0%</td>
+</tr>
+
+<tr>
+<td align="left">2</td>
+<td align="left">57572</td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">900</td>
+<td align="left">77.6%</td>
+<td align="left">9.0%</td>
+</tr>
+
+<tr>
+<td align="left">5</td>
+<td align="left">57572</td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">621</td>
+<td align="left">72.5%</td>
+<td align="left">15.0%</td>
+</tr>
+
+<tr>
+<td align="left">3</td>
+<td align="left"><strong>56972</strong></td>
+<td align="left">Standard</td>
+<td align="left">6.99</td>
+<td align="left">587</td>
+<td align="left">76.0%</td>
+<td align="left">9.9%</td>
+</tr>
+
+<tr>
+<td align="left">4</td>
+<td align="left"><strong>56972</strong></td>
+<td align="left">Premium</td>
+<td align="left">15</td>
+<td align="left">264</td>
+<td align="left"><strong>64.8%</strong></td>
+<td align="left">9.5%</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>RECOMMENDATION 4</strong>: there may be potential to investigate <strong>different price points</strong> for Premium product that could help boost take up</p>
+
+<p><strong>RECOMMENDATION 5</strong>: acquisition campaigns should be <strong>more closely aligned to a single product</strong> to ensure accountability and better understanding of acquisition dynamics</p>
+
+<h2 id="summary-of-recommendations">Summary of recommendations</h2>
+
+<ul>
+<li><p><strong>Review and solve high failed payment rate</strong> - This could result in a 10% potential boost in overall subscriptions</p></li>
+
+<li><p><strong>Incentivise credit card payments</strong> - Subscriptions associated with this means of payment have a higher sign up rate that other payments methods</p></li>
+
+<li><p><strong>Investigate different price points for both standard &amp; premium products</strong> - Lower price point could boost take up</p></li>
+
+<li><p><strong>Keep campaigns more closely aligned to product</strong> - This would ensure better accountability and understanding of acquisition dynamics</p></li>
+</ul>
+
+<h2 id="closing-thoughts">Closing thoughts</h2>
+
+<p>In this project I revisited clustering, one of my favourite analytic methods, to explore and analyse a real-world dataset that included a <strong>mix of categorical and numerical</strong> feature. This required a different approach from the classical <strong>K-means</strong> algorithm that cannot be no directly applied to categorical data.</p>
+
+<p>Instead, I used the <strong>K-medoids</strong> algorithm, also known as <strong>PAM</strong> (Partitioning Around Medoids), that has the advantage of working on <strong>distances other than numerical</strong> and lends itself well to analyse mixed-type data.</p>
+
+<p>The <strong>silhouette coefficient</strong> helped to establish the <strong>optimal number of clusters</strong>, whilst <strong>t-SNE</strong> ( t-distributed stochastic neighbour embedding), a dimensionality reduction technique akin <em>Principal Component Analysis</em> and <em>UMAP</em>, unveiled <strong>good separation between clusters</strong> as well as <strong>closeness of elements within clusters</strong>, confirming the segmentation relevance.</p>
+
+<p>Finally, I condensed the <strong>insight</strong> generated from the analysis into a number of actionable and <strong>data-driven recommendations</strong> that, applied correctly, could <strong>help improve product sign up</strong>.</p>
+
+<h3 id="code-repository">Code Repository</h3>
+
+<p>The full R code and all relevant files can be found on my GitHub profile @ <a href="https://github.com/DiegoUsaiUK/K_Medoid_Clustering"><strong>K Medoid Clustering</strong></a></p>
+
+<h3 id="references">References</h3>
+
+<ul>
+<li><p>For the article that inspired my foray into K-medois clustering see this excellent TDS post by <em>Thomas Filaire</em>: <a href="https://towardsdatascience.com/clustering-on-mixed-type-data-8bbd0a2569c3"><strong>Clustering on mixed type data</strong></a></p></li>
+
+<li><p>For a tidy and fully-featured approach to counting things, see the <a href="https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html"><strong>tabyls Function Vignette</strong></a></p></li>
+</ul>
+
+<h3 id="appendix">Appendix</h3>
+
+<p><strong>Table 1 – Variable Definitions</strong></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Account ID</td>
+<td align="left">Unique account ID</td>
+</tr>
+
+<tr>
+<td align="left">Created Date</td>
+<td align="left">Date of original account creation</td>
+</tr>
+
+<tr>
+<td align="left">Country</td>
+<td align="left">Country of account holder</td>
+</tr>
+
+<tr>
+<td align="left">Status</td>
+<td align="left">Current status - active/inactive</td>
+</tr>
+
+<tr>
+<td align="left">Product Group</td>
+<td align="left">Product type</td>
+</tr>
+
+<tr>
+<td align="left">Payment Frequency</td>
+<td align="left">Most subscriptions are a 1 year contract term - payable annually or monthly</td>
+</tr>
+
+<tr>
+<td align="left">Campaign Code</td>
+<td align="left">Unique identifier for campaign attributed to acquisition</td>
+</tr>
+
+<tr>
+<td align="left">Start Date</td>
+<td align="left">Start date of the trial</td>
+</tr>
+
+<tr>
+<td align="left">End Date</td>
+<td align="left">Scheduled end of term</td>
+</tr>
+
+<tr>
+<td align="left">Cancellation Date</td>
+<td align="left">Date of instruction to cancel</td>
+</tr>
+
+<tr>
+<td align="left">Cancellation Reason</td>
+<td align="left">Reason given for cancellation</td>
+</tr>
+
+<tr>
+<td align="left">Monthly Price</td>
+<td align="left">Current monthly price of subscription</td>
+</tr>
+
+<tr>
+<td align="left">Contract Monthly Price</td>
+<td align="left">Price after promo period</td>
+</tr>
+
+<tr>
+<td align="left">Trial Length</td>
+<td align="left">Length of trial</td>
+</tr>
+
+<tr>
+<td align="left">Trial Monthly Price</td>
+<td align="left">Price during trial</td>
+</tr>
+
+<tr>
+<td align="left">Payment Method</td>
+<td align="left">Payment method</td>
+</tr>
+</tbody>
+</table>
+    
+        </div>
+    </section>
+
+    <footer class="post-full-footer">
+      <section class="author-card">
+        <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+        <section class="author-card-content">
+            <h4 class="author-card-name"><a href="/">Diego Usai</a></h4>
+                <p></p>
+        </section>
+      </section>
+    </footer>
+</article>
+    
+    
+    
+
+  </div>
+</main>
+
+
+<aside class="read-next outer">
+  <div class="inner">
+    <div class="read-next-feed">      
+      
+<article class="read-next-card" 
+            style="background-image: url(/img/simon-zhu-TfRHSL2GKDc-unsplash.jpg);" >
+    <header class="read-next-card-header">
+        <small class="read-next-card-header-sitetitle">&mdash; Lifelong Learning &mdash;</small>
+        
+        <h3 class="read-next-card-header-title"><a href="/tags/clustering/">#Clustering</a></h3>
+    </header>
+    <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+    </div>
+
+    <div class="read-next-card-content">
+      
+        <ul>
+          <li><a href="/2019/10/build-your-website-with-hugo-and-blogdown/">Build Your Website with Hugo and blogdown - How I used RStudio, GitHub and Netlify to create and deploy my own webpage</a></li>            
+        
+          <li><a href="/2019/04/market-basket-analysis-part-3-of-3/">Market Basket Analysis - Part 3 of 3 - A Shiny Product Recommender with Improved Collaborative Filtering</a></li>            
+        
+          <li><a href="/2020/05/propensity-modelling-abridged/">Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</a></li>            
+        
+                      
+        
+          <li><a href="/2019/07/loading-merging-and-joining-datasets-excel-edt/">Loading, Merging and Joining Several Datasets - Excel EDT</a></li>            
+        </ul>
+    </div>
+    <footer class="read-next-card-footer">
+      
+        <a href="/tags/clustering/">See all related posts →</a>
+    </footer>
+</article>
+
+
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/05/propensity-modelling-abridged/">
+      <div class="post-card-image" style="background-image: url(/img/dan-meyers-MQ8-4HYTgOc-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/05/propensity-modelling-abridged/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Propensity Modelling 
+              #Data Exploration 
+              #ML Interpretability 
+              #Model Selection 
+              #Optimisation 
+              #Machine Learning  </span>
+              
+              <h2 class="post-card-title">Propensity Modelling - Using h2o and DALEX to Estimate Likelihood to Purchase a Financial Product - Abridged Version</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>In this day and age, a business that leverages data to understand the drivers of customers&rsquo; behaviour has a true competitive advantage. Organisations can dramatically improve their performance in the market by analysing customer level data in an effective way and focus their efforts towards those that are more likely to engage.
+One trialled and tested approach to tease this type of insight out of data is Propensity Modelling, which combines information such as a customers’ demographics (age, race, religion, gender, family size, ethnicity, income, education level), psycho-graphic (social class, lifestyle and personality characteristics), engagement (emails opened, emails clicked, searches on mobile app, webpage dwell time, etc. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+      
+      <article class="post-card post"> 
+    
+    <a class="post-card-image-link" href="/2020/04/mixed-type-data-segmentation-initial-data-exploration/">
+      <div class="post-card-image" style="background-image: url(/img/nuno-silva-wmYP3jGL5wo-unsplash.jpg)"></div>
+    </a>
+    
+
+    <div class="post-card-content">
+      <a class="post-card-content-link" href="/2020/04/mixed-type-data-segmentation-initial-data-exploration/">
+          <header class="post-card-header">
+              <span class="post-card-tags">
+              #Data Wrangling 
+              #Data Exploration  </span>
+              
+              <h2 class="post-card-title">Segmenting with Mixed Type Data - Initial data inspection and manupulation</h2>
+          </header>
+          <section class="post-card-excerpt">
+              
+                <p>With the new year, I started to look for new employment opportunities and even managed to land a handful of final stage interviews before it all grounded to a halt following the coronavirus pandemic. Invariably, as part of the selection process I was asked to analyse a set of data and compile a number of data driven-recommendations to present in my final meeting.
+In this post I retrace the steps I took for one of the take home analysis I was tasked with and revisit clustering, one of my favourite analytic methods. ...  </p>
+              
+          </section>
+      </a>
+
+      <footer class="post-card-meta">
+          <img class="author-profile-image" src="/img/Me_1.jpg" alt="Author" />
+          <span class="post-card-author"><a href="/">Diego Usai</a></span>
+      </footer>
+    </div>
+</article>
+      
+    </div>
+  </div>
+</aside>
+
+<div class="floating-header">
+  <div class="floating-header-logo">
+    <a href="/">
+      
+      <span></span>
+    </a>
+  </div>
+  <span class="floating-header-divider">&mdash;</span>
+  <div class="floating-header-title">Segmenting with Mixed Type Data - A Case Study Using K-Medoids on Subscription Data</div>
+  <div class="floating-header-share">
+    <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/></svg>
+    </div>
+    
+    <a class="floating-header-share-tw" href="https://twitter.com/share?text=Segmenting%20with%20Mixed%20Type%20Data%20-%20A%20Case%20Study%20Using%20K-Medoids%20on%20Subscription%20Data&amp;url=%2f2020%2f04%2fmixed-type-data-segmentation-k-medoids%2f"
+          onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+      </a>
+      <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=%2f2020%2f04%2fmixed-type-data-segmentation-k-medoids%2f"
+          onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+      </a>
+  </div>
+
+  <progress class="progress" value="0">
+    <div class="progress-container">
+      <span class="progress-bar"></span>
+    </div>
+  </progress>
+</div>
+
+
+
+<footer class="site-footer outer">
+  <div class="site-footer-content inner">
+    <section class="copyright" style="line-height: 1.3em;">
+      <a href="/">Diego Usai</a> © 2019 <br>
+      <span style="font-size: 0.8em; color: #555;">Hugo port of <a href="https://github.com/TryGhost/Casper">Casper 2.1.7</a> by <a href="https://www.telematika.org">EM</a></span>
+    </section>
+    <nav class="site-footer-nav">
+        <a href="/">Latest Posts</a>
+        
+        
+        <a href="https://github.com/DiegoUsaiUK" target="_blank" rel="noopener">Github</a>
+        <a href="https://www.linkedin.com/in/diegousaiuk" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://medium.com/@diegousaiuk" target="_blank" rel="noopener">Medium</a>
+    </nav>  
+  </div>
+</footer>
+
+</div>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+  <!-- Google Analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-151122416-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+
+    <script>
+
+
+
+
+
+$(document).ready(function () {
+    
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+</body></html>
